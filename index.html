@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 활용 의학 논문 작성 워크숍 — 설치 안내</title>
+<style>
+  :root{
+    --ink:#0F1F2E; --ink2:#182C3F; --line:#2A4156;
+    --teal:#0E7C7B; --tealDeep:#0A5C5B; --tealLt:#5BC8C5;
+    --paper:#F2F6F8; --mist:#DCE6EC; --muted:#55677A;
+    --red:#C0392B; --redBg:#FBECEA; --amber:#B9770E; --amberBg:#FCF3E3;
+    --green:#1E7E4F; --grnBg:#E9F4EE; --code:#0D1B26;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif;
+       color:var(--ink);background:var(--paper);line-height:1.55;-webkit-text-size-adjust:100%}
+  .wrap{max-width:820px;margin:0 auto;padding:0 18px 64px}
+  header{background:var(--ink);color:#fff;padding:34px 0 30px;border-bottom:4px solid var(--teal)}
+  header .wrap{padding-bottom:0}
+  .kicker{color:var(--tealLt);font-weight:700;letter-spacing:2px;font-size:13px;margin:0 0 8px}
+  h1{font-size:27px;margin:0 0 6px;line-height:1.25}
+  header p{color:#BBD2DC;margin:6px 0 0;font-size:15px}
+  h2{font-size:20px;margin:38px 0 6px;padding-top:10px;border-top:2px solid var(--mist)}
+  h2 .n{display:inline-block;background:var(--teal);color:#fff;width:30px;height:30px;border-radius:8px;
+        text-align:center;line-height:30px;font-size:16px;margin-right:9px;vertical-align:-3px}
+  h2 .n.w{background:var(--amber)}
+  h3{font-size:16px;margin:18px 0 6px;color:var(--ink)}
+  p{margin:8px 0}
+  .sub{color:var(--muted);font-size:14px}
+  a{color:var(--teal);font-weight:600}
+  .card{background:#fff;border:1px solid var(--mist);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .pre{display:block;border-radius:10px;background:var(--code);color:#eef;
+       font-family:Consolas,Menlo,monospace;font-size:13.5px;line-height:1.5;
+       padding:14px 44px 14px 16px;white-space:pre-wrap;word-break:break-word;margin:6px 0 0;overflow-x:auto}
+  .cmd{position:relative;margin:10px 0}
+  button.copy{position:absolute;top:10px;right:10px;background:var(--teal);color:#fff;border:0;
+       border-radius:7px;padding:6px 12px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit;z-index:2}
+  button.copy:hover{background:var(--tealDeep)}
+  button.copy.done{background:var(--green)}
+  .big .pre{font-size:14.5px;border:2px solid var(--tealLt)}
+  .pill{display:inline-block;background:var(--amberBg);color:var(--amber);font-weight:700;
+        border-radius:999px;padding:3px 11px;font-size:12.5px;margin-left:6px}
+  .pill.win{background:#e7f0fa;color:#2c5a8c}
+  .warn{background:var(--redBg);border-left:4px solid var(--red);border-radius:8px;padding:12px 14px;margin:12px 0;font-size:14px}
+  .ok{background:var(--grnBg);border-left:4px solid var(--green);border-radius:8px;padding:12px 14px;margin:12px 0;font-size:14px}
+  .note{background:#fff;border-left:4px solid var(--teal);border-radius:8px;padding:12px 14px;margin:12px 0;font-size:14px}
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:14px}
+  th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--mist);vertical-align:top}
+  th{background:var(--ink);color:#fff;font-size:13px}
+  td .yes{color:var(--green);font-weight:700}
+  td .no{color:var(--red);font-weight:700}
+  .links a{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--mist);
+        border-radius:10px;padding:13px 15px;margin:8px 0;text-decoration:none;color:var(--ink);font-weight:600}
+  .links a:hover{border-color:var(--teal)}
+  .links .ic{font-size:20px}
+  .links small{display:block;color:var(--muted);font-weight:400;font-size:12.5px}
+  .ph{background:var(--amberBg);color:var(--amber);border:1px dashed var(--amber)}
+  footer{color:var(--muted);font-size:12.5px;text-align:center;margin-top:40px}
+  .step-note{font-size:13.5px;color:var(--muted);margin:6px 0 0}
+  b.win{color:#2c5a8c} b.mac{color:var(--tealDeep)}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <p class="kicker">2026-06-20 · 대구가톨릭대학교 의과대학</p>
+    <h1>AI 활용 의학 논문 작성 워크숍 — 설치 안내</h1>
+    <p>터미널·명령어 타이핑 없습니다. <b>설치파일 더블클릭 + Code 탭에 자연어 붙여넣기</b>가 전부입니다.</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="ok" style="margin-top:22px">
+    ✅ <b>0번(앱 설치·로그인, Windows는 Git까지)은 워크숍 전날까지 집에서 미리</b> 끝내 오세요. 당일엔 Code 탭에 <b>발화 2개</b>만 붙여넣으면 됩니다.
+  </div>
+
+  <!-- 0. 사전 준비 -->
+  <h2><span class="n">0</span>사전 준비 — <b>설치파일 더블클릭만</b> (터미널 X)</h2>
+
+  <div class="card">
+    <h3>① Claude Desktop 앱 설치 + 로그인 <span class="sub">(Mac · Windows 공통)</span></h3>
+    <p class="sub">학교 지원 Claude Pro/Max 계정으로 로그인. 설치파일을 받아 더블클릭만 하면 됩니다.</p>
+    <div class="links">
+      <a href="https://claude.ai/download" target="_blank" rel="noopener">
+        <span class="ic">⬇️</span><span>Claude Desktop 다운로드<small>claude.ai/download</small></span></a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>② <b class="win">Windows 사용자만</b> — Git for Windows 설치 <span class="pill win">Windows</span></h3>
+    <p class="sub">설치파일 더블클릭 → 설치 후 <b>Claude 앱을 완전히 종료했다 다시 켜기</b>.</p>
+    <div class="links">
+      <a href="https://git-scm.com/downloads/win" target="_blank" rel="noopener">
+        <span class="ic">🪟</span><span>Git for Windows<small>git-scm.com/downloads/win — 옵션은 기본값 그대로 Next</small></span></a>
+    </div>
+    <div class="note">
+      💡 <b>왜 이것만 미리?</b> Windows에서는 <b>Code 탭이 처음 켜질 때 Git가 있어야</b> 합니다. 그래서 이건 Code 탭 안에서 깔 수 없고(Code 탭이 그걸 필요로 하니까) 먼저 더블클릭으로 설치합니다. <b class="mac">Mac은 보통 이미 있어 건너뜁니다.</b>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>③ (권장) Python <span class="sub">— 일부 점검 단계(참고문헌·통계)에서 사용</span></h3>
+    <p class="sub"><b class="mac">Mac</b>은 보통 이미 설치돼 있습니다. <b class="win">Windows</b>에 없으면 <a href="https://www.python.org/downloads/" target="_blank" rel="noopener">python.org</a>에서 받아 더블클릭 설치 — 설치 첫 화면에서 <b>"Add python.exe to PATH" 체크</b>. (없어도 앞 단계는 진행되고, 해당 점검은 사후로 넘길 수 있습니다.)</p>
+  </div>
+
+  <!-- 당일 -->
+  <h2><span class="n">①</span>Code 탭 열고 작업 폴더 고르기</h2>
+  <p>Claude 앱 상단 <b>Code</b> 탭 → <b>"폴더 선택(Select folder)"</b> → 오늘 논문용 빈 폴더를 하나 선택(또는 새로 만들기). 이 폴더가 오늘의 작업 공간이 됩니다.</p>
+  <p class="sub">(Windows에서 Code 탭이 처음이라면 0-② Git 설치 후 앱 재시작을 먼저.)</p>
+
+  <h2><span class="n">②</span>발화 1 — 셋업 (복사해서 붙여넣기) <span class="pill">가장 중요</span></h2>
+  <p>아래를 복사해 Code 탭 입력창에 붙여넣으면, Claude가 <b>저장소 복제·skill 복사·도구 설치</b>를 알아서 합니다. 권한을 물으면 <b>승인</b>만 누르세요. (터미널 타이핑 없음)</p>
+  <div class="card big">
+    <div class="cmd"><button class="copy" onclick="copyCmd(this)">복사</button>
+      <code class="pre">지금 선택한 이 폴더를 제 논문 작업 폴더로 셋업해줘. 터미널 명령은 네가 실행하고, 권한 물으면 내가 승인할게.
+1) https://github.com/samahn0601/sam-workshop 를 clone하고, 그 안 skills/sam-workshop/ 의 18개 skill 폴더(진입점 start-here + 작업 skill 17)와 _shared 폴더를 이 폴더의 .claude/skills/ 바로 아래로 복사해줘. (우산 폴더 sam-workshop을 만들지 말 것 — .claude/skills/start-here 처럼 1단계가 되도록.)
+2) git이 없으면 ZIP https://github.com/samahn0601/sam-workshop/archive/refs/heads/main.zip 을 받아서 풀어 같은 위치에 넣어줘.
+3) python이 있으면 'pip install --user python-docx' 도 실행해줘 (실패하면 건너뛰고 알려줘).
+끝나면 .claude/skills/ 바로 아래 폴더 목록을 보여줘.</code></div>
+    <div class="warn">⚠️ <b>우산 폴더 금지.</b> <code>sam-workshop</code> 폴더째 넣으면 2단계가 되어 skill이 전부 안 잡힙니다. <b>내용물</b>을 <code>.claude/skills/</code> 바로 아래로. (발화에 이미 들어 있으니 그대로 붙여넣으면 됩니다.)</div>
+  </div>
+
+  <h2><span class="n">③</span>발화 2 — 새 세션에서 "시작하자"</h2>
+  <div class="card">
+    <p><b>1.</b> <b>새 세션</b>을 엽니다 — 방금 skill 폴더를 만들었으므로 <b>새 세션이어야 인식</b>됩니다(설치한 세션에선 안 보임). 같은 작업 폴더로 엽니다.</p>
+    <p><b>2.</b> <b><code>/</code></b> 를 쳐서 목록에 <b>18개</b>가 보이는지 확인.</p>
+    <p><b>3.</b> 첫 발화:</p>
+    <div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
+      <code class="pre">시작하자</code></div>
+    <p class="step-note">→ <code>start-here</code>가 10단계 맵·운전 모드를 제시하고 각 단계를 안내합니다. 단계 끝마다 <b>"다음"</b>으로 진행.</p>
+  </div>
+
+  <!-- 전역 설치 정리 -->
+  <h2><span class="n">i</span>"전역에 깔아야 하는 것" 한눈에</h2>
+  <table>
+    <tr><th>무엇</th><th>어디서</th></tr>
+    <tr><td>Claude Desktop 앱</td><td>설치파일 더블클릭 <span class="sub">(Mac·Win 공통)</span></td></tr>
+    <tr><td>Git for Windows</td><td>설치파일 더블클릭 <b class="win">(Windows, Code 탭 켜기 전)</b> · <span class="no">Code 탭에선 불가</span></td></tr>
+    <tr><td>Python 본체 (없을 때)</td><td>Mac 보통 있음 / Windows는 python.org 더블클릭("Add to PATH") · 관리형 노트북은 IT 사전설치 권장</td></tr>
+    <tr><td>python-docx 등 <b>패키지</b></td><td><span class="yes">✅ Code 탭 발화로</span> (pip install --user — 관리자 권한 불필요)</td></tr>
+    <tr><td>작업폴더 · skill 복사</td><td><span class="yes">✅ Code 탭 발화로</span> (발화 1)</td></tr>
+  </table>
+  <p class="sub">즉, <b>관리자 권한이 필요한 본체(앱·Git·Python)는 더블클릭 설치파일</b>로, <b>나머지는 전부 Code 탭 발화</b>로 해결됩니다. 기관 노트북은 본체 3종을 IT가 미리 깔아두면 당일 발화 2개만 남습니다.</p>
+
+  <!-- 트러블 -->
+  <h2><span class="n">!</span>막히면 — facilitator 부르기 전에 1번만</h2>
+  <table>
+    <tr><th>증상</th><th>1차 대응</th></tr>
+    <tr><td>(Windows) Code 탭이 안 열림 / 명령 실행이 이상</td><td>Git for Windows 설치 → 앱 <b>완전 종료 후 재시작</b></td></tr>
+    <tr><td><code>/</code> 목록에 skill이 안 보임</td><td><b>새 세션</b>인지 확인 + <code>.claude/skills/start-here</code>가 <b>1단계</b>인지(우산 폴더 금지)</td></tr>
+    <tr><td>발화 1(clone)이 멈춤</td><td>인터넷·github.com 접근 확인 → 발화에 들어있는 <b>ZIP 폴백</b>이 자동 시도됨</td></tr>
+    <tr><td>"권한 없음 / Access denied"로 설치 실패</td><td>관리자 권한 필요 항목(Git·Python 본체) — 더블클릭 설치파일로 깔거나 IT 요청. <b>python-docx 등 패키지는 영향 없음</b></td></tr>
+    <tr><td>"pandoc not found"</td><td>docx 패키징은 숙제로 넘기고 진행 (무시 OK)</td></tr>
+  </table>
+  <p class="sub">해결 안 되면 facilitator 호출 — 워크숍은 멈추지 않고 다음 단계로 진행합니다. (정 안 되면 <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai 웹</a> + 옆자리 pairing으로 따라옵니다.)</p>
+
+  <!-- 링크 -->
+  <h2><span class="n">🔗</span>링크 모음</h2>
+  <div class="links">
+    <a href="https://claude.ai/download" target="_blank" rel="noopener"><span class="ic">⬇️</span><span>Claude Desktop 다운로드<small>claude.ai/download</small></span></a>
+    <a href="https://git-scm.com/downloads/win" target="_blank" rel="noopener"><span class="ic">🪟</span><span>Git for Windows<small>git-scm.com/downloads/win</small></span></a>
+    <a href="https://www.python.org/downloads/" target="_blank" rel="noopener"><span class="ic">🐍</span><span>Python (Windows에 없을 때)<small>python.org — "Add to PATH" 체크</small></span></a>
+    <a href="https://github.com/samahn0601/sam-workshop" target="_blank" rel="noopener"><span class="ic">📦</span><span>워크숍 Skill 공개 저장소<small>github.com/samahn0601/sam-workshop</small></span></a>
+    <a class="ph" href="#" id="kakao"><span class="ic">💬</span><span>워크숍 카톡방<small>← 여기에 단톡방 초대 링크를 넣으세요</small></span></a>
+  </div>
+
+  <footer>
+    AI 활용 의학 논문 작성 워크숍 · 2026-06-20 · 단독저자 모드 · 10-step lifecycle<br>
+    문의는 워크숍 카톡방에서.
+  </footer>
+</div>
+
+<script>
+function copyCmd(btn){
+  var code = btn.parentElement.querySelector('code,.pre');
+  var text = code ? code.innerText : '';
+  function done(){ btn.textContent='복사됨 ✓'; btn.classList.add('done');
+    setTimeout(function(){ btn.textContent='복사'; btn.classList.remove('done'); },1500); }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done, function(){ legacy(text); done(); });
+  } else { legacy(text); done(); }
+}
+function legacy(text){
+  var ta=document.createElement('textarea'); ta.value=text;
+  ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta);
+  ta.select(); try{ document.execCommand('copy'); }catch(e){} document.body.removeChild(ta);
+}
+</script>
+</body>
+</html>
