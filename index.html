@@ -182,43 +182,23 @@
     <a href="https://github.com/samahn0601/sam-exam-pipeline-demo" target="_blank" rel="noopener"><span class="ic">🐙</span><span>GitHub 저장소<small>github.com/samahn0601/sam-exam-pipeline-demo</small></span></a>
   </div>
   <div class="card">
-    <h3>쓰는 법 <span class="sub">· Claude Project 3단계</span></h3>
-    <p class="what"><b>1.</b> Claude(Desktop/웹) → <b>Projects → + Create Project</b><br>
-    <b>2.</b> <code>claude_desktop_bundle/02_project_instructions.md</code>를 <b>Instructions</b>에 붙여넣고, <code>project_files/</code>의 5개 파일을 <b>Project 지식</b>에 업로드<br>
-    <b>3.</b> 새 대화에 아래 one-shot 프롬프트 붙여넣기 (단계별로 보려면 ZIP 안 <code>03_chat_prompts.md</code>의 모드 B)</p>
+    <h3>쓰는 법 <span class="sub">· Code 탭 2단계 (가장 쉬움)</span></h3>
+    <p class="what"><b>1.</b> Claude Desktop <b>Code 탭 → 폴더 선택</b>으로 압축 푼 <code>sam-exam-pipeline-demo</code> 폴더 열기<br>
+    <b>2.</b> 아래 프롬프트 붙여넣기 → Claude가 폴더의 SSOT·스펙을 직접 읽고 5단계 실행 + <code>outputs_new/</code>에 저장 <span class="sub">(프로젝트 생성·업로드 불필요)</span></p>
     <div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
-      <code class="pre">첨부된 SSOT(ssot.md), Blueprint(blueprint.md), Item Spec(item_spec.md), Difficulty Spec(difficulty_spec.md)을 기반으로 5단계 워크플로우를 모두 진행해주세요.
+      <code class="pre">이 작업 폴더의 자료로 'AI 시험 출제 5단계'를 진행해줘.
+- 역할 정의: claude_desktop_bundle/02_project_instructions.md 를 읽어 5개 역할(Generator·Verifier·Solver·Answer·Appeals) 파악
+- 근거(SSOT·스펙): claude_desktop_bundle/project_files/ 의 ssot.md, blueprint.md, item_spec.md, difficulty_spec.md
 
-각 단계 결과를 명확히 구분해서 출력:
+순서대로 진행:
+STEP 1 문항 생성 (흉통 ACS vs PE, M3, Bloom=analyze, 음성 소견(호흡곤란 없음·SpO2 정상·하지 부종 없음)을 stem에 명시)
+STEP 2 7-Gate 검증 (Gate 4 '단일 정답'을 적극적으로 의심)
+STEP 3 Solver — 정답 라벨을 잊고 학생처럼 풀어 각 보기 0~1 점수 + top2_gap
+STEP 4 모범답안 패키지 (학생용 + 교수용)
+STEP 5 이의제기 처리 ("B(폐색전증)와 C(ACS) 둘 다 정답" 주장)
 
-== STEP 1: GENERATOR ==
-KMLE SBA 5지선다 문항 1개 생성 (주제: 흉통 감별진단, M3, Bloom=analyze, clinical_task=diagnosis).
-정답 1개 + 음성 소견(호흡곤란 없음, SpO2 정상, 하지 부종 없음 등)을 stem에 명시.
-JSON으로 출력.
-
-== STEP 2: VERIFIER ==
-방금 생성한 문항을 7-Gate fail-closed 정책으로 검증.
-JSON gate_report로 출력.
-
-== STEP 3: SOLVER ==
-방금 생성한 문항의 정답 라벨을 제거하고, 학생 입장에서 정답을 풀어보세요.
-각 보기에 0~1 점수 매기고 top2_gap 계산.
-JSON으로 출력.
-
-== STEP 4: ANSWER PACKAGE ==
-학생용(짧고 명확) + 교수용(상세 reasoning) 모범답안 패키지 작성.
-appeal_risk와 preemptive_response 포함.
-JSON으로 출력.
-
-== STEP 5: APPEALS ==
-다음 가상의 학생 이의제기를 처리해주세요:
-
-"폐색전증도 급성 흉통의 중요한 감별진단입니다. 환자가 50대 후반 남성이고 흡연력이 있어 PE 위험인자에도 해당합니다. 따라서 B(폐색전증)와 C(급성 관상동맥증후군) 둘 다 정답으로 인정되어야 합니다."
-
-분류 → SSOT 대조 → 판정 → 학생 안내문 초안까지 모두 JSON으로 출력.
-
-마지막에 5단계 요약 표(Pass/Fail/Risk Level/Outcome)를 Markdown으로.</code></div>
-    <p class="step-note">자기 강의노트로 바꾸려면 <code>project_files/ssot.md</code>만 교체 — 같은 흐름이 복통·두통 등 다른 주제에도 작동. 자세한 건 ZIP 안 <code>README.md</code>.</p>
+각 단계 결과를 outputs_new/ 폴더에 JSON으로 저장하고, 마지막에 5단계 요약 표(Pass/Fail/Risk/Outcome)를 보여줘.</code></div>
+    <p class="step-note">💡 <b>Tip</b> — Project 기능을 쓰려면 <b>Cowork</b>로 전환(클릭 한 번): 샌드박스라 더 안전하고, 자료를 Project 지식으로 등록해 재사용 가능. · 자기 강의노트는 <code>project_files/ssot.md</code>만 교체. · 코드 없이 채팅만 원하면 ZIP 안 <code>claude_desktop_bundle/</code>(Project 방식).</p>
   </div>
   <div class="warn">⚠️ 데모용 — 학생 개인정보·실제 출제 예정 문항 입력 금지. 생성 문항은 본인 분야 검토 + 평가위원회 승인 후 사용.</div>
 
