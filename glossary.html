@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>워크숍 용어집 — 쉬운 설명</title>
+<style>
+  :root{
+    --ink:#0F1F2E; --teal:#0E7C7B; --tealDeep:#0A5C5B; --tealLt:#5BC8C5;
+    --paper:#F2F6F8; --mist:#DCE6EC; --muted:#55677A;
+    --amber:#B9770E; --amberBg:#FCF3E3; --green:#1E7E4F; --grnBg:#E9F4EE;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif;
+       color:var(--ink);background:var(--paper);line-height:1.55;-webkit-text-size-adjust:100%}
+  .wrap{max-width:820px;margin:0 auto;padding:0 18px 64px}
+  header{background:var(--ink);color:#fff;padding:30px 0 26px;border-bottom:4px solid var(--teal)}
+  header .wrap{padding-bottom:0}
+  .kicker{color:var(--tealLt);font-weight:700;letter-spacing:2px;font-size:13px;margin:0 0 8px}
+  h1{font-size:25px;margin:0 0 6px;line-height:1.25}
+  header p{color:#BBD2DC;margin:6px 0 0;font-size:14.5px}
+  header a{color:var(--tealLt);font-weight:700}
+  .nav{position:sticky;top:0;background:rgba(242,246,248,.96);backdrop-filter:blur(4px);
+       border-bottom:1px solid var(--mist);padding:10px 0;margin-bottom:6px;z-index:5}
+  .nav .wrap{padding-bottom:0;display:flex;flex-wrap:wrap;gap:8px}
+  .nav a{font-size:13px;font-weight:700;color:var(--tealDeep);text-decoration:none;
+       background:#fff;border:1px solid var(--mist);border-radius:999px;padding:5px 12px}
+  .nav a:hover{border-color:var(--teal)}
+  h2{font-size:19px;margin:30px 0 8px;padding-top:10px;border-top:2px solid var(--mist);scroll-margin-top:60px}
+  h2 .ic{margin-right:7px}
+  .term{background:#fff;border:1px solid var(--mist);border-radius:10px;padding:12px 15px;margin:9px 0}
+  .term b{font-size:15.5px;color:var(--ink)}
+  .term .en{color:var(--muted);font-weight:600;font-size:13px;margin-left:4px}
+  .term .tag{display:inline-block;background:var(--grnBg);color:var(--green);font-weight:700;
+       font-size:11.5px;border-radius:999px;padding:2px 9px;margin-left:6px;vertical-align:2px}
+  .term p{margin:6px 0 0;font-size:14px}
+  .term .ex{color:var(--muted);font-size:13px}
+  .lead{background:#E1F1F0;border:2px solid var(--teal);border-radius:12px;padding:14px 18px;margin:22px 0 4px;font-size:14.5px}
+  .mind{background:var(--ink);color:#fff;border-radius:12px;padding:16px 18px;margin:10px 0}
+  .mind b{color:var(--tealLt)} .mind p{margin:8px 0;font-size:14.5px}
+  code{background:#eef2f5;border-radius:5px;padding:1px 6px;font-family:Consolas,monospace;font-size:13px}
+  footer{color:var(--muted);font-size:12.5px;text-align:center;margin-top:36px}
+  a{color:var(--teal)}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <p class="kicker">AI 활용 의학 논문 작성 워크숍 · 2026-06-20</p>
+    <h1>📖 용어집 — 쉬운 설명</h1>
+    <p>오늘 듣게 될 말들을 풀어 썼습니다. 모르는 단어가 나오면 여기서 찾으세요. <a href="/">← 설치 안내로</a></p>
+  </div>
+</header>
+
+<div class="nav"><div class="wrap">
+  <a href="#install">① 설치할 때</a>
+  <a href="#flow">② 오늘 작업 흐름</a>
+  <a href="#ai">③ AI·논문 기초</a>
+  <a href="#mind">④ 기억할 한 줄</a>
+</div></div>
+
+<div class="wrap">
+
+  <div class="lead">💡 <b>대부분은 외울 필요 없습니다.</b> 오늘 git·코딩·파이썬 같은 건 <b>Claude(AI)가 알아서</b> 하고, 여러분은 한국어로 말하고 확인만 합니다. 이 표는 "그게 무슨 말이지?" 싶을 때 보는 사전입니다.</div>
+
+  <!-- ① 설치 -->
+  <h2 id="install"><span class="ic">🧩</span>① 설치할 때 보이는 말</h2>
+
+  <div class="term"><b>Claude(클로드)</b><span class="en">AI</span><p>오늘 함께 일하는 AI입니다. ChatGPT 같은 대화형 AI인데, 글쓰기뿐 아니라 <b>파일·폴더를 직접 다룰 수</b> 있습니다.</p></div>
+  <div class="term"><b>Claude Desktop 앱</b><p>컴퓨터에 설치하는 Claude 프로그램. 웹 대신 앱으로 쓰면 내 컴퓨터의 폴더를 다룰 수 있습니다.</p></div>
+  <div class="term"><b>Code 탭</b> <span class="tag">오늘 주력</span><p>Claude 앱 위쪽의 탭 하나. <b>오늘 논문 작업을 하는 작업실</b>입니다. 이름은 "Code(코드)"지만 여러분이 코딩하는 게 아니라, 여기서 Claude가 파일을 만들고 정리합니다.</p></div>
+  <div class="term"><b>Claude Code</b><p>위 Code 탭의 정식 이름. "파일·폴더·도구를 다룰 수 있는 Claude"라고 보면 됩니다.</p></div>
+  <div class="term"><b>코딩 / 프로그래밍</b> <span class="tag">오늘 직접 안 함</span><p>컴퓨터에 시킬 일을 정해진 글(코드)로 적는 것. <b>오늘은 여러분이 코딩하지 않습니다</b> — Claude가 대신 합니다.</p></div>
+  <div class="term"><b>파이썬</b><span class="en">Python</span> <span class="tag">Claude가 설치</span><p>널리 쓰이는 프로그래밍 언어. 오늘은 <b>참고문헌·통계를 점검하는 작은 프로그램</b>이 파이썬으로 돌아갑니다. 없으면 Claude가 알아서 깔아줍니다.</p></div>
+  <div class="term"><b>터미널 / 명령어(CLI)</b> <span class="tag">오늘 거의 안 씀</span><p>글자로 컴퓨터에 명령하는 검은 창. 옛날 방식이라 어렵지만, <b>오늘은 거의 안 씁니다</b> — Claude에게 한국어로 말하면 됩니다.</p></div>
+  <div class="term"><b>git(깃)</b> <span class="tag">Claude가 함</span><p>파일의 <b>변경 이력을 기록하고 되돌릴 수 있게</b> 해주는 도구. 문서의 "버전 관리·실행 취소"라고 보면 됩니다. Windows에선 이게 있어야 Code 탭이 처음 켜집니다.</p></div>
+  <div class="term"><b>GitHub(깃허브)</b><p>git 저장소를 <b>인터넷에 올려두는 곳</b>. "코드용 구글 드라이브"라고 생각하면 됩니다. 워크숍 도구를 여기서 받습니다.</p></div>
+  <div class="term"><b>저장소 / repo(레포)</b><span class="en">repository</span><p>한 프로젝트의 파일들을 묶어둔 폴더. 워크숍 도구 묶음이 <code>samahn0601/sam-workshop</code>이라는 저장소입니다.</p></div>
+  <div class="term"><b>clone(클론) / 다운로드</b><p>인터넷의 저장소를 <b>내 컴퓨터로 복제</b>해 가져오는 것. 오늘은 Claude가 하거나, ZIP을 받아 풀면 됩니다.</p></div>
+  <div class="term"><b>ZIP / 압축 풀기</b><p>여러 파일을 하나로 묶은 파일(<code>.zip</code>). 받아서 "압축 풀기"(Windows 우클릭 / Mac 더블클릭)하면 폴더가 생깁니다. 오늘 가장 쉬운 설치법.</p></div>
+  <div class="term"><b>폴더 / 파일 경로</b><p>파일이 들어 있는 위치. <code>.claude/skills/</code>처럼 점(.)으로 시작하는 폴더는 "설정용 숨김 폴더"입니다. 오늘 작업 폴더 하나를 고르면 거기에 결과가 쌓입니다.</p></div>
+  <div class="term"><b>skill(스킬)</b><p>특정 작업을 반복 가능하게 묶은 <b>도구 프리셋</b>. 예: 저널 찾기, 참고문헌 점검. 오늘 18개가 설치되며, 이름을 외울 필요 없이 "시작하자"라고 하면 알아서 불립니다.</p></div>
+  <div class="term"><b>발화 / 프롬프트</b><span class="en">prompt</span><p>Claude 입력창에 적어 보내는 <b>말·지시</b>. "붙여넣기 발화"는 미리 준비한 문장을 복사해 그대로 붙여넣는 것.</p></div>
+  <div class="term"><b>(새) 세션</b><p>대화를 새로 시작하는 것(새 채팅창). 방금 설치한 도구는 <b>새 세션</b>을 열어야 보입니다.</p></div>
+  <div class="term"><b>권한 승인</b><span class="en">permission</span><p>Claude가 파일을 만들거나 명령을 실행하기 전에 "해도 될까요?"라고 물을 때 누르는 <b>허용(Approve) 버튼</b>. 오늘은 대부분 승인하면 됩니다.</p></div>
+  <div class="term"><b>로그인 / 팀 플랜</b><p>오늘은 학교가 만든 <b>'DCU Medicine RISE' 팀 플랜</b>에 <b>@cu.ac.kr 메일</b>로 로그인합니다. 별도 결제·API 키 필요 없습니다.</p></div>
+  <div class="term"><b>API / API 키</b><span class="en">Application Programming Interface</span><p>프로그램끼리 자동으로 데이터를 주고받는 통로. 따로 쓰는 곳도 있지만 <b>오늘 설치엔 API 키가 필요 없습니다</b>(구독 로그인으로 충분).</p></div>
+
+  <!-- ② 흐름 -->
+  <h2 id="flow"><span class="ic">🛞</span>② 오늘 작업 흐름</h2>
+
+  <div class="term"><b>파이프라인</b><span class="en">pipeline</span><p>막연한 "논문 써줘"를 <b>작은 단계로 나누고 각 단계에 점검 기준을 붙인 것</b>. 오늘의 핵심 개념.</p></div>
+  <div class="term"><b>10단계 lifecycle</b><p>논문 한 편을 ①주제 → ②문헌 → ③개요 → ④초안 → ⑤검증 → ⑥비판 → ⑦문체·패키지 → ⑧제출 → ⑨리뷰대응 → ⑩마무리로 한 바퀴 도는 순서.</p></div>
+  <div class="term"><b>start-here</b><p>"시작하자" 한마디로 위 10단계를 <b>차례로 안내해주는 진입점</b> 스킬. 단계 끝마다 "다음"이라고 하면 넘어갑니다.</p></div>
+  <div class="term"><b>운전 모드 / HITL</b><span class="en">Human-in-the-loop</span><p>각 단계를 <b>"정차(멈춰서 내가 확인)"</b> 할지 <b>"정지 없이 진행"</b> 할지 내가 고르는 것. 사람이 운전대를 쥔다는 뜻.</p></div>
+  <div class="term"><b>정차 / Self-Gate</b><p>중요한 단계에서 멈춰 저자가 [승인/수정/계속]을 정하는 지점. 오늘 표준 모드는 ①⑤⑥⑩에서 정차.</p></div>
+  <div class="term"><b>안전선(floor)</b><p>어떤 모드에서도 <b>사람이 반드시 확인</b>하는 선 — 약물·IRB·사망률(의학 안전), AI 공개문·저자권·이해상충(출판 윤리), 실제 제출·로그인.</p></div>
+  <div class="term"><b>Human Final Gate</b><p>실제 저널에 제출하기 <b>직전, 본인이 최종 확인</b>하는 관문(원자료·참고문헌·저자 승인·윤리 등). 오늘 산출물은 여기 통과 전의 "연습본".</p></div>
+  <div class="term"><b>주장 · 근거</b><span class="en">claim · source</span><p>"무엇을 말한다(주장)"와 "그 근거 논문"을 <b>섞지 않고 분리</b>하는 것. 할루시네이션을 막는 핵심 습관.</p></div>
+  <div class="term"><b>Deep Research(딥리서치)</b><p>문헌을 깊게 찾아주는 기능. 오늘은 ②문헌 단계에서 잠깐 Chat 탭으로 쓸 수 있습니다.</p></div>
+
+  <!-- ③ AI·논문 -->
+  <h2 id="ai"><span class="ic">🔬</span>③ AI·논문 기초</h2>
+
+  <div class="term"><b>LLM(대규모 언어모델)</b><span class="en">Large Language Model</span><p>Claude·GPT·Gemini 같은 AI의 본체. 엄청난 글을 학습해 다음 말을 예측하는 방식이라, <b>그럴듯하지만 틀릴 수</b> 있습니다.</p></div>
+  <div class="term"><b>할루시네이션(환각)</b><span class="en">hallucination</span><p>AI가 <b>사실이 아닌 내용을 자신 있게 만들어내는</b> 것. 의학에서는 환자 안전 문제라 반드시 검증해야 합니다.</p></div>
+  <div class="term"><b>교차검증</b><p>여러 AI나 출처로 <b>같은 내용을 대조</b>해 오류를 잡는 것. 오늘 교직원포털의 여러 AI를 이 용도로 씁니다.</p></div>
+  <div class="term"><b>참고문헌 / 인용</b><span class="en">reference · citation</span><p>논문이 근거로 댄 다른 논문들. AI는 <b>없는 논문을 지어내거나</b> 저자·제목을 섞기도 해서 점검이 필요합니다.</p></div>
+  <div class="term"><b>DOI · PMID</b><p><b>DOI</b>=논문의 고유 인터넷 주소. <b>PMID</b>=PubMed(의학 논문 DB)의 논문 번호. 이게 실제로 존재하는지로 위조 인용을 거릅니다.</p></div>
+  <div class="term"><b>PubMed · Crossref</b><p>논문 정보를 조회하는 공개 데이터베이스. 참고문헌 점검 도구가 여기에 물어봐 진위를 확인합니다(가입·키 불필요).</p></div>
+  <div class="term"><b>철회 논문</b><span class="en">retracted</span><p>오류·부정으로 <b>학계에서 취소된 논문</b>. 모르고 근거로 인용하면 큰 문제라 자동으로 걸러줍니다.</p></div>
+  <div class="term"><b>desk reject(데스크 리젝)</b><p>심사에 들어가기도 전에 <b>편집장이 곧바로 반려</b>하는 것. 형식·범위·참고문헌 오류가 흔한 원인.</p></div>
+  <div class="term"><b>투고 / cover letter / AI 공개문</b><p><b>투고</b>=저널에 논문 제출. <b>cover letter</b>=편집장에게 보내는 소개 편지. <b>AI 공개문</b>=AI를 어떻게 썼는지 밝히는 글(요즘 저널 필수).</p></div>
+  <div class="term"><b>IRB · COI · ORCID</b><p><b>IRB</b>=연구윤리심의. <b>COI</b>=이해상충(이해관계 충돌) 공개. <b>ORCID</b>=연구자 고유 ID 번호.</p></div>
+
+  <!-- ④ 마음가짐 -->
+  <h2 id="mind"><span class="ic">⭐</span>④ 오늘 기억할 한 줄</h2>
+
+  <div class="mind">
+    <p><b>“AI는 똑똑하지만 자신 있게 틀린다.”</b> — 그래서 파이프라인과 검증이 필요합니다.</p>
+    <p><b>“Green ≠ 제출 가능.”</b> — 자동 점검 통과가 "게재 보증"은 아닙니다. 참고문헌은 본인이 확인.</p>
+    <p><b>“운전대는 저자가 쥔다.”</b> — AI는 초안을, 책임과 최종 결정은 사람이.</p>
+    <p><b>“Prompt-first, Verify-always.”</b> — 잘 시키고(프롬프트), 항상 검증.</p>
+  </div>
+
+  <footer>AI 활용 의학 논문 작성 워크숍 · 2026-06-20 · <a href="/">설치 안내로 돌아가기</a></footer>
+</div>
+</body>
+</html>
