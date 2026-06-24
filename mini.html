@@ -52,6 +52,12 @@
   .links small{display:block;color:var(--muted);font-weight:400;font-size:12.5px}
   footer{color:var(--muted);font-size:12.5px;text-align:center;margin-top:36px}
   .step-note{font-size:13px;color:var(--muted);margin:5px 0 0}
+  .session{margin:36px 0 4px;padding:11px 16px;border-radius:10px;font-weight:800;font-size:18px}
+  .session span{font-weight:600;font-size:13.5px;margin-left:6px}
+  .session.green{background:var(--grnBg);border-left:5px solid var(--green);color:var(--green)}
+  .session.green span{color:#3a6b52}
+  .session.blue{background:#E1F1F0;border-left:5px solid var(--teal);color:var(--tealDeep)}
+  .session.blue span{color:#3f6f6e}
 </style>
 </head>
 <body>
@@ -65,11 +71,11 @@
 </header>
 
 <div class="wrap">
-  <div class="now"><b>기초 12:30~13:30</b> — OT → 설치 → 간단 코딩(내 폴더 → 진짜 파일) · ☕ 휴식 30분 · <b>응용 14:00~16:00</b> — 자기 업무·논문 병행(고급).</div>
+  <div class="now"><b>기초 12:30~13:30</b> — OT → 설치 → 간단 코딩(내 폴더 → 진짜 파일) · ☕ 휴식 30분 · <b>응용 14:00~16:00</b> — 고급: 논문 / 자동화·비서 두 트랙.</div>
 
   <div class="note"><b>🎟️ 신청 트랙 — 본인 트랙 확인</b><br>
   🟢 <b>기초반</b>(12:30~13:30): 설치 + 기본 활용 — 아래 ①~③<br>
-  🔵 <b>응용반</b>(14:00~16:00): 고급 활용 — ④ 이후 + 더 나아가기<br>
+  🔵 <b>응용반</b>(14:00~16:00): 고급 — 🅰 논문 / 🅱 자동화·비서 두 트랙 (④ 이후 + 더 나아가기)<br>
   ⚠️ <b>응용반만</b> 신청: 12:30 설치 세션을 건너뛰므로 <b>Claude Code(Desktop)+Git을 미리 설치</b>하고 오셔야 합니다 → <a href="/preinstall.html">응용반 사전 설치 매뉴얼</a></div>
 
   <div class="warn">🔒 <b>실제 환자정보·개인정보는 올리지 마세요</b> — 오늘은 교육용 가상 데이터로만. Code는 <b>내가 연 폴더</b>의 파일을 읽고 만듭니다 → <b>폴더 선택이 곧 안전경계</b>입니다.</div>
@@ -82,6 +88,8 @@
   <h2><span class="n">?</span>왜 Code예요? <span class="sub">· 채팅과 뭐가 달라요</span></h2>
   <div class="note">채팅으로도 계산기·차트 하나는 만듭니다(아티팩트). 하지만 <b>채팅 안 일회성</b>입니다.<br>
   <b>Code는 내 폴더·내 데이터를 직접 다루고, 진짜 파일(.docx·.png·.xlsx)을 만들어 남깁니다</b> — 여러 파일·여러 단계를, 프로젝트로 지속. 그래서 <b>논문 한 편을 통째로</b> 돌립니다.</div>
+
+  <div class="session green">🟢 기초반 <span>12:30~13:30 · 설치 + 기본 활용</span></div>
 
   <h2><span class="n">1</span>설치 <span class="sub">· 설치파일 더블클릭</span></h2>
   <div class="links">
@@ -120,14 +128,33 @@
     <p class="step-note">→ 진짜 <code>.docx</code> 생성. (채팅은 내 로컬 파일들을 못 합침)</p>
   </div>
 
-  <h2><span class="n">4</span>응용 <span class="sub">· 원하는 분 (논문·자기 업무 병행)</span></h2>
-  <div class="note">자기 데이터·문서로 위 A′/B/C를 응용하거나(<b>비식별·가상·공개 자료만, 사본으로</b>), <b>논문 트랙</b>으로 한 걸음 더:</div>
-  <div class="links">
-    <a href="https://github.com/samahn0601/sam-workshop" target="_blank" rel="noopener"><span class="ic">📦</span><span>워크숍 Skill 저장소 (논문 파이프라인 18 skill)<small>github.com/samahn0601/sam-workshop · 폴더 열고 "시작하자"</small></span></a>
+  <div class="session blue">🔵 응용반 <span>14:00~16:00 · 고급 활용 · 두 트랙</span></div>
+
+  <h2><span class="n">4</span>두 트랙 중 선택 <span class="sub">· 트랙은 자유롭게 넘나들 수 있어요</span></h2>
+  <div class="note">원하는 트랙을 고르되 <b>고정은 아니에요</b> — 논문 하다가 자동화도 맛보고, 반대로도 OK. (지난번 논문 워크숍 하신 분은 🅱 추천) · 자기 자료는 <b>비식별·가상·공개 자료만, 사본으로</b>.</div>
+
+  <div class="card">
+    <h3>🅰 논문 트랙 <span class="sub">· 논문 한 편 파이프라인</span></h3>
+    <p class="what">아이디어 → <b>저널 적합성</b> → <b>문헌 딥리서치</b> → 초안 → <b>AI 비평</b>까지 한 바퀴. (최종 판단은 사람)</p>
+    <div class="links">
+      <a href="https://github.com/samahn0601/sam-workshop" target="_blank" rel="noopener"><span class="ic">📦</span><span>워크숍 Skill 저장소 (논문 파이프라인 18 skill)<small>github.com/samahn0601/sam-workshop · 폴더 열고 "시작하자"</small></span></a>
+    </div>
+    <div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
+      <code class="pre">시작하자</code></div>
+    <p class="step-note">→ start-here가 논문 10단계를 안내. <b>오늘은 2~3단계 맛보기</b>(전체는 후속 학습용).</p>
   </div>
-  <div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
-    <code class="pre">시작하자</code></div>
-  <p class="step-note">→ start-here가 논문 10단계를 안내합니다. <b>오늘은 그중 2~3단계만 맛보기</b>(전체는 후속 학습용).</p>
+
+  <div class="card">
+    <h3>🅱 자동화·비서 트랙 <span class="sub">· 지난번 논문 워크숍 하신 분 추천</span></h3>
+    <p class="what">Claude를 <b>시키면 알아서 일하는 비서</b>로 키웁니다:</p>
+    <p>• 🤖 <b>헤르메스</b> — 자율 비서 에이전트 세팅<br>
+    • 🧩 <b>K-skills 이식</b> — 식약처·법령·HWP·맞춤법·지도·예약 등 한국형 스킬 골라 설치<br>
+    • 📧 <b>Gmail·캘린더 자동화</b> — 투고 메일 추적·마감 관리<br>
+    • 🎨 <b>더 나아가기</b> — Claude Design→Code·웹 제어·Office 애드인</p>
+    <p class="step-note">자세한 설정·주의는 아래 <b>"더 나아가기"</b> 카탈로그(①~⑧) 참고.</p>
+  </div>
+
+  <div class="note"><b>🤝 공통 (트랙 무관)</b> · 📊 내 데이터 분석 · 🗂️ 문서 변환·정리 · ♻️ 이어가기(핸드오프로 다음에·다른 기기에서)</div>
 
   <h2><span class="n">+</span>더 나아가기 <span class="sub">· 익숙해지면 이런 것도 (입문 이후의 지평)</span></h2>
   <div class="note">오늘은 "내 파일을 다루는 첫걸음". 익숙해지면 여기까지 갑니다.</div>
