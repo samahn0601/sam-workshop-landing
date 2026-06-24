@@ -75,22 +75,30 @@
     <code class="pre">내 Gmail에서 최근 30일간 저널 편집장/투고시스템 메일(editorialmanager·scholarone·manuscriptcentral 도메인, 또는 'decision/revision/manuscript ID/under review' 포함)을 찾아, 논문별 상태를 표로 요약해줘. 리비전 마감 등 기한이 보이면 구글 캘린더에 일정으로 넣어줘(넣기 전 확인). 회신이 필요한 건 자동 발송하지 말고 초안만 만들어줘.</code></div>
   <div class="star">💡 <b>정직하게</b>: 커넥터는 "물어볼 때만" 동작 → "메일 오면 바로 알림"은 <b>실시간 푸시가 아님</b>. 상시 알림은 ④ <b>헤르메스(cron 예약)</b>나 예약 작업이 이 명령을 주기적으로 돌리는 구조.</div>
 
-  <h2><span class="n">3</span>K-skills 맛보기 <span class="mins">~12분</span> <span class="sub">· Node 필요</span></h2>
-  <p>한국형 스킬 모음(법령·식약처·HWP·맞춤법·지도·예약 등). <b>무(無)키 스킬</b>부터:</p>
-  <div class="cmd"><button class="copy" onclick="copyCmd(this)">복사</button>
-    <code class="pre">npx --yes skills add NomaDamas/k-skill --skill korean-spell-check</code></div>
-  <p>설치 후 Code에서:</p>
-  <div class="cmd"><button class="copy" onclick="copyCmd(this)">복사</button>
-    <code class="pre">이 문서 맞춤법 검사해줘.</code></div>
-  <p class="step-note">전체 설치(키 필요분 포함): <code>npx --yes skills add NomaDamas/k-skill --all -g</code> → <code>k-skill-setup 스킬로 공통 설정 진행해줘.</code> · 무키 예: korean-spell-check·korean-character-count·korean-law-search. 최신 명령: <a href="https://github.com/NomaDamas/k-skill" target="_blank" rel="noopener">github.com/NomaDamas/k-skill</a></p>
+  <h2><span class="n">3</span>K-skills 맛보기 <span class="mins">~12분</span></h2>
+  <p>한국형 스킬 모음(법령·식약처·HWP·맞춤법·지도·예약 등). <b>터미널 명령 외울 필요 없이 Code에 시키면</b> 알아서 설치합니다:</p>
+  <div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
+    <code class="pre">NomaDamas의 k-skill 중 맞춤법 검사(korean-spell-check) 스킬을 설치해줘. github.com/NomaDamas/k-skill 공식 방법을 확인해서 진행하고, 되면 아무 문서로 한 번 시험해줘.</code></div>
+  <p class="step-note">→ Claude가 공식 설치를 찾아 실행(필요 시 Node 설치도 안내). 무키 예: korean-spell-check·korean-character-count·korean-law-search(키 불필요) · 전체는 "k-skill 전체 설치하고 공통 설정까지 해줘". <span class="sub">직접: <code>npx --yes skills add NomaDamas/k-skill --skill korean-spell-check</code></span> · 목록: <a href="https://github.com/NomaDamas/k-skill" target="_blank" rel="noopener">github.com/NomaDamas/k-skill</a></p>
 
-  <h2><span class="n">4</span>헤르메스(Hermes Agent) — 자율 비서로 확장 <span class="mins">~8분</span></h2>
-  <div class="note"><b>Nous Research</b>의 오픈소스(MIT) 자율 에이전트 — <b>PC/서버에 상주</b>하며 영속 메모리·스킬 자가생성, <b>내장 cron으로 예약 작업을 알아서 실행</b>. CLI + 텔레그램·Slack 등 여러 채널.<br>
-  <b>왜 핵심</b>: ②의 투고 추적을 "매일 아침 자동 점검 → 알림"처럼 <b>상시화</b>하는 엔진. 모델 무관(Claude 포함, <code>hermes model</code>로 전환).</div>
+  <h2><span class="n">4</span>LLM wiki — 인맥 노트 <span class="mins">~10분</span> <span class="sub">· 쌓을수록 똑똑해지는 메모</span></h2>
+  <p>친구·동료별 노트를 쌓아두면 "7월 생일?" "○○ 자녀 나이?"에 바로 답합니다. 설치랄 게 없고 <b>Code에 시작만 시키면</b> 됩니다:</p>
+  <div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
+    <code class="pre">이 폴더에 'LLM wiki'를 시작하자. people 폴더를 만들고, 내가 사람 정보를 주면 한 명당 노트 한 개(이름·생일·자녀 이름/나이·근황·마지막 만남)로 정리해줘. 전체를 한눈에 보는 index.md도 만들어 계속 갱신하고. 먼저 구조와 빈 템플릿부터.</code></div>
+  <p>몇 명 넣은 뒤 — 이렇게 물어보세요:</p>
   <div class="cmd"><button class="copy" onclick="copyCmd(this)">복사</button>
-    <code class="pre">iex (irm https://hermes-agent.nousresearch.com/install.ps1)</code></div>
-  <p class="step-note">↑ Windows 네이티브 PowerShell · macOS/Linux/WSL2는 <code>curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash</code> · 첫 실행 <code>hermes setup</code>. Gmail/캘린더는 Google Workspace 스킬로 연동, Claude Code도 구동 가능.</p>
-  <div class="warn">⚠️ 상주 에이전트·모델 설정이라 다소 <b>고급</b> → 오늘은 <b>개요·데모</b>, 관심자는 take-home. 설치는 원격 스크립트 실행(<code>irm|iex</code>·<code>curl|bash</code>)이니 <b>공식 도메인 확인 후</b>. 공식: <a href="https://hermes-agent.nousresearch.com/docs" target="_blank" rel="noopener">hermes-agent.nousresearch.com/docs</a> · <a href="https://github.com/NousResearch/hermes-agent" target="_blank" rel="noopener">github</a></div>
+    <code class="pre">7월에 생일인 친구를 모두 찾아서 정리해줘.</code></div>
+  <div class="cmd"><button class="copy" onclick="copyCmd(this)">복사</button>
+    <code class="pre">김민수 자녀 이름이랑 나이 알려줘.</code></div>
+  <p class="step-note">개인 노트이니 <b>내 기기에서</b> 관리 · 실제 사람 정보는 본인 판단으로.</p>
+
+  <h2><span class="n">5</span>헤르메스(Hermes Agent) — 자율 비서로 확장 <span class="mins">~8분</span></h2>
+  <div class="note"><b>Nous Research</b>의 오픈소스(MIT) 자율 에이전트 — <b>PC/서버에 상주</b>하며 영속 메모리·스킬 자가생성, <b>내장 cron으로 예약 작업을 알아서 실행</b>. <b>왜 핵심</b>: ②의 투고 추적을 "매일 아침 자동 점검 → 알림"처럼 <b>상시화</b>하는 엔진. 모델 무관(Claude 포함).</div>
+  <p><b>설치 — 터미널 명령 외울 필요 없이 Code에 시키세요</b>(Claude가 찾아 설치·설정):</p>
+  <div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
+    <code class="pre">헤르메스(Hermes Agent, github.com/NousResearch/hermes-agent)를 내 컴퓨터에 설치해줘. 공식 사이트 hermes-agent.nousresearch.com에서 내 OS(Windows/맥)에 맞는 설치 방법을 찾아 진행하고, 끝나면 첫 설정(hermes setup)까지 안내해줘. 시스템을 바꾸는 명령은 실행 전에 보여주고 확인받아.</code></div>
+  <p class="step-note">→ Claude가 공식 명령을 찾아 실행(권한 승인·로그인은 직접) → <code>hermes setup</code>으로 모델·연동 설정. <span class="sub">직접: Win <code>iex (irm https://hermes-agent.nousresearch.com/install.ps1)</code> · mac/Linux/WSL2 <code>curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash</code></span></p>
+  <div class="warn">⚠️ 상주 에이전트라 다소 <b>고급</b> → 오늘은 <b>개요·데모</b>도 OK. 설치 스크립트는 원격 실행이니 <b>공식 도메인 확인 후</b>. 공식: <a href="https://hermes-agent.nousresearch.com/docs" target="_blank" rel="noopener">hermes-agent.nousresearch.com/docs</a> · <a href="https://github.com/NousResearch/hermes-agent" target="_blank" rel="noopener">github</a></div>
 
   <h2><span class="n">✓</span>진행 팁</h2>
   <div class="note">순서 강제 X — 관심 가는 것부터. <b>1·2번(연결+투고추적)만 해도 "비서" 체감 충분.</b> 막히는 1순위 = 커넥터 권한/플랜 → 안 되면 데모 화면 공유로. 모든 부작용 작업(캘린더 생성·메일 초안)은 <b>승인 후</b>.</div>

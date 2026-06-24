@@ -179,6 +179,8 @@
     <p>• <b>K-skills</b>(한국형 생활·공공데이터·예약·문서 처리 스킬셋, GitHub 공개) — 헤르메스에게 시켜 <b>필요한 것만 골라 설치</b>. <a href="https://github.com/NomaDamas/k-skill" target="_blank" rel="noopener">github.com/NomaDamas/k-skill</a><br>
     <span class="sub">예: KTX/SRT 조회·예약, 카카오·네이버 지도, 날씨·미세먼지, 우편번호, 법령·판례, 식약처, HWP, 글자수·맞춤법 → 비서로서 충실도↑</span><br>
     • <b>Gmail·구글 캘린더 연동</b> → 일정·메일 챙기는 비서로 한층 성장.</p>
+    <p class="step-note"><b>설치 — Code에 한국어로</b>(터미널 명령 불필요, Claude가 찾아 설치·설정):</p>
+    <div class="cmd"><button class="copy" onclick="copyCmd(this)">복사</button><code class="pre">헤르메스(Hermes Agent, Nous Research)를 내 컴퓨터에 설치해줘. 공식 사이트 hermes-agent.nousresearch.com에서 내 OS에 맞는 방법을 찾아 설치하고 첫 설정까지 안내해줘. 시스템 바꾸는 명령은 실행 전에 확인받아.</code></div>
     <div class="warn">⚠️ 실제 예약·취소처럼 <b>부작용 있는 작업은 사용자 승인 후 실행</b>합니다.</div>
   </div>
 
@@ -186,6 +188,8 @@
     <h3>④ LLM wiki — 옵시디언 없이 지식 위키 <span class="sub">(예: 인맥 노트)</span></h3>
     <p class="what">에이전트가 <b>Markdown 노트를 쌓고 연결</b>해 나만의 지식베이스를 만듭니다(Karpathy LLM Wiki). 매번 새로 찾는 RAG가 아니라 <b>쌓을수록 똑똑해지는</b> 메모.</p>
     <p class="what">💡 <b>예 — 인맥 노트</b>: 친구마다 <code>/people</code>에 노트 하나(자녀 이름·나이·근황). "<b>7월 생일인 친구 찾아줘</b>" → 여러 문서를 가로질러 정리, "<b>○○ 자녀가 몇 살이었지?</b>" → 바로 답. 친구가 내 아이 이름·나이를 기억해 물어봐 주면 반갑듯, 그걸 <b>대신 챙겨주는</b> 셈 — 나이 들수록 이런 디테일이 관계의 자산.</p>
+    <p class="step-note"><b>시작 — Code에 이렇게</b>:</p>
+    <div class="cmd"><button class="copy" onclick="copyCmd(this)">복사</button><code class="pre">이 폴더에 LLM wiki를 시작하자. people 폴더에 사람별 노트(이름·생일·자녀 이름/나이·근황)와 전체 index.md를 만들고 계속 갱신해줘. 먼저 구조부터.</code></div>
     <p class="step-note">옵시디언 없이 Markdown 폴더로 작동(열면 위키링크·그래프). · 개인 노트이니 <b>내 기기에서</b> 관리.</p>
   </div>
 
