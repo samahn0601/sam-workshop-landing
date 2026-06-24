@@ -154,6 +154,30 @@
     <p class="step-note">옵시디언 없이 그냥 Markdown 폴더로 작동 · 옵시디언/VS Code에서 열면 위키링크·그래프로 보임.</p>
   </div>
 
+  <div class="card">
+    <h3>⑤ 웹을 직접 다룬다 — Claude in Chrome</h3>
+    <p class="what">크롬 확장(모든 유료 플랜 베타)으로 Claude가 <b>사이드패널에서 웹사이트를 읽고·클릭·폼 입력</b>하고, 반복 작업은 <b>워크플로를 녹화해</b> 다시 시킵니다. <b>Claude Code와 연동</b>(빌드→브라우저 테스트·검증)도 됩니다.</p>
+    <p class="step-note">안전: <b>"승인 후 실행" 모드</b>·고위험 행동은 확인. 뱅킹 등 민감 사이트는 주의. · (개발자용) <b>Playwright</b>를 MCP로 붙이면 재현 가능한 브라우저 자동화·테스트.</p>
+  </div>
+
+  <div class="card">
+    <h3>⑥ Word·Excel·PowerPoint 안에서 — Claude for Office</h3>
+    <p class="what">Microsoft <b>AppSource에서 "Claude by Anthropic" 애드인</b> 설치(유료 플랜). Word는 <b>변경내용 추적</b>으로 제안하고, 앱 사이로 대화 맥락이 이어집니다(메일 요약 → 엑셀 → 슬라이드).</p>
+    <div class="warn">⚠️ <b>학교·병원 Microsoft 365는 관리자가 외부 애드인을 막아둔 경우</b> 설치가 안 될 수 있습니다(개인 계정·허용된 테넌트에서 동작).</div>
+  </div>
+
+  <div class="card">
+    <h3>⑦ Claude Design — 디자인하고 Code로 넘긴다</h3>
+    <p class="what"><b>claude.ai/design</b>(유료 플랜·Labs 프리뷰)에서 대화로 <b>프로토타입·슬라이드·원페이저</b>를 만들고, 완성하면 <b>Code로 handoff 번들</b>을 넘겨 실제 구현까지(<code>/design-sync</code>로 디자인시스템 양방향 연동).</p>
+    <p class="step-note">사용량은 구독 한도 공유 — "보기 좋게 만드는 것"과 "진짜 구현"이 한 흐름으로.</p>
+  </div>
+
+  <div class="card">
+    <h3>⑧ Gmail·캘린더 연결 + 자동화</h3>
+    <p class="what">설정 ▸ Connectors로 <b>Gmail·구글 캘린더</b> 연결(유료). Gmail: 검색·요약·<b>초안 작성</b>(자동 발송은 안 됨 — 직접 보냄). 캘린더: 일정 조회 + <b>생성</b>(Code/MCP로 수정·삭제까지) → <b>입출력 모두</b>.</p>
+    <p class="step-note"><b>자동화 예</b>: "투고 관련 메일(편집장·저널 도메인·decision/revision/manuscript ID)이 오면 요약해 알려주고, 마감일은 캘린더에 넣어줘." ※ 연결은 <b>물어볼 때만</b> 동작 → <b>상시 알림은 ③ 헤르메스 같은 에이전트나 예약 작업</b>이 주기적으로 점검(실시간 푸시 아님).</p>
+  </div>
+
   <p class="step-note">오늘은 첫걸음 — 위는 그다음 단계입니다.</p>
 
   <div class="warn">⚠️ 실습은 모두 <b>교육용 가상 데이터</b>. 실제 환자자료·개인정보는 올리지 마세요. 통계·임상 최종 판단은 사람이 책임집니다.</div>
