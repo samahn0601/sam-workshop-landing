@@ -58,8 +58,9 @@
   <a href="#ai">③ AI·논문</a>
   <a href="#models">④ 모델·OAuth</a>
   <a href="#agent">⑤ 에이전트·비서</a>
-  <a href="#tools">⑥ 연동·자동화</a>
-  <a href="#mind">⑦ 기억할 한 줄</a>
+  <a href="#usage">⑥ 사용량 한도</a>
+  <a href="#tools">⑦ 연동·자동화</a>
+  <a href="#mind">⑧ 기억할 한 줄</a>
 </div></div>
 
 <div class="wrap">
@@ -139,12 +140,23 @@
   <div class="term"><b>마크다운 · 위키 · 옵시디언</b><p><b>마크다운</b>= #, - 같은 기호로 제목·목록을 적는 가벼운 서식. <b>위키</b>= 문서가 링크로 엮인 지식베이스. <b>Obsidian(옵시디언)</b>= 마크다운 노트를 링크로 엮는 인기 지식관리 앱.</p></div>
   <div class="term"><b>LLM wiki</b><p><b>Karpathy</b>가 공개한 패턴 — 폴더+마크다운으로 AI가 <b>쌓을수록 똑똑해지는</b> 지식베이스(매번 새로 찾는 RAG가 아니라 <b>index.md(목차)+log.md(기록)</b>로 누적). "Code에 붙여넣어 쓰라"는 <a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f" target="_blank" rel="noopener">공개 gist</a> 그대로 시키면 구조까지 잡아줌. <span class="ex">예: 친구별 노트(<code>/people</code>)에 자녀 이름·나이를 적어두면 "7월 생일?" "○○ 자녀 나이?"에 바로 답 — 읽은 논문 정리에도. (내 기기에서 개인 노트로)</span></p></div>
   <div class="term"><b>토큰(token)</b><p>AI가 글을 처리하는 단위(대략 단어 조각). 과금·기억량의 기준.</p></div>
-  <div class="term"><b>컨텍스트 윈도우</b><span class="en">context window</span><p>AI가 <b>한 대화에서 한 번에 기억하는 양</b>(토큰). 오늘 모델은 최대 <b>100만(1M) 토큰</b>. 단 <b>차면 찰수록 성능이 떨어져</b>, 길어지면 <b>새 세션에서 이어가는 게 좋습니다</b>.</p></div>
+  <div class="term"><b>컨텍스트 윈도우</b><span class="en">context window</span><p>AI가 <b>한 대화에서 한 번에 기억하는 양</b>(토큰). 오늘 모델은 최대 <b>100만(1M) 토큰</b>. 단 <b>차면 찰수록 성능이 떨어지고</b> 사용량 한도도 빨리 먹어, 길어지면 <b>새 세션에서 이어가는 게 좋습니다</b>. <span class="ex">→ <a href="#usage">⑥ 사용량 한도</a></span></p></div>
   <div class="term"><b>핸드오프(handoff)</b><p>지금까지 작업을 정리한 <b>인수인계 메모(MD) + 새 세션 첫 프롬프트</b>를 만들어, 다음 세션이 끊김 없이 이어가게 하는 것. 자주 하므로 <b>스킬로 만들어 두면</b> "핸드오프 해줘" 한마디로 됨.</p></div>
   <div class="term"><b>스킬로 만들기</b><p>반복 작업(핸드오프·교차검증 등)을 스킬로 묶으면 다음부터 한 번에 호출. <b>이 모든 걸 Claude Code에게 시키면</b> 됩니다 — "이걸 스킬로 만들어줘".</p></div>
 
-  <!-- ⑥ 연동·자동화 도구 -->
-  <h2 id="tools"><span class="ic">🧰</span>⑥ 더 나아가기 — 연동·자동화 도구 <span style="font-size:13px;color:var(--muted);font-weight:400">(응용반·관심자용)</span></h2>
+  <!-- ⑥ 사용량 한도·컨텍스트 관리 -->
+  <h2 id="usage"><span class="ic">⏱️</span>⑥ 사용량 한도 — 길어지면 끊어가기 <span style="font-size:13px;color:var(--muted);font-weight:400">(오래 쓰면 꼭 알아둘 것)</span></h2>
+
+  <div class="lead">⏱️ <b>한 세션을 너무 길게 끌면 사용량 한도가 빨리 찹니다.</b> 길어지면 <code>/compact</code>하거나 <b>핸드오프로 새 세션</b>에서 이어가세요 — 아래가 그 이유와 방법입니다.</div>
+
+  <div class="term"><b>사용량 한도 (5시간 · 주간)</b><p>구독 플랜은 <b>5시간마다 리셋되는 한도</b>와 <b>주간 한도</b>가 있습니다. 한도는 <b>처리한 토큰 양</b>에 비례해 쌓여요. 지금 얼마나 썼는지는 <code>/usage</code>로 확인.</p></div>
+  <div class="term"><b>왜 갑자기 한도가 차죠?</b><span class="en">컨텍스트 비대화</span><p>Claude Code는 <b>매 턴마다 그때까지의 대화 전체</b>를 다시 처리합니다. 그래서 한 세션이 길어질수록 <b>매 턴이 점점 무거워져</b> 한도를 빠르게 먹습니다. <span class="ex">한도가 걸려 쉰 뒤 <b>같은 거대 세션을 그대로 재개</b>하면 그 큰 맥락이 따라와 몇 턴 만에 또 걸립니다 — "쉬었는데 곧바로 또"가 이것.</span></p></div>
+  <div class="term"><b>/compact</b><p>지금까지 대화를 <b>요약해 맥락을 줄이는</b> 명령. 길어진 세션을 이어가되 다음 턴부터 가볍게 만듭니다.</p></div>
+  <div class="term"><b>핸드오프로 새 세션</b><p>맥락이 차면 <b>핸드오프</b>(→<a href="#agent">⑤</a>)로 인수인계 메모를 만들고 <b>새 세션</b>에서 이어가면 맥락이 리셋돼 한도 소모가 확 줄어듭니다. <b>한도가 걸렸을 땐 같은 세션 재개 대신 이 방법.</b></p></div>
+  <div class="term"><b>모델 선택 (Opus · Sonnet · Haiku)</b><p>같은 작업도 <b>Opus가 한도를 가장 빨리</b> 먹습니다. <b>일상 작업은 Sonnet</b>(가볍고 빠름), <b>정말 어려운 것만 Opus</b>로 — 이것만으로 한도가 크게 늘어납니다. 모델은 앱 또는 <code>/model</code>에서 전환.</p></div>
+
+  <!-- ⑦ 연동·자동화 도구 -->
+  <h2 id="tools"><span class="ic">🧰</span>⑦ 더 나아가기 — 연동·자동화 도구 <span style="font-size:13px;color:var(--muted);font-weight:400">(응용반·관심자용)</span></h2>
 
   <div class="term"><b>Connector(커넥터)</b><p>Claude의 <b>설정 ▸ Connectors</b>에서 Gmail·구글 캘린더 같은 외부 서비스를 켜는 기능. (연결의 기술 통로가 ⑤의 <b>MCP</b>.) 유료 플랜에서 동작하고, 켠 뒤에도 <b>"물어볼 때만"</b> 작동합니다.</p></div>
   <div class="term"><b>cron · 예약 작업</b><p>"매일 아침 9시"처럼 <b>정해진 시각에 자동 실행</b>되는 일정. 커넥터는 물어봐야 동작하므로, "메일 오면 알려줘"처럼 <b>알아서 챙기려면</b> 헤르메스의 cron 예약이 주기적으로 점검해야 합니다.</p></div>
@@ -153,7 +165,7 @@
   <div class="term"><b>Claude Design</b><p><code>claude.ai/design</code>에서 대화로 <b>프로토타입·슬라이드·원페이저</b>를 만드는 도구(유료·Labs). 완성하면 <b>Code로 넘겨 실제 구현</b>까지 이어집니다.</p></div>
   <div class="term"><b>Claude for Office · 애드인 · AppSource</b><p><b>애드인</b>=프로그램에 끼워 기능을 더하는 확장. Microsoft <b>AppSource</b>(애드인 장터)에서 "Claude by Anthropic"을 깔면 Word·Excel·PowerPoint <b>안에서</b> Claude를 씁니다. Word는 <b>변경내용 추적</b>으로 제안. <span class="ex">⚠️ 학교·병원 M365는 관리자가 외부 애드인을 막아둘 수 있음.</span></p></div>
 
-  <h2 id="mind"><span class="ic">⭐</span>⑦ 오늘 기억할 한 줄</h2>
+  <h2 id="mind"><span class="ic">⭐</span>⑧ 오늘 기억할 한 줄</h2>
 
   <div class="mind">
     <p><b>“AI는 똑똑하지만 자신 있게 틀린다.”</b> — 그래서 파이프라인과 검증이 필요합니다.</p>
