@@ -101,6 +101,16 @@
   <p class="step-note">→ Claude가 공식 명령을 찾아 실행(권한 승인·로그인은 직접) → <code>hermes setup</code>으로 모델·연동 설정. <span class="sub">직접: Win <code>iex (irm https://hermes-agent.nousresearch.com/install.ps1)</code> · mac/Linux/WSL2 <code>curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash</code></span></p>
   <div class="warn">⚠️ 상주 에이전트라 다소 <b>고급</b> → 오늘은 <b>개요·데모</b>도 OK. 설치 스크립트는 원격 실행이니 <b>공식 도메인 확인 후</b>. 공식: <a href="https://hermes-agent.nousresearch.com/docs" target="_blank" rel="noopener">hermes-agent.nousresearch.com/docs</a> · <a href="https://github.com/NousResearch/hermes-agent" target="_blank" rel="noopener">github</a></div>
 
+  <h3>🧠 브레인(두뇌) 모델 — 카드 없이 무과금 3경로</h3>
+  <div class="note">헤르메스가 "생각"에 쓰는 모델. 설치 직후 <code>hermes setup</code>(또는 나중에 <code>hermes model</code>)에서 <b>고르기만</b> 하면 됩니다. ⚠️ 헤르메스 브레인은 <b>tool-calling + 64K↑ 컨텍스트</b>가 필요 — 아무 모델이나 되는 건 아닙니다.</div>
+  <p>• <b>ChatGPT 구독자 → OpenAI Codex</b>: <code>hermes setup</code> → OpenAI Codex 선택 → 브라우저 코드 인증. <b>API 키 ❌, 기존 구독</b>으로.<br>
+  • <b>그 외 누구나(추천) → NVIDIA NIM + Hermes 3/4</b>: <a href="https://build.nvidia.com" target="_blank" rel="noopener">build.nvidia.com</a> 무료 키(카드 ❌·만료 ❌) → <code>hermes setup</code> → NVIDIA → 키 붙여넣기 → <b>Hermes 3/4</b> 선택. <span class="sub">Hermes 3/4 = tool-calling 특화라 비서에 딱(이름값).</span><br>
+  • <b>또는 OpenRouter 무료</b>: <a href="https://openrouter.ai" target="_blank" rel="noopener">openrouter.ai</a> 무료 키 → <code>hermes setup</code> → OpenRouter → <b>tool-calling 되는 <code>:free</code> 모델</b>(Llama 4·DeepSeek 계열). <span class="sub">⚠️ 무료는 요청수 제한(≈200/일)·모델별 품질차.</span></p>
+  <p class="step-note"><b>프롬프트로 한 번에</b>(추천 경로):</p>
+  <div class="cmd"><button class="copy" onclick="copyCmd(this)">복사</button>
+    <code class="pre">헤르메스 브레인을 NVIDIA NIM 무료(Hermes 3)로 설정하고 싶어. build.nvidia.com에서 무료 키 받는 법부터 hermes setup으로 NVIDIA·Hermes 3 고르는 데까지 안내해줘. 시스템 바꾸는 명령은 실행 전에 확인받아.</code></div>
+  <div class="star">💡 <b>왜 이 둘?</b> Claude는 <b>Max+추가 크레딧 전용</b>(Pro 불가)이라 일반 Claude 구독자는 구독으로 브레인을 못 굴립니다 → NIM·OpenRouter가 <b>카드 없이 바로</b> 되는 길. <b>당일 전 실기기에서 1회 동작 확인 권장.</b></div>
+
   <h2><span class="n">✓</span>진행 팁</h2>
   <div class="note">순서 강제 X — 관심 가는 것부터. <b>1·2번(연결+투고추적)만 해도 "비서" 체감 충분.</b> 막히는 1순위 = 커넥터 권한/플랜 → 안 되면 데모 화면 공유로. 모든 부작용 작업(캘린더 생성·메일 초안)은 <b>승인 후</b>.</div>
 

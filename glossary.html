@@ -134,6 +134,7 @@
 
   <div class="term"><b>에이전트(agent)</b><p>단계를 일일이 지시하지 않아도, <b>목표만 주면 스스로 도구를 골라 여러 단계를 수행</b>하는 AI.</p></div>
   <div class="term"><b>헤르메스(Hermes Agent)</b><p>Nous Research의 <b>오픈소스 자율 비서 에이전트</b>. PC/서버에 상주하며 <b>영속 기억·예약(cron) 실행</b>으로 "○○ 알아봐줘"를 스스로 처리합니다. 모델 무관(Claude 포함), 스킬·연동을 붙일수록 유능해집니다.</p></div>
+  <div class="term"><b>브레인(두뇌) 모델 선택</b><p>헤르메스가 생각에 쓰는 LLM. <b>tool-calling + 64K↑ 컨텍스트</b>가 필요(아무 모델이나 X). 무과금 경로 — <b>ChatGPT 구독자</b>=OpenAI Codex(구독 인증·키 불요), <b>그 외 누구나</b>=<b>NVIDIA NIM(Hermes 3, 카드 불요)</b> 또는 <b>OpenRouter 무료(<code>:free</code>)</b>. <code>hermes setup</code>·<code>hermes model</code>에서 고르기만. <span class="ex">Claude는 Max+추가 크레딧 전용이라 일반 구독자는 위 무료 경로 — 단계는 <a href="/trackb.html">trackb 🅱</a>.</span></p></div>
   <div class="term"><b>K-skills</b><p>한국 사용자에게 유용한 <b>스킬 모음</b>(GitHub 공개). 헤르메스에게 시켜 <b>필요한 것만 골라 설치</b> — 예: 기차표 예약·대중교통·날씨 안내. 비서로서 충실도가 올라감.</p></div>
   <div class="term"><b>Gmail · 구글 캘린더 연동</b><p>헤르메스에 이메일·일정을 연결하면 "메일 정리·일정 잡기" 같은 <b>비서 역할이 한층</b> 커집니다. (연동의 기술 통로 = MCP.)</p></div>
   <div class="term"><b>MCP</b><span class="en">Model Context Protocol</span><p>Gmail·캘린더·DB 같은 <b>외부 서비스를 AI에 안전하게 연결</b>하는 표준 통로(연동의 기술 이름).</p></div>
