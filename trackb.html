@@ -95,7 +95,9 @@
 
   <h2><span class="n">5</span>헤르메스(Hermes Agent) — 자율 비서로 확장 <span class="mins">~8분</span></h2>
   <div class="note"><b>Nous Research</b>의 오픈소스(MIT) 자율 에이전트 — <b>PC/서버에 상주</b>하며 영속 메모리·스킬 자가생성, <b>내장 cron으로 예약 작업을 알아서 실행</b>. <b>왜 핵심</b>: ②의 투고 추적을 "매일 아침 자동 점검 → 알림"처럼 <b>상시화</b>하는 엔진. 모델 무관(Claude 포함).</div>
-  <p><b>설치 — 터미널 명령 외울 필요 없이 Code에 시키세요</b>(Claude가 찾아 설치·설정):</p>
+  <div class="note">💻 <b>가장 쉬운 길 — 헤르메스 데스크탑 앱</b>(공식, 맥·윈·리눅스): <a href="https://hermes-agent.nousresearch.com/" target="_blank" rel="noopener">hermes-agent.nousresearch.com</a>에서 설치파일(.exe/.dmg) 받아 실행 → <b>CLI까지 같이</b> 깔립니다. 이후 <b>터미널 없이 GUI로</b> 채팅·<b>모델(브레인) 선택</b>·<b>메시징 연결</b>·<b>세션 관리(생성·이름변경·전환)</b>·예약·메모리. <span class="sub">CLI·데스크탑·웹 대시보드(<code>hermes dashboard</code>)가 <b>상태 공유</b> — 한 곳에서 시작해 다른 곳에서 이어집니다. 아래 단계는 CLI/프롬프트 기준이고, <b>데스크탑 앱이면 같은 설정을 클릭으로</b> 하면 됩니다.</span></div>
+
+  <p><b>또는 — 터미널 없이 Code에 시켜 설치</b>(Claude가 찾아 설치·설정):</p>
   <div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
     <code class="pre">헤르메스(Hermes Agent, github.com/NousResearch/hermes-agent)를 내 컴퓨터에 설치해줘. 공식 사이트 hermes-agent.nousresearch.com에서 내 OS(Windows/맥)에 맞는 설치 방법을 찾아 진행하고, 끝나면 첫 설정(hermes setup)까지 안내해줘. 시스템을 바꾸는 명령은 실행 전에 보여주고 확인받아.</code></div>
   <p class="step-note">→ Claude가 공식 명령을 찾아 실행(권한 승인·로그인은 직접) → <code>hermes setup</code>으로 모델·연동 설정. <span class="sub">직접: Win <code>iex (irm https://hermes-agent.nousresearch.com/install.ps1)</code> · mac/Linux/WSL2 <code>curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash</code></span></p>
