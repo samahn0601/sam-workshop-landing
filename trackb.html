@@ -111,6 +111,17 @@
     <code class="pre">헤르메스 브레인을 NVIDIA NIM 무료(Hermes 3)로 설정하고 싶어. build.nvidia.com에서 무료 키 받는 법부터 hermes setup으로 NVIDIA·Hermes 3 고르는 데까지 안내해줘. 시스템 바꾸는 명령은 실행 전에 확인받아.</code></div>
   <div class="star">💡 <b>왜 이 둘?</b> Claude는 <b>Max+추가 크레딧 전용</b>(Pro 불가)이라 일반 Claude 구독자는 구독으로 브레인을 못 굴립니다 → NIM·OpenRouter가 <b>카드 없이 바로</b> 되는 길. <b>당일 전 실기기에서 1회 동작 확인 권장.</b></div>
 
+  <h3>📱 어디서나 대화 — 텔레그램·디스코드·슬랙</h3>
+  <div class="note">헤르메스는 <b>메시징 게이트웨이</b>로 텔레그램·디스코드·슬랙(·WhatsApp)에 붙습니다 → <b>폰에서 내 비서에게 말 걸고 알림 받기</b>. 한 백그라운드 프로세스가 세션·cron·음성까지 처리. <b>"한 번에 받는 다운로드 링크"는 없고 봇 토큰 방식</b>입니다(아래 3단계).</div>
+  <p><b>텔레그램 — 한 탭으로 이동</b>:<br>
+  ① <a href="https://t.me/BotFather" target="_blank" rel="noopener">t.me/BotFather</a> → <code>/newbot</code> → <b>봇 토큰</b> 복사<br>
+  ② <a href="https://t.me/userinfobot" target="_blank" rel="noopener">t.me/userinfobot</a> → 내 <b>숫자 ID</b> 확인<br>
+  ③ <code>hermes gateway setup</code> → Telegram 선택 → 토큰·ID 붙여넣기 → <code>hermes gateway</code>로 시작</p>
+  <p class="step-note"><b>프롬프트로 한 번에</b>(Code가 안내):</p>
+  <div class="cmd"><button class="copy" onclick="copyCmd(this)">복사</button>
+    <code class="pre">헤르메스를 텔레그램에 연결하고 싶어. ① BotFather(t.me/BotFather)로 봇 만들어 토큰 받기, ② userinfobot(t.me/userinfobot)으로 내 숫자 ID 확인, ③ hermes gateway setup으로 텔레그램에 '내 ID만' 허용되게 토큰·ID 설정하고 게이트웨이 시작까지 — 순서대로 안내해줘. 봇 토큰은 비밀이니 다시 출력하거나 기록에 남기지 말고.</code></div>
+  <div class="star">💡 <b>디스코드·슬랙도 같은 <code>hermes gateway setup</code></b>(각 봇 토큰·초대). ⚠️ <b>봇 토큰=비밀번호</b> — 공유·커밋 금지. <b>허용 사용자에 본인 ID만</b> 넣어 아무나 못 쓰게. <b>실기기 1회 확인 권장.</b></div>
+
   <h2><span class="n">✓</span>진행 팁</h2>
   <div class="note">순서 강제 X — 관심 가는 것부터. <b>1·2번(연결+투고추적)만 해도 "비서" 체감 충분.</b> 막히는 1순위 = 커넥터 권한/플랜 → 안 되면 데모 화면 공유로. 모든 부작용 작업(캘린더 생성·메일 초안)은 <b>승인 후</b>.</div>
 
