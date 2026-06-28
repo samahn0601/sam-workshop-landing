@@ -51,7 +51,7 @@
   <div class="wrap">
     <p class="kicker">응용반 🅱 · 자동화·비서 트랙 · 퀵스타트</p>
     <h1>🅱 Claude를 "내 일을 챙기는 비서"로</h1>
-    <p>Gmail·캘린더 연결 → 투고 메일 추적 자동화 → K-skills → 헤르메스. 약 45분.</p>
+    <p>Gmail·캘린더 연결 → 투고 메일 추적 자동화 → K-skills → 헤르메스. 약 55분.</p>
   </div>
 </header>
 
@@ -93,25 +93,27 @@
     <code class="pre">김민수 자녀 이름이랑 나이 알려줘.</code></div>
   <p class="step-note">개인 노트이니 <b>내 기기에서</b> 관리 · 실제 사람 정보는 본인 판단으로.</p>
 
-  <h2><span class="n">5</span>헤르메스(Hermes Agent) — 자율 비서로 확장 <span class="mins">~8분</span></h2>
-  <div class="note"><b>Nous Research</b>의 오픈소스(MIT) 자율 에이전트 — <b>PC/서버에 상주</b>하며 영속 메모리·스킬 자가생성, <b>내장 cron으로 예약 작업을 알아서 실행</b>. <b>왜 핵심</b>: ②의 투고 추적을 "매일 아침 자동 점검 → 알림"처럼 <b>상시화</b>하는 엔진. 모델 무관(Claude 포함).</div>
-  <div class="note">💻 <b>가장 쉬운 길 — 헤르메스 데스크탑 앱</b>(공식, 맥·윈·리눅스): <a href="https://hermes-agent.nousresearch.com/" target="_blank" rel="noopener">hermes-agent.nousresearch.com</a>에서 설치파일(.exe/.dmg) 받아 실행 → <b>CLI까지 같이</b> 깔립니다. 이후 <b>터미널 없이 GUI로</b> 채팅·<b>모델(브레인) 선택</b>·<b>메시징 연결</b>·<b>세션 관리(생성·이름변경·전환)</b>·예약·메모리. <span class="sub">CLI·데스크탑·웹 대시보드(<code>hermes dashboard</code>)가 <b>상태 공유</b> — 한 곳에서 시작해 다른 곳에서 이어집니다. 아래 단계는 CLI/프롬프트 기준이고, <b>데스크탑 앱이면 같은 설정을 클릭으로</b> 하면 됩니다.</span></div>
+  <h2><span class="n">5</span>헤르메스(Hermes Agent) — 자율 비서로 확장 <span class="mins">개요 ~8분</span></h2>
+  <div class="note"><b>Nous Research</b>의 오픈소스(MIT) 자율 에이전트 — <b>PC/서버에 상주</b>하며 영속 메모리·스킬 자가생성, <b>내장 cron으로 예약 작업을 알아서 실행</b>. <b>왜 핵심</b>: ②의 투고 추적을 "매일 아침 자동 점검 → 알림"처럼 <b>상시화</b>하는 엔진.</div>
+  <div class="warn">🎯 <b>오늘 현장에선 "이런 게 된다"는 개요·데모까지.</b> 아래 <b>브레인·메시징 설정은 외부 계정 발급이 필요</b>해 <b>집에서 천천히 골라서</b> 하시면 됩니다 — 지금 전부 안 해도 됩니다.</div>
 
-  <p><b>또는 — 터미널 없이 Code에 시켜 설치</b>(Claude가 찾아 설치·설정):</p>
+  <h3>설치 — 가장 쉬운 길: 데스크탑 앱</h3>
+  <div class="note">💻 <a href="https://hermes-agent.nousresearch.com/" target="_blank" rel="noopener">hermes-agent.nousresearch.com</a>에서 <b>공식 데스크탑 설치파일(.exe/.dmg)</b> 받아 실행 → <b>CLI까지 같이</b> 깔리고, 이후 <b>터미널 없이 GUI로</b> 채팅·모델(브레인) 선택·메시징 연결·세션 관리·예약. <span class="sub">CLI·데스크탑·웹 대시보드(<code>hermes dashboard</code>)가 상태 공유 — 아래 설정도 데스크탑 앱이면 클릭으로. ※ 제공 형태·시점은 공식 사이트 기준.</span></div>
+  <p class="step-note"><b>또는 — Code에 시켜 설치</b>(터미널 명령 불필요):</p>
   <div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
     <code class="pre">헤르메스(Hermes Agent, github.com/NousResearch/hermes-agent)를 내 컴퓨터에 설치해줘. 공식 사이트 hermes-agent.nousresearch.com에서 내 OS(Windows/맥)에 맞는 설치 방법을 찾아 진행하고, 끝나면 첫 설정(hermes setup)까지 안내해줘. 시스템을 바꾸는 명령은 실행 전에 보여주고 확인받아.</code></div>
-  <p class="step-note">→ Claude가 공식 명령을 찾아 실행(권한 승인·로그인은 직접) → <code>hermes setup</code>으로 모델·연동 설정. <span class="sub">직접: Win <code>iex (irm https://hermes-agent.nousresearch.com/install.ps1)</code> · mac/Linux/WSL2 <code>curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash</code></span></p>
-  <div class="warn">⚠️ 상주 에이전트라 다소 <b>고급</b> → 오늘은 <b>개요·데모</b>도 OK. 설치 스크립트는 원격 실행이니 <b>공식 도메인 확인 후</b>. 공식: <a href="https://hermes-agent.nousresearch.com/docs" target="_blank" rel="noopener">hermes-agent.nousresearch.com/docs</a> · <a href="https://github.com/NousResearch/hermes-agent" target="_blank" rel="noopener">github</a></div>
+  <p class="step-note">→ Claude가 공식 명령 실행(권한·로그인은 직접) → <code>hermes setup</code>. <span class="sub">직접: Win <code>iex (irm https://hermes-agent.nousresearch.com/install.ps1)</code> · mac/Linux/WSL2 <code>curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash</code></span></p>
+  <div class="warn">⚠️ 설치 스크립트는 원격 실행이니 <b>공식 도메인 확인 후</b>. 공식: <a href="https://hermes-agent.nousresearch.com/docs" target="_blank" rel="noopener">docs</a> · <a href="https://github.com/NousResearch/hermes-agent" target="_blank" rel="noopener">github</a></div>
 
-  <h3>🧠 브레인(두뇌) 모델 — 카드 없이 무과금 3경로</h3>
-  <div class="note">헤르메스가 "생각"에 쓰는 모델. 설치 직후 <code>hermes setup</code>(또는 나중에 <code>hermes model</code>)에서 <b>고르기만</b> 하면 됩니다. ⚠️ 헤르메스 브레인은 <b>tool-calling + 64K↑ 컨텍스트</b>가 필요 — 아무 모델이나 되는 건 아닙니다.</div>
-  <p>• <b>ChatGPT 구독자 → OpenAI Codex</b>: <code>hermes setup</code> → OpenAI Codex 선택 → 브라우저 코드 인증. <b>API 키 ❌, 기존 구독</b>으로.<br>
-  • <b>그 외 누구나(추천) → NVIDIA NIM + Hermes 3/4</b>: <a href="https://build.nvidia.com" target="_blank" rel="noopener">build.nvidia.com</a> 무료 키(카드 ❌·만료 ❌) → <code>hermes setup</code> → NVIDIA → 키 붙여넣기 → <b>Hermes 3/4</b> 선택. <span class="sub">Hermes 3/4 = tool-calling 특화라 비서에 딱(이름값).</span><br>
-  • <b>또는 OpenRouter 무료</b>: <a href="https://openrouter.ai" target="_blank" rel="noopener">openrouter.ai</a> 무료 키 → <code>hermes setup</code> → OpenRouter → <b>tool-calling 되는 <code>:free</code> 모델</b>(Llama 4·DeepSeek 계열). <span class="sub">⚠️ 무료는 요청수 제한(≈200/일)·모델별 품질차.</span></p>
-  <p class="step-note"><b>프롬프트로 한 번에</b>(추천 경로):</p>
+  <h3>🧠 브레인(두뇌) 모델 — 카드 없이</h3>
+  <div class="star">💡 <b>당장은 'NVIDIA NIM + Hermes 3' 하나면 충분</b> — <a href="https://build.nvidia.com" target="_blank" rel="noopener">build.nvidia.com</a>에서 무료 키 받아 <code>hermes setup</code> → NVIDIA → <b>Hermes 3</b> 선택. (Hermes 3 = tool-calling 특화라 비서에 딱.) 나머지는 상황별 대안이니 안 봐도 됩니다.</div>
+  <div class="note">브레인은 <b>tool-calling + 64K↑ 컨텍스트</b> 모델이어야 합니다(아무 모델이나 X). 상황별:</div>
+  <p>• <b>ChatGPT 구독자</b> → <b>OpenAI Codex</b>: <code>hermes setup</code> → 브라우저 코드 인증. API 키 불요·기존 구독으로.<br>
+  • <b>OpenRouter 무료</b>: <a href="https://openrouter.ai" target="_blank" rel="noopener">openrouter.ai</a> 키 → tool-calling 되는 <code>:free</code> 모델(예시·변동). <span class="sub">무료 티어는 일일 요청 한도가 있습니다 — 현행 정책은 공식 사이트 확인.</span><br>
+  • <b>Claude</b>: 브레인으로 쓸 수는 있으나 <b>개인 구독만으론 제약</b>(API 키=종량과금 / 구독 OAuth는 상위 플랜·크레딧 필요·정책 변동) → 무과금·즉시는 위 NIM·OpenRouter·Codex 권장. <span class="sub">(정확한 현행 요건은 Anthropic 확인)</span></p>
+  <p class="step-note"><b>프롬프트로 한 번에</b>(추천 NIM 경로):</p>
   <div class="cmd"><button class="copy" onclick="copyCmd(this)">복사</button>
     <code class="pre">헤르메스 브레인을 NVIDIA NIM 무료(Hermes 3)로 설정하고 싶어. build.nvidia.com에서 무료 키 받는 법부터 hermes setup으로 NVIDIA·Hermes 3 고르는 데까지 안내해줘. 시스템 바꾸는 명령은 실행 전에 확인받아.</code></div>
-  <div class="star">💡 <b>왜 이 둘?</b> Claude는 <b>Max+추가 크레딧 전용</b>(Pro 불가)이라 일반 Claude 구독자는 구독으로 브레인을 못 굴립니다 → NIM·OpenRouter가 <b>카드 없이 바로</b> 되는 길. <b>당일 전 실기기에서 1회 동작 확인 권장.</b></div>
 
   <h3>📱 어디서나 대화 — 텔레그램·디스코드·슬랙</h3>
   <div class="note">헤르메스는 <b>메시징 게이트웨이</b>로 텔레그램·디스코드·슬랙(·WhatsApp)에 붙습니다 → <b>폰에서 내 비서에게 말 걸고 알림 받기</b>. 한 백그라운드 프로세스가 세션·cron·음성까지 처리. <b>"한 번에 받는 다운로드 링크"는 없고 봇 토큰 방식</b>입니다(아래 3단계).</div>
@@ -122,14 +124,14 @@
   <p class="step-note"><b>프롬프트로 한 번에</b>(Code가 안내):</p>
   <div class="cmd"><button class="copy" onclick="copyCmd(this)">복사</button>
     <code class="pre">헤르메스를 텔레그램에 연결하고 싶어. ① BotFather(t.me/BotFather)로 봇 만들어 토큰 받기, ② userinfobot(t.me/userinfobot)으로 내 숫자 ID 확인, ③ hermes gateway setup으로 텔레그램에 '내 ID만' 허용되게 토큰·ID 설정하고 게이트웨이 시작까지 — 순서대로 안내해줘. 봇 토큰은 비밀이니 다시 출력하거나 기록에 남기지 말고.</code></div>
-  <div class="star">💡 <b>디스코드·슬랙도 같은 <code>hermes gateway setup</code></b>(각 봇 토큰·초대). ⚠️ <b>봇 토큰=비밀번호</b> — 공유·커밋 금지. <b>허용 사용자에 본인 ID만</b> 넣어 아무나 못 쓰게. <b>실기기 1회 확인 권장.</b></div>
+  <div class="star">💡 디스코드·슬랙도 같은 <code>hermes gateway setup</code>(각 봇 토큰·초대). ⚠️ <b>봇 토큰=비밀번호</b> — 공유·커밋 금지·허용 사용자에 본인 ID만. <b>외부 계정(NIM 키·텔레그램 봇)은 발급에 시간이 걸리니 집에서 미리.</b> 실기기 1회 확인 권장.</div>
 
   <h2><span class="n">✓</span>진행 팁</h2>
   <div class="note">순서 강제 X — 관심 가는 것부터. <b>1·2번(연결+투고추적)만 해도 "비서" 체감 충분.</b> 막히는 1순위 = 커넥터 권한/플랜 → 안 되면 데모 화면 공유로. 모든 부작용 작업(캘린더 생성·메일 초안)은 <b>승인 후</b>.</div>
 
   <p class="step-note">← 전체 안내: <a href="/mini.html">mini.html</a> · 사전설치: <a href="/preinstall.html">preinstall.html</a> · 용어: <a href="/glossary.html">용어집</a></p>
 
-  <footer>🅱 자동화·비서 트랙 퀵스타트 · Claude Code 미니 워크숍 · 7/9 대구가톨릭의대 루가관</footer>
+  <footer>🅱 자동화·비서 트랙 퀵스타트 · Claude Code 미니 워크숍 · 7/9 대구가톨릭의대 루가관 7층 씨젠 세미나실</footer>
 </div>
 
 <script>

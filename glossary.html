@@ -56,10 +56,10 @@
   <a href="#install">① 설치할 때</a>
   <a href="#flow">② 작업 흐름</a>
   <a href="#ai">③ AI·논문</a>
-  <a href="#models">④ 모델·OAuth</a>
-  <a href="#agent">⑤ 에이전트·비서</a>
+  <a href="#models">④ 모델·OAuth <span style="opacity:.55;font-weight:400">심화</span></a>
+  <a href="#agent">⑤ 에이전트·비서 <span style="opacity:.55;font-weight:400">심화</span></a>
   <a href="#usage">⑥ 사용량 한도</a>
-  <a href="#tools">⑦ 연동·자동화</a>
+  <a href="#tools">⑦ 연동·자동화 <span style="opacity:.55;font-weight:400">심화</span></a>
   <a href="#mind">⑧ 기억할 한 줄</a>
 </div></div>
 
@@ -117,14 +117,13 @@
   <div class="term"><b>투고 / cover letter / AI 공개문</b><p><b>투고</b>=저널에 논문 제출. <b>cover letter</b>=편집장에게 보내는 소개 편지. <b>AI 공개문</b>=AI를 어떻게 썼는지 밝히는 글(요즘 저널 필수).</p></div>
   <div class="term"><b>IRB · COI · ORCID</b><p><b>IRB</b>=연구윤리심의. <b>COI</b>=이해상충(이해관계 충돌) 공개. <b>ORCID</b>=연구자 고유 ID 번호.</p></div>
 
-  <!-- ④ 마음가짐 -->
   <!-- ④ 모델·OAuth -->
   <h2 id="models"><span class="ic">🔌</span>④ 더 알아두면 — 모델 연결·OAuth·이미지 <span style="font-size:13px;color:var(--muted);font-weight:400">(워크숍 너머·관심자용)</span></h2>
 
   <div class="term"><b>OAuth(오어쓰)</b><p>비밀번호를 직접 넘기지 않고 <b>"이 앱이 내 계정을 써도 됩니다"</b>라고 안전하게 허용하는 로그인 방식("구글로 로그인" 버튼이 그 예). 오늘 팀 플랜 로그인도 이 방식.</p></div>
   <div class="term"><b>API 과금 vs 구독(OAuth)</b><p>AI를 프로그램에서 부를 때 — <b>API 키</b>는 쓴 만큼 돈을 냄(종량제), <b>구독 OAuth</b>는 이미 낸 월 구독으로 <b>추가 과금 없이</b> 씀.</p></div>
   <div class="term"><b>brain(두뇌) 모델</b><p>에이전트가 "생각"에 쓰는 LLM. 작업마다 강점이 달라 골라 씁니다. <b>과금형(API) = Claude·Gemini</b>(토큰당 과금) · <b>구독 OAuth형 = GPT·Grok</b>(구독으로 추가 과금 없이).</p></div>
-  <div class="term"><b>GPT를 OAuth로 연결</b><p>ChatGPT 구독자가 OAuth로 연결하면 <b>API 종량과금 없이</b> GPT를 Claude 안에서 사용 — <b>GPT와 상의(교차 자문)</b>, <b>이미지 생성</b> 등을 추가 비용 없이.</p></div>
+  <div class="term"><b>GPT를 OAuth로 연결</b><p>ChatGPT 구독자가 OAuth로 연결하면 <b>API 종량과금 없이</b> GPT를 Claude 안에서 사용 — <b>GPT와 상의(교차 자문)</b>, <b>이미지 생성</b> 등을 추가 비용 없이. <span class="ex">※ 공식 '무과금 API'가 아니라 구독(ChatGPT) OAuth 쿼터를 쓰는 비공식 경로.</span></p></div>
   <div class="term"><b>GPT-image-2</b><p>GPT의 이미지 생성 모델. OAuth 연결 시 그림(인포그래픽·피규어 등)을 추가 과금 없이 만들 수 있음.</p></div>
   <div class="term"><b>Grok(그록)</b><p>xAI의 LLM. GPT처럼 <b>구독 OAuth</b>로 연결해 무과금 사용 가능.</p></div>
   <div class="term"><b>교차 자문 (3AI)</b><p>같은 질문을 Claude·GPT·Gemini 등 <b>여러 모델에 던져 대조</b> — 한 모델의 오류·할루시네이션을 잡습니다(③ 교차검증을 모델 단위로).</p></div>
@@ -134,8 +133,8 @@
 
   <div class="term"><b>에이전트(agent)</b><p>단계를 일일이 지시하지 않아도, <b>목표만 주면 스스로 도구를 골라 여러 단계를 수행</b>하는 AI.</p></div>
   <div class="term"><b>헤르메스(Hermes Agent)</b><p>Nous Research의 <b>오픈소스 자율 비서 에이전트</b>. PC/서버에 상주하며 <b>영속 기억·예약(cron) 실행</b>으로 "○○ 알아봐줘"를 스스로 처리합니다. 모델 무관(Claude 포함), 스킬·연동을 붙일수록 유능해집니다.</p></div>
-  <div class="term"><b>헤르메스 데스크탑 앱·대시보드</b><p>헤르메스의 <b>공식 GUI</b>(맥·윈·리눅스, 2026-06 공개). 터미널 없이 채팅·모델 선택·메시징 연결·예약·<b>세션 관리(생성·이름변경·전환)</b>를 클릭으로. <code>hermes dashboard</code>는 브라우저 관리 패널(설정·키·세션·사용량). <span class="ex">CLI·데스크탑·웹이 <b>상태 공유</b>(한 곳에서 시작→다른 곳에서 이어). 다운로드: <a href="https://hermes-agent.nousresearch.com/" target="_blank" rel="noopener">hermes-agent.nousresearch.com</a>.</span></p></div>
-  <div class="term"><b>브레인(두뇌) 모델 선택</b><p>헤르메스가 생각에 쓰는 LLM. <b>tool-calling + 64K↑ 컨텍스트</b>가 필요(아무 모델이나 X). 무과금 경로 — <b>ChatGPT 구독자</b>=OpenAI Codex(구독 인증·키 불요), <b>그 외 누구나</b>=<b>NVIDIA NIM(Hermes 3, 카드 불요)</b> 또는 <b>OpenRouter 무료(<code>:free</code>)</b>. <code>hermes setup</code>·<code>hermes model</code>에서 고르기만. <span class="ex">Claude는 Max+추가 크레딧 전용이라 일반 구독자는 위 무료 경로 — 단계는 <a href="/trackb.html">trackb 🅱</a>.</span></p></div>
+  <div class="term"><b>헤르메스 데스크탑 앱·대시보드</b><p>헤르메스의 <b>공식 GUI</b>(맥·윈·리눅스 · 제공 형태·시점은 공식 사이트 기준). 터미널 없이 채팅·모델 선택·메시징 연결·예약·<b>세션 관리(생성·이름변경·전환)</b>를 클릭으로. <code>hermes dashboard</code>는 브라우저 관리 패널(설정·키·세션·사용량). <span class="ex">CLI·데스크탑·웹이 <b>상태 공유</b>(한 곳에서 시작→다른 곳에서 이어). 다운로드: <a href="https://hermes-agent.nousresearch.com/" target="_blank" rel="noopener">hermes-agent.nousresearch.com</a>.</span></p></div>
+  <div class="term"><b>브레인(두뇌) 모델 선택</b><p>헤르메스가 생각에 쓰는 LLM. <b>tool-calling + 64K↑ 컨텍스트</b>가 필요(아무 모델이나 X). 무과금 경로 — <b>ChatGPT 구독자</b>=OpenAI Codex(구독 인증·키 불요), <b>그 외 누구나</b>=<b>NVIDIA NIM(Hermes 3, 현재 무료 키)</b> 또는 <b>OpenRouter 무료(<code>:free</code>)</b>. <code>hermes setup</code>·<code>hermes model</code>에서 고르기만. <span class="ex">Claude도 가능하나 개인 구독만으론 제약(현행 요건은 Anthropic 확인)이라 무과금·즉시는 위 경로 — 단계는 <a href="/trackb.html">trackb 🅱</a>.</span></p></div>
   <div class="term"><b>메시징 게이트웨이</b><p>헤르메스를 <b>텔레그램·디스코드·슬랙</b>에 붙여 <b>폰에서 비서와 대화·알림</b> 받는 기능. "다운로드"가 아니라 <b>봇 토큰 방식</b> — 텔레그램은 <a href="https://t.me/BotFather" target="_blank" rel="noopener">BotFather</a>로 봇 토큰 + <a href="https://t.me/userinfobot" target="_blank" rel="noopener">userinfobot</a>으로 내 ID → <code>hermes gateway setup</code>. <span class="ex">봇 토큰=비밀·허용 사용자에 본인만. 단계 → <a href="/trackb.html">trackb 🅱</a>.</span></p></div>
   <div class="term"><b>K-skills</b><p>한국 사용자에게 유용한 <b>스킬 모음</b>(GitHub 공개). 헤르메스에게 시켜 <b>필요한 것만 골라 설치</b> — 예: 기차표 예약·대중교통·날씨 안내. 비서로서 충실도가 올라감.</p></div>
   <div class="term"><b>Gmail · 구글 캘린더 연동</b><p>헤르메스에 이메일·일정을 연결하면 "메일 정리·일정 잡기" 같은 <b>비서 역할이 한층</b> 커집니다. (연동의 기술 통로 = MCP.)</p></div>
