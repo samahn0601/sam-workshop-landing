@@ -63,7 +63,7 @@
   <div class="note"><b>전제</b> — Claude Desktop(Code) + Git 설치·<b>유료 플랜</b> 로그인(=preinstall 완료). K-skill 설치(3단계)엔 <b>Node.js</b> 필요(없으면 건너뛰고 연결·자동화 위주).</div>
 
   <h2><span class="n">1</span>Gmail·캘린더 연결 <span class="mins">~10분</span></h2>
-  <p><b>설정(Settings) ▸ Connectors</b> → Google(Gmail·Calendar) <b>Connect</b> → 계정 인증. <span class="sub">(Team/Enterprise는 관리자가 먼저 활성화. 데스크톱/웹에서 연결.)</span></p>
+  <p><b>설정(Settings) ▸ Connectors</b> → Google(Gmail·Calendar) <b>Connect</b> → 계정 인증. <span class="sub">(Team/Enterprise는 <b>2중 사전 활성화</b> 필요: ① Claude 조직 Owner가 설정 ▸ Connectors에서 활성화 ② 학교 Google Workspace는 IT가 admin.google.com ▸ 보안 ▸ API 제어에서 <b>Claude를 '신뢰 앱(Trusted)'</b>으로 허용 — 누락 시 "Access blocked" 오류. 데스크톱/웹에서 연결.)</span></p>
   <div class="cmd"><button class="copy" onclick="copyCmd(this)">복사</button>
     <code class="pre">다음 주 내 구글 캘린더 일정을 요약해줘.</code></div>
   <div class="cmd"><button class="copy" onclick="copyCmd(this)">복사</button>
@@ -109,7 +109,7 @@
   <div class="star">💡 <b>당장은 'NVIDIA NIM + Hermes 3' 하나면 충분</b> — <a href="https://build.nvidia.com" target="_blank" rel="noopener">build.nvidia.com</a>에서 무료 키 받아 <code>hermes setup</code> → NVIDIA → <b>Hermes 3</b> 선택. (Hermes 3 = tool-calling 특화라 비서에 딱.) 나머지는 상황별 대안이니 안 봐도 됩니다.</div>
   <div class="note">브레인은 <b>tool-calling + 64K↑ 컨텍스트</b> 모델이어야 합니다(아무 모델이나 X). 상황별:</div>
   <p>• <b>ChatGPT 구독자</b> → <b>OpenAI Codex</b>: <code>hermes setup</code> → 브라우저 코드 인증. API 키 불요·기존 구독으로.<br>
-  • <b>OpenRouter 무료</b>: <a href="https://openrouter.ai" target="_blank" rel="noopener">openrouter.ai</a> 키 → tool-calling 되는 <code>:free</code> 모델(예시·변동). <span class="sub">무료 티어는 일일 요청 한도가 있습니다 — 현행 정책은 공식 사이트 확인.</span><br>
+  • <b>OpenRouter 무료</b>: <a href="https://openrouter.ai" target="_blank" rel="noopener">openrouter.ai</a> 키 → tool-calling 되는 <code>:free</code> 모델(예: gpt-oss·qwen3-coder, 변동). <span class="sub">무료 일일 약 50회·20회/분(공식 기준 · $10+ 1회 충전 시 1,000회/일).</span><br>
   • <b>Claude</b>: 브레인으로 쓸 수는 있으나 <b>개인 구독만으론 제약</b>(API 키=종량과금 / 구독 OAuth는 상위 플랜·크레딧 필요·정책 변동) → 무과금·즉시는 위 NIM·OpenRouter·Codex 권장. <span class="sub">(정확한 현행 요건은 Anthropic 확인)</span></p>
   <p class="step-note"><b>프롬프트로 한 번에</b>(추천 NIM 경로):</p>
   <div class="cmd"><button class="copy" onclick="copyCmd(this)">복사</button>
