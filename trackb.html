@@ -105,15 +105,19 @@
   <p class="step-note">→ Claude가 공식 명령 실행(권한·로그인은 직접) → <code>hermes setup</code>. <span class="sub">직접: Win <code>iex (irm https://hermes-agent.nousresearch.com/install.ps1)</code> · mac/Linux/WSL2 <code>curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash</code></span></p>
   <div class="warn">⚠️ 설치 스크립트는 원격 실행이니 <b>공식 도메인 확인 후</b>. 공식: <a href="https://hermes-agent.nousresearch.com/docs" target="_blank" rel="noopener">docs</a> · <a href="https://github.com/NousResearch/hermes-agent" target="_blank" rel="noopener">github</a></div>
 
-  <h3>🧠 브레인(두뇌) 모델 — 카드 없이</h3>
-  <div class="star">💡 <b>당장은 'NVIDIA NIM' 하나면 충분</b>(신용카드 불필요) — <a href="https://build.nvidia.com" target="_blank" rel="noopener">build.nvidia.com</a>에서 무료 키 받아 <code>hermes setup</code> → NVIDIA → <b>tool-calling 되는 모델(Nemotron 등)</b> 선택. 나머지는 상황별 대안이니 안 봐도 됩니다.</div>
-  <div class="note">브레인은 <b>tool-calling + 64K↑ 컨텍스트</b> 모델이어야 합니다(아무 모델이나 X). 상황별:</div>
-  <p>• <b>ChatGPT 구독자</b> → <b>OpenAI Codex</b>: <code>hermes setup</code> → 브라우저 코드 인증. API 키 불요·기존 구독으로.<br>
-  • <b>OpenRouter 무료</b>: <a href="https://openrouter.ai" target="_blank" rel="noopener">openrouter.ai</a> 키 → tool-calling 되는 <code>:free</code> 모델(예: gpt-oss·qwen3-coder, 변동). <span class="sub">무료 일일 약 50회·20회/분(공식 기준 · $10+ 1회 충전 시 1,000회/일).</span><br>
-  • <b>Claude</b>: 브레인으로 쓸 수는 있으나 <b>개인 구독만으론 제약</b> — API 키(종량과금)는 누구나 / 구독 OAuth는 <b>Max+추가 크레딧 전용(Pro 불가)</b>이고 라우팅 버그로 불안정 → 무과금·즉시는 위 NIM·OpenRouter·Codex 권장. <span class="sub">(현행 요건은 Anthropic 확인)</span></p>
-  <p class="step-note"><b>프롬프트로 한 번에</b>(추천 NIM 경로):</p>
+  <h3>🧠 브레인(두뇌) 모델 — 무료로 시작</h3>
+  <div class="star">💡 <b>두 갈래 중 하나</b>(둘 다 카드·API 키 없이):<br>
+  • <b>ChatGPT 구독자</b> → <b>OpenAI Codex</b>: <code>hermes setup</code> → 브라우저 코드 인증. 기존 구독 그대로.<br>
+  • <b>비구독자</b> → <b>무료 Nous Portal + Hy3</b>: <a href="https://portal.nousresearch.com" target="_blank" rel="noopener">portal.nousresearch.com</a> 무료 가입 → <code>hermes setup --portal</code>(브라우저 로그인) → <code>/model</code>로 <b>Hy3</b> 선택. Hy3 = tool-calling 특화 · <b>2주 한정 무료</b>(~7/20).</div>
+  <div class="note">브레인은 <b>tool-calling + 긴 컨텍스트</b> 모델이어야 합니다(아무 모델이나 X). 위 두 경로면 충분 — 아래는 <b>폴백</b>입니다.</div>
+  <p class="sub"><b>폴백(혹시 위가 막히면):</b><br>
+  • <b>NVIDIA NIM</b>: <a href="https://build.nvidia.com" target="_blank" rel="noopener">build.nvidia.com</a>에서 무료 키(카드 없이) → <code>hermes setup</code> → NVIDIA → tool-calling 모델(Nemotron 등).<br>
+  • <b>OpenRouter 무료</b>: <a href="https://openrouter.ai" target="_blank" rel="noopener">openrouter.ai</a> 키 → <code>:free</code> 모델(일일 약 50회 제한).<br>
+  • <b>Claude</b>: API 키(종량과금)는 누구나 / 구독 OAuth는 Max+추가 크레딧 전용(Pro 불가)이라 개인 구독만으론 제약.</p>
+  <div class="warn">⚠️ Nous Portal 무료 tier는 <b>레이트리밋</b>이 있고, Hy3 무료는 <b>~7/20까지</b>(이후 Neatron·Trinity 등 다른 무료 모델로 자동 폴백). Portal 프리미엄 툴셋(Tool Gateway)은 유료지만, <b>모델 자체의 함수호출(에이전트 루프)은 무료 tier에서 동작</b>합니다.</div>
+  <p class="step-note"><b>프롬프트로 한 번에</b>(비구독자 · 무료 Portal+Hy3 경로):</p>
   <div class="cmd"><button class="copy" onclick="copyCmd(this)">복사</button>
-    <code class="pre">헤르메스 브레인을 NVIDIA NIM 무료로 설정하고 싶어. build.nvidia.com에서 무료 키(신용카드 없이) 받는 법부터, hermes setup으로 NVIDIA를 고르고 tool-calling 되는 모델(Nemotron 등)을 선택하는 데까지 안내해줘. 시스템 바꾸는 명령은 실행 전에 확인받아.</code></div>
+    <code class="pre">헤르메스 브레인을 무료 Nous Portal의 Hy3로 설정하고 싶어. portal.nousresearch.com 무료 가입부터, hermes setup --portal로 브라우저 로그인하고 /model로 Hy3(tool-calling 되는 모델)를 고르는 데까지 안내해줘. 시스템 바꾸는 명령은 실행 전에 확인받아.</code></div>
 
   <h3>📱 어디서나 대화 — 텔레그램·디스코드·슬랙</h3>
   <div class="note">헤르메스는 <b>메시징 게이트웨이</b>로 텔레그램·디스코드·슬랙(·WhatsApp)에 붙습니다 → <b>폰에서 내 비서에게 말 걸고 알림 받기</b>. 한 백그라운드 프로세스가 세션·cron·음성까지 처리. <b>"한 번에 받는 다운로드 링크"는 없고 봇 토큰 방식</b>입니다(아래 3단계).</div>
