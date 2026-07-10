@@ -212,11 +212,15 @@
   </div>
 
   <div class="card">
-    <h3>② LLM wiki — 읽은 논문 정리·인맥 노트</h3>
-    <p class="what">에이전트가 <b>Markdown 노트를 쌓고 연결</b>해 쌓을수록 똑똑해지는 지식베이스(Karpathy LLM wiki 패턴). <b>읽은 논문 정리</b>에 특히 좋습니다 — "작년에 읽은 것 중 ○○ 다룬 논문?"에 여러 노트를 가로질러 답.</p>
+    <h3>② LLM wiki — 인물 노트 실습 + 읽은 논문 쌓기</h3>
+    <p class="what">에이전트가 <b>Markdown 노트를 쌓고 연결</b>해 쌓을수록 똑똑해지는 지식베이스(Karpathy LLM wiki 패턴). 오늘은 두 용도로 — <b>㉮ 인물 노트 실습</b>(감 잡기 가장 쉬움)과 <b>㉯ 읽은 논문 서재</b>.</p>
+    <p><b>㉮ 인물 노트 실습</b> — 가상 인물 2~3명을 넣고 "이번 달 생일인 사람?" 같은 질문으로 여러 노트를 가로질러 답하는 걸 체험:</p>
+    <div class="cmd"><button class="copy" onclick="copyCmd(this)">복사</button>
+      <code class="pre">이 폴더에 '인물 노트 wiki'를 시작하자. people 폴더를 만들고, 내가 사람 정보를 주면 한 명당 노트 한 개(이름·생일·자녀 이름/나이·근황·마지막 만남)로 정리해줘. 전체를 한눈에 보는 index.md도 만들어 계속 갱신하고. 먼저 구조와 빈 템플릿부터. (실습은 가상 인물로)</code></div>
+    <p><b>㉯ 읽은 논문 서재</b> — 같은 원리로 논문 노트를 쌓으면 "작년에 읽은 것 중 ○○ 다룬 논문?"에 즉답:</p>
     <div class="cmd"><button class="copy" onclick="copyCmd(this)">복사</button>
       <code class="pre">이 폴더에 '읽은 논문 wiki'를 시작하자. papers 폴더에 논문별 노트(서지정보·핵심 결과·내 코멘트·관련 논문 링크)와 전체 index.md를 만들고 계속 갱신해줘. 먼저 구조와 빈 템플릿부터.</code></div>
-    <p class="step-note">제대로/오래 쓰려면 Karpathy <a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f" target="_blank" rel="noopener">공개 gist</a>를 붙여넣고 "이대로 만들어줘" → index+log·교차링크까지 일관. 옵시디언으로 열면 그래프로 보임.</p>
+    <p class="step-note">제대로/오래 쓰려면 Karpathy <a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f" target="_blank" rel="noopener">공개 gist</a>를 붙여넣고 "이대로 만들어줘" → index+log·교차링크까지 일관. 옵시디언으로 열면 그래프로 보임 · 실제 인물 정보는 <b>내 기기에서, 본인 판단으로</b>.</p>
   </div>
 
   <div class="card">
@@ -239,7 +243,13 @@
   </div>
 
   <div class="card">
-    <h3>⑥ Claude Design + 무과금 OAuth <span class="sub">· 더 멀리</span></h3>
+    <h3>⑥ NotebookLM — 문헌 소화 AI <span class="sub">· 무료 · 구글 계정</span></h3>
+    <p class="what">Code가 <b>만드는 AI</b>라면 NotebookLM은 <b>소화시켜주는 AI</b> — 내가 올린 문헌·논문 <b>안에서만</b> 답하고(출처 인용·환각 억제), 요약·오디오/비디오 오버뷰·퀴즈·플래시카드를 자동 생성합니다. 본인 논문 PDF·참고문헌을 넣어 보세요.</p>
+    <p class="step-note"><a href="https://notebooklm.google" target="_blank" rel="noopener">notebooklm.google</a> → <b>개인 구글 계정</b> 로그인(학교 Workspace는 막힌 경우 있음) → 새 노트북 → PDF 업로드 → 출력 언어 한국어. ⭐ 답변의 <b>출처 인용을 클릭</b>해 원문 근거로 점프해 보세요 — "AI가 지어낸 게 아니라 내 소스에서 왔다"를 눈으로(가짜 인용 경계 습관과 직결). ⚠️ 무료 한도: 오디오 ~3/일·비디오는 더 제한적.</p>
+  </div>
+
+  <div class="card">
+    <h3>⑦ Claude Design + 무과금 OAuth <span class="sub">· 더 멀리</span></h3>
     <p><b>Claude Design</b>(claude.ai/design) — 대화로 프로토타입·슬라이드·원페이저를 만들고 Code로 넘겨 실제 구현까지.<br>
     <b>구독 OAuth</b> — ChatGPT 구독자는 Codex OAuth로 연결해 <b>API 과금 없이</b> GPT와 교차 자문·이미지 생성. <span class="sub">※ 공식 무과금 API가 아니라 구독 쿼터를 쓰는 비공식 경로.</span></p>
   </div>
@@ -254,7 +264,7 @@
     <tr><td><b>Python</b></td><td>참고문헌·통계 점검 스크립트 실행기</td><td><span class="yes">Claude 자동</span> (필요 시)</td></tr>
     <tr><td><b>논문 Skill 18개</b></td><td>논문 작성 10단계를 자동화한 도구 모음</td><td>ZIP 풀기(방법 A) 또는 발화(B)</td></tr>
     <tr><td><b>start-here</b></td><td>"시작하자" 한마디로 10단계를 안내하는 진입점</td><td>(Skill에 포함)</td></tr>
-    <tr><td><b>고급 활용 메뉴</b></td><td>투고 추적·LLM wiki·K-skills·헤르메스·Chrome/Office</td><td>워크숍 중 시연 + take-home</td></tr>
+    <tr><td><b>고급 활용 메뉴</b></td><td>투고 추적·LLM wiki·K-skills·헤르메스·Chrome/Office·NotebookLM</td><td>워크숍 중 시연 + take-home</td></tr>
   </table>
 
   <!-- 막히면 -->
@@ -278,7 +288,8 @@
     <a href="/sam-workshop-paper.zip" download><span class="ic">📦</span><span>논문 파이프라인 ZIP (18 skill · 원클릭)<small>sam-workshop-paper.zip</small></span></a>
     <a href="/sample_workspace.zip" download><span class="ic">🗂️</span><span>몸풀기 실습 폴더<small>sample_workspace.zip · 교육용 가상 데이터</small></span></a>
     <a href="https://github.com/samahn0601/sam-workshop" target="_blank" rel="noopener"><span class="ic">🐙</span><span>논문 Skill 저장소<small>github.com/samahn0601/sam-workshop</small></span></a>
-    <a href="/trackb.html"><span class="ic">🤖</span><span>🅱 자동화·비서 퀵스타트<small>투고추적·K-skills·헤르메스 설정 단계 상세</small></span></a>
+    <a href="/trackb.html"><span class="ic">🤖</span><span>자동화·비서 퀵스타트<small>투고추적·K-skills·헤르메스 설정 단계 상세</small></span></a>
+    <a href="https://notebooklm.google" target="_blank" rel="noopener"><span class="ic">📚</span><span>NotebookLM<small>notebooklm.google · 개인 구글 계정 · 무료</small></span></a>
     <a href="/glossary.html"><span class="ic">📖</span><span>용어집 (쉬운 설명)<small>git·코딩·파이썬·AI·논문 용어 풀이</small></span></a>
     <a class="ph" id="kakao"><span class="ic">💬</span><span>워크숍 카톡방<small>워크숍 당일 현장에서 공유</small></span></a>
   </div>
