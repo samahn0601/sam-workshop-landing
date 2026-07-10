@@ -102,6 +102,16 @@
   </table>
   <div class="note"><b>연구 유형별 지원</b> — 질적 연구(내러티브·현상학·주제분석 · COREQ/SRQR), 양적 연구, 문헌·사료 기반 연구. 연구 유형에 맞춰 저널·구조·검증이 자동으로 달라집니다.<br>📊 <a href="/medhum-pipeline.html">논문 파이프라인 한눈에 보기 →</a></div>
 
+  <h2><span class="n">＋</span>Claude 단독이 기본 · GPT는 선택</h2>
+  <div class="note">이 파이프라인은 <b>Claude 단독</b>으로 논문 한 편이 끝까지 됩니다 — 추가 도구·API 키 불요. 아래는 <b>ChatGPT 구독이 있는 분</b>을 위한 선택 옵션이며, 없어도 워크숍 진행엔 전혀 지장이 없습니다.</div>
+  <div class="note"><b>⑥ Critic</b>처럼 여러 시각이 도움 되는 단계에서 Claude의 다관점 페르소나에 더해 <b>GPT를 "제2 관점"</b>으로 더할 수 있습니다:<br>
+  · <b>간단</b> — 비평 요약을 브라우저 ChatGPT에 붙여넣어 "제2 심사자"로 물어보기 (설정 없음, 구독만 있으면).<br>
+  · <b>무과금 연결(OAuth)</b> — <b>Codex OAuth</b>로 연결하면 Code 탭 안에서 Claude가 GPT를 직접 호출합니다. 별도 <code>OPENAI_API_KEY</code> 과금 없이 <b>ChatGPT 구독 쿼터</b>를 씁니다.</div>
+  <p class="sub">연결은 Code 탭에 한국어로 시키면 됩니다 (터미널 명령 몰라도 OK):</p>
+  <div class="cmd"><button class="copy" onclick="copyCmd(this)">복사</button>
+    <code class="pre">ChatGPT 구독으로 GPT를 무과금 연결(OpenAI Codex CLI, OAuth 로그인)하고 싶어. 내 OS에 맞게 Codex를 설치하고 codex login으로 ChatGPT 계정 로그인하는 것까지 안내해줘. 시스템을 바꾸는 명령은 실행 전에 꼭 확인받아.</code></div>
+  <div class="note">※ 공식 "무과금 API"가 아니라 <b>구독(ChatGPT Plus/Pro) OAuth 쿼터</b>를 쓰는 비공식 경로입니다. 쿼터 제한이 걸리면 유료 API 키로 폴백해야 할 수 있습니다. <b>Claude 단독도 완전한 경로</b>이니 부담 없이 선택하세요.</div>
+
   <div class="warn">⚠️ <b>안전선</b> — 미출간 원고·연구참여자 정보는 신중히. 질적연구도 <b>IRB·참여자 비식별</b> 대상이고, 1차 사료·핵심 인용은 <b>본인이 원문 확인</b>합니다. 워크숍 산출물은 "투고 준비를 도운" 것이지 "그대로 투고 가능"이 아닙니다.</div>
 
   <footer>인문사회의학 논문 워크숍 · 7월 11일(토) 09:30–12:00 · 순천향의과대학 향설의학관 5층 415호 · Claude 단독(외부 API 불요)</footer>
