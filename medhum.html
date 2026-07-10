@@ -50,6 +50,22 @@
   th{background:#EAF2F4;color:var(--tealDeep)}
   footer{color:var(--muted);font-size:12.5px;text-align:center;margin-top:36px}
   .step-note{font-size:13px;color:var(--muted);margin:5px 0 0}
+  /* embedded pipeline viz */
+  .pl{margin:10px 0 4px}
+  .pl-band{font-weight:800;color:var(--tealDeep);font-size:13px;margin:14px 0 6px;border-bottom:2px solid var(--mist);padding-bottom:3px}
+  .pl-flow{display:flex;flex-wrap:wrap;gap:6px}
+  .pl-step{flex:1 1 90px;min-width:80px;background:#fff;border:1px solid var(--mist);border-radius:10px;padding:9px 6px 8px;text-align:center;position:relative;display:flex;flex-direction:column;gap:2px;font-size:12px}
+  .pl-step b{font-size:12.5px}
+  .pl-step small{color:var(--muted);font-size:10.5px}
+  .pl-no{position:absolute;top:-8px;left:6px;background:var(--ink);color:#fff;font-size:11px;font-weight:700;width:19px;height:19px;border-radius:50%;line-height:19px}
+  .pl-ic{font-size:20px;margin-top:4px;line-height:1}
+  .pl-step.pl-lock{background:#F7FAFB;border-color:var(--muted)}
+  .pl-stop{color:var(--red);font-weight:700;font-size:11px}
+  .pl-lk{color:var(--muted);font-weight:700;font-size:10.5px}
+  .pl-intake{background:#EAF2F4;border:1px solid var(--tealLt);border-radius:10px;padding:10px 12px;margin:12px 0 0;font-size:13px}
+  .pl-chip{display:inline-block;background:#fff;border:1px solid var(--tealLt);border-radius:999px;padding:2px 10px;font-size:12px;font-weight:600;color:var(--tealDeep);margin:6px 4px 0 0}
+  .pl-floor{background:var(--amberBg);border:1px solid #E8CF97;border-radius:10px;padding:10px 12px;margin:10px 0 0;font-size:12.5px;color:#6b4e12;font-weight:600}
+  .pl-tag{background:var(--ink);color:#fff;text-align:center;font-weight:800;font-style:italic;font-size:15px;border-radius:10px;padding:11px;margin:10px 0 0}
 </style>
 </head>
 <body>
@@ -100,13 +116,44 @@
     <tr><td>10:10–11:45</td><td><b>본인 자료로 논문화 실습</b> — 분야 선택 → 저널 적합성 → 서사/구조 → 근거·인용 → 검증 → 휴머나이징 → 최종 점검</td></tr>
     <tr><td>11:45–12:00</td><td>마무리 · 안전선 · Q&A</td></tr>
   </table>
-  <div class="note"><b>연구 유형별 지원</b> — 질적 연구(내러티브·현상학·주제분석 · COREQ/SRQR), 양적 연구, 문헌·사료 기반 연구. 연구 유형에 맞춰 저널·구조·검증이 자동으로 달라집니다.<br>📊 <a href="/medhum-pipeline.html">논문 파이프라인 한눈에 보기 →</a></div>
+  <div class="note"><b>연구 유형별 지원</b> — 질적 연구(내러티브·현상학·주제분석 · COREQ/SRQR), 양적 연구, 문헌·사료 기반 연구. 연구 유형에 맞춰 저널·구조·검증이 자동으로 달라집니다.</div>
 
-  <h2><span class="n">＋</span>Claude 단독이 기본 · GPT는 선택</h2>
-  <div class="note">이 파이프라인은 <b>Claude 단독</b>으로 논문 한 편이 끝까지 됩니다 — 추가 도구·API 키 불요. 아래는 <b>ChatGPT 구독이 있는 분</b>을 위한 선택 옵션이며, 없어도 워크숍 진행엔 전혀 지장이 없습니다.</div>
-  <div class="note"><b>⑥ Critic</b>처럼 여러 시각이 도움 되는 단계에서 Claude의 다관점 페르소나에 더해 <b>GPT를 "제2 관점"</b>으로 더할 수 있습니다:<br>
-  · <b>간단</b> — 비평 요약을 브라우저 ChatGPT에 붙여넣어 "제2 심사자"로 물어보기 (설정 없음, 구독만 있으면).<br>
-  · <b>무과금 연결(OAuth)</b> — <b>Codex OAuth</b>로 연결하면 Code 탭 안에서 Claude가 GPT를 직접 호출합니다. 별도 <code>OPENAI_API_KEY</code> 과금 없이 <b>ChatGPT 구독 쿼터</b>를 씁니다.</div>
+  <h2><span class="n">📊</span>논문 파이프라인 한눈에</h2>
+  <p class="sub">"시작하자" 한마디면 아래 10단계를 순서대로 안내합니다. <b>✋</b>=저자가 검토·승인하는 정차, <b>🔒</b>=사람이 직접(로그인·제출).</p>
+  <div class="pl">
+    <div class="pl-band">작성</div>
+    <div class="pl-flow">
+      <div class="pl-step"><span class="pl-no">1</span><span class="pl-ic">💡</span><b>Idea</b><small>주제·분야</small><span class="pl-stop">✋ 정차</span></div>
+      <div class="pl-step"><span class="pl-no">2</span><span class="pl-ic">🔍</span><b>Research</b><small>문헌 수집</small></div>
+      <div class="pl-step"><span class="pl-no">3</span><span class="pl-ic">🗺️</span><b>Story</b><small>서사·구조</small></div>
+      <div class="pl-step"><span class="pl-no">4</span><span class="pl-ic">📄</span><b>Draft</b><small>초고</small></div>
+      <div class="pl-step"><span class="pl-no">5</span><span class="pl-ic">🛡️</span><b>Verify</b><small>인용 검증</small><span class="pl-stop">✋ 정차</span></div>
+      <div class="pl-step"><span class="pl-no">6</span><span class="pl-ic">💬</span><b>Critic</b><small>다관점 비평</small><span class="pl-stop">✋ 정차</span></div>
+      <div class="pl-step"><span class="pl-no">7</span><span class="pl-ic">✨</span><b>Package</b><small>문체·양식</small></div>
+    </div>
+    <div class="pl-band">제출 · 리뷰 · 마무리</div>
+    <div class="pl-flow">
+      <div class="pl-step pl-lock"><span class="pl-no">8</span><span class="pl-ic">⬆️</span><b>Submission</b><small>투고 준비</small><span class="pl-lk">🔒 사람</span></div>
+      <div class="pl-step pl-lock"><span class="pl-no">9</span><span class="pl-ic">🔄</span><b>Review</b><small>심사 대응</small><span class="pl-lk">🔒 사람</span></div>
+      <div class="pl-step"><span class="pl-no">10</span><span class="pl-ic">🚩</span><b>Wrap</b><small>마무리</small><span class="pl-stop">✋ 정차</span></div>
+    </div>
+    <div class="pl-intake"><b>① 진입에서 "연구 유형"을 먼저 고릅니다</b> — 이후 저널·구조·검증·평가가 유형에 맞춰 자동으로 달라집니다.
+      <span class="pl-chip">질적 연구</span><span class="pl-chip">양적 연구</span><span class="pl-chip">문헌·사료</span>
+    </div>
+    <div class="pl-floor">🛡️ 항상 사람 책임 — IRB·참여자 비식별 · 1차 사료 확인 · AI 활용 공개 · 핵심 인용 검증</div>
+    <div class="pl-tag">submission-directed ≠ submission-ready</div>
+  </div>
+  <p class="sub">📊 <a href="/medhum-pipeline.html">전체 파이프라인 페이지에서 더 크게 보기 →</a></p>
+
+  <h2><span class="n">＋</span>Claude 단독이 기본 · GPT는 선택 adjunct</h2>
+  <div class="note">이 파이프라인은 <b>Claude 단독</b>으로 논문 한 편이 끝까지 됩니다 — 추가 도구·API 키 불요. 아래는 <b>ChatGPT 구독이 있는 분</b>을 위한 선택 옵션이며(파이프라인에도 선택 단계로 반영됨), 없어도 워크숍 진행엔 전혀 지장이 없습니다.</div>
+  <table>
+    <tr><th>단계</th><th>GPT를 이렇게 곁들일 수 있어요 <span style="font-weight:400">(선택)</span></th></tr>
+    <tr><td><b>② 문헌 검색</b></td><td>ChatGPT <b>심층 리서치(Deep Research)</b>를 Claude Research와 <b>병행</b> — 엔진이 서로 놓친 문헌을 메워 커버리지↑. 결과를 같은 파일에 합치고, 인용은 ⑤에서 실재 확인.</td></tr>
+    <tr><td><b>⑥ Critic</b></td><td>Claude 다관점 비평에 <b>GPT를 "제2 심사자"</b>로 추가 — 의견이 <b>엇갈릴수록</b> 값집니다(단일 모델 맹점 상쇄).</td></tr>
+    <tr><td><b>보조</b></td><td>ChatGPT <b>에이전트·브라우징(computer use)</b>으로 저널 투고규정·보고지침 확인·문헌 포털 탐색 보조. 단 로그인·제출은 🔒 본인이 직접.</td></tr>
+  </table>
+  <div class="note"><b>연결 방법 2가지</b> · <b>간단</b> = 비평·질문을 브라우저 ChatGPT에 붙여넣기(설정 없음) · <b>무과금 연결(OAuth)</b> = <b>Codex OAuth</b>로 Code 탭 안에서 Claude가 GPT를 직접 호출(별도 <code>OPENAI_API_KEY</code> 과금 없이 <b>ChatGPT 구독 쿼터</b> 사용).</div>
   <p class="sub">연결은 Code 탭에 한국어로 시키면 됩니다 (터미널 명령 몰라도 OK):</p>
   <div class="cmd"><button class="copy" onclick="copyCmd(this)">복사</button>
     <code class="pre">ChatGPT 구독으로 GPT를 무과금 연결(OpenAI Codex CLI, OAuth 로그인)하고 싶어. 내 OS에 맞게 Codex를 설치하고 codex login으로 ChatGPT 계정 로그인하는 것까지 안내해줘. 시스템을 바꾸는 명령은 실행 전에 꼭 확인받아.</code></div>
