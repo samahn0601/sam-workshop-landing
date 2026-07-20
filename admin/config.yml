@@ -1,0 +1,92 @@
+# Sveltia CMS 설정 — sam-workshop-landing 텍스트 편집
+# 로그인: GitHub PAT(fine-grained, 이 repo Contents Read/Write) — OAuth 서버 불요
+# 서식 요령(모든 텍스트칸 공통): **굵게** · `코드` · *기울임* — 그 외 특수문자는 그대로 입력
+
+backend:
+  name: github
+  repo: samahn0601/sam-workshop-landing
+  branch: main
+
+media_folder: assets
+
+site_url: https://sam-workshop-landing.vercel.app
+
+collections:
+  - name: pages
+    label: 랜딩 페이지
+    description: '저장하면 1~2분 뒤 라이브에 반영됩니다. 서식: **굵게** `코드` *기울임*'
+    files:
+      - name: tutor
+        label: AI 과외 (tutor.html)
+        file: content/tutor.json
+        format: json
+        fields:
+          - { name: page_title, label: 브라우저 탭 제목, widget: string }
+          - name: header
+            label: 상단 헤더
+            widget: object
+            fields:
+              - { name: kicker, label: 머리띠(작은 글씨), widget: string }
+              - { name: title, label: 큰 제목, widget: string }
+              - { name: lede, label: 소개 문장, widget: text }
+          - name: now_box
+            label: 안내 박스(형식·주제)
+            widget: object
+            fields:
+              - { name: format_line, label: '형식 — 줄', widget: text }
+              - { name: topic_line, label: '주제 — 줄', widget: text }
+          - { name: account_note, label: 계정 안내 박스, widget: text }
+          - name: steps
+            label: 설치 단계 ①~⑤
+            widget: object
+            fields:
+              - { name: step1_title, label: '① 제목', widget: string }
+              - { name: step1_link_label, label: '① 링크 이름', widget: string }
+              - { name: step1_link_sub, label: '① 링크 설명', widget: string }
+              - { name: step2_title, label: '② 제목', widget: string }
+              - { name: step2_link_label, label: '② 링크 이름', widget: string }
+              - { name: step2_link_sub, label: '② 링크 설명', widget: string }
+              - { name: step2_note, label: '② 안내 박스', widget: text }
+              - { name: step3_title, label: '③ 제목', widget: string }
+              - { name: step3_note, label: '③ 안내 박스', widget: text }
+              - { name: step3_sub, label: '③ 작은 글씨 덧붙임', widget: text }
+              - { name: step4_title, label: '④ 제목', widget: string }
+              - { name: step4_link_label, label: '④ 링크 이름', widget: string }
+              - { name: step4_link_sub, label: '④ 링크 설명', widget: string }
+              - { name: step4_note, label: '④ 안내 박스', widget: text }
+              - { name: step5_title, label: '⑤ 제목', widget: string }
+              - { name: step5_sub, label: '⑤ 설명 줄', widget: text }
+              - { name: step5_cmd, label: '⑤ 복사용 명령(검은 박스)', widget: string }
+              - { name: step5_ok, label: '⑤ 성공 확인 박스', widget: text }
+          - name: ladder
+            label: 커리큘럼 — 자동화 사다리
+            widget: object
+            fields:
+              - { name: title, label: 섹션 제목, widget: string }
+              - { name: sub, label: 설명 줄, widget: text }
+              - name: items
+                label: 사다리 단(L0~L4)
+                widget: list
+                fields:
+                  - { name: 'no', label: 번호(L0 등), widget: string }
+                  - { name: icon, label: 아이콘(이모지), widget: string }
+                  - { name: name, label: 이름, widget: string }
+                  - { name: desc, label: 한 줄 설명, widget: string }
+              - { name: tag, label: 하단 검은 배너 문구, widget: string }
+          - name: modules
+            label: 모듈 표
+            widget: list
+            fields:
+              - { name: name, label: '모듈명 (**굵게** 가능)', widget: string }
+              - { name: desc, label: 내용, widget: string }
+              - { name: note, label: '회색 덧붙임(선택)', widget: string, required: false, default: '' }
+              - { name: ladder, label: '사다리 구간(L0→L1 등)', widget: string }
+          - { name: dual_track_note, label: 양대 앱 안내 박스, widget: text }
+          - name: safety
+            label: 안전 원칙
+            widget: object
+            fields:
+              - { name: title, label: 섹션 제목, widget: string }
+              - { name: warn, label: 빨간 경고 박스, widget: text }
+              - { name: note, label: 흰 안내 박스, widget: text }
+          - { name: footer, label: 페이지 맨 아래 줄, widget: string }

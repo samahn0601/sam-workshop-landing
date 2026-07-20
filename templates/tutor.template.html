@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{page_title}}</title>
+<style>
+  :root{
+    --ink:#0F1F2E; --teal:#0E7C7B; --tealDeep:#0A5C5B; --tealLt:#5BC8C5;
+    --paper:#F2F6F8; --mist:#DCE6EC; --muted:#55677A;
+    --red:#C0392B; --redBg:#FBECEA; --amber:#B9770E; --amberBg:#FCF3E3;
+    --green:#1E7E4F; --grnBg:#E9F4EE; --code:#0D1B26;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif;
+       color:var(--ink);background:var(--paper);line-height:1.55;-webkit-text-size-adjust:100%}
+  .wrap{max-width:820px;margin:0 auto;padding:0 18px 64px}
+  header{background:var(--ink);color:#fff;padding:30px 0 26px;border-bottom:4px solid var(--teal)}
+  header .wrap{padding-bottom:0}
+  .kicker{color:var(--tealLt);font-weight:700;letter-spacing:2px;font-size:13px;margin:0 0 8px}
+  h1{font-size:24px;margin:0 0 6px;line-height:1.25}
+  header p{color:#BBD2DC;margin:6px 0 0;font-size:14.5px}
+  h2{font-size:19px;margin:30px 0 6px;padding-top:10px;border-top:2px solid var(--mist)}
+  h2 .n{display:inline-block;background:var(--teal);color:#fff;width:30px;height:30px;border-radius:8px;
+        text-align:center;line-height:30px;font-size:16px;margin-right:9px;vertical-align:-3px}
+  p{margin:7px 0}
+  .sub{color:var(--muted);font-size:13.5px}
+  a{color:var(--teal);font-weight:600}
+  .links a{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--mist);
+        border-radius:10px;padding:12px 15px;margin:7px 0;text-decoration:none;color:var(--ink);font-weight:600}
+  .links a:hover{border-color:var(--teal)}
+  .links .ic{font-size:20px}
+  .links small{display:block;color:var(--muted);font-weight:400;font-size:12.5px}
+  .pill{display:inline-block;background:#e7f0fa;color:#2c5a8c;font-weight:700;border-radius:999px;padding:2px 10px;font-size:12px;margin-left:6px}
+  .pre{display:block;border-radius:10px;background:var(--code);color:#eef;
+       font-family:Consolas,Menlo,monospace;font-size:14px;line-height:1.5;
+       padding:14px 44px 14px 16px;white-space:pre-wrap;word-break:break-word;margin:6px 0 0;border:2px solid var(--tealLt)}
+  .cmd{position:relative;margin:8px 0}
+  button.copy{position:absolute;top:10px;right:10px;background:var(--teal);color:#fff;border:0;
+       border-radius:7px;padding:6px 12px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit;z-index:2}
+  button.copy:hover{background:var(--tealDeep)}
+  button.copy.done{background:var(--green)}
+  .warn{background:var(--redBg);border-left:4px solid var(--red);border-radius:8px;padding:11px 14px;margin:10px 0;font-size:13.5px}
+  .now{background:#E1F1F0;border:2px solid var(--teal);border-radius:12px;padding:14px 18px;margin:22px 0 6px;font-size:15px}
+  .now b{color:var(--tealDeep)}
+  .note{background:#fff;border-left:4px solid var(--teal);border-radius:8px;padding:11px 14px;margin:10px 0;font-size:13.5px}
+  .ok{background:var(--grnBg);border-left:4px solid var(--green);border-radius:8px;padding:11px 14px;margin:10px 0;font-size:13.5px}
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px;background:#fff}
+  th,td{border:1px solid var(--mist);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:#EAF2F4;color:var(--tealDeep)}
+  footer{color:var(--muted);font-size:12.5px;text-align:center;margin-top:36px}
+  /* ladder viz (pl-flow 재사용) */
+  .pl-flow{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 4px}
+  .pl-step{flex:1 1 120px;min-width:105px;background:#fff;border:1px solid var(--mist);border-radius:10px;padding:9px 6px 8px;text-align:center;position:relative;display:flex;flex-direction:column;gap:2px;font-size:12px}
+  .pl-step b{font-size:12.5px}
+  .pl-step small{color:var(--muted);font-size:10.5px}
+  .pl-no{position:absolute;top:-8px;left:6px;background:var(--ink);color:#fff;font-size:11px;font-weight:700;min-width:19px;height:19px;border-radius:10px;line-height:19px;padding:0 4px}
+  .pl-ic{font-size:20px;margin-top:4px;line-height:1}
+  .pl-tag{background:var(--ink);color:#fff;text-align:center;font-weight:800;font-style:italic;font-size:15px;border-radius:10px;padding:11px;margin:10px 0 0}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <p class="kicker">{{header.kicker}}</p>
+    <h1>{{header.title}}</h1>
+    <p>{{header.lede}}</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="now"><b>형식</b> — {{now_box.format_line}}<br>
+  <b>주제</b> — {{now_box.topic_line}}</div>
+
+  <div class="note">{{account_note}}</div>
+
+  <h2><span class="n">1</span>{{steps.step1_title}}</h2>
+  <div class="links">
+    <a href="https://claude.ai/download" target="_blank" rel="noopener"><span class="ic">⬇️</span><span>{{steps.step1_link_label}}<small>{{steps.step1_link_sub}}</small></span></a>
+  </div>
+
+  <h2><span class="n">2</span>{{steps.step2_title}} <span class="pill">Windows</span></h2>
+  <div class="links">
+    <a href="https://git-scm.com/downloads/win" target="_blank" rel="noopener"><span class="ic">🪟</span><span>{{steps.step2_link_label}}<small>{{steps.step2_link_sub}}</small></span></a>
+  </div>
+  <div class="note">{{steps.step2_note}}</div>
+
+  <h2><span class="n">3</span>{{steps.step3_title}}</h2>
+  <div class="note">{{steps.step3_note}} <span class="sub">{{steps.step3_sub}}</span></div>
+
+  <h2><span class="n">4</span>{{steps.step4_title}}</h2>
+  <div class="links">
+    <a href="/sam-tutor-pack.zip" download><span class="ic">📦</span><span>{{steps.step4_link_label}}<small>{{steps.step4_link_sub}}</small></span></a>
+  </div>
+  <div class="note">{{steps.step4_note}}</div>
+
+  <h2><span class="n">5</span>{{steps.step5_title}}</h2>
+  <p class="sub">{{steps.step5_sub}}</p>
+  <div class="cmd"><button class="copy" onclick="copyCmd(this)">복사</button>
+    <code class="pre">{{steps.step5_cmd}}</code></div>
+  <div class="ok">{{steps.step5_ok}}</div>
+
+  <h2><span class="n">🪜</span>{{ladder.title}}</h2>
+  <p class="sub">{{ladder.sub}}</p>
+  <div class="pl-flow">
+{{LADDER_ITEMS}}
+  </div>
+  <div class="pl-tag">{{ladder.tag}}</div>
+
+  <table>
+    <tr><th>모듈</th><th>내용</th><th>사다리</th></tr>
+{{MODULE_ROWS}}
+  </table>
+  <div class="note">{{dual_track_note}}</div>
+
+  <h2><span class="n">🔒</span>{{safety.title}}</h2>
+  <div class="warn">{{safety.warn}}</div>
+  <div class="note">{{safety.note}}</div>
+
+  <footer>{{footer}}</footer>
+</div>
+
+<script>
+function copyCmd(btn){
+  var code = btn.parentElement.querySelector('.pre').innerText;
+  navigator.clipboard.writeText(code).then(function(){
+    btn.textContent = '복사됨 ✓'; btn.classList.add('done');
+    setTimeout(function(){ btn.textContent = '복사'; btn.classList.remove('done'); }, 1600);
+  });
+}
+</script>
+</body>
+</html>

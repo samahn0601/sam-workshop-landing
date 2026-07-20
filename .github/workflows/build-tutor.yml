@@ -1,0 +1,38 @@
+name: build-tutor
+
+# content(텍스트)나 템플릿이 바뀌면 tutor.html을 재생성해 커밋-백한다.
+# - GITHUB_TOKEN 커밋은 워크플로우를 재트리거하지 않음(공식 동작) + tutor.html은 paths에 없음 → 무한루프 이중 차단
+# - Vercel 배포 설정은 건드리지 않는다(순수 정적 유지) — 봇 커밋도 push라서 Vercel이 자동 재배포
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'content/tutor.json'
+      - 'templates/tutor.template.html'
+      - 'scripts/build-tutor.mjs'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: rebuild tutor.html
+        run: node scripts/build-tutor.mjs
+      - name: commit back if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tutor.html
+          if git diff --cached --quiet; then
+            echo "tutor.html 변경 없음 — 커밋 생략"
+          else
+            git commit -m "chore: tutor.html 재생성 (content/tutor.json 변경 반영)"
+            git push
+          fi

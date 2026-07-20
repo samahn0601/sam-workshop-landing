@@ -1,0 +1,59 @@
+{
+  "page_title": "AI 과외 — 1:1 개인 수업 · 설치 안내",
+  "header": {
+    "kicker": "AI 과외 · 의사·교수 대상 1:1 개인 수업",
+    "title": "AI 과외 파이프라인 — 설치 안내",
+    "lede": "Claude·ChatGPT 양대 앱의 기본기부터, 내 업무 하나가 **자동으로 돌아갈 때까지**. 첫 수업 전에 아래 **①~③**만 해두시면 시작이 매끄럽습니다."
+  },
+  "now_box": {
+    "format_line": "1:1 과외, 회당 60~90분, 여러 세션에 걸쳐 지난 진도에서 이어갑니다.",
+    "topic_line": "AI 앱 기본 사용(Claude·ChatGPT), 논문 쓰기, 글쓰기, 통계, 자동화 — 첫 수업 인테이크에서 **본인 목표에 맞게 커리큘럼을 짭니다.**"
+  },
+  "account_note": "**계정** — 개인 **Claude 구독(Pro 이상, Max 권장)**으로 로그인합니다. **무료 계정은 Code 탭을 쓸 수 없습니다.** API 키는 필요 없습니다 — 구독 로그인만. (ChatGPT 구독은 선택 — 양대 앱 수업에서 함께 다루니 있으면 좋습니다.)",
+  "steps": {
+    "step1_title": "Claude Desktop 앱 설치 + 로그인",
+    "step1_link_label": "Claude Desktop 앱",
+    "step1_link_sub": "claude.ai/download · 설치 후 본인 계정으로 로그인",
+    "step2_title": "(Windows만) Git for Windows 설치",
+    "step2_link_label": "Git for Windows",
+    "step2_link_sub": "git-scm.com/downloads/win · 기본 옵션으로 끝까지 설치",
+    "step2_note": "설치 후 **Claude 앱을 완전히 종료했다가 다시 켜세요.** 이게 있어야 Code 탭이 켜집니다. (Mac은 Git이 대개 이미 있어 생략 가능)",
+    "step3_title": "Code 탭이 보이는지 확인",
+    "step3_note": "Claude 앱 상단(또는 좌측)에 **Code 탭**이 보이면 성공. 안 보이면 → (Windows) Git 설치 + **앱 완전 종료 후 재시작**을 다시 확인.",
+    "step3_sub": "과외 팩은 **Code 탭 전용**입니다 — Cowork 탭에서는 보이지 않아요.",
+    "step4_title": "과외 팩 내려받기 (첫 수업 때 함께 해도 됩니다)",
+    "step4_link_label": "sam-tutor-pack.zip",
+    "step4_link_sub": "AI 과외 파이프라인 (6 skill · 인테이크 → 맞춤 커리큘럼 → 진도 기록)",
+    "step4_note": "받은 zip을 **압축 풀면 `sam-tutor-pack` 폴더**가 나옵니다. 이 폴더가 곧 과외 홈(학습 기록이 쌓이는 곳)입니다. (압축을 못 풀어도 첫 수업 때 Code에게 *\"이 zip 풀어줘\"*로 됩니다.)",
+    "step5_title": "1분 자가 테스트 — 진짜 되는지 확인",
+    "step5_sub": "Code 탭에서 `sam-tutor-pack` 폴더를 연 뒤, 아래를 붙여넣어 보세요.",
+    "step5_cmd": "과외 시작하자",
+    "step5_ok": "✅ Claude가 **\"어떤 일을 하세요? / 주로 쓰는 컴퓨터는?\"** 같은 인테이크 질문을 시작하면 — 준비 끝입니다. 첫 수업 전이라면 여기까지만 하고 멈추셔도 됩니다."
+  },
+  "ladder": {
+    "title": "커리큘럼 — 자동화 사다리",
+    "sub": "모든 주제가 이 사다리를 오릅니다. 졸업 기준은 하나 — **\"내 업무 하나가 자동으로 돈다.\"**",
+    "items": [
+      { "no": "L0", "icon": "🔌", "name": "앱 세팅", "desc": "설치·로그인·탭 구분" },
+      { "no": "L1", "icon": "📝", "name": "워크플로우 정의", "desc": "반복 업무를 글로" },
+      { "no": "L2", "icon": "🔁", "name": "파이프라인화", "desc": "매번 같은 절차로" },
+      { "no": "L3", "icon": "🧩", "name": "스킬화", "desc": "한 마디로 발동" },
+      { "no": "L4", "icon": "⏰", "name": "자동화", "desc": "예약 실행 — 사람 없이" }
+    ],
+    "tag": "\"내 업무 하나가 자동으로 돈다\" — 여기까지가 과외의 목표입니다."
+  },
+  "modules": [
+    { "name": "**M0 양대 앱 기본기**", "desc": "Claude(Chat·Cowork·Code) ↔ ChatGPT(Chat·Work·Codex) 비교·세팅 — 내 컴퓨터·구독에 맞는 경로 추천", "note": "", "ladder": "L0→L1" },
+    { "name": "**M1 논문 쓰기**", "desc": "주제 진단 후 전용 논문 파이프라인 연결(임상/인문사회) — 회차별 수업+숙제", "note": "", "ladder": "L1→L2" },
+    { "name": "M2 글쓰기", "desc": "칼럼·강의자료·환자안내문", "note": "(수요에 따라 확장)", "ladder": "L1→L3" },
+    { "name": "M3 통계", "desc": "프라이버시-우선 통계 흐름", "note": "(수요에 따라 확장)", "ladder": "L1→L2" },
+    { "name": "M4 자동화 심화", "desc": "스킬 직접 만들기 · 예약 실행(Claude/GPT)", "note": "(수요에 따라 확장)", "ladder": "L2→L4" }
+  ],
+  "dual_track_note": "**양대 앱을 함께 다룹니다** — 이 과외는 Claude 전용이 아닙니다. ChatGPT 데스크톱(Chat·Work·Codex·Deep Research·Tasks)도 정식 수업 재료이고, 문헌 검색·2차 검토처럼 **두 앱을 나눠 쓰는 법**을 배웁니다. 기능 비교는 전부 공식 문서 실측(2026-07 기준) 기반이며, 확인 안 된 것은 수업에서 실기기로 함께 확인합니다.",
+  "safety": {
+    "title": "안전 원칙",
+    "warn": "**환자정보·개인정보는 실습 재료로 쓰지 않습니다.** 통계 수업도 원자료(환자 raw data)는 반입하지 않고 요약통계·구조만 다룹니다.",
+    "note": "**계정·결제·설치 실행은 본인이 직접** 합니다 — 튜터·AI는 비밀번호·카드번호를 받지 않습니다. AI 산출물은 방향을 잡아주는 초안이며, 최종 책임은 항상 본인에게 있습니다."
+  },
+  "footer": "안상현 (Sam, MD) · AI 과외 파이프라인 — sam-workshop → sam-medhum → sam-tutor 계보 · 2026-07"
+}
