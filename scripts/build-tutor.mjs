@@ -19,6 +19,7 @@ function md(s) {
   if (typeof s !== 'string') throw new Error(`문자열이 아닌 값: ${JSON.stringify(s)}`);
   return s
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
     .replace(/`([^`]+)`/g, '<code>$1</code>')
     .replace(/\*\*([^*]+(?:\*(?!\*)[^*]*)*)\*\*/g, '<b>$1</b>')
     .replace(/\*([^*\n]+)\*/g, '<i>$1</i>');

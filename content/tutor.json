@@ -88,7 +88,7 @@
     },
     {
       "name": "M3 통계",
-      "desc": "프라이버시 우선 / 통계 흐름",
+      "desc": "프라이버시 우선 통계 흐름 — 실제 분석은 오픈소스 [sam-medstats](https://github.com/samahn0601/sam-medstats)로",
       "note": "(수요에 따라 확장)",
       "ladder": "L1→L2"
     },
