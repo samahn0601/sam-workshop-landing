@@ -188,6 +188,7 @@
 
   <h2><span class="n">4</span>논문 10단계 — "시작하자" 한마디로</h2>
   <div class="note"><b>막연한 "논문 써줘"가 아니라</b>, 논문 한 편을 ①주제 → ②문헌 → ③개요 → ④초안 → ⑤검증 → ⑥비판 → ⑦문체·패키지 → ⑧제출 → ⑨리뷰대응 → ⑩마무리의 <b>10단계 파이프라인</b>으로 돌립니다. 각 단계에 점검 기준이 붙어 있고, 중요한 단계에선 <b>멈춰서 저자가 확인</b>합니다(운전대는 저자가).</div>
+  <p class="sub" style="margin:4px 0 0">📊 <a href="/0801-pipeline.html"><b>10단계를 그림 한 장으로 — 파이프라인 지도 →</b></a></p>
   <div class="card">
     <h3>진행 방법</h3>
     <p><b>1.</b> 위 ②에서 연 폴더의 Code 탭에서 <b>"시작하자"</b> → <code>start-here</code>가 단계별로 안내<br>
@@ -197,6 +198,19 @@
       <code class="pre">시작하자</code></div>
   </div>
   <div class="star">⭐ <b>교수 필수 3가지</b> — ① <b>가짜 인용/DOI</b>: AI는 없는 논문을 지어냅니다. 파이프라인의 참고문헌 점검(PubMed·Crossref 실검증)을 반드시 통과 + <b>최종은 본인 확인</b>. ② <b>AI 저자성/공개</b>: 요즘 저널은 AI 사용 공개문을 요구합니다. ③ <b>Human Final Gate</b>: 자동 점검 통과(Green) ≠ 제출 가능 — 실제 투고 직전 본인이 최종 관문.</div>
+
+  <h2><span class="n">＋</span>Claude 단독이 기본 · GPT는 선택 <span class="sub">· 개인 ChatGPT 구독자만 · 없어도 무방</span></h2>
+  <div class="note">오늘 파이프라인은 <b>Claude Team 시트만으로 끝까지</b> 됩니다 — 추가 도구·API 키 불요. 아래는 <b>개인 ChatGPT(Plus/Pro) 구독이 있는 분</b>을 위한 선택 옵션이며(논문 도구 스킬에도 선택 단계로 반영돼 있음), 없어도 워크숍 진행엔 전혀 지장이 없습니다.</div>
+  <table>
+    <tr><th>단계</th><th>GPT를 이렇게 곁들일 수 있어요 <span style="font-weight:400">(선택)</span></th></tr>
+    <tr><td><b>② 문헌 검색</b></td><td>ChatGPT <b>심층 리서치(Deep Research)</b>를 Claude Research와 <b>병행</b> — 엔진이 서로 놓친 문헌을 메워 커버리지↑. 결과를 같은 파일에 합치고, 인용은 ⑤에서 실재 확인.</td></tr>
+    <tr><td><b>⑥ Critic</b></td><td>Claude 다관점 비평에 <b>GPT를 "제2 심사자"</b>로 추가 — 의견이 <b>엇갈릴수록</b> 값집니다(단일 모델 맹점 상쇄).</td></tr>
+    <tr><td><b>보조</b></td><td>ChatGPT <b>에이전트·브라우징</b>으로 저널 투고규정·보고지침 페이지 확인 보조. 단 포털 로그인·제출은 🔒 본인이 직접.</td></tr>
+  </table>
+  <div class="note"><b>연결 방법 2가지</b> · <b>간단</b> = 비평·질문을 브라우저 ChatGPT에 붙여넣기(설정 없음) · <b>무과금 연결(OAuth)</b> = <b>Codex OAuth</b>로 Code 탭 안에서 Claude가 GPT를 직접 호출(별도 <code>OPENAI_API_KEY</code> 과금 없이 <b>ChatGPT 구독 쿼터</b> 사용). 연결 설정은 집에서 아래 복붙:</div>
+  <div class="cmd"><button class="copy" onclick="copyCmd(this)">복사</button>
+    <code class="pre">ChatGPT 구독으로 GPT를 무과금 연결(OpenAI Codex CLI, OAuth 로그인)하고 싶어. 내 OS에 맞게 Codex를 설치하고 codex login으로 ChatGPT 계정 로그인하는 것까지 안내해줘. 시스템을 바꾸는 명령은 실행 전에 꼭 확인받아.</code></div>
+  <p class="sub">※ 공식 "무과금 API"가 아니라 <b>구독(ChatGPT Plus/Pro) OAuth 쿼터</b>를 쓰는 비공식 경로 — 쿼터 제한이 걸리면 유료 API 키 폴백이 필요할 수 있습니다. <b>Claude 단독도 완전한 경로</b>이니 부담 없이 선택하세요.</p>
 
   <div class="session blue">🔵 3부 · 고급 활용 <span>진행 중 남는 시간에 수시로 — 관심 가는 것부터</span></div>
 
@@ -251,7 +265,7 @@
   <div class="card">
     <h3>⑦ Claude Design + 무과금 OAuth <span class="sub">· 더 멀리</span></h3>
     <p><b>Claude Design</b>(claude.ai/design) — 대화로 프로토타입·슬라이드·원페이저를 만들고 Code로 넘겨 실제 구현까지.<br>
-    <b>구독 OAuth</b> — ChatGPT 구독자는 Codex OAuth로 연결해 <b>API 과금 없이</b> GPT와 교차 자문·이미지 생성. <span class="sub">※ 공식 무과금 API가 아니라 구독 쿼터를 쓰는 비공식 경로.</span></p>
+    <b>구독 OAuth</b> — ChatGPT 구독자는 Codex OAuth로 연결해 <b>API 과금 없이</b> GPT와 교차 자문·이미지 생성. <span class="sub">※ 상세·복붙 프롬프트는 위 2부 "GPT는 선택" 절 · 비공식 경로.</span></p>
   </div>
 
   <!-- 프로그램 한눈에 -->

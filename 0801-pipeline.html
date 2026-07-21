@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 논문 쓰기 파이프라인 — 8/1 대구가톨릭대 의대 교수 워크숍 (한눈에 보기)</title>
+<style>
+  :root{
+    --ink:#0F1F2E; --teal:#0E7C7B; --tealDeep:#0A5C5B; --tealLt:#5BC8C5;
+    --paper:#F2F6F8; --mist:#DCE6EC; --muted:#55677A;
+    --red:#C0392B; --redBg:#FBECEA; --gold:#B9770E; --goldBg:#FCF3E3;
+    --green:#1E7E4F; --line:#B9C7D2;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif;
+       color:var(--ink);background:var(--paper);line-height:1.5;-webkit-text-size-adjust:100%}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 16px 56px}
+  header{background:var(--ink);color:#fff;padding:26px 0 22px;border-bottom:4px solid var(--teal);text-align:center}
+  h1{font-size:26px;margin:0 0 6px;line-height:1.2;letter-spacing:-.5px}
+  header p{color:#BBD2DC;margin:0;font-size:14px}
+  .band{display:flex;align-items:center;gap:9px;margin:26px 0 10px}
+  .band b{background:var(--ink);color:#fff;font-size:15px;padding:5px 16px;border-radius:8px}
+  .band .rule{flex:1;height:2px;background:var(--mist)}
+  /* flow */
+  .flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:6px}
+  .step{flex:1 1 118px;min-width:118px;background:#fff;border:1px solid var(--mist);border-radius:12px;
+        padding:12px 10px 11px;text-align:center;position:relative;display:flex;flex-direction:column;gap:5px}
+  .step .no{position:absolute;top:-9px;left:9px;background:var(--ink);color:#fff;font-size:12px;font-weight:700;
+        width:22px;height:22px;border-radius:50%;line-height:22px}
+  .step .ic{font-size:26px;margin-top:6px;line-height:1}
+  .step .nm{font-weight:700;font-size:13.5px}
+  .step .nm small{display:block;color:var(--muted);font-weight:400;font-size:11px;margin-top:1px}
+  .step.lock{border-color:var(--line);background:#F7FAFB}
+  .stop{display:inline-block;background:var(--redBg);color:var(--red);font-weight:700;font-size:10.5px;
+        border:1px solid #E7B7B0;border-radius:6px;padding:1px 6px;margin-top:2px}
+  .gate{display:inline-block;background:#EAF2F4;color:var(--tealDeep);font-weight:700;font-size:10px;
+        border:1px solid var(--tealLt);border-radius:6px;padding:1px 6px;margin-top:3px}
+  .opt{display:inline-block;background:#F4F0FA;color:#5B3E8C;font-weight:700;font-size:10px;
+        border:1px solid #CDBCE8;border-radius:6px;padding:1px 6px;margin-top:3px}
+  .lk{font-size:11px;color:var(--muted)}
+  .arrow{align-self:center;color:var(--teal);font-size:19px;font-weight:700;flex:0 0 auto}
+  @media(max-width:640px){ .arrow{display:none} .step{flex:1 1 44%} }
+  /* intake callout */
+  .intake{background:#EAF2F4;border:1px solid var(--tealLt);border-radius:12px;padding:14px 16px;margin:20px 0 4px;font-size:14px}
+  .intake b{color:var(--tealDeep)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:9px}
+  .chip{background:#fff;border:1px solid var(--tealLt);border-radius:999px;padding:4px 13px;font-size:13px;font-weight:600;color:var(--tealDeep)}
+  .chip small{color:var(--muted);font-weight:400}
+  /* floor */
+  .floor{background:var(--goldBg);border:1px solid #E8CF97;border-radius:12px;padding:14px 16px;margin:22px 0 0;
+         display:flex;flex-wrap:wrap;align-items:center;gap:10px 20px}
+  .floor .hd{font-weight:800;color:var(--gold);font-size:15px;display:flex;align-items:center;gap:7px}
+  .floor .it{font-size:13.5px;font-weight:600;color:#6b4e12;display:flex;align-items:center;gap:6px}
+  .tag{background:var(--ink);color:#fff;text-align:center;font-weight:800;font-style:italic;font-size:18px;
+       letter-spacing:.3px;border-radius:12px;padding:15px;margin:20px 0 0}
+  .note{font-size:12.5px;color:var(--muted);margin:16px 0 0}
+  footer{color:var(--muted);font-size:12.5px;text-align:center;margin-top:30px}
+  a{color:var(--teal);font-weight:600}
+</style>
+</head>
+<body>
+<header>
+  <h1>AI 논문 쓰기 파이프라인</h1>
+  <p>Sam Workshop · 8/1(토) 대구가톨릭대 의대 교수 풀데이 · Claude Team 시트만으로 완결 (API 키 불요)</p>
+</header>
+
+<div class="wrap">
+
+  <div class="band"><b>작성</b><span class="rule"></span></div>
+  <div class="flow">
+    <div class="step"><span class="no">1</span><span class="ic">💡</span><span class="nm">Idea<small>주제 확정·저널 방향</small></span><span class="stop">✋ 저자 정차</span></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="no">2</span><span class="ic">🔍</span><span class="nm">Research<small>문헌 수집·보고지침</small></span><span class="opt">＋GPT 선택</span></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="no">3</span><span class="ic">🗺️</span><span class="nm">Story<small>서사·구조</small></span></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="no">4</span><span class="ic">📄</span><span class="nm">Draft<small>초고</small></span></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="no">5</span><span class="ic">🛡️</span><span class="nm">Verify<small>인용·DOI 실재 검증</small></span><span class="stop">✋ 저자 정차</span></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="no">6</span><span class="ic">💬</span><span class="nm">Critic<small>다관점 비평</small></span><span class="stop">✋ 저자 정차</span><span class="opt">＋GPT 선택</span></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="no">7</span><span class="ic">✨</span><span class="nm">Humanize &amp; Package<small>문체·양식·docx</small></span></div>
+  </div>
+
+  <div class="band"><b>제출 · 리뷰 · 마무리</b><span class="rule"></span></div>
+  <div class="flow">
+    <div class="step lock"><span class="no">8</span><span class="ic">⬆️</span><span class="nm">Submission<small>투고 준비</small></span><span class="lk">🔒 사람 주도</span></div>
+    <div class="arrow">→</div>
+    <div class="step lock"><span class="no">9</span><span class="ic">🔄</span><span class="nm">Review<small>심사 대응</small></span><span class="lk">🔒 사람 주도</span></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="no">10</span><span class="ic">🚩</span><span class="nm">Wrap<small>마무리·다음</small></span><span class="stop">✋ 저자 정차</span><span class="gate">Human Final Gate</span></div>
+  </div>
+
+  <div class="intake">
+    <b>① 진입에서 "운전 모드"를 먼저 고릅니다.</b> 별도 단계가 아니라 ① Idea에서 한 번 정하면, 이후 어느 단계에서 멈춰 저자 확인을 받을지가 정해집니다 — <b>운전대는 저자가.</b>
+    <div class="chips">
+      <span class="chip">🛡️ 표준 <small>①⑤⑥⑩ 정차 · 추천 기본값</small></span>
+      <span class="chip">⚡ 시간절약 <small>①⑤⑩ 정차</small></span>
+      <span class="chip">📋 보고지침 자동 라우팅 <small>② 에서 CONSORT/STROBE/PRISMA</small></span>
+    </div>
+  </div>
+
+  <div class="floor">
+    <span class="hd">🛡️ 항상 사람 책임</span>
+    <span class="it">🔒 환자정보·연구 원자료 반입 금지</span>
+    <span class="it">💊 약물 용량·임상 권고 본인 판단</span>
+    <span class="it">📣 AI 활용 공개</span>
+    <span class="it">🔗 가짜 인용·DOI 검증</span>
+  </div>
+
+  <div class="tag">submission-directed &nbsp;≠&nbsp; submission-ready</div>
+
+  <p class="note">✋ 저자 정차 = 그 단계에서 저자가 검토·승인해야 다음으로 넘어가는 지점(①⑤⑥⑩). 🔒 = 포털 로그인·제출·실제 심사 원문은 사람이 직접. ＋GPT 선택 = 개인 ChatGPT 구독자만 곁들이는 보조 경로(② 심층 리서치 병행 · ⑥ 제2 심사자) — 기본은 Claude 단독으로 완결. 워크숍 산출물은 "투고 준비를 도운" 것이지 "그대로 투고 가능"이 아닙니다.</p>
+
+  <footer>AI 논문 쓰기 풀데이 워크숍 · 8월 1일(토) 10:00–16:00 · 대구가톨릭대학교 · 설치·실습 안내 → <a href="/0801.html">0801.html</a></footer>
+</div>
+</body>
+</html>
