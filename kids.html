@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>부모를 위한 AI 워크숍 — 아이를 위해, 아이와 함께</title>
+<style>
+  :root{
+    --ink:#2A211C; --ink2:#3A2D25; --line:#5A4A3E;
+    --accent:#E07A3E; --accentDeep:#C25E27; --accentLt:#F2B488;
+    --paper:#FBF6F1; --mist:#EFE3D7; --muted:#7C6A5D;
+    --red:#C0392B; --redBg:#FBECEA; --amber:#B9770E; --amberBg:#FCF3E3;
+    --green:#2E7D4F; --grnBg:#E9F4EE; --teal:#0E7C7B; --code:#241B16;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif;
+       color:var(--ink);background:var(--paper);line-height:1.58;-webkit-text-size-adjust:100%}
+  .wrap{max-width:820px;margin:0 auto;padding:0 18px 64px}
+  header{background:var(--ink);color:#fff;padding:32px 0 28px;border-bottom:4px solid var(--accent)}
+  header .wrap{padding-bottom:0}
+  .kicker{color:var(--accentLt);font-weight:700;letter-spacing:2px;font-size:13px;margin:0 0 8px}
+  h1{font-size:26px;margin:0 0 6px;line-height:1.25}
+  header p{color:#E7D7C8;margin:6px 0 0;font-size:14.5px}
+  h2{font-size:20px;margin:34px 0 6px;padding-top:10px;border-top:2px solid var(--mist)}
+  h2 .n{display:inline-block;background:var(--accent);color:#fff;width:30px;height:30px;border-radius:8px;
+        text-align:center;line-height:30px;font-size:16px;margin-right:9px;vertical-align:-3px}
+  h3{font-size:16px;margin:14px 0 2px;color:var(--ink)}
+  p{margin:7px 0}
+  .sub{color:var(--muted);font-size:13.5px}
+  a{color:var(--accentDeep);font-weight:600}
+  .card{background:#fff;border:1px solid var(--mist);border-radius:12px;padding:15px 18px;margin:11px 0}
+  .pre{display:block;border-radius:10px;background:var(--code);color:#f6ece2;
+       font-family:Consolas,Menlo,monospace;font-size:13.5px;line-height:1.5;
+       padding:14px 44px 14px 16px;white-space:pre-wrap;word-break:break-word;margin:6px 0 0;overflow-x:auto}
+  .cmd{position:relative;margin:8px 0}
+  button.copy{position:absolute;top:10px;right:10px;background:var(--accent);color:#fff;border:0;
+       border-radius:7px;padding:6px 12px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit;z-index:2}
+  button.copy:hover{background:var(--accentDeep)}
+  button.copy.done{background:var(--green)}
+  .big .pre{font-size:14.5px;border:2px solid var(--accentLt)}
+  .pill{display:inline-block;background:var(--amberBg);color:var(--amber);font-weight:700;
+        border-radius:999px;padding:2px 10px;font-size:12px;margin-left:6px}
+  .pill.win{background:#e7f0fa;color:#2c5a8c}
+  .pill.web{background:var(--grnBg);color:var(--green)}
+  .pill.code{background:#f3e4d8;color:var(--accentDeep)}
+  .warn{background:var(--redBg);border-left:4px solid var(--red);border-radius:8px;padding:11px 14px;margin:10px 0;font-size:13.5px}
+  .now{background:#FBEBDD;border:2px solid var(--accent);border-radius:12px;padding:14px 18px;margin:22px 0 6px;font-size:15px}
+  .now b{color:var(--accentDeep)}
+  .note{background:#fff;border-left:4px solid var(--accent);border-radius:8px;padding:11px 14px;margin:10px 0;font-size:13.5px}
+  .safe{background:var(--grnBg);border-left:4px solid var(--green);border-radius:8px;padding:12px 15px;margin:12px 0;font-size:13.5px}
+  .links a{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--mist);
+        border-radius:10px;padding:12px 15px;margin:7px 0;text-decoration:none;color:var(--ink);font-weight:600}
+  .links a:hover{border-color:var(--accent)}
+  .links .ic{font-size:20px}
+  .links small{display:block;color:var(--muted);font-weight:400;font-size:12.5px}
+  footer{color:var(--muted);font-size:12.5px;text-align:center;margin-top:36px}
+  .step-note{font-size:13px;color:var(--muted);margin:5px 0 0}
+  .out{font-size:13px;color:var(--green);font-weight:600;margin:6px 0 0}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <p class="kicker">부모를 위한 AI 워크숍 · [날짜·장소 미정]</p>
+    <h1>아이를 위해, 아이와 함께 — 부모의 AI 활용</h1>
+    <p>알림장 정리부터 학습·글쓰기 코칭, 여행 학습자료, 그리고 내 컴퓨터에서 만드는 아이 영상까지.</p>
+    <p><b>[날짜·시간]</b> · [장소] · 120분 · 실습 위주 · 💻 노트북 지참</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="now"><b>오늘 만들 것 (5가지 + 보너스)</b> — ① 알림장 정리 · ② 학습 코치 · ③ 글쓰기 코칭 · ④ 여행 학습자료 · ⑤ 아이 영상 편집 · 🎁 코딩 없는 웹앱 · 🏫 우리 아이 학교(급식·시간표). <b>전부 "아이를 위한 산출물"을 손에 들고 갑니다.</b></div>
+
+  <div class="safe">🔒 <b>안전 약속</b> ① 아이 <b>얼굴·영상 원본·실명·학교/학원·성적표</b>는 AI에 올리지 않기 → <b>가명·샘플</b>로. ② 영상은 ⑤처럼 <b>내 컴퓨터(로컬)</b>에서 처리 = 외부 전송 없음. ③ AI 답은 <b>부모가 확인</b>(특히 사실·수학·역사). 아이에겐 "정답기계가 아니라 같이 생각하는 도구".</div>
+
+  <div class="note"><b>📋 오시기 전에 (성패를 가릅니다)</b><br>
+  ① <b>Claude 로그인</b> + 앱 상단에 <b>Code 탭</b> 보임 — <a href="https://claude.ai/download" target="_blank" rel="noopener">claude.ai/download</a><br>
+  ② <b>구글 계정 로그인</b>(Gemini Notebook, 옛 NotebookLM·여행자료) — <a href="https://notebooklm.google.com" target="_blank" rel="noopener">notebooklm.google.com</a><br>
+  ③ <b>(Windows만)</b> Git for Windows 설치 후 <b>앱 완전 종료·재시작</b> · ffmpeg(영상용)는 <b>당일 도와드려요</b><br>
+  ④ 노트북 + 충전기 · 실습 폴더 <b>kids_workspace</b> 받기(아래)</div>
+
+  <div class="links">
+    <a href="https://claude.ai/download" target="_blank" rel="noopener"><span class="ic">⬇️</span><span>Claude Desktop 앱<small>claude.ai/download · 로그인 후 상단 Code 탭 사용</small></span></a>
+    <a href="https://git-scm.com/downloads/win" target="_blank" rel="noopener"><span class="ic">🪟</span><span>Git for Windows <span class="pill win">Windows만</span><small>설치 후 Claude 앱 재시작 (이게 있어야 Code 탭이 켜집니다) · Mac은 불요</small></span></a>
+    <a href="/kids_workspace.zip" download><span class="ic">📦</span><span>실습 폴더 kids_workspace.zip <small>[배포 시 추가] 전부 가상 데이터 · 압축 풀어 Code 탭으로 폴더 열기</small></span></a>
+  </div>
+  <div class="warn">💻 <b>개인 노트북 권장</b> — 회사·기관 PC는 보안 제한으로 막힐 수 있어요. 웹(①~④)은 <b>설치 없이도</b> 바로 참여됩니다(⑤ 영상만 설치 필요).</div>
+
+  <h2><span class="n">1</span>알림장·가정통신문 정리 <span class="pill web">웹</span> <span class="sub">· claude.ai</span></h2>
+  <div class="note">가정통신문 <b>사진을 📎로 첨부</b>한 뒤 붙여넣기. (실명·학교 가린 샘플로)</div>
+  <div class="card">
+    <h3>한 장 정리 <span class="sub">(가장 쉬움)</span></h3>
+    <div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
+      <code class="pre">첨부한 가정통신문에서 이번 주 준비물·제출물·날짜만 표로 정리해줘. 아이 이름과 학교명은 빼고.</code></div>
+    <p class="out">→ 흩어진 통신문이 주간 체크리스트 한 장으로.</p>
+  </div>
+  <div class="card">
+    <h3>여러 장 합치기 <span class="sub">(심화)</span></h3>
+    <div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
+      <code class="pre">첨부한 통신문들을 합쳐서 주간 체크리스트로 만들어줘. 마감일 순으로 정렬하고, 캘린더에 옮길 수 있게 [날짜 | 항목 | 준비물]만 깔끔하게.</code></div>
+  </div>
+
+  <h2><span class="n">2</span>학습 코치 <span class="pill web">웹</span> <span class="sub">· claude.ai + Gemini Notebook</span></h2>
+  <div class="note">빠른 코칭은 claude.ai, 교재 기반 학습자료는 <b>Gemini Notebook</b>(학습 특화).</div>
+  <div class="card">
+    <h3>개념을 아이 눈높이로 <span class="sub">(claude.ai)</span></h3>
+    <div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
+      <code class="pre">초등 4학년이 이해하게 '분수의 덧셈'을 아이가 좋아하는 것(예: 피자)에 비유해 설명하고, 끝에 이해 확인 질문 2개 내줘.</code></div>
+  </div>
+  <div class="card">
+    <h3>문제 + "정답 말고 힌트" <span class="sub">(claude.ai)</span></h3>
+    <div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
+      <code class="pre">초4 분수 덧셈 연습문제 5개와 풀이를 만들어줘. 난이도를 조금씩 올리고, 아이가 틀리면 정답 말고 힌트부터 주는 식으로.</code></div>
+  </div>
+  <div class="card">
+    <h3>Gemini Notebook 학습자료 <span class="sub">(교재/필기 업로드 후)</span></h3>
+    <p>버튼으로 <b>학습가이드·플래시카드·퀴즈</b> 자동 생성, <b>Audio/Video Overview</b>로 5분 요약 강의. 프롬프트로 다듬을 때:</p>
+    <div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
+      <code class="pre">이 자료로 초등학생용 플래시카드 20장과 퀴즈 10문제를 쉬운 말로 만들어줘.</code></div>
+    <p class="step-note">🆕 Gemini <b>'Study Notebooks'</b>가 보이면: 교재 올리고 <b>진단 퀴즈</b>부터 → 약점 맞춤 학습. (안 보이면 위 Gemini Notebook으로 — 같은 효과)</p>
+    <p class="out">→ Gemini Notebook은 올린 자료 안에서만 답해 <b>엉뚱한 소리(환각)가 적어요.</b></p>
+  </div>
+
+  <h2><span class="n">3</span>글쓰기 코칭봇 + 표현 다듬기 <span class="pill web">웹</span> <span class="sub">· claude.ai</span></h2>
+  <div class="card">
+    <h3>답 안 주는 글쓰기 코치 <span class="sub">(아이 글을 가명으로 붙여넣기)</span></h3>
+    <div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
+      <code class="pre">너는 초등 글쓰기 코치야. 아이 글을 대신 고쳐주지 마. 칭찬 1개와, 더 생각하게 하는 질문 3개만 해. 절대 완성된 문장을 써주지 마.</code></div>
+    <p class="step-note">매일 쓰려면 claude.ai <b>Projects</b>에 저장 = "우리 집 글쓰기 코치".</p>
+  </div>
+  <div class="card">
+    <h3>표현 다듬기 / 같은 말을 다르게</h3>
+    <div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
+      <code class="pre">이 문장을 초등학생이 쓸 법한 더 생생한 표현 3가지로 바꿔 보기로 보여줘. 고르는 건 아이가 하게.</code></div>
+    <div class="warn">⚠️ <b>숙제 대필·AI 글 위장용이 아닙니다.</b> 표현을 배워 <b>아이가 직접 자기 말로</b> 다시 쓰는 학습 도구예요.</div>
+  </div>
+
+  <h2><span class="n">4</span>여행·체험학습팩 <span class="pill web">웹</span> <span class="sub">· Gemini Notebook (②에서 배운 도구)</span></h2>
+  <div class="note">여행지 자료(위키 링크·박물관 PDF·메모)를 업로드 후 — 차에서 들을 오디오, 현장에서 풀 퀴즈.</div>
+  <div class="card">
+    <h3>아이용 여행 학습가이드 + 퀴즈</h3>
+    <div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
+      <code class="pre">이 자료로 아이용 여행 학습가이드와 퀴즈 10개, 그리고 가볼 곳 타임라인을 초등학생 눈높이로 만들어줘.</code></div>
+    <p class="out">→ <b>Audio/Video Overview</b>(버튼)로 차에서 들을 여행 개요까지.</p>
+  </div>
+
+  <h2><span class="n">5</span>아이 영상 편집 <span class="pill code">Code</span> <span class="sub">· Claude Code + ffmpeg (내 컴퓨터·로컬)</span></h2>
+  <div class="note">영상 폴더를 <b>Code 탭으로 열고</b> 한국어로 시킵니다. 영상은 <b>내 컴퓨터에서만</b> 처리돼 밖으로 안 나갑니다.</div>
+  <div class="card">
+    <h3>(필요할 때) ffmpeg 설치</h3>
+    <div class="cmd"><button class="copy" onclick="copyCmd(this)">복사</button>
+      <code class="pre">ffmpeg를 설치해줘 — 내 OS(Windows)에 맞는 공식 방법으로. 시스템을 바꾸는 명령은 실행 전 나한테 확인받아.</code></div>
+  </div>
+  <div class="card">
+    <h3>자르기 <span class="sub">(가장 쉬움)</span></h3>
+    <div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
+      <code class="pre">이 영상 앞 5초만 잘라줘. 원본은 그대로 두고 새 파일로 저장해줘.</code></div>
+  </div>
+  <div class="card">
+    <h3>이어붙이기 + 자막</h3>
+    <div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
+      <code class="pre">이 3개 클립을 하나로 이어붙이고, 끝에 '우리 가족 여행 2026' 자막을 3초 넣어줘.</code></div>
+  </div>
+  <div class="card">
+    <h3>하이라이트 + 음악 <span class="sub">(심화)</span></h3>
+    <div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
+      <code class="pre">이 영상을 하이라이트 30초로 줄이고, 자막이랑 배경음악(bgm.mp3)을 넣어줘.</code></div>
+    <p class="out">→ ⭐ 끝나면 파일 탐색기에서 완성된 .mp4를 더블클릭 재생. (채팅으론 못 하는 일)</p>
+  </div>
+
+  <h2><span class="n">🎁</span>보너스 — 코딩 없이 웹앱 만들기 <span class="pill web">웹</span> <span class="sub">· claude.ai Artifacts</span></h2>
+  <div class="card">
+    <div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
+      <code class="pre">우주 테마의 '칭찬 스티커판' 웹앱을 만들어줘. 칸을 클릭하면 별이 하나씩 채워지게.</code></div>
+    <p class="out">→ 오른쪽에 바로 작동하는 앱. 응용: 용돈 기입장, 구구단 게임, 방학 생활계획표.</p>
+  </div>
+
+  <h2><span class="n">🏫</span>보너스 — 우리 아이 학교 통째로 <span class="pill code">Code</span> <span class="sub">· NEIS 공개 API · 무료·무key</span></h2>
+  <div class="note">"Code는 영상만이 아니에요" — <b>학교명만 바꾸면</b> 우리 아이 학교 데이터를 실시간으로. 공개 데이터라 개인정보 걱정 없음. (라이브 검증됨)</div>
+  <div class="card">
+    <h3>급식 <span class="sub">(알레르기까지)</span></h3>
+    <div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
+      <code class="pre">천안아름초등학교 이번 주 급식표를 만들어줘. NEIS 급식 공개 API(open.neis.go.kr)로 학교코드를 찾고, 알레르기 번호는 이름으로 풀어주고, 우유·계란 들어간 메뉴는 따로 표시해줘.</code></div>
+    <p class="out">→ 실시간 급식표 + 알레르기. 응용: "우유 알레르기 날 저녁은 칼슘 보충 메뉴 추천."</p>
+  </div>
+  <div class="card">
+    <h3>학사일정 · 시간표 · 동네 학원 <span class="sub">(학교명만 바꾸면)</span></h3>
+    <div class="cmd"><button class="copy" onclick="copyCmd(this)">복사</button>
+      <code class="pre">천안아름초 이번 학기 학사일정(시험·행사·휴업일)을 캘린더로 정리해줘. (NEIS 학사일정 API)</code></div>
+    <div class="cmd"><button class="copy" onclick="copyCmd(this)">복사</button>
+      <code class="pre">천안아름초 3학년 이번 주 시간표 알려줘. (NEIS 초등 시간표 API)</code></div>
+    <div class="cmd"><button class="copy" onclick="copyCmd(this)">복사</button>
+      <code class="pre">천안 지역 초등 영어·수학 학원/교습소를 분야별로 뽑아줘. (NEIS 학원정보 API)</code></div>
+    <p class="step-note">💡 키를 받으면(가정용): 미세먼지·날씨·공휴일·도서관도 같은 식으로.</p>
+  </div>
+
+  <div class="warn">🔒 집에서도 — 아이 정보는 늘 <b>가명/사본</b>, AI 답은 <b>부모가 확인</b>. claude.ai·Gemini Notebook은 매일 써도 됩니다.</div>
+
+  <footer>부모를 위한 AI 워크숍 · 아이를 위해, 아이와 함께 · [날짜·장소 미정]</footer>
+</div>
+
+<script>
+function copyCmd(btn){
+  var code = btn.parentElement.querySelector('code,.pre');
+  var text = code ? code.innerText : '';
+  function done(){ btn.textContent='복사됨 ✓'; btn.classList.add('done');
+    setTimeout(function(){ btn.textContent='복사'; btn.classList.remove('done'); },1500); }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done, function(){ legacy(text); done(); });
+  } else { legacy(text); done(); }
+}
+function legacy(text){
+  var ta=document.createElement('textarea'); ta.value=text;
+  ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta);
+  ta.select(); try{ document.execCommand('copy'); }catch(e){} document.body.removeChild(ta);
+}
+</script>
+</body>
+</html>
