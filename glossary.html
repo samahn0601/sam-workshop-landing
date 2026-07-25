@@ -155,7 +155,7 @@
   <div class="term"><b>왜 갑자기 한도가 차죠?</b><span class="en">컨텍스트 비대화</span><p>Claude Code는 <b>매 턴마다 그때까지의 대화 전체</b>를 다시 처리합니다. 그래서 한 세션이 길어질수록 <b>매 턴이 점점 무거워져</b> 한도를 빠르게 먹습니다. <b>(한 분석에선 긴 세션 토큰의 ~98%가 '과거 재처리', 새 작업 생성은 ~1.5%.)</b> <span class="ex">한도가 걸려 쉰 뒤 <b>같은 거대 세션을 그대로 재개</b>하면 그 큰 맥락이 따라와 몇 턴 만에 또 걸립니다 — "쉬었는데 곧바로 또"가 이것.</span></p></div>
   <div class="term"><b>/clear · /compact</b><p><code>/clear</code> = 대화 초기화(새 작업 시작 시 · 프로젝트 메모리는 유지) · <code>/compact</code> = 지금까지 대화를 <b>요약해 맥락 축소</b>(진행 중 장기 작업). 둘 다 다음 턴부터 가볍게 만들어 한도를 아낍니다.</p></div>
   <div class="term"><b>핸드오프로 새 세션</b><p>맥락이 차면 <b>핸드오프</b>(→<a href="#agent">⑤</a>)로 인수인계 메모를 만들고 <b>새 세션</b>에서 이어가면 맥락이 리셋돼 한도 소모가 확 줄어듭니다. <b>한도가 걸렸을 땐 같은 세션 재개 대신 이 방법.</b></p></div>
-  <div class="term"><b>모델 선택 (Opus · Sonnet · Haiku)</b><p>같은 작업도 <b>Opus가 한도를 가장 빨리</b> 먹습니다. <b>일상 작업은 Sonnet</b>(가볍고 빠름), <b>정말 어려운 것만 Opus</b>로 — 이것만으로 한도가 크게 늘어납니다. 모델은 앱 또는 <code>/model</code>에서 전환.</p></div>
+  <div class="term"><b>모델 선택 (Haiku · Sonnet · Opus · Fable)</b><p>같은 작업이라도 <b>상위 모델일수록 한도를 빨리</b> 먹습니다(가벼운 쪽 → 무거운 쪽: Haiku → Sonnet → Opus → Fable). <b>일상 작업은 Sonnet</b>(기본값·빠름), <b>정말 어려운 것만 상위 모델</b>로 — 이것만으로 한도가 크게 늘어납니다. 모델은 앱 또는 <code>/model</code>에서 전환. <span class="sub">라인업·플랜별 접근은 바뀔 수 있으니 화면에 보이는 목록이 기준입니다.</span></p></div>
 
   <!-- ⑦ 연동·자동화 도구 -->
   <h2 id="tools"><span class="ic">🧰</span>⑦ 더 나아가기 — 연동·자동화 도구 <span style="font-size:13px;color:var(--muted);font-weight:400">(응용반·관심자용)</span></h2>
