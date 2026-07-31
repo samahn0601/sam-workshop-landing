@@ -53,8 +53,10 @@
          display:flex;flex-wrap:wrap;align-items:center;gap:10px 20px}
   .floor .hd{font-weight:800;color:var(--gold);font-size:15px;display:flex;align-items:center;gap:7px}
   .floor .it{font-size:13.5px;font-weight:600;color:#6b4e12;display:flex;align-items:center;gap:6px}
-  .tag{background:var(--ink);color:#fff;text-align:center;font-weight:800;font-style:italic;font-size:18px;
-       letter-spacing:.3px;border-radius:12px;padding:15px;margin:20px 0 0}
+  .tag{background:var(--ink);color:#fff;text-align:center;border-radius:12px;padding:16px 15px 14px;margin:20px 0 0}
+  .tag .ko{display:block;font-weight:800;font-size:21px;letter-spacing:-.4px;line-height:1.35}
+  .tag .en{display:block;font-weight:700;font-style:italic;font-size:14px;color:var(--tealLt);letter-spacing:.3px;margin-top:7px}
+  .tag .why{display:block;font-weight:400;font-size:13px;color:#BBD2DC;margin-top:8px;line-height:1.5}
   .note{font-size:12.5px;color:var(--muted);margin:16px 0 0}
   footer{color:var(--muted);font-size:12.5px;text-align:center;margin-top:30px}
   a{color:var(--teal);font-weight:600}
@@ -111,7 +113,11 @@
     <span class="it">🔗 가짜 인용·DOI 검증</span>
   </div>
 
-  <div class="tag">submission-directed &nbsp;≠&nbsp; submission-ready</div>
+  <div class="tag">
+    <span class="ko">투고를 <u>겨냥한</u> 원고 &nbsp;≠&nbsp; 투고<u>해도 되는</u> 원고</span>
+    <span class="en">submission-directed &nbsp;≠&nbsp; submission-ready</span>
+    <span class="why">그 사이에 남는 것 — ① 참고문헌 전수 실존 확인(‘검증 불능’은 통과가 아님) ② <b>AI 사용 공개문</b>(⑦ 소관 · 오늘 초고엔 없음) ③ 데이터 적법성(IRB·개인정보) ④ 공저자 전원 동의 ⑤ 저널 서식·분량 대조 ⑥ 주장이 데이터로 지지되는가 — <b>⑥은 저자만 판단할 수 있습니다</b></span>
+  </div>
 
   <p class="note">✋ <b>저자 정차</b> = 그 단계에서 저자가 검토·승인해야 다음으로 넘어가는 지점(①⑤⑥⑩).<br>
   📝 <b>초안은 도구가</b> — ⑧⑨도 도구가 일합니다. ⑧은 투고 워크시트와 데스크리젝 점검을, <b>⑨는 리비전 서신·리뷰어 코멘트를 넣으면 point-by-point 응답서와 개정 원고를 초안으로</b> 만듭니다.<br>
