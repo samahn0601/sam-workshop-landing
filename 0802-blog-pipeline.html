@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>블로그 자동화 파이프라인 — 8/2 대구가톨릭대 의대생 워크숍 (한눈에 보기)</title>
+<style>
+  :root{
+    --ink:#0F1F2E; --teal:#0E7C7B; --tealDeep:#0A5C5B; --tealLt:#5BC8C5;
+    --paper:#F2F6F8; --mist:#DCE6EC; --muted:#55677A;
+    --red:#C0392B; --redBg:#FBECEA; --gold:#B9770E; --goldBg:#FCF3E3;
+    --green:#1E7E4F; --line:#B9C7D2;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif;
+       color:var(--ink);background:var(--paper);line-height:1.5;-webkit-text-size-adjust:100%}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 16px 56px}
+  header{background:var(--ink);color:#fff;padding:26px 0 22px;border-bottom:4px solid var(--teal);text-align:center}
+  h1{font-size:26px;margin:0 0 6px;line-height:1.2;letter-spacing:-.5px}
+  header p{color:#BBD2DC;margin:0;font-size:14px}
+  .band{display:flex;align-items:center;gap:9px;margin:26px 0 10px}
+  .band b{background:var(--ink);color:#fff;font-size:15px;padding:5px 16px;border-radius:8px}
+  .band .rule{flex:1;height:2px;background:var(--mist)}
+  /* flow */
+  .flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:6px}
+  .step{flex:1 1 118px;min-width:118px;background:#fff;border:1px solid var(--mist);border-radius:12px;
+        padding:12px 10px 11px;text-align:center;position:relative;display:flex;flex-direction:column;gap:5px}
+  .step .no{position:absolute;top:-9px;left:9px;background:var(--ink);color:#fff;font-size:12px;font-weight:700;
+        min-width:22px;height:22px;border-radius:11px;line-height:22px;padding:0 6px}
+  .step .ic{font-size:26px;margin-top:6px;line-height:1}
+  .step .nm{font-weight:700;font-size:13.5px}
+  .step .nm small{display:block;color:var(--muted);font-weight:400;font-size:11px;margin-top:1px}
+  .step.human{background:#F1F9F4;border-color:#9CCDB0}
+  .step.human .no{background:var(--green)}
+  .stop{display:inline-block;background:var(--redBg);color:var(--red);font-weight:700;font-size:10.5px;
+        border:1px solid #E7B7B0;border-radius:6px;padding:1px 6px;margin-top:2px}
+  .gate{display:inline-block;background:#EAF2F4;color:var(--tealDeep);font-weight:700;font-size:10px;
+        border:1px solid var(--tealLt);border-radius:6px;padding:1px 6px;margin-top:3px}
+  .par{display:inline-block;background:#EDF6F6;color:var(--tealDeep);font-weight:700;font-size:10px;
+        border:1px solid var(--tealLt);border-radius:6px;padding:1px 6px;margin-top:3px}
+  .big{display:inline-block;background:#F4F0FA;color:#5B3E8C;font-weight:700;font-size:10px;
+        border:1px solid #CDBCE8;border-radius:6px;padding:1px 6px;margin-top:3px}
+  .arrow{align-self:center;color:var(--teal);font-size:19px;font-weight:700;flex:0 0 auto}
+  @media(max-width:640px){ .arrow{display:none} .step{flex:1 1 44%} }
+  /* callouts */
+  .intake{background:#EAF2F4;border:1px solid var(--tealLt);border-radius:12px;padding:14px 16px;margin:20px 0 4px;font-size:14px}
+  .intake b{color:var(--tealDeep)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:9px}
+  .chip{background:#fff;border:1px solid var(--tealLt);border-radius:999px;padding:4px 13px;font-size:13px;font-weight:600;color:var(--tealDeep)}
+  .chip small{color:var(--muted);font-weight:400}
+  /* evidence */
+  .ev{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+  .card{flex:1 1 300px;background:#fff;border:1px solid var(--mist);border-radius:12px;padding:14px 16px}
+  .card h3{margin:0 0 7px;font-size:14.5px;color:var(--tealDeep)}
+  .card p{margin:0;font-size:13.5px;color:#294056}
+  .card .num{font-weight:800;color:var(--ink)}
+  .card .bad{font-weight:800;color:var(--red)}
+  .card .ok{font-weight:800;color:var(--green)}
+  .floor{background:var(--goldBg);border:1px solid #E8CF97;border-radius:12px;padding:14px 16px;margin:22px 0 0;
+         display:flex;flex-wrap:wrap;align-items:center;gap:10px 20px}
+  .floor .hd{font-weight:800;color:var(--gold);font-size:15px;display:flex;align-items:center;gap:7px}
+  .floor .it{font-size:13.5px;font-weight:600;color:#6b4e12;display:flex;align-items:center;gap:6px}
+  .tag{background:var(--ink);color:#fff;text-align:center;border-radius:12px;padding:16px 15px 14px;margin:20px 0 0}
+  .tag .ko{display:block;font-weight:800;font-size:21px;letter-spacing:-.4px;line-height:1.35}
+  .tag .why{display:block;font-weight:400;font-size:13px;color:#BBD2DC;margin-top:8px;line-height:1.5}
+  .note{font-size:12.5px;color:var(--muted);margin:16px 0 0}
+  .note b{color:var(--ink)}
+  footer{color:var(--muted);font-size:12.5px;text-align:center;margin-top:30px}
+  a{color:var(--teal);font-weight:600}
+</style>
+</head>
+<body>
+<header>
+  <h1>블로그 자동화 파이프라인 — 8단계 전부</h1>
+  <p>주제 발굴 → 병렬 작성 → <b>의학 이중검수</b> → 가독성 게이트 → 이미지 3표 합의 → <b>사람이 발행</b> · 오늘 배운 “폴더 + 프롬프트”가 그대로 커진 것 · 8/2(일) 대구가톨릭대 의대생 풀데이</p>
+</header>
+
+<div class="wrap">
+
+  <div class="intake">
+    <b>이건 예시가 아니라 강사가 실제로 돌리는 파이프라인입니다.</b>
+    소아 건강 블로그(한글·영문 두 서비스)를 이 흐름으로 만듭니다. 오늘 오전에 한 것과 원리가 같습니다 —
+    <b>참고할 자료를 폴더에 두고</b>, <b>역할을 나눠</b> 시키고, <b>중요한 자리에서는 사람이 확인</b>합니다.
+    다른 점은 규모뿐입니다.
+  </div>
+
+  <div class="band"><b>글 만들기</b><span class="rule"></span></div>
+  <div class="flow">
+    <div class="step"><span class="no">A</span><span class="ic">🔍</span><span class="nm">주제 발굴<small>후보 여러 개 + 지난 주제 회피</small></span></div>
+    <div class="arrow">→</div>
+    <div class="step human"><span class="no">사람</span><span class="ic">🙋</span><span class="nm">주제 선택<small>제안 중에서 고르기</small></span><span class="stop">✋ 사람이 결정</span></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="no">B</span><span class="ic">🌐</span><span class="nm">영문 원고<small>FeverCoach</small></span><span class="par">⇉ 동시 실행</span></div>
+    <div class="step"><span class="no">C</span><span class="ic">✍️</span><span class="nm">한글 원고<small>열나요 · 번역 아님</small></span><span class="par">⇉ 동시 실행</span></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="no">D</span><span class="ic">🩺</span><span class="nm">의학 이중검수<small>Claude + Gemini 각자</small></span><span class="big">가장 센 모델</span></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="no">E</span><span class="ic">📐</span><span class="nm">가독성 게이트<small>말투·문장 길이를 숫자로</small></span></div>
+  </div>
+
+  <div class="band"><b>이미지 · 발행</b><span class="rule"></span></div>
+  <div class="flow">
+    <div class="step"><span class="no">F</span><span class="ic">🎨</span><span class="nm">이미지 생성<small>자리마다 A·B 2안</small></span></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="no">F′</span><span class="ic">🗳️</span><span class="nm">이미지 검수<small>3표 다수결</small></span></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="no">G</span><span class="ic">📦</span><span class="nm">발행 준비물<small>붙여넣기용 HTML · 제목·태그</small></span></div>
+    <div class="arrow">→</div>
+    <div class="step human"><span class="no">사람</span><span class="ic">🚀</span><span class="nm">최종 승인·발행<small>게시 버튼</small></span><span class="stop">✋ 사람이 결정</span><span class="gate">Human Final Gate</span></div>
+  </div>
+
+  <div class="band"><b>실제로 한 번 돌렸을 때</b><span class="rule"></span></div>
+  <div class="ev">
+    <div class="card">
+      <h3>🩺 D · 의학 검수를 둘에게 따로 시킨다</h3>
+      <p>Claude와 Gemini가 <b>서로 모르는 상태로 각자</b> 검수하고, 그 판정을 맞춰 봅니다. 실제 실행에서 양쪽 모두 <span class="ok">통과</span>·이견 없음이었지만, 그 글은 <span class="num">한 번 고쳐서 올라온 판</span>이었습니다 — 첫 판에 통과한 게 아닙니다.</p>
+    </div>
+    <div class="card">
+      <h3>📐 E · 자기 글을 자기가 반려한다</h3>
+      <p>말투·문장 길이·번역투를 사람 느낌이 아니라 숫자로 잽니다. 그 글은 <span class="num">2,527자 · 34문장 · 평균 58.4자</span>였고, 가장 긴 문장이 <span class="bad">366자</span>였습니다. 가독성 항목 5개 중 <span class="bad">4개가 미달</span>로 표시됐습니다.</p>
+    </div>
+    <div class="card">
+      <h3>🗳️ F′ · 이미지는 3표로 본다</h3>
+      <p>“예쁘다”가 아니라 미리 정한 항목만 봅니다 — 인물 다양성 · <b>의학적 안전성</b> · 기술 품질 · <b>글자 깨짐</b> · 스타일. 생성 이미지엔 깨진 글자가 자주 박히기 때문에 그 검사가 따로 있습니다.</p>
+    </div>
+    <div class="card">
+      <h3>📦 그래서 한 번에 남는 것</h3>
+      <p>원고·검수 기록·이미지·발행 준비물까지 <span class="num">파일 40개</span>가 한 폴더에 쌓입니다. <b>그래도 게시 버튼은 사람이 누릅니다.</b></p>
+    </div>
+  </div>
+
+  <div class="intake">
+    <b>눈여겨볼 설계 두 가지.</b>
+    <div class="chips">
+      <span class="chip">⇉ 병렬 <small>영문·한글이 서로를 기다리지 않는다</small></span>
+      <span class="chip">🚫 지름길 금지 <small>한글은 영문의 번역이 아니라 따로 쓴다 — 독자가 다르니까</small></span>
+      <span class="chip">💰 비싼 모델은 한 곳에만 <small>사람이 다칠 수 있는 의학 검수</small></span>
+      <span class="chip">🔢 기준은 숫자로 <small>모델이 “좋습니다” 해도 통과가 안 되게</small></span>
+    </div>
+  </div>
+
+  <div class="floor">
+    <span class="hd">🛡️ 항상 사람 책임</span>
+    <span class="it">🚀 발행 버튼은 사람이</span>
+    <span class="it">💊 의학 수치·권고는 사람이 재확인</span>
+    <span class="it">📣 AI 활용 공개</span>
+    <span class="it">🔒 환자정보 반입 금지</span>
+  </div>
+
+  <div class="tag">
+    <span class="ko">반복되는 콘텐츠 작업은 파이프라인으로<br>— 단, 발행 전 최종 확인은 반드시 사람</span>
+    <span class="why">자동화의 요령은 “사람을 빼는 것”이 아니라 <b>사람이 개입할 자리를 미리 정해두는 것</b>입니다.
+    이 파이프라인에서 사람은 딱 두 번 나섭니다 — <b>무엇을 쓸지 고를 때</b>, 그리고 <b>내보낼지 결정할 때</b>.</span>
+  </div>
+
+  <p class="note">✋ <b>사람이 결정</b> = 그 자리에서 사람이 판단해야 다음으로 넘어가는 지점.<br>
+  ⇉ <b>동시 실행</b> = 두 작업이 서로를 기다리지 않고 나란히 도는 구간(B·C).<br>
+  ⓘ <b>이 페이지에 원고 본문은 없습니다.</b> 흐름과 검증 기록만 담았습니다 — 남의(또는 내 서비스의) 원고를 그대로 옮겨 붙이지 않는 것도 오늘 배우는 습관에 들어갑니다.<br>
+  ⓘ <b>오늘 워크숍에서 이걸 직접 만들지는 않습니다.</b> 15:35 “더 나아가기”에서 흐름만 보여드리는 시연입니다 — 오늘 배운 패턴이 어디까지 커질 수 있는지 보는 대목입니다.</p>
+
+  <footer>의대생 AI 활용 풀데이 워크숍 · 8월 2일(일) 10:00–16:00 · 대구 메리어트호텔 이스트홀 · 설치·실습 안내 → <a href="/0802.html">0802.html</a></footer>
+</div>
+</body>
+</html>
