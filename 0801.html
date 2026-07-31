@@ -232,7 +232,8 @@
   <span class="sub">오늘 하루의 도달 범위는 <b>앞 단계 2~4개</b>이고, 나머지는 <b>같은 폴더에서 그대로 이어집니다</b> — 프롬프트·스킬 전부 재사용.</span></div>
 
   <h2><span class="n">＋</span>Claude 단독이 기본 · GPT·Gemini는 선택 <span class="sub">· 본인 구독/계정 있는 분만 · 없어도 무방</span></h2>
-  <div class="note">오늘 파이프라인은 <b>Claude Team 시트만으로 끝까지</b> 됩니다 — 추가 도구·API 키 불요. 아래는 <b>개인 ChatGPT(Plus/Pro) 구독이 있는 분</b>을 위한 선택 옵션이며(논문 도구 스킬에도 선택 단계로 반영돼 있음), 없어도 워크숍 진행엔 전혀 지장이 없습니다.</div>
+  <div class="note">오늘 파이프라인은 <b>Claude Team 시트만으로 끝까지</b> 됩니다 — 추가 도구·API 키 불요. 아래는 <b>모델을 하나 더 붙여 교차검증</b>하고 싶은 분을 위한 선택 옵션입니다(논문 도구 스킬에도 선택 단계로 반영돼 있음). <b>둘 다 집에서 5분</b>이면 되고, 없어도 워크숍 진행엔 전혀 지장이 없습니다.<br>
+  💡 <b>왜 굳이 하나 더?</b> — 두 모델이 <b>같이</b> 지적한 곳은 진짜 문제일 확률이 높고, <b>한쪽만</b> 지적한 곳은 확인이 필요한 곳입니다. <b>리뷰어를 미리 만나는 셈</b>이에요.</div>
   <table>
     <tr><th>단계</th><th>GPT를 이렇게 곁들일 수 있어요 <span style="font-weight:400">(선택)</span></th></tr>
     <tr><td><b>② 문헌 검색</b></td><td>ChatGPT <b>심층 리서치(Deep Research)</b>를 Claude Research와 <b>병행</b> — 엔진이 서로 놓친 문헌을 메워 커버리지↑. 결과를 같은 파일에 합치고, 인용은 ⑤에서 실재 확인.</td></tr>
@@ -243,10 +244,11 @@
   <table>
     <tr><th>모델</th><th>인증 방식</th><th>비용</th></tr>
     <tr><td><b>Claude</b> (오늘 주축)</td><td>Team 시트 로그인</td><td><span class="yes">주최측 지급 · 추가 0</span></td></tr>
-    <tr><td><b>GPT</b> (선택)</td><td><b>ChatGPT 구독 OAuth</b> — 이미 내고 계신 구독</td><td><span class="yes">추가 과금 0</span> · 구독 쿼터 차감</td></tr>
-    <tr><td><b>Gemini</b> (선택)</td><td><b>API 키</b> 발급</td><td>🔴 <b>건당 실제 과금</b> — 카드로 청구됩니다</td></tr>
+    <tr><td><b>GPT</b> (선택)</td><td><b>ChatGPT 구독 OAuth</b> — 공식 Codex CLI</td><td><span class="yes">추가 과금 0</span> · <b>유료 구독자만</b></td></tr>
+    <tr><td><b>Gemini</b> (선택)</td><td><b>구글 계정 OAuth</b> — 공식 Gemini CLI</td><td><span class="yes">무료</span> · <b>카드 불요</b> (분당 60 · 일 1,000회)</td></tr>
+    <tr><td>Gemini <b>API 키</b> <span class="sub">(고급)</span></td><td>API 키 + 카드 등록</td><td>🔴 <b>건당 과금</b> — 프로그램이 자동 반복 호출할 때만</td></tr>
   </table>
-  <p class="sub">즉 <b>GPT는 이미 구독 중이면 공짜로 하나 더 얻는 것</b>이고, <b>Gemini는 쓰는 만큼 돈이 나갑니다.</b> 이 차이를 모르고 API 키를 붙이면 청구서로 알게 됩니다.</p>
+  <p class="sub">핵심 — <b>GPT는 이미 구독 중이어야 공짜</b>지만, <b>Gemini는 무료 구글 계정만 있으면 됩니다.</b> 그래서 <b>붙이기 쉬운 쪽은 Gemini</b>입니다. 🔴 <b>API 키는 전혀 다른 것</b>이니 혼동하지 마세요 — 그건 카드를 걸고 쓰는 만큼 청구됩니다.</p>
 
   <div class="card">
     <h3>🅐 GPT 무과금 연결 <span class="pill">ChatGPT Plus/Pro 구독자만</span></h3>
@@ -271,18 +273,24 @@
   </div>
 
   <div class="card">
-    <h3>🅖 Gemini API 연결 <span class="pill" style="background:var(--redBg);color:var(--red)">건당 과금 — 주의</span></h3>
-    <p class="what">Gemini는 구독 OAuth 경로가 없어 <b>API 키</b>를 씁니다. 긴 문헌을 한 번에 넣기 좋지만, <b>호출할 때마다 실제 요금이 발생</b>합니다. 오늘 워크숍엔 필요 없고, <b>집에서 천천히</b> 해보실 항목입니다.</p>
+    <h3>🅖 Gemini 무과금 연결 <span class="pill">무료 구글 계정이면 누구나</span></h3>
+    <p class="what">구글도 <b>공식 CLI</b>가 있고, <b>구글 계정 로그인(OAuth)</b>으로 붙습니다 — <b>API 키도 카드도 필요 없습니다.</b> 무료 한도가 <b>분당 60회 · 하루 1,000회</b>라 실사용에 넉넉합니다. <b>셋 중 가장 붙이기 쉬운 경로</b>예요.</p>
     <div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
-      <code class="pre">Gemini를 API 키로 붙이고 싶어. 키가 새어나가지 않는 방식으로 해줘. 아래 순서대로 안내해줘.
+      <code class="pre">구글 공식 Gemini CLI를 내 구글 계정으로 연결하고 싶어. API 키가 아니라 OAuth 로그인 방식이야(무료 한도로 쓰는 것). 아래 순서대로 해주고, 시스템을 바꾸는 명령은 실행 전에 꼭 확인받아.
 
-1) aistudio.google.com/apikey 에서 키를 발급받는 방법을 알려줘. 키는 내가 직접 받을게 — 채팅창에는 절대 붙여넣지 않을 거야.
-2) 이 폴더에 .env.local 파일을 만들어줘. 안에는 GEMINI_API_KEY= 까지만 써두고 값은 비워둬. 내가 메모장으로 열어서 직접 채워 넣을게.
-3) .gitignore에 .env.local을 추가해줘. 실수로 키가 업로드되는 걸 막는 표준 방법이야.
-4) 다 되면, 키가 잘 읽히는지 확인하는 아주 짧은 시험을 한 번만 돌려줘. 키 값 자체는 절대 화면에 출력하지 마.
-5) 마지막으로 이 모델이 대략 얼마씩 과금되는지, 어디서 사용량을 확인하는지 알려줘.</code></div>
-    <p class="step-note">🔒 <b>키를 채팅창에 붙여넣지 마세요.</b> 대화 기록에 남고, 그 기록이 어디로 가는지는 통제 밖입니다. <b>파일에 넣고 파일 이름만 알려주는 것</b>이 표준입니다 — 위 프롬프트가 그렇게 설계돼 있습니다.<br>
-    💳 발급 직후엔 무료 한도가 있을 수 있지만 <b>한도를 넘으면 조용히 유료로 넘어갑니다.</b> Google Cloud 콘솔에서 <b>예산 알림</b>을 걸어두시는 걸 권합니다.</p>
+1) node와 npm이 있는지 확인하고, 없으면 관리자 권한 없이(user 설치) 깔아줘.
+2) npm i -g @google/gemini-cli 로 설치해줘.
+3) gemini 를 한 번 실행해줘 — 인증 방식을 고르라고 하면 "Sign in with Google"(구글 계정 로그인)을 골라줘. 브라우저가 열리면 내 개인 구글 계정으로 로그인할게. API 키 방식은 고르지 마.
+4) 어느 방식으로 붙었는지 확인해줘: 홈 폴더의 .gemini/settings.json 에서 selectedAuthType 값만 봐줘. "oauth-personal" 이면 무료 로그인 모드가 맞아. 다른 값이면 알려줘. 토큰 값 자체는 절대 화면에 출력하지 마.
+5) 도는지 한 번 시험해줘:
+   gemini -p "한 문장으로 자기소개해줘"
+   답이 나오면 성공이야. 안 되면 어디서 막혔는지 알려줘.</code></div>
+    <p class="step-note">✅ <b>성공 판정</b>: 4번 <code>selectedAuthType</code>이 <b>"oauth-personal"</b> + 5번에서 답 한 줄. <span class="sub">(강사 기기 실측: API 키를 아예 제거한 상태에서도 정상 응답 — 과금 경로가 아님이 확인됨)</span><br>
+    ⚠️ <b>개인 구글 계정</b>으로 하세요. 학교 Workspace 계정은 조직 정책으로 막혀 있을 수 있습니다(오늘 Gemini Notebook과 같은 이유).</p>
+    <p><b>붙였으면 ⑥ Critic이 3인 심사가 됩니다</b>:</p>
+    <div class="cmd"><button class="copy" onclick="copyCmd(this)">복사</button>
+      <code class="pre">지금 원고를 비평할 때 GPT와 Gemini를 각각 제2·제3 심사자로 같이 써줘. codex exec로 GPT에게, gemini -p로 Gemini에게 같은 원고를 주고, 세 비평을 나란히 놓은 다음 판단이 갈리는 지점만 표로 정리해줘. 셋 중 둘 이상이 같이 지적한 것과, 하나만 지적한 것을 구분해줘.</code></div>
+    <p class="step-note">🔴 <b>"Gemini API 키"는 이것과 전혀 다릅니다.</b> 그건 <code>aistudio.google.com</code>에서 키를 받아 <b>카드를 걸고 건당 과금</b>하는 방식이고, 프로그램이 <b>자동으로 수백 번 반복 호출</b>할 때나 필요합니다. 손으로 쓰실 거면 위 OAuth로 충분합니다. <span class="sub">혹시 키를 쓰시게 되면 — 키는 <b>채팅창에 붙여넣지 말고</b> <code>.env.local</code>에 넣고 <code>.gitignore</code>에 등록, 그리고 <b>예산 알림</b>부터 거세요.</span></p>
   </div>
 
   <div class="session blue">🔵 3부 · 고급 활용 <span>진행 중 남는 시간에 수시로 — 관심 가는 것부터</span></div>

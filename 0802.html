@@ -296,13 +296,15 @@
     <tr><th>무엇</th><th>인증</th><th>비용</th></tr>
     <tr><td><b>Claude</b> (오늘)</td><td>Team 시트</td><td><span class="yes">주최측 지급 · 추가 0</span></td></tr>
     <tr><td><b>Gemini Notebook</b> (오늘 오후)</td><td>개인 구글 계정</td><td><span class="yes">무료</span> (한도 있음)</td></tr>
+    <tr><td><b>Gemini CLI</b> (선택 · <b>추천</b>)</td><td>구글 계정 로그인(OAuth)</td><td><span class="yes">무료 · 카드 불요</span> (분당 60 · 일 1,000회)</td></tr>
     <tr><td><b>GPT</b> (선택)</td><td>ChatGPT 구독 로그인</td><td><span class="yes">추가 0</span> — <b>이미 유료 구독 중일 때만</b></td></tr>
-    <tr><td><b>Gemini API</b> (선택)</td><td>API 키 + 카드 등록</td><td>🔴 <b>쓰는 만큼 청구</b></td></tr>
+    <tr><td>Gemini <b>API 키</b> <span class="sub">(고급)</span></td><td>API 키 + 카드 등록</td><td>🔴 <b>쓰는 만큼 청구</b></td></tr>
   </table>
+  <p class="sub">👉 <b>ChatGPT 유료 구독이 없어도 괜찮습니다</b> — <b>Gemini CLI는 무료 구글 계정만 있으면</b> 됩니다. 오늘 오후 Notebook 로그인에 쓴 그 계정 그대로예요. 🔴 <b>"Gemini API 키"는 전혀 다른 것</b>이니 헷갈리지 마세요(카드 등록 + 건당 청구).</p>
 
   <div class="card">
     <h3>🅐 ChatGPT 유료 구독이 이미 있다면 <span class="sub">· 추가 비용 0</span></h3>
-    <p class="what">이미 내고 있는 구독을 <b>Code 탭 안으로</b> 끌어옵니다. Claude가 GPT를 직접 불러서 두 답을 나란히 보여줘요. <b>구독이 없으면 이걸 위해 새로 결제하지 마세요</b> — 오늘 배운 것만으로 충분합니다.</p>
+    <p class="what">이미 내고 있는 구독을 <b>Code 탭 안으로</b> 끌어옵니다. Claude가 GPT를 직접 불러서 두 답을 나란히 보여줘요. <b>구독이 없으면 이걸 위해 새로 결제하지 마세요</b> — 아래 <b>🅖 Gemini(무료)</b>로 똑같이 하실 수 있습니다.</p>
     <div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
       <code class="pre">ChatGPT 유료 구독(Plus/Pro)이 있어서, 내 구독으로 GPT를 추가 과금 없이 연결하고 싶어. OpenAI 공식 Codex CLI를 쓰는 방식이야. 아래 순서대로 해주고, 시스템을 바꾸는 명령은 실행 전에 꼭 확인받아.
 
@@ -321,10 +323,23 @@
   </div>
 
   <div class="card">
-    <h3>🅖 Gemini API <span class="pill" style="background:var(--redBg);color:var(--red)">카드 등록 · 건당 과금</span></h3>
-    <p class="what">🛑 <b>대부분은 필요 없습니다.</b> 오늘 오후에 쓴 <b>Gemini Notebook은 무료</b>이고, 문헌·강의자료를 소화시키는 용도로는 그걸로 충분해요. API는 <b>프로그램에서 자동으로 반복 호출</b>할 때 쓰는 것이고, <b>카드를 걸고 호출할 때마다 요금이 붙습니다.</b></p>
-    <p class="step-note">정말 필요해지는 날이 오면(예: 수백 건을 자동으로 돌려야 할 때) — <code>aistudio.google.com/apikey</code>에서 키를 받고, <b>키는 채팅창에 절대 붙여넣지 말고</b> <code>.env.local</code> 파일에 넣은 뒤 <code>.gitignore</code>에 등록하는 것이 표준입니다. Claude에게 <i>"키는 내가 직접 파일에 써넣을 테니 빈 <code>.env.local</code>과 <code>.gitignore</code>만 만들어줘"</i>라고 시키면 됩니다.<br>
-    💳 <b>시작 전에 Google Cloud 콘솔에서 예산 알림부터 걸어두세요.</b> 무료 한도를 넘으면 조용히 유료로 넘어갑니다.</p>
+    <h3>🅖 Gemini 무료 연결 <span class="pill">구글 계정만 있으면 · 추천</span></h3>
+    <p class="what">구글도 <b>공식 CLI</b>가 있고, <b>구글 계정 로그인</b>으로 붙습니다 — <b>카드도 API 키도 필요 없어요.</b> 무료 한도가 <b>하루 1,000회</b>라 공부용으로는 남습니다. <b>유료 구독이 없어도 되는 유일한 경로</b>라, 둘 중 하나만 한다면 이걸 권합니다.</p>
+    <div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
+      <code class="pre">구글 공식 Gemini CLI를 내 구글 계정으로 연결하고 싶어. API 키가 아니라 OAuth 로그인 방식이야(무료 한도로 쓰는 것). 아래 순서대로 해주고, 시스템을 바꾸는 명령은 실행 전에 꼭 확인받아.
+
+1) node와 npm이 있는지 확인하고, 없으면 관리자 권한 없이(user 설치) 깔아줘.
+2) npm i -g @google/gemini-cli 로 설치해줘.
+3) gemini 를 한 번 실행해줘 — 인증 방식을 고르라고 하면 "Sign in with Google"(구글 계정 로그인)을 골라줘. 브라우저가 열리면 내 개인 구글 계정으로 로그인할게. API 키 방식은 고르지 마.
+4) 어느 방식으로 붙었는지 확인해줘: 홈 폴더의 .gemini/settings.json 에서 selectedAuthType 값만 봐줘. "oauth-personal" 이면 무료 로그인 모드가 맞아. 다른 값이면 알려줘.
+5) 도는지 한 번 시험해줘:
+   gemini -p "한 문장으로 자기소개해줘"
+   답이 나오면 성공이야.</code></div>
+    <p class="step-note">✅ <b>성공 판정</b>: <code>selectedAuthType</code>이 <b>"oauth-personal"</b> + 답 한 줄. ⚠️ <b>개인 구글 계정</b>으로 하세요 — 학교 계정은 막혀 있을 수 있습니다(오늘 Notebook과 같은 이유).</p>
+    <p><b>붙였으면 이렇게</b> — 오늘 만든 요약을 두 모델에게 동시에 검사시키기:</p>
+    <div class="cmd"><button class="copy" onclick="copyCmd(this)">복사</button>
+      <code class="pre">이 파일의 의학 내용이 맞는지 검토해줘. 그리고 gemini -p 로 Gemini에게도 같은 파일을 주고 똑같이 검토시킨 다음, 너와 Gemini의 판단이 엇갈리는 부분만 따로 표로 정리해줘. 엇갈리는 곳이 내가 교과서로 확인해야 할 곳이야.</code></div>
+    <p class="step-note">🔴 <b>"Gemini API 키"는 이것과 전혀 다릅니다</b> — <code>aistudio.google.com</code>에서 키를 받아 <b>카드를 걸고 건당 청구</b>되는 방식이고, 프로그램이 수백 번 자동 호출할 때나 필요합니다. <b>여러분은 위 무료 로그인으로 충분합니다.</b> 혹시 나중에 키를 쓰게 되면 — 키는 <b>채팅창에 붙여넣지 말고</b> <code>.env.local</code>에 넣고 <code>.gitignore</code>에 등록, <b>예산 알림</b>부터 거세요.</p>
   </div>
 
   <div class="star">⭐ <b>AI 리터러시 4가지 (15:50 · 오늘의 마무리)</b> — ① <b>환각 검증</b>: 의학 수치·용량은 반드시 원 자료로 재확인, 최종 책임은 사람(Human Final Gate). ② <b>환자정보 절대 금지</b>: 오늘 전부 가상 데이터였던 이유. ③ <b>시험 윤리</b>: 학습 도구 O / 평가 중 사용·대필 X — 학교 규정 우선. ④ <b>한도 관리</b>: 긴 세션은 한도 폭식 → <code>/compact</code>·새 세션·일상은 Sonnet. Cowork 같은 "맡기는" 작업은 더 빨리 소모.</div>
