@@ -32,7 +32,7 @@
   .card{background:#fff;border:1px solid var(--mist);border-radius:12px;padding:15px 18px;margin:11px 0}
   .pre{display:block;border-radius:10px;background:var(--code);color:#eef;
        font-family:Consolas,Menlo,monospace;font-size:13.5px;line-height:1.5;
-       padding:14px 44px 14px 16px;white-space:pre-wrap;word-break:break-word;margin:6px 0 0;overflow-x:auto}
+       padding:14px 68px 14px 16px;white-space:pre-wrap;word-break:break-word;margin:6px 0 0;overflow-x:auto}
   .cmd{position:relative;margin:8px 0}
   button.copy{position:absolute;top:10px;right:10px;background:var(--teal);color:#fff;border:0;
        border-radius:7px;padding:6px 12px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit;z-index:2}
@@ -86,7 +86,7 @@
 
   <div class="note">
     <b>📧 Claude Team 프리미엄 시트 — 전원 무료 제공 (주최측 지급)</b><br>
-    워크숍 전 <b>초대 메일</b>이 발송됩니다. <b>오시기 전에 반드시 초대를 수락하고 로그인까지</b> 마쳐 주세요 — 당일 아침엔 되돌릴 시간이 없습니다. 메일이 안 보이면 <b>스팸함</b>을 확인하세요. 비용 부담은 전혀 없습니다.
+<b>초대 메일은 이미 발송되었습니다.</b> <b>오시기 전에 수락하고 로그인까지</b> 마쳐 주세요 — 당일 아침엔 시간이 빠듯합니다. 메일이 안 보이면 <b>스팸함</b>을 확인하시고, 그래도 없으면 그냥 오세요(현장에서 함께 처리해 드립니다). claude.ai 로그인 시 화면 위쪽에 <b>Team</b>으로 보이면 완료입니다. 비용 부담은 전혀 없습니다.
   </div>
 
   <div class="note" style="border-left-color:#B9770E;background:#FCF8EF">🔋 <b>준비물</b> — 개인 노트북 <b>배터리 완충 + 충전기 지참</b> · Team 시트 초대 수락된 Claude 계정 · 구글 계정.</div>
@@ -125,15 +125,35 @@
 
   <!-- STEP 2 -->
   <h2><span class="n">2</span>논문 도구(Skill) 설치 — Code 탭 <span class="sub">· 보통 OT 중에 끝남</span></h2>
-  <p class="sub">아래 <b>방법 A(ZIP·추천)</b> 또는 <b>B(발화)</b> 중 하나만 → 그다음 ③ "시작하자".</p>
+  <p class="sub">아래 <b>방법 A(추천 — 받아두고 붙여넣기)</b> 또는 <b>B(발화로 직접 받기)</b> 중 <b>하나만</b> → 그다음 ③ "시작하자".</p>
 
   <div class="card">
-    <h3>방법 A — ZIP로 설치 <span class="pill">추천·가장 쉬움</span></h3>
-    <p class="what">= 도구 18개가 이미 든 폴더를 받아서 열기만. 복사·명령·인터넷 clone 없음 → 가장 안 막힘.</p>
-    <p><b>1.</b> <a href="/sam-workshop-paper.zip" download><b>📦 sam-workshop-paper.zip 다운로드</b></a> → 압축 풀기 (Windows 우클릭 "압축 풀기" / Mac 더블클릭)<br>
-    <b>2.</b> Claude <b>Code 탭 → 폴더 선택(Select folder)</b> → 압축 푼 폴더 <code>sam-workshop-paper</code> 열기</p>
-    <p class="step-note">→ 이미 도구가 들어 있어, 폴더 연 그 세션에서 바로 ③로.</p>
+    <h3>방법 A — ZIP 받고 붙여넣기 <span class="pill">추천·가장 쉬움</span></h3>
+    <p class="what">= 파일 2개 받아두고 <b>문장 하나 붙여넣으면 끝.</b> 압축은 <b>직접 풀지 않습니다</b> — Claude가 풀고, 제대로 풀렸는지 확인까지 합니다. (오늘 쓸 폴더가 <b>한 번에 둘 다</b> 준비됩니다)</p>
+    <p><b>1.</b> 아래 <b>두 개</b>를 받아 <b>그대로 두세요</b>(압축 풀지 마세요 · 합쳐서 165KB)</p>
+    <div class="links">
+      <a href="/sam-workshop-paper.zip" download><span class="ic">📦</span><span>sam-workshop-paper.zip<small>오후 논문 도구 18개</small></span></a>
+      <a href="/sample_workspace.zip" download><span class="ic">🗂️</span><span>sample_workspace.zip<small>오전 몸풀기용 가상 자료</small></span></a>
+    </div>
+    <p><b>2.</b> Claude <b>Code 탭 → 폴더 선택(Select folder)</b> → <b>다운로드(Downloads) 폴더</b> 열기<br>
+    <b>3.</b> 아래를 붙여넣고 실행 — <b>압축 풀기와 정리를 Claude가 대신 합니다.</b></p>
+    <div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
+      <code class="pre">이 폴더에서 sam-workshop-paper.zip과 sample_workspace.zip을 찾아, workshop 폴더를 만들어 각각 그 안에 압축 풀어줘. 압축을 풀었을 때 같은 이름 폴더가 한 겹 더 생기면 안쪽 내용을 위로 올려서 정리해줘.
+
+다 되면 확인해서 알려줘 —
+· workshop/sam-workshop-paper 안에 .claude 폴더와 CLAUDE.md 가 있는지, 그리고 .claude/skills 안에 폴더가 몇 개인지
+· workshop/sample_workspace 안에 study_scores.csv 가 있는지
+
+원래 zip 파일은 그대로 두고, 이 폴더의 다른 파일은 건드리지 마.</code></div>
+    <p class="step-note">→ <code>다운로드/workshop/sam-workshop-paper</code>·<code>…/sample_workspace</code>가 만들어집니다. <b>ZIP 안에 폴더가 한 겹 더 들어 있는 경우까지 알아서 정리</b>합니다 — 손으로 풀 때 가장 많이 헤매는 지점입니다.</p>
+    <p><b>4.</b> <b>18개</b>라고 답하면 성공 → 다시 <b>폴더 선택 → <code>workshop/sam-workshop-paper</code></b>로 바꿔 열기 → ③으로<br>
+    <span class="sub">이 한 번은 손으로 해야 합니다. 이후 모든 프롬프트가 <b>"이 폴더의 …"</b>로 시작하기 때문에, <b>작업 자료만 든 폴더</b>를 열고 있어야 결과가 정확합니다.</span></p>
+    <p class="step-note">📁 <b>이미 직접 압축을 푸셨다면</b>(미리 풀어 오신 경우 포함): 그 폴더를 열고 ③에서 <code>/</code>를 쳤을 때 <b>18개가 안 보이면</b> — 십중팔구 <code>sam-workshop-paper</code> 안에 같은 이름 폴더가 하나 더 있는 경우입니다(Windows 기본 "모두 압축 풀기"가 이렇게 만듭니다). <b>안쪽 폴더를 열면</b> 바로 해결됩니다.</p>
   </div>
+
+  <div class="note">🪟 <b>여기서 "실행할까요?" 승인 창이 처음 뜹니다.</b> 압축을 풀려면 Claude가 명령을 하나 실행해야 하기 때문입니다 — <b>허용</b>을 누르면 진행됩니다. 무엇을 하려는지 창에 그대로 적혀 있으니, <b>읽고 누르는 습관</b>을 가장 안전한 작업(압축 풀기)에서 들이는 셈입니다. <span class="sub">안 누르고 두면 Claude가 한참 뒤에 되묻습니다 — 오후 실습에서도 같은 창이 나옵니다.</span></div>
+
+  <div class="note" style="border-left-color:#B9770E;background:#FCF8EF">🔒 <b>다운로드 폴더에 민감한 파일이 있다면</b> — Code는 <b>내가 연 폴더의 목록</b>을 봅니다. 환자 자료·심사 중 원고가 다운로드 폴더에 있다면, 새 폴더(예: 바탕화면에 <code>workshop</code>)를 하나 만들어 <b>ZIP 두 개만 옮겨 넣고</b> 그 폴더를 여세요. 다음은 위와 똑같습니다. <span class="sub">"폴더 선택이 곧 안전경계"라는 게 이런 뜻입니다.</span></div>
 
   <div class="card">
     <h3>방법 B — 발화로 설치 <span class="sub">(인터넷으로 직접 받기)</span></h3>
@@ -151,15 +171,16 @@
     <p><code>/</code> 를 쳐서 <b>18개</b>가 보이면 입력:</p>
     <div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
       <code class="pre">시작하자</code></div>
-    <p class="step-note">방법 A는 폴더 연 세션에서 바로 보입니다. <b>방법 B는 새 세션</b>을 한 번 열어야 보입니다(설치한 세션엔 안 보임). → <code>start-here</code>가 10단계를 안내, 단계 끝마다 <b>"다음"</b>.</p>
+    <p class="step-note">방법 A는 <code>workshop/sam-workshop-paper</code>를 <b>새로 연 그 화면에서 바로</b> 보입니다(압축을 푼 다운로드 폴더 화면에서는 <b>안 보이는 게 정상</b> — 폴더를 바꿔 여셔야 합니다). <b>방법 B는 새 세션</b>을 한 번 열어야 보입니다(설치한 세션엔 안 보임). → <code>start-here</code>가 10단계를 안내, 단계 끝마다 <b>"다음"</b>.</p>
   </div>
 
   <!-- STEP 3 몸풀기 -->
   <h2><span class="n">3</span>몸풀기 — 내 폴더로 첫 산출물 <span class="sub">· 복붙 · 5분</span></h2>
   <p class="sub">논문에 들어가기 전, Code가 진짜 파일을 만드는 감각부터. 끝나면 <b>파일 탐색기를 열어</b> 새로 생긴 파일을 확인하세요 — 채팅엔 없는 것. (모두 교육용 가상 데이터)</p>
-  <div class="links">
-    <a href="/sample_workspace.zip" download><span class="ic">📦</span><span>sample_workspace.zip 다운로드 (몸풀기용 가상 자료)<small>압축 풀기 → Code 탭 → 폴더 선택으로 그 폴더 열기</small></span></a>
-  </div>
+  <div class="note">📂 <b>Code 탭 → 폴더 선택 → <code>workshop/sample_workspace</code> 열기</b> → 아래 A′·B·C 중 하나를 붙여넣으세요. <b>안에 <code>study_scores.csv</code>가 보이면 제대로 연 것입니다.</b><br>
+  <span class="sub">방법 A로 하셨으면 <b>2번 단계에서 이미 만들어져 있습니다.</b> 방법 B로 하셨거나 폴더가 없으면 → <a href="/sample_workspace.zip" download><b>sample_workspace.zip을 받아</b></a> 다운로드 폴더를 연 뒤 아래를 붙여넣으세요.</span></div>
+  <div class="cmd"><button class="copy" onclick="copyCmd(this)">복사</button>
+    <code class="pre">이 폴더에서 sample_workspace.zip을 찾아, workshop 폴더 안에 압축 풀어줘. 같은 이름 폴더가 한 겹 더 생기면 안쪽 내용을 위로 올려서 정리해줘. 다 되면 그 폴더 안에 study_scores.csv 가 있는지 확인해서 알려줘. 이 폴더의 다른 파일은 건드리지 마.</code></div>
 
   <div class="card">
     <h3>A′ · 내 폴더 읽어 정리 <span class="sub">(가장 쉬움)</span></h3>
@@ -280,7 +301,7 @@
     <tr><td><b>Claude Desktop 앱</b></td><td>AI 작업실 — Code 탭에서 파일·폴더를 직접 다룸</td><td>더블클릭 (Mac·Win)</td></tr>
     <tr><td><b>Git for Windows</b></td><td>자료 받아오기 · Windows Code 탭 실행 전제</td><td>더블클릭 (Win만)</td></tr>
     <tr><td><b>Python</b></td><td>참고문헌·통계 점검 스크립트 실행기</td><td><span class="yes">Claude 자동</span> (필요 시)</td></tr>
-    <tr><td><b>논문 Skill 18개</b></td><td>논문 작성 10단계를 자동화한 도구 모음</td><td>ZIP 풀기(방법 A) 또는 발화(B)</td></tr>
+    <tr><td><b>논문 Skill 18개</b></td><td>논문 작성 10단계를 자동화한 도구 모음</td><td>ZIP 받고 붙여넣기(A) 또는 발화(B)</td></tr>
     <tr><td><b>start-here</b></td><td>"시작하자" 한마디로 10단계를 안내하는 진입점</td><td>(Skill에 포함)</td></tr>
     <tr><td><b>고급 활용 메뉴</b></td><td>투고 추적·LLM wiki·K-skills·헤르메스·Chrome/Office·Gemini Notebook</td><td>워크숍 중 시연 + take-home</td></tr>
   </table>
@@ -289,9 +310,10 @@
   <h2><span class="n">!</span>막히면</h2>
   <table>
     <tr><th>증상</th><th>1차 대응</th></tr>
-    <tr><td>Team 초대 메일이 없음</td><td>스팸함 확인 → 그래도 없으면 손 들기 (현장 재발송)</td></tr>
+    <tr><td>Team 초대 메일이 없음</td><td>스팸함 확인 → 그래도 없으면 손 들기 (현장에서 함께 확인)</td></tr>
     <tr><td>(Win) Code 탭이 안 열림</td><td>Git for Windows 설치 → 앱 완전 종료 후 재시작</td></tr>
-    <tr><td><code>/</code>에 skill이 안 보임</td><td><b>새 세션</b>인지 + <code>.claude/skills/start-here</code>가 1단계인지(우산 금지)</td></tr>
+    <tr><td><code>/</code>에 skill이 <b>0개</b></td><td><b>①이중폴더</b>(가장 흔함) — 연 폴더 안에 같은 이름 폴더가 또 있으면 <b>안쪽을 열기</b>. ②방법 B로 했으면 <b>새 세션</b>인지. <span class="sub">폴더 안에 <code>CLAUDE.md</code>가 보이면 제대로 연 것.</span></td></tr>
+    <tr><td>몸풀기 B·C가 "파일이 없다"</td><td>같은 원인 — <code>sample_workspace</code> 안에 같은 이름 폴더가 또 있는 경우. <b>안쪽 폴더를 열면</b> 해결(<code>study_scores.csv</code>가 보여야 정상)</td></tr>
     <tr><td>발화 B가 멈춤</td><td>github.com 접근 확인 → 발화의 ZIP 폴백이 자동 시도됨</td></tr>
     <tr><td>Gmail·캘린더 연결 안 됨</td><td>조직/학교 정책일 수 있음 — 손 들기 (데모 화면으로 대체)</td></tr>
     <tr><td>"권한 없음"으로 설치 실패</td><td>관리형 노트북 — 손 들기 (Git·Python 본체만 해당)</td></tr>

@@ -32,7 +32,7 @@
   .card{background:#fff;border:1px solid var(--mist);border-radius:12px;padding:15px 18px;margin:11px 0}
   .pre{display:block;border-radius:10px;background:var(--code);color:#eef;
        font-family:Consolas,Menlo,monospace;font-size:13.5px;line-height:1.5;
-       padding:14px 44px 14px 16px;white-space:pre-wrap;word-break:break-word;margin:6px 0 0;overflow-x:auto}
+       padding:14px 68px 14px 16px;white-space:pre-wrap;word-break:break-word;margin:6px 0 0;overflow-x:auto}
   .cmd{position:relative;margin:8px 0}
   button.copy{position:absolute;top:10px;right:10px;background:var(--teal);color:#fff;border:0;
        border-radius:7px;padding:6px 12px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit;z-index:2}
@@ -125,19 +125,30 @@
   <div class="note">🐍 <b>Python은 안 깔아도 됩니다.</b> 그래프·엑셀 만들 때 필요하면 Claude가 물어보고 자동 설치합니다.</div>
 
   <!-- STEP 2 -->
-  <h2><span class="n">2</span>실습 폴더 열기 <span class="sub">· ZIP 받아서 폴더 선택</span></h2>
+  <h2><span class="n">2</span>실습 폴더 열기 <span class="sub">· 다운만 받고, 압축은 Claude가</span></h2>
   <div class="card">
-    <p><b>1.</b> <a href="/sample_workspace_0802.zip" download><b>📦 sample_workspace_0802.zip 다운로드</b></a> → 압축 풀기 (Windows 우클릭 "압축 풀기" / Mac 더블클릭)<br>
-    <b>2.</b> Claude <b>Code 탭 → 폴더 선택(Select folder)</b> → 압축 푼 <code>sample_workspace</code> 폴더 열기</p>
+    <p><b>1.</b> ZIP 두 개를 <b>다운로드 폴더에 그대로</b> 받아둡니다 — <b>압축은 풀지 마세요</b>:<br>
+    　<a href="/sample_workspace_0802.zip" download><b>📦 sample_workspace_0802.zip</b></a> ㆍ <a href="/notebooklm_0802.zip" download><b>📦 notebooklm_0802.zip</b></a> <span class="sub">(오후 Gemini Notebook용 — 지금 같이 받아두면 오후에 할 일이 없습니다)</span><br>
+    <b>2.</b> Claude <b>Code 탭 → 폴더 선택(Select folder)</b> → <b>다운로드(Downloads) 폴더</b>를 엽니다.<br>
+    <b>3.</b> 아래를 붙여넣고 실행 — <b>압축 풀기와 정리를 Claude가 대신 합니다.</b></p>
+    <div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
+      <code class="pre">이 폴더에서 sample_workspace_0802.zip과 notebooklm_0802.zip을 찾아, workshop 폴더를 만들어 각각 그 안에 압축 풀어줘. 압축을 풀었을 때 같은 이름 폴더가 한 겹 더 생기면 안쪽 내용을 위로 올려서 정리해줘. 다 되면 workshop 안에 어떤 파일이 생겼는지 목록으로 보여줘. 원래 zip 파일은 그대로 두고, 이 폴더의 다른 파일은 건드리지 마.</code></div>
+    <p class="step-note">→ <code>다운로드/workshop/sample_workspace</code>·<code>…/notebooklm_0802</code>가 만들어집니다. <b>ZIP 안에 폴더가 한 겹 더 들어 있는 경우까지 알아서 정리</b>합니다 — 손으로 풀 때 가장 많이 헤매는 지점입니다.</p>
+    <p><b>4.</b> 다시 <b>폴더 선택 → 방금 만들어진 <code>workshop/sample_workspace</code></b>로 바꿔 주세요.<br>
+    <span class="sub">이 한 번은 손으로 해야 합니다. 이후 모든 프롬프트가 <b>"이 폴더의 …"</b>로 시작하기 때문에, <b>실습 자료만 든 깨끗한 폴더</b>를 열고 있어야 결과가 정확합니다.</span></p>
     <p class="step-note">안에 가상 강의노트 3개 + 성적표 CSV + 가상 증례(케이스 발표용)가 들어 있습니다 — 전부 교육용 가상 자료.</p>
   </div>
 
+  <div class="note">🪟 <b>여기서 "실행할까요?" 승인 창이 처음 뜹니다.</b> 압축을 풀려면 Claude가 명령을 하나 실행해야 하기 때문입니다 — <b>허용</b>을 누르면 진행됩니다. 무엇을 하려는지 창에 그대로 적혀 있으니, <b>읽고 누르는 습관</b>을 가장 안전한 작업(압축 풀기)에서 들이는 셈입니다. <span class="sub">안 누르고 두면 Claude가 계속 되묻습니다 — 오후 실습에서도 같은 창이 나옵니다.</span></div>
+
+  <div class="note" style="border-left-color:#B9770E;background:#FCF8EF">🔒 <b>다운로드 폴더에 개인 파일이 많다면</b> — Code는 <b>내가 연 폴더의 목록</b>을 봅니다. 그게 부담되면 새 폴더(예: 바탕화면에 <code>workshop</code>)를 하나 만들어 <b>ZIP 두 개만 옮겨 넣고</b> 그 폴더를 여세요. 다음은 위와 똑같습니다. <span class="sub">"폴더 선택이 곧 안전경계"라는 게 이런 뜻입니다.</span></div>
+
   <!-- STEP 3 -->
   <h2><span class="n">3</span>첫 WOW — 진짜 파일 만들기 <span class="sub">· 복붙 · 택1</span></h2>
-  <p class="sub">셋 중 하나를 골라 붙여넣으세요(쉬운 것부터 A′ 추천). 끝나면 <b>파일 탐색기를 열어</b> 새로 생긴 파일을 확인하세요 — 채팅엔 없는 것.</p>
+  <p class="sub"><b>먼저 A를 전원 한 번</b> 하세요(가장 쉽고 실패가 없습니다). 되는 분은 B·C로. 끝나면 <b>파일 탐색기를 열어</b> 새로 생긴 파일을 확인하세요 — 채팅엔 없는 것.</p>
 
   <div class="card">
-    <h3>A′ · 내 폴더 읽어 정리 <span class="sub">(가장 쉬움)</span></h3>
+    <h3>A · 내 폴더 읽어 정리 <span class="sub">(가장 쉬움 · 추가 설치 없음)</span></h3>
     <div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
       <code class="pre">이 폴더의 파일들을 모두 읽고, 각 파일 한 줄 요약과 전체 목록을 INDEX.md로 만들어줘. (파일은 옮기지 말고 읽기만)</code></div>
     <p class="step-note">→ 진짜 <code>INDEX.md</code> 생성. 여러 강의노트를 한 번에 읽음(채팅엔 불가).</p>
@@ -172,17 +183,29 @@
 
   <!-- STEP 4 Gemini Notebook -->
   <h2><span class="n">4</span>Gemini Notebook — 공부시켜주는 AI <span class="sub">· 무료 · 개인 구글 계정</span></h2>
-  <div class="note"><b>Code = 만드는 AI / Gemini Notebook = 공부시켜주는 AI.</b> 내가 올린 자료 <b>안에서만</b> 답하고(출처 인용·환각 억제), 퀴즈·플래시카드·오디오/비디오 오버뷰를 자동 생성합니다.</div>
+  <div class="note"><b>Code = 만드는 AI / Gemini Notebook = 공부시켜주는 AI.</b> 내가 올린 자료 <b>안에서만</b> 답하고(출처 인용·환각 억제), 퀴즈·플래시카드·오디오/동영상 개요를 자동 생성합니다.</div>
   <div class="card">
     <h3>진행 순서 <span class="sub">(당일 13:40 블록 · 미리 봐두면 빠름)</span></h3>
-    <p><b>1.</b> <a href="/notebooklm_0802.zip" download><b>📦 notebooklm_0802.zip 다운로드</b></a>(가상 강의자료 PDF 3종 + 마스코트 "열이") → 압축 풀기<br>
+    <p><b>1.</b> 자료는 <b>2번 단계에서 이미 풀려 있습니다</b> → <code>workshop/notebooklm_0802</code>(가상 강의자료 PDF 3종 + 마스코트 "열이"). <span class="sub">안 받으셨으면 <a href="/notebooklm_0802.zip" download>여기서 다운로드</a>.</span><br>
     <b>2.</b> <a href="https://notebooklm.google" target="_blank" rel="noopener">notebooklm.google</a> → <b>개인 구글 계정</b> 로그인 → 새 노트북 → PDF 3개 + <code>character_yeori.png</code> 업로드 → 출력 언어 <b>한국어</b><br>
-    <b>3.</b> <b>오디오 or 비디오 오버뷰 "택1"을 가장 먼저 생성 걸기</b>(시간 걸림 · 전원 비디오 몰리면 무료 한도) — 비디오는 연필 아이콘 → 스타일 선택 + 커스텀 지시:</p>
+    <span class="sub">　ℹ️ 주소가 <code>notebook.google.com</code>으로 자동 이동되고 화면 이름도 <b>Gemini Notebook</b>입니다 — 정상입니다. 노트북 <b>제목이 영어로</b> 지어질 수 있는데 그것도 정상(눌러서 바꿀 수 있음).</span><br>
+    <b>3.</b> ⭐<b>가장 먼저 생성을 걸어두세요</b> — <code>AI 오디오 오버뷰</code> 또는 <code>동영상 개요</code> 중 <b>택1</b>.</p>
+
+    <div class="note" style="margin:8px 0">⏱️ <b>동영상은 최소 12분 이상 걸립니다</b> <span class="sub">(2026-07-31 실측: 소스 1개·혼잡 없는 조건에서 <b>약 13분 40초</b>, 결과물 길이는 <b>8분 35초</b>).</span> 25명이 동시에 걸면 더 걸립니다 → <b>걸어놓고 잊고</b> 4번으로 넘어가세요. <b>오늘 감상은 강사가 미리 만들어 둔 것</b>으로 하고, 내 것은 <b>집에서</b> 열어보면 됩니다(없어지지 않습니다). <b>오디오는 훨씬 빠릅니다.</b></div>
+
+    <p><b>동영상 개요</b>를 고른다면 — <code>동영상 개요</code>를 <b>클릭하면 설정 창이 바로 열립니다</b>(<b>연필 아이콘 같은 건 없습니다</b>):<br>
+    　① 형식 <code>설명 동영상</code>(기본) 또는 <code>요약</code> ② <b>언어 선택 = 한국어</b> 확인 ③ 시각적 스타일 <b>9종</b> — <code>자동 선택</code>·<b><code>맞춤</code></b>·<code>기본</code>·<code>화이트보드</code>·<code>귀여움</code>·<code>일본 애니메이션</code>·<code>수채화</code>·<code>레트로풍</code>·<code>전통</code><br>
+    　④ <b><code>맞춤</code></b>을 고르면 <b>입력란이 2개</b> 나옵니다 — <b>용도가 다릅니다</b>:</p>
+    <p class="step-note"><b>맞춤 시각적 스타일에 대한 설명</b> = <b>그림</b> 칸 → 캐릭터는 <b>여기</b>에 씁니다:</p>
     <div class="cmd"><button class="copy" onclick="copyCmd(this)">복사</button>
-      <code class="pre">소스에 등장하는 캐릭터(열이)가 진행자로 나와 설명하게 해줘</code></div>
-    <p><b>4.</b> 기다리는 동안: <b>퀴즈</b>(문항 수·난이도 커스텀) → <b>플래시카드</b> → 마인드맵 → (여유) 슬라이드 덱<br>
+      <code class="pre">소스에 나오는 마스코트 캐릭터(열이)가 진행자로 등장하는 어린이용 동화책 삽화 스타일</code></div>
+    <p class="step-note"><b>AI 호스트가 어떤 부분에 집중해야 하나요?</b> = <b>내용</b> 칸 → ⭐<b>칸을 클릭하면 흐린 예시 옆에 <code>Tab →</code></b>가 뜹니다. <b>Tab 키 한 번</b>이면 그 예시가 그대로 입력됩니다(아무것도 안 떠올라도 넘어갈 수 있음). 아래 <b>제안 버튼</b>을 눌러도 채워집니다.</p>
+
+    <p><b>4.</b> 기다리는 동안 바로 되는 것들: <b>퀴즈</b>(10문항·중난이도 · 생성 30~60초) → <b>플래시카드</b> → <b>마인드맵</b> → (여유) <b>슬라이드 자료</b>[베타]·<b>인포그래픽</b>[베타]<br>
     <b>5.</b> ⭐ 답변의 <b>출처 인용을 클릭</b>해 원문 PDF로 점프 — "AI가 지어낸 게 아니라 내 소스에서 왔다"를 눈으로.</p>
-    <p class="step-note">⚠️ 무료 한도: 오디오 ~3/일 · 비디오는 더 제한적 → 반에서 <b>택1</b> 규칙. 학교 Workspace 계정이 막혀 있으면 <b>개인 계정</b>으로.</p>
+    <p class="step-note">⚠️ <b>퀴즈는 대화형</b>입니다 — 한 문항씩 풀며 진행되고, 문항을 한 번에 훑는 화면은 없습니다. <b>부정형 문항이 섞입니다</b>("~에 해당하지 <b>않는</b> 것은?") → 급히 읽으면 방향을 거꾸로 잡으니 <b>끝까지</b> 읽으세요.</p>
+    <p class="step-note">🚫 생성물 옆 <code>⋮</code>는 누르지 마세요 — 메뉴에 <b>「삭제」밖에 없습니다.</b> 크게 보려면 <b>펼치기(↗)</b>를 쓰세요.</p>
+    <p class="step-note">⚠️ 무료 한도: 오디오 ~3/일 · 동영상은 더 제한적 → 반에서 <b>택1</b> 규칙. <b>남은 횟수가 화면에 표시되지 않습니다</b>(걸린 뒤에야 안내가 뜹니다). 학교 Workspace 계정이 막혀 있으면 <b>개인 계정</b>으로.</p>
   </div>
 
   <!-- STEP 5 트랙 -->
@@ -211,11 +234,11 @@
 
   <div class="card">
     <h3>★ 케이스 발표(증례 보고) — PK·임상실습 대비</h3>
-    <p class="what">실습 폴더의 <code>case_presentation/</code>에 <b>가상 증례</b>(폐렴)와 발표 골격이 들어 있습니다. Code 탭에서 그 폴더를 열고:</p>
+    <p class="what">실습 폴더 안 <code>case_presentation/</code>에 <b>가상 증례</b>(폐렴)와 발표 골격이 들어 있습니다. <b>폴더를 바꿀 필요 없이</b> 그대로 아래를 붙여넣으세요.</p>
     <div class="cmd"><button class="copy" onclick="copyCmd(this)">복사</button>
-      <code class="pre">이 폴더의 case_virtual_01_pneumonia.md를 읽고, case_template.md의 발표 골격에 맞춰 증례 발표 개요를 case_outline.md로 만들어줘. 각 섹션을 채우되, 감별진단은 가능성 높은 순서로 3~5개 들고 각각 지지 소견/반대 소견을 표로 정리해줘.</code></div>
+      <code class="pre">case_presentation 폴더의 case_virtual_01_pneumonia.md를 읽고, 같은 폴더의 case_template.md 발표 골격에 맞춰 증례 발표 개요를 case_presentation/case_outline.md로 만들어줘. 각 섹션을 채우되, 감별진단은 가능성 높은 순서로 3~5개 들고 각각 지지 소견/반대 소견을 표로 정리해줘.</code></div>
     <div class="cmd"><button class="copy" onclick="copyCmd(this)">복사</button>
-      <code class="pre">방금 만든 case_outline.md를 바탕으로 7~8장짜리 증례 발표 슬라이드 아웃라인을 case_slides.md로 만들어줘. 마지막에 교수님이 물어볼 만한 예상 질문 5개와 모범 답변도 달아줘.</code></div>
+      <code class="pre">방금 만든 case_presentation/case_outline.md를 바탕으로 7~8장짜리 증례 발표 슬라이드 아웃라인을 case_presentation/case_slides.md로 만들어줘. 마지막에 교수님이 물어볼 만한 예상 질문 5개와 모범 답변도 달아줘.</code></div>
     <p class="step-note">⚠️ <b>실제 환자 증례는 절대 입력 금지.</b> 병원 실습에서 이 패턴을 쓰려면 반드시 <b>가상화·완전 비식별 재작성본</b>으로만 — 이 템플릿으로 연습하는 것 자체가 올바른 사용 습관.</p>
   </div>
 
@@ -250,7 +273,7 @@
     <tr><td><b>Claude Desktop 앱</b></td><td>AI 작업실 — Code 탭에서 파일·폴더를 직접 다룸</td><td>더블클릭 (Mac·Win)</td></tr>
     <tr><td><b>Git for Windows</b></td><td>Windows Code 탭 실행 전제</td><td>더블클릭 (Win만)</td></tr>
     <tr><td><b>Python</b></td><td>그래프·엑셀 만들 때 실행기</td><td><span class="yes">Claude 자동</span> (필요 시)</td></tr>
-    <tr><td><b>Gemini Notebook</b></td><td>공부시켜주는 AI — 퀴즈·플래시카드·오디오/비디오 오버뷰</td><td>설치 없음 (개인 구글 계정)</td></tr>
+    <tr><td><b>Gemini Notebook</b></td><td>공부시켜주는 AI — 퀴즈·플래시카드·오디오/동영상 개요</td><td>설치 없음 (개인 구글 계정)</td></tr>
     <tr><td><b>Claude in Chrome</b></td><td>브라우저 사이드패널의 Claude</td><td>웹스토어 (크롬 전용)</td></tr>
     <tr><td><b>PPT 애드인</b></td><td>PowerPoint(=Word·Excel) 안의 Claude</td><td>추가 기능 검색</td></tr>
   </table>
@@ -262,7 +285,7 @@
     <tr><td>Team 초대 메일이 없음</td><td>스팸함 확인 → 그래도 없으면 손 들기 (현장 재발송)</td></tr>
     <tr><td>(Win) Code 탭이 안 열림</td><td>Git for Windows 설치 → 앱 완전 종료 후 재시작</td></tr>
     <tr><td>Gemini Notebook이 학교 계정에서 안 열림</td><td><b>개인 구글 계정</b>으로 로그인 (사전 준비 항목)</td></tr>
-    <tr><td>비디오 오버뷰 한도 초과</td><td>오디오 오버뷰로 전환 — 반에서 택1 규칙</td></tr>
+    <tr><td>동영상 개요 한도 초과</td><td>AI 오디오 오버뷰로 전환 — 반에서 택1 규칙</td></tr>
     <tr><td>PPT 애드인이 안 보임</td><td>M365 구독 없는 PC — office.com 웹 PowerPoint로</td></tr>
     <tr><td>"권한 없음"으로 설치 실패</td><td>관리형 노트북 — 손 들기</td></tr>
   </table>
