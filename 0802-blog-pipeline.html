@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>블로그 자동화 파이프라인 — 8/2 대구가톨릭대 의대생 워크숍 (한눈에 보기)</title>
+<title>블로그 자동화 파이프라인 — 8/2 대구가톨릭대 의대생 워크숍 (돌려보기)</title>
 <style>
   :root{
     --ink:#0F1F2E; --teal:#0E7C7B; --tealDeep:#0A5C5B; --tealLt:#5BC8C5;
     --paper:#F2F6F8; --mist:#DCE6EC; --muted:#55677A;
     --red:#C0392B; --redBg:#FBECEA; --gold:#B9770E; --goldBg:#FCF3E3;
-    --green:#1E7E4F; --line:#B9C7D2;
+    --green:#1E7E4F; --greenBg:#E9F4EE; --line:#B9C7D2;
   }
   *{box-sizing:border-box}
   body{margin:0;font-family:"Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif;
@@ -21,7 +21,122 @@
   .band{display:flex;align-items:center;gap:9px;margin:26px 0 10px}
   .band b{background:var(--ink);color:#fff;font-size:15px;padding:5px 16px;border-radius:8px}
   .band .rule{flex:1;height:2px;background:var(--mist)}
-  /* flow */
+
+  /* ===== 러너(애니메이션) ===== */
+  .runner{background:#fff;border:1px solid var(--mist);border-radius:14px;margin-top:18px;overflow:hidden}
+  .bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+       padding:12px 14px;background:#F7FAFB;border-bottom:1px solid var(--mist)}
+  .btn{font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;background:#fff;
+       color:var(--ink);border:1.5px solid var(--line);border-radius:9px;padding:8px 15px}
+  .btn:hover{border-color:var(--teal);color:var(--tealDeep)}
+  .btn.go{background:var(--teal);border-color:var(--teal);color:#fff}
+  .track{flex:1;min-width:150px;height:8px;background:var(--mist);border-radius:5px;overflow:hidden}
+  .track i{display:block;height:100%;width:0;background:var(--teal)}
+  .clock{font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+
+  .chips{display:flex;flex-wrap:wrap;gap:5px;padding:10px 14px;border-bottom:1px solid var(--mist)}
+  .pill{font-size:11.5px;font-weight:700;color:var(--muted);background:#fff;border:1px solid var(--mist);
+        border-radius:999px;padding:3px 10px;cursor:pointer;white-space:nowrap}
+  .pill.on{background:var(--ink);border-color:var(--ink);color:#fff}
+  .pill.past{background:#EAF2F4;border-color:var(--tealLt);color:var(--tealDeep)}
+
+  .stage{position:relative;min-height:352px;padding:18px 18px 20px;background:#fff}
+  .scene{display:none}
+  .scene.on{display:block;animation:fade .45s ease both}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .cap{font-size:13px;color:var(--muted);margin:0 0 12px}
+  .cap b{color:var(--ink)}
+  .h3{font-size:18px;font-weight:800;margin:0 0 3px}
+  .h3 span{font-size:12px;font-weight:700;color:#fff;background:var(--ink);border-radius:6px;padding:2px 8px;
+           margin-right:8px;vertical-align:2px}
+  .h3 span.hu{background:var(--green)}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+  .doc{background:#FBFDFD;border:1px solid var(--mist);border-radius:11px;padding:12px 14px;min-height:150px}
+  .doc .fn{font-family:Consolas,monospace;font-size:11.5px;color:var(--tealDeep);
+           background:#EAF2F4;border-radius:5px;padding:2px 7px;display:inline-block;margin-bottom:7px}
+  .doc .tx{font-size:13px;color:#294056;line-height:1.65;white-space:pre-wrap;min-height:74px}
+  .cursor::after{content:"▍";color:var(--teal);animation:blink .9s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+
+  .cands{display:flex;flex-direction:column;gap:7px}
+  .cand{background:#FBFDFD;border:1px solid var(--mist);border-radius:9px;padding:9px 12px;font-size:13.5px;
+        opacity:0;transform:translateX(-6px);transition:.35s}
+  .cand.in{opacity:1;transform:none}
+  .cand.pick{background:var(--greenBg);border-color:#9CCDB0;font-weight:700}
+  .stamp{display:inline-block;background:var(--green);color:#fff;font-size:11px;font-weight:800;
+         border-radius:6px;padding:2px 8px;margin-left:8px;opacity:0;transform:scale(.7);transition:.3s}
+  .stamp.in{opacity:1;transform:none}
+
+  .rev{display:flex;gap:12px;flex-wrap:wrap}
+  .rv{flex:1 1 220px;background:#FBFDFD;border:1px solid var(--mist);border-radius:11px;padding:12px 14px;position:relative;overflow:hidden}
+  .rv .who{font-weight:800;font-size:14px;margin-bottom:2px}
+  .rv .sub{font-size:11.5px;color:var(--muted)}
+  .rv .scan{position:absolute;left:0;right:0;height:34px;top:-40px;
+            background:linear-gradient(180deg,rgba(91,200,197,0),rgba(91,200,197,.35),rgba(91,200,197,0))}
+  .rv.scanning .scan{animation:sweep 1.5s linear infinite}
+  @keyframes sweep{from{top:-40px}to{top:100%}}
+  .verd{margin-top:9px;font-size:13px;font-weight:800;opacity:0;transition:.3s}
+  .verd.in{opacity:1}
+  .verd.ok{color:var(--green)}
+  .cnt{font-size:12px;color:var(--muted);font-weight:400;margin-top:3px}
+  .agree{margin-top:12px;background:var(--greenBg);border:1px solid #9CCDB0;border-radius:10px;
+         padding:10px 13px;font-size:13.5px;opacity:0;transition:.4s}
+  .agree.in{opacity:1}
+  .agree b{color:var(--green)}
+
+  .metrics{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:11px}
+  .m{background:#FBFDFD;border:1px solid var(--mist);border-radius:10px;padding:8px 13px;text-align:center;min-width:96px}
+  .m .v{font-size:19px;font-weight:800;font-variant-numeric:tabular-nums}
+  .m .k{font-size:11px;color:var(--muted)}
+  .m.warn{background:var(--redBg);border-color:#E7B7B0}
+  .m.warn .v{color:var(--red)}
+  .checks{display:flex;flex-direction:column;gap:5px}
+  .ck{font-size:13px;padding:6px 11px;border-radius:8px;background:#FBFDFD;border:1px solid var(--mist);
+      display:flex;justify-content:space-between;gap:10px;opacity:.35;transition:.3s}
+  .ck.in{opacity:1}
+  .ck.no{background:var(--redBg);border-color:#E7B7B0;color:var(--red);font-weight:700}
+  .ck.yes{background:var(--greenBg);border-color:#9CCDB0;color:var(--green);font-weight:700}
+  .reject{margin-top:11px;background:var(--redBg);border:1px solid #E7B7B0;border-radius:10px;padding:10px 13px;
+          font-size:13.5px;color:#7d2d22;opacity:0;transition:.4s}
+  .reject.in{opacity:1}
+  .reject b{color:var(--red)}
+
+  .imgs{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+  @media(max-width:700px){.imgs{grid-template-columns:repeat(2,1fr)}}
+  .slot{background:#FBFDFD;border:1px solid var(--mist);border-radius:10px;padding:9px}
+  .slot .sn{font-family:Consolas,monospace;font-size:10.5px;color:var(--tealDeep);margin-bottom:6px}
+  .ab{display:flex;gap:6px}
+  .th{flex:1;aspect-ratio:1/1;border-radius:7px;border:2px solid var(--mist);
+      background:repeating-linear-gradient(45deg,#EAF2F4,#EAF2F4 6px,#F7FAFB 6px,#F7FAFB 12px);
+      display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#8FA9BC;
+      opacity:0;transform:scale(.9);transition:.3s;position:relative}
+  .th.in{opacity:1;transform:none}
+  .th.win{border-color:var(--green);background:var(--greenBg);color:var(--green)}
+  .votes{position:absolute;bottom:-3px;font-size:9.5px;letter-spacing:-1px;opacity:0;transition:.3s}
+  .votes.in{opacity:1}
+  .counter{margin-top:12px;background:#FBFDFD;border:1px solid var(--mist);border-radius:10px;
+           padding:11px 14px;font-size:14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .counter .big{font-size:26px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--ink)}
+
+  /* 결과 글 */
+  .post{border:1px solid var(--mist);border-radius:12px;background:#fff;overflow:hidden}
+  .post .top{background:#FFF4F6;border-bottom:1px solid #F3D6DD;padding:8px 14px;font-size:12px;color:#8a4257;font-weight:700}
+  .post .body{padding:16px 18px;max-height:270px;overflow:hidden;position:relative}
+  .post .body::after{content:"";position:absolute;left:0;right:0;bottom:0;height:64px;
+                     background:linear-gradient(180deg,rgba(255,255,255,0),#fff)}
+  .post h4{font-size:19px;margin:0 0 10px;line-height:1.32}
+  .post p{font-size:13.5px;color:#294056;margin:0 0 9px;line-height:1.7}
+  .post .sumbox{background:#EAF2F4;border-left:4px solid var(--tealLt);border-radius:8px;padding:10px 13px;
+                font-size:13px;margin:0 0 11px;color:#26414f}
+  .post .toc{font-size:12.5px;color:var(--muted);line-height:1.9;border-top:1px dashed var(--mist);padding-top:9px}
+  .post .toc b{color:var(--ink);font-weight:700}
+  .gatebar{margin-top:12px;background:var(--goldBg);border:1px solid #E8CF97;border-radius:10px;
+           padding:11px 14px;font-size:13.5px;color:#6b4e12}
+  .gatebar b{color:var(--gold)}
+
+  /* ===== 아래 정적 지도 ===== */
   .flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:6px}
   .step{flex:1 1 118px;min-width:118px;background:#fff;border:1px solid var(--mist);border-radius:12px;
         padding:12px 10px 11px;text-align:center;position:relative;display:flex;flex-direction:column;gap:5px}
@@ -38,24 +153,15 @@
         border:1px solid var(--tealLt);border-radius:6px;padding:1px 6px;margin-top:3px}
   .par{display:inline-block;background:#EDF6F6;color:var(--tealDeep);font-weight:700;font-size:10px;
         border:1px solid var(--tealLt);border-radius:6px;padding:1px 6px;margin-top:3px}
-  .big{display:inline-block;background:#F4F0FA;color:#5B3E8C;font-weight:700;font-size:10px;
+  .big2{display:inline-block;background:#F4F0FA;color:#5B3E8C;font-weight:700;font-size:10px;
         border:1px solid #CDBCE8;border-radius:6px;padding:1px 6px;margin-top:3px}
   .arrow{align-self:center;color:var(--teal);font-size:19px;font-weight:700;flex:0 0 auto}
   @media(max-width:640px){ .arrow{display:none} .step{flex:1 1 44%} }
-  /* callouts */
   .intake{background:#EAF2F4;border:1px solid var(--tealLt);border-radius:12px;padding:14px 16px;margin:20px 0 4px;font-size:14px}
   .intake b{color:var(--tealDeep)}
-  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:9px}
-  .chip{background:#fff;border:1px solid var(--tealLt);border-radius:999px;padding:4px 13px;font-size:13px;font-weight:600;color:var(--tealDeep)}
-  .chip small{color:var(--muted);font-weight:400}
-  /* evidence */
-  .ev{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
-  .card{flex:1 1 300px;background:#fff;border:1px solid var(--mist);border-radius:12px;padding:14px 16px}
-  .card h3{margin:0 0 7px;font-size:14.5px;color:var(--tealDeep)}
-  .card p{margin:0;font-size:13.5px;color:#294056}
-  .card .num{font-weight:800;color:var(--ink)}
-  .card .bad{font-weight:800;color:var(--red)}
-  .card .ok{font-weight:800;color:var(--green)}
+  .chips2{display:flex;flex-wrap:wrap;gap:8px;margin-top:9px}
+  .chip2{background:#fff;border:1px solid var(--tealLt);border-radius:999px;padding:4px 13px;font-size:13px;font-weight:600;color:var(--tealDeep)}
+  .chip2 small{color:var(--muted);font-weight:400}
   .floor{background:var(--goldBg);border:1px solid #E8CF97;border-radius:12px;padding:14px 16px;margin:22px 0 0;
          display:flex;flex-wrap:wrap;align-items:center;gap:10px 20px}
   .floor .hd{font-weight:800;color:var(--gold);font-size:15px;display:flex;align-items:center;gap:7px}
@@ -71,20 +177,140 @@
 </head>
 <body>
 <header>
-  <h1>블로그 자동화 파이프라인 — 8단계 전부</h1>
-  <p>주제 발굴 → 병렬 작성 → <b>의학 이중검수</b> → 가독성 게이트 → 이미지 3표 합의 → <b>사람이 발행</b> · 오늘 배운 “폴더 + 프롬프트”가 그대로 커진 것 · 8/2(일) 대구가톨릭대 의대생 풀데이</p>
+  <h1>블로그 자동화 파이프라인 — 돌려보기</h1>
+  <p>▶ 재생을 누르면 8단계가 이어서 돌고, 마지막에 <b>이런 글이 나옵니다</b> · 오늘 배운 “폴더 + 프롬프트”가 그대로 커진 것 · 8/2(일) 대구가톨릭대 의대생 풀데이</p>
 </header>
 
 <div class="wrap">
 
   <div class="intake">
     <b>이건 예시가 아니라 강사가 실제로 돌리는 파이프라인입니다.</b>
-    소아 건강 블로그(한글·영문 두 서비스)를 이 흐름으로 만듭니다. 오늘 오전에 한 것과 원리가 같습니다 —
-    <b>참고할 자료를 폴더에 두고</b>, <b>역할을 나눠</b> 시키고, <b>중요한 자리에서는 사람이 확인</b>합니다.
-    다른 점은 규모뿐입니다.
+    소아 건강 블로그(한글 <b>열나요</b> · 영문 <b>FeverCoach</b>)를 이 흐름으로 만듭니다.
+    아래는 <b>실제 실행 1건을 재구성한 애니메이션</b>이고, 나오는 <b>판정·수치·문장은 그 실행의 실측값</b>입니다.
   </div>
 
-  <div class="band"><b>글 만들기</b><span class="rule"></span></div>
+  <div class="runner">
+    <div class="bar">
+      <button class="btn go" id="play">▶ 재생</button>
+      <button class="btn" id="restart">↺ 처음부터</button>
+      <button class="btn" id="speed">1× 속도</button>
+      <div class="track"><i id="track"></i></div>
+      <span class="clock" id="clock">0:00 / 1:12</span>
+    </div>
+    <div class="chips" id="chips"></div>
+    <div class="stage" id="stage">
+
+      <!-- 0 -->
+      <section class="scene on" data-s="0">
+        <p class="h3"><span>준비</span>폴더에 재료를 넣는다</p>
+        <p class="cap">오전 실습과 똑같습니다 — <b>참고할 자료를 한 폴더에</b> 두는 것부터.</p>
+        <div class="grid2">
+          <div class="doc"><span class="fn">브랜드 가이드</span><div class="tx">말투·구성·금지 표현 규칙<br>(모든 단계가 이걸 참조한다)</div></div>
+          <div class="doc"><span class="fn">지난 주제 목록</span><div class="tx">이미 쓴 주제들<br>→ 같은 얘기를 반복하지 않도록 넣는다</div></div>
+        </div>
+      </section>
+
+      <!-- 1 -->
+      <section class="scene" data-s="1">
+        <p class="h3"><span>A</span>무엇을 쓸지부터 찾는다</p>
+        <p class="cap">글부터 쓰지 않습니다. 계절·관심사·지난 주제를 보고 <b>후보를 여러 개</b> 뽑습니다.</p>
+        <div class="cands" id="cands">
+          <div class="cand" data-i="0">여름철 아기 열사병과 발열 구분</div>
+          <div class="cand" data-i="1">아기 예방접종 후 발열 — 접종열인가 감염인가<span class="stamp" id="stampA">🙋 사람이 선택</span></div>
+          <div class="cand" data-i="2">모기 물린 자리가 부었을 때</div>
+        </div>
+        <div class="gatebar" style="opacity:0" id="gate1"><b>✋ 사람 개입 ①</b> — AI는 <b>제안까지만</b> 합니다. 고르는 건 사람이에요. 방향이 틀리면 뒤 전부가 헛일이 되니, 가장 값싼 자리에서 사람이 끼어듭니다.</div>
+      </section>
+
+      <!-- 2 -->
+      <section class="scene" data-s="2">
+        <p class="h3"><span>B · C</span>두 글을 동시에, 각자 쓴다</p>
+        <p class="cap"><b>⇉ 나란히 돕니다.</b> 그리고 한글은 영문의 번역이 아니라 <b>따로 씁니다</b> — 서비스도 독자도 다르니까.</p>
+        <div class="grid2">
+          <div class="doc"><span class="fn">영문 — FeverCoach</span><div class="tx" id="txB"></div></div>
+          <div class="doc"><span class="fn">한글 — 열나요</span><div class="tx" id="txC"></div></div>
+        </div>
+      </section>
+
+      <!-- 3 -->
+      <section class="scene" data-s="3">
+        <p class="h3"><span>D</span>의학 검수를 서로 모르는 둘에게 따로 시킨다</p>
+        <p class="cap">사람이 다칠 수 있는 자리라 <b>여기만 가장 센 모델</b>을 씁니다.</p>
+        <div class="rev">
+          <div class="rv" id="rv1"><div class="scan"></div>
+            <div class="who">Claude</div><div class="sub">Opus · 사고 max</div>
+            <div class="verd ok" id="v1">✅ 통과 (APPROVE)</div>
+            <div class="cnt" id="c1">치명 0 · 중대 0 · 경미 1 · 참고 2</div>
+          </div>
+          <div class="rv" id="rv2"><div class="scan"></div>
+            <div class="who">Gemini</div><div class="sub">독립 검수 · 서로 결과를 모른다</div>
+            <div class="verd ok" id="v2">✅ 통과 (APPROVE)</div>
+            <div class="cnt" id="c2">지적 사항 0건</div>
+          </div>
+        </div>
+        <div class="agree" id="agree"><b>두 판정이 일치 → 통과.</b> 단, 이 글은 <b>한 번 고쳐서 올라온 판</b>이었습니다 — 첫 판에 통과한 게 아닙니다. 어긋나면 사람에게 넘깁니다.</div>
+      </section>
+
+      <!-- 4 -->
+      <section class="scene" data-s="4">
+        <p class="h3"><span>E</span>자기 글을 자기가 반려한다</p>
+        <p class="cap">말투·문장 길이·번역투를 <b>느낌이 아니라 숫자로</b> 잽니다.</p>
+        <div class="metrics">
+          <div class="m"><div class="v" id="m1">0</div><div class="k">글자</div></div>
+          <div class="m"><div class="v" id="m2">0</div><div class="k">문장</div></div>
+          <div class="m"><div class="v" id="m3">0</div><div class="k">평균 문장(자)</div></div>
+          <div class="m warn"><div class="v" id="m4">0</div><div class="k">가장 긴 문장(자)</div></div>
+        </div>
+        <div class="checks">
+          <div class="ck" data-k="0"><span>평균 문장 길이</span><span>기준 초과</span></div>
+          <div class="ck" data-k="1"><span>가장 긴 문장</span><span>기준 초과</span></div>
+          <div class="ck" data-k="2"><span>해요체 일관성</span><span>어긋난 문장 있음</span></div>
+          <div class="ck" data-k="3"><span>번역투</span><span>없음</span></div>
+          <div class="ck" data-k="4"><span>분량(열나요 기준)</span><span>기준 미달</span></div>
+        </div>
+        <div class="reject" id="reject"><b>5개 중 4개 미달 → 통과 안 됨.</b> 기준을 숫자로 박아두면, 모델이 “좋습니다”라고 해도 넘어가지 못합니다. 고쳐서 다시 옵니다.</div>
+      </section>
+
+      <!-- 5 -->
+      <section class="scene" data-s="5">
+        <p class="h3"><span>F</span>이미지는 2안씩 만들고 3표로 고른다</p>
+        <p class="cap">“예쁘다”가 아니라 <b>미리 정한 항목</b>만 봅니다 — 인물 다양성 · <b>의학적 안전성</b> · 기술 품질 · <b>글자 깨짐</b> · 스타일.</p>
+        <div class="imgs" id="imgs"></div>
+        <div class="gatebar" style="opacity:0" id="gate5">🖼️ 생성 이미지엔 <b>깨진 글자</b>가 자주 박힙니다. 그래서 ‘글자 깨짐’ 검사가 따로 있습니다.</div>
+      </section>
+
+      <!-- 6 -->
+      <section class="scene" data-s="6">
+        <p class="h3"><span>G</span>발행 준비물까지 만들어 둔다</p>
+        <p class="cap">붙여넣기용 HTML · 제목 후보 · 태그 · 요약까지 한 폴더에 쌓입니다.</p>
+        <div class="counter"><span class="big" id="fc">0</span><span>개 파일 — 원고 · 검수 기록 · 이미지 · 발행 준비물</span></div>
+        <div class="gatebar" style="opacity:0" id="gate6">여기까지가 <b>도구의 몫</b>입니다. 다음 한 걸음이 사람 몫입니다.</div>
+      </section>
+
+      <!-- 7 -->
+      <section class="scene" data-s="7">
+        <p class="h3"><span class="hu">사람</span>그래서, 이런 글이 나옵니다</p>
+        <p class="cap">게시 버튼 앞에서 멈춥니다. <b>내보낼지는 사람이 결정</b>합니다.</p>
+        <div class="post">
+          <div class="top">📄 실제 산출물 — 열나요용 한글 원고 (앞부분만 · 전문은 서비스에서)</div>
+          <div class="body">
+            <h4>아기 예방접종 후 열이 났어요 — 그냥 접종열인가요, 병원 가야 하나요?</h4>
+            <p>예방접종을 마치고 집에 돌아왔는데 저녁부터 아기 몸이 뜨거워요. 체온계를 대니 38.3°C. “접종열이겠지?” 싶으면서도 마음이 놓이지 않죠.</p>
+            <div class="sumbox">💡 <b>핵심 요약</b> — 접종 후 열은 면역 반응의 정상적인 표현일 수 있어요. 하지만 <b>생후 3개월 미만 영아라면, 접종열이라도 혼자 단정하지 말고 소아과에 연락하세요.</b></div>
+            <p>예방접종은 면역계를 훈련시키는 과정이에요. 체온이 일시적으로 오르는 건 면역이 제대로 작동하고 있다는 신호예요.</p>
+            <div class="toc">이어지는 소제목 — <b>왜 접종 후 열이 날까요?</b> · <b>월령별로 알아두세요</b>(1개월·2개월·4개월) · <b>접종열 vs. 다른 병 구분</b> · <b>해열제, 이것만은 꼭</b> · <b>🚨 응급 상황 판단 가이드</b> · 마무리</div>
+          </div>
+        </div>
+        <div class="gatebar" id="gate7"><b>✋ 사람 개입 ② · Human Final Gate</b> — 파일 40개가 자동으로 나왔지만, <b>게시 버튼은 사람이 누릅니다.</b> 이 선은 넘기지 않습니다.</div>
+      </section>
+
+    </div>
+  </div>
+
+  <p class="note">⏯️ 재생 중 아무 단계 이름을 눌러 그 지점으로 건너뛸 수 있습니다. 2× 속도도 있습니다.</p>
+
+  <!-- ===== 정적 지도 ===== -->
+  <div class="band"><b>한 장으로 — 8단계 전부</b><span class="rule"></span></div>
   <div class="flow">
     <div class="step"><span class="no">A</span><span class="ic">🔍</span><span class="nm">주제 발굴<small>후보 여러 개 + 지난 주제 회피</small></span></div>
     <div class="arrow">→</div>
@@ -93,13 +319,11 @@
     <div class="step"><span class="no">B</span><span class="ic">🌐</span><span class="nm">영문 원고<small>FeverCoach</small></span><span class="par">⇉ 동시 실행</span></div>
     <div class="step"><span class="no">C</span><span class="ic">✍️</span><span class="nm">한글 원고<small>열나요 · 번역 아님</small></span><span class="par">⇉ 동시 실행</span></div>
     <div class="arrow">→</div>
-    <div class="step"><span class="no">D</span><span class="ic">🩺</span><span class="nm">의학 이중검수<small>Claude + Gemini 각자</small></span><span class="big">가장 센 모델</span></div>
+    <div class="step"><span class="no">D</span><span class="ic">🩺</span><span class="nm">의학 이중검수<small>Claude + Gemini 각자</small></span><span class="big2">가장 센 모델</span></div>
     <div class="arrow">→</div>
     <div class="step"><span class="no">E</span><span class="ic">📐</span><span class="nm">가독성 게이트<small>말투·문장 길이를 숫자로</small></span></div>
   </div>
-
-  <div class="band"><b>이미지 · 발행</b><span class="rule"></span></div>
-  <div class="flow">
+  <div class="flow" style="margin-top:10px">
     <div class="step"><span class="no">F</span><span class="ic">🎨</span><span class="nm">이미지 생성<small>자리마다 A·B 2안</small></span></div>
     <div class="arrow">→</div>
     <div class="step"><span class="no">F′</span><span class="ic">🗳️</span><span class="nm">이미지 검수<small>3표 다수결</small></span></div>
@@ -109,33 +333,13 @@
     <div class="step human"><span class="no">사람</span><span class="ic">🚀</span><span class="nm">최종 승인·발행<small>게시 버튼</small></span><span class="stop">✋ 사람이 결정</span><span class="gate">Human Final Gate</span></div>
   </div>
 
-  <div class="band"><b>실제로 한 번 돌렸을 때</b><span class="rule"></span></div>
-  <div class="ev">
-    <div class="card">
-      <h3>🩺 D · 의학 검수를 둘에게 따로 시킨다</h3>
-      <p>Claude와 Gemini가 <b>서로 모르는 상태로 각자</b> 검수하고, 그 판정을 맞춰 봅니다. 실제 실행에서 양쪽 모두 <span class="ok">통과</span>·이견 없음이었지만, 그 글은 <span class="num">한 번 고쳐서 올라온 판</span>이었습니다 — 첫 판에 통과한 게 아닙니다.</p>
-    </div>
-    <div class="card">
-      <h3>📐 E · 자기 글을 자기가 반려한다</h3>
-      <p>말투·문장 길이·번역투를 사람 느낌이 아니라 숫자로 잽니다. 그 글은 <span class="num">2,527자 · 34문장 · 평균 58.4자</span>였고, 가장 긴 문장이 <span class="bad">366자</span>였습니다. 가독성 항목 5개 중 <span class="bad">4개가 미달</span>로 표시됐습니다.</p>
-    </div>
-    <div class="card">
-      <h3>🗳️ F′ · 이미지는 3표로 본다</h3>
-      <p>“예쁘다”가 아니라 미리 정한 항목만 봅니다 — 인물 다양성 · <b>의학적 안전성</b> · 기술 품질 · <b>글자 깨짐</b> · 스타일. 생성 이미지엔 깨진 글자가 자주 박히기 때문에 그 검사가 따로 있습니다.</p>
-    </div>
-    <div class="card">
-      <h3>📦 그래서 한 번에 남는 것</h3>
-      <p>원고·검수 기록·이미지·발행 준비물까지 <span class="num">파일 40개</span>가 한 폴더에 쌓입니다. <b>그래도 게시 버튼은 사람이 누릅니다.</b></p>
-    </div>
-  </div>
-
   <div class="intake">
-    <b>눈여겨볼 설계 두 가지.</b>
-    <div class="chips">
-      <span class="chip">⇉ 병렬 <small>영문·한글이 서로를 기다리지 않는다</small></span>
-      <span class="chip">🚫 지름길 금지 <small>한글은 영문의 번역이 아니라 따로 쓴다 — 독자가 다르니까</small></span>
-      <span class="chip">💰 비싼 모델은 한 곳에만 <small>사람이 다칠 수 있는 의학 검수</small></span>
-      <span class="chip">🔢 기준은 숫자로 <small>모델이 “좋습니다” 해도 통과가 안 되게</small></span>
+    <b>눈여겨볼 설계.</b>
+    <div class="chips2">
+      <span class="chip2">⇉ 병렬 <small>영문·한글이 서로를 기다리지 않는다</small></span>
+      <span class="chip2">🚫 지름길 금지 <small>한글은 영문의 번역이 아니라 따로 쓴다</small></span>
+      <span class="chip2">💰 비싼 모델은 한 곳에만 <small>사람이 다칠 수 있는 의학 검수</small></span>
+      <span class="chip2">🔢 기준은 숫자로 <small>모델이 “좋습니다” 해도 통과가 안 되게</small></span>
     </div>
   </div>
 
@@ -155,10 +359,138 @@
 
   <p class="note">✋ <b>사람이 결정</b> = 그 자리에서 사람이 판단해야 다음으로 넘어가는 지점.<br>
   ⇉ <b>동시 실행</b> = 두 작업이 서로를 기다리지 않고 나란히 도는 구간(B·C).<br>
-  ⓘ <b>이 페이지에 원고 본문은 없습니다.</b> 흐름과 검증 기록만 담았습니다 — 남의(또는 내 서비스의) 원고를 그대로 옮겨 붙이지 않는 것도 오늘 배우는 습관에 들어갑니다.<br>
-  ⓘ <b>오늘 워크숍에서 이걸 직접 만들지는 않습니다.</b> 15:35 “더 나아가기”에서 흐름만 보여드리는 시연입니다 — 오늘 배운 패턴이 어디까지 커질 수 있는지 보는 대목입니다.</p>
+  ⓘ <b>원고는 앞부분만 실었습니다.</b> 흐름을 보여주는 데 필요한 만큼이고, 전문은 서비스에서 봅니다.<br>
+  ⓘ <b>오늘 워크숍에서 이걸 직접 만들지는 않습니다.</b> 15:35 “더 나아가기”에서 흐름만 보여드리는 시연입니다.</p>
 
   <footer>의대생 AI 활용 풀데이 워크숍 · 8월 2일(일) 10:00–16:00 · 대구 메리어트호텔 이스트홀 · 설치·실습 안내 → <a href="/0802.html">0802.html</a></footer>
 </div>
+
+<script>
+const EN = "Post-Vaccination Fever in Infants:\nWhen It's Expected and When to Call\n\nYour baby got vaccinated today, and\nnow the thermometer reads 38.3°C…";
+const KR = "아기 예방접종 후 열이 났어요 —\n그냥 접종열인가요, 병원 가야 하나요?\n\n예방접종을 마치고 집에 돌아왔는데\n저녁부터 아기 몸이 뜨거워요.";
+const SLOTS = [["fc_hero","A"],["fc_mid","B"],["yn_top","A"],["yn_mid","B"]];
+const SCENES = ["준비 · 폴더","A 주제 발굴","B·C 병렬 작성","D 의학 이중검수","E 가독성 게이트","F 이미지 · 3표","G 발행 준비물","사람 · 이런 글이 나온다"];
+const AT =     [0,            5,            12,             26,               39,                50,             60,              66];
+const TOTAL = 72;
+
+// 이미지 슬롯 조립
+const imgsEl = document.getElementById('imgs');
+SLOTS.forEach(([nm,win],i)=>{
+  const d=document.createElement('div'); d.className='slot';
+  d.innerHTML='<div class="sn">'+nm+'</div><div class="ab">'+
+    ['A','B'].map(v=>'<div class="th" data-slot="'+i+'" data-v="'+v+'">'+v+
+      '<span class="votes" data-slot="'+i+'" data-v="'+v+'">●●●</span></div>').join('')+'</div>';
+  imgsEl.appendChild(d);
+});
+
+// 칩
+const chipsEl = document.getElementById('chips');
+SCENES.forEach((s,i)=>{
+  const b=document.createElement('button'); b.className='pill'; b.textContent=s; b.dataset.i=i;
+  b.onclick=()=>{ seek(AT[i]); };
+  chipsEl.appendChild(b);
+});
+
+const $ = id => document.getElementById(id);
+const playBtn=$('play'), track=$('track'), clock=$('clock');
+let t=0, playing=false, last=0, rate=1;
+
+function fmt(s){ s=Math.max(0,Math.floor(s)); return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); }
+
+function sceneIndex(time){ let k=0; for(let i=0;i<AT.length;i++) if(time>=AT[i]) k=i; return k; }
+
+// 시간 t에서의 화면 상태를 매번 새로 그린다(되감기·건너뛰기에도 일관)
+function render(){
+  const k = sceneIndex(t);
+  document.querySelectorAll('.scene').forEach(s=>s.classList.toggle('on', +s.dataset.s===k));
+  document.querySelectorAll('.pill').forEach((p,i)=>{
+    p.classList.toggle('on', i===k); p.classList.toggle('past', i<k);
+  });
+  const rel = t - AT[k];
+
+  // A 후보
+  document.querySelectorAll('.cand').forEach((c,i)=>{
+    c.classList.toggle('in', k>1 || (k===1 && rel > 0.5+i*0.9));
+    c.classList.toggle('pick', (k>1 || (k===1&&rel>4.4)) && i===1);
+  });
+  $('stampA').classList.toggle('in', k>1 || (k===1&&rel>4.8));
+  $('gate1').style.opacity = (k>1 || (k===1&&rel>5.4)) ? 1 : 0;
+
+  // B·C 타이핑 (동시)
+  const p = k<2 ? 0 : (k>2 ? 1 : Math.min(1, rel/9));
+  const cut = (s,f)=> s.slice(0, Math.floor(s.length*f));
+  $('txB').textContent = cut(EN,p); $('txC').textContent = cut(KR,p);
+  $('txB').classList.toggle('cursor', k===2 && p<1);
+  $('txC').classList.toggle('cursor', k===2 && p<1);
+
+  // D 검수
+  const scanning = k===3 && rel<5;
+  $('rv1').classList.toggle('scanning', scanning);
+  $('rv2').classList.toggle('scanning', scanning);
+  const done = k>3 || (k===3&&rel>=5);
+  ['v1','c1','v2','c2'].forEach(id=>$(id).classList.toggle('in', done));
+  $('v1').style.opacity = done?1:0; $('v2').style.opacity = done?1:0;
+  $('c1').style.opacity = done?1:0; $('c2').style.opacity = done?1:0;
+  $('agree').classList.toggle('in', k>3 || (k===3&&rel>7.5));
+
+  // E 카운트업
+  const ep = k<4 ? 0 : (k>4 ? 1 : Math.min(1, rel/3.2));
+  const ease = 1-Math.pow(1-ep,3);
+  $('m1').textContent = Math.round(2527*ease).toLocaleString();
+  $('m2').textContent = Math.round(34*ease);
+  $('m3').textContent = (58.4*ease).toFixed(1);
+  $('m4').textContent = Math.round(366*ease);
+  document.querySelectorAll('.ck').forEach((c,i)=>{
+    const shown = k>4 || (k===4 && rel > 3.4+i*0.55);
+    c.classList.toggle('in', shown);
+    c.classList.toggle('no', shown && i!==3);
+    c.classList.toggle('yes', shown && i===3);
+  });
+  $('reject').classList.toggle('in', k>4 || (k===4&&rel>7.2));
+
+  // F 이미지
+  document.querySelectorAll('.th').forEach(th=>{
+    const i=+th.dataset.slot, v=th.dataset.v, order=i*2+(v==='B'?1:0);
+    const shown = k>5 || (k===5 && rel > 0.4+order*0.42);
+    th.classList.toggle('in', shown);
+    const voted = k>5 || (k===5 && rel > 4.2+i*0.7);
+    th.classList.toggle('win', voted && v===SLOTS[i][1]);
+    const vt = th.querySelector('.votes');
+    vt.classList.toggle('in', voted && v===SLOTS[i][1]);
+  });
+  $('gate5').style.opacity = (k>5 || (k===5&&rel>7.4)) ? 1 : 0;
+
+  // G 카운터
+  const gp = k<6 ? 0 : (k>6 ? 1 : Math.min(1, rel/3.6));
+  $('fc').textContent = Math.round(40*(1-Math.pow(1-gp,3)));
+  $('gate6').style.opacity = (k>6 || (k===6&&rel>4.4)) ? 1 : 0;
+
+  track.style.width = (t/TOTAL*100)+'%';
+  clock.textContent = fmt(t)+' / '+fmt(TOTAL);
+}
+
+function tick(now){
+  if(!playing) return;
+  const dt=(now-last)/1000; last=now;
+  t=Math.min(TOTAL, t+dt*rate);
+  render();
+  if(t>=TOTAL){ pause(); return; }
+  requestAnimationFrame(tick);
+}
+function play(){ if(t>=TOTAL) t=0; playing=true; playBtn.textContent='⏸ 일시정지';
+  playBtn.classList.remove('go'); last=performance.now(); requestAnimationFrame(tick); }
+function pause(){ playing=false; playBtn.textContent='▶ 재생'; playBtn.classList.add('go'); }
+function seek(x){ t=Math.max(0,Math.min(TOTAL,x)); render(); }
+
+playBtn.onclick = ()=> playing ? pause() : play();
+$('restart').onclick = ()=>{ seek(0); play(); };
+$('speed').onclick = e=>{ rate = rate===1?2:1; e.target.textContent = rate+'× 속도'; };
+document.addEventListener('keydown', e=>{
+  if(e.code==='Space'){ e.preventDefault(); playing?pause():play(); }
+  else if(e.key==='ArrowRight') seek(t+3);
+  else if(e.key==='ArrowLeft') seek(t-3);
+});
+render();
+</script>
 </body>
 </html>
