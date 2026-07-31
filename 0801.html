@@ -235,20 +235,21 @@
   <div class="note">오늘 파이프라인은 <b>Claude Team 시트만으로 끝까지</b> 됩니다 — 추가 도구·API 키 불요. 아래는 <b>모델을 하나 더 붙여 교차검증</b>하고 싶은 분을 위한 선택 옵션입니다(논문 도구 스킬에도 선택 단계로 반영돼 있음). <b>둘 다 집에서 5분</b>이면 되고, 없어도 워크숍 진행엔 전혀 지장이 없습니다.<br>
   💡 <b>왜 굳이 하나 더?</b> — 두 모델이 <b>같이</b> 지적한 곳은 진짜 문제일 확률이 높고, <b>한쪽만</b> 지적한 곳은 확인이 필요한 곳입니다. <b>리뷰어를 미리 만나는 셈</b>이에요.</div>
   <table>
-    <tr><th>단계</th><th>GPT를 이렇게 곁들일 수 있어요 <span style="font-weight:400">(선택)</span></th></tr>
-    <tr><td><b>② 문헌 검색</b></td><td>ChatGPT <b>심층 리서치(Deep Research)</b>를 Claude Research와 <b>병행</b> — 엔진이 서로 놓친 문헌을 메워 커버리지↑. 결과를 같은 파일에 합치고, 인용은 ⑤에서 실재 확인.</td></tr>
-    <tr><td><b>⑥ Critic</b></td><td>Claude 다관점 비평에 <b>GPT를 "제2 심사자"</b>로 추가 — 의견이 <b>엇갈릴수록</b> 값집니다(단일 모델 맹점 상쇄).</td></tr>
-    <tr><td><b>보조</b></td><td>ChatGPT <b>에이전트·브라우징</b>으로 저널 투고규정·보고지침 페이지 확인 보조. 단 포털 로그인·제출은 🔒 본인이 직접.</td></tr>
+    <tr><th>단계</th><th>GPT <span style="font-weight:400">(ChatGPT 유료 구독자)</span></th><th>Gemini <span style="font-weight:400">(구글 계정 누구나)</span></th></tr>
+    <tr><td><b>② 문헌 검색</b></td><td>ChatGPT <b>심층 리서치</b>를 Claude Research와 <b>병행</b> — 엔진이 서로 놓친 문헌을 메움. 인용은 ⑤에서 실재 확인.</td><td><b>Gemini 구독자</b>는 Gemini 앱의 <b>심층 리서치</b>도 같이 — <b>엔진 셋이면 커버리지가 또 달라집니다.</b></td></tr>
+    <tr><td><b>⑥ Critic</b></td><td>Claude 비평에 <b>GPT = 제2 심사자</b></td><td><b>Gemini = 제3 심사자</b> — 셋 중 <b>둘 이상이 같이 지적한 것</b>이 진짜 문제, 하나만 지적한 것은 확인 대상.</td></tr>
+    <tr><td><b>보조</b></td><td>ChatGPT <b>에이전트·브라우징</b>으로 투고규정·보고지침 확인. 포털 로그인·제출은 🔒 본인이 직접.</td><td>긴 문헌·긴 원고를 <b>한 번에 넣고 훑기</b>(넓은 컨텍스트). 오늘 오후 Gemini Notebook과 같은 계열.</td></tr>
   </table>
   <div class="note"><b>먼저 알아둘 것 — 돈이 나가는 방식이 셋 다 다릅니다.</b> 오늘 리터러시의 핵심 중 하나입니다.</div>
   <table>
     <tr><th>모델</th><th>인증 방식</th><th>비용</th></tr>
     <tr><td><b>Claude</b> (오늘 주축)</td><td>Team 시트 로그인</td><td><span class="yes">주최측 지급 · 추가 0</span></td></tr>
     <tr><td><b>GPT</b> (선택)</td><td><b>ChatGPT 구독 OAuth</b> — 공식 Codex CLI</td><td><span class="yes">추가 과금 0</span> · <b>유료 구독자만</b></td></tr>
-    <tr><td><b>Gemini</b> (선택)</td><td><b>구글 계정 OAuth</b> — 공식 Gemini CLI</td><td><span class="yes">무료</span> · <b>카드 불요</b> (분당 60 · 일 1,000회)</td></tr>
-    <tr><td>Gemini <b>API 키</b> <span class="sub">(고급)</span></td><td>API 키 + 카드 등록</td><td>🔴 <b>건당 과금</b> — 프로그램이 자동 반복 호출할 때만</td></tr>
+    <tr><td><b>Gemini</b> (선택)</td><td><b>구글 계정 OAuth</b> — 공식 Gemini CLI</td><td><span class="yes">무료</span> · <b>카드 불요</b> · <b>하루 1,000회</b><br><span class="sub">Google AI <b>Pro 구독</b>이면 1,500회 · <b>Ultra</b>면 2,000회로 자동 상향</span></td></tr>
+    <tr><td>Gemini <b>API 키</b> <span class="sub">(고급)</span></td><td>API 키 + 카드 등록</td><td>🔴 <b>건당 과금</b> · 무료 티어는 <b>하루 250회뿐</b> — 프로그램이 자동 반복 호출할 때만</td></tr>
   </table>
-  <p class="sub">핵심 — <b>GPT는 이미 구독 중이어야 공짜</b>지만, <b>Gemini는 무료 구글 계정만 있으면 됩니다.</b> 그래서 <b>붙이기 쉬운 쪽은 Gemini</b>입니다. 🔴 <b>API 키는 전혀 다른 것</b>이니 혼동하지 마세요 — 그건 카드를 걸고 쓰는 만큼 청구됩니다.</p>
+  <p class="sub">핵심 — <b>GPT는 이미 구독 중이어야 공짜</b>지만, <b>Gemini는 무료 구글 계정만 있으면 됩니다.</b> 그래서 <b>붙이기 쉬운 쪽은 Gemini</b>입니다.<br>
+  🔴 <b>API 키는 전혀 다른 것</b>이니 혼동하지 마세요 — 카드를 걸고 쓰는 만큼 청구되는데, <b>무료 한도는 오히려 로그인 방식의 1/4(250회)</b>입니다. 손으로 쓰실 거면 API 키를 쓸 이유가 없습니다.</p>
 
   <div class="card">
     <h3>🅐 GPT 무과금 연결 <span class="pill">ChatGPT Plus/Pro 구독자만</span></h3>
@@ -273,8 +274,11 @@
   </div>
 
   <div class="card">
-    <h3>🅖 Gemini 무과금 연결 <span class="pill">무료 구글 계정이면 누구나</span></h3>
-    <p class="what">구글도 <b>공식 CLI</b>가 있고, <b>구글 계정 로그인(OAuth)</b>으로 붙습니다 — <b>API 키도 카드도 필요 없습니다.</b> 무료 한도가 <b>분당 60회 · 하루 1,000회</b>라 실사용에 넉넉합니다. <b>셋 중 가장 붙이기 쉬운 경로</b>예요.</p>
+    <h3>🅖 Gemini 무과금 연결 <span class="pill">무료 구글 계정이면 누구나 · 구독자는 한도 상향</span></h3>
+    <p class="what">구글도 <b>공식 CLI</b>가 있고, <b>구글 계정 로그인(OAuth)</b>으로 붙습니다 — <b>API 키도 카드도 필요 없습니다.</b> 무료도 <b>하루 1,000회</b>라 넉넉하고, <b>Google AI Pro·Ultra 구독이 있으면 같은 방법으로 1,500·2,000회</b>가 됩니다. <b>셋 중 가장 붙이기 쉬운 경로</b>예요.</p>
+    <div class="note" style="margin:8px 0">💎 <b>Gemini(Google AI Pro/Ultra) 구독 중이신 분 — 따로 하실 게 없습니다.</b> 아래 그대로 하시되 <b>3번에서 "구독이 걸려 있는 그 구글 계정"으로 로그인</b>하면 한도가 자동으로 올라갑니다.<br>
+    ⚠️ <b>계정을 여러 개 쓰시면 여기서 갈립니다</b> — 구독은 A 계정인데 B 계정으로 로그인하면 무료 한도로 붙습니다. 로그인 화면에서 계정을 꼭 확인하세요.<br>
+    <span class="sub">※ 구독이 있는데도 무료 한도로 인식되는 사례가 보고돼 있습니다(구글 쪽 알려진 이슈). 그래도 <b>하루 1,000회는 그대로 쓰실 수 있어</b> 오늘 실습엔 지장이 없습니다.</span></div>
     <div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
       <code class="pre">구글 공식 Gemini CLI를 내 구글 계정으로 연결하고 싶어. API 키가 아니라 OAuth 로그인 방식이야(무료 한도로 쓰는 것). 아래 순서대로 해주고, 시스템을 바꾸는 명령은 실행 전에 꼭 확인받아.
 
