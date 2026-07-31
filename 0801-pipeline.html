@@ -37,6 +37,8 @@
         border:1px solid var(--tealLt);border-radius:6px;padding:1px 6px;margin-top:3px}
   .opt{display:inline-block;background:#F4F0FA;color:#5B3E8C;font-weight:700;font-size:10px;
         border:1px solid #CDBCE8;border-radius:6px;padding:1px 6px;margin-top:3px}
+  .draft{display:inline-block;background:#E9F4EE;color:#1E7E4F;font-weight:700;font-size:10px;
+        border:1px solid #9CCDB0;border-radius:6px;padding:1px 6px;margin-top:3px}
   .lk{font-size:11px;color:var(--muted)}
   .arrow{align-self:center;color:var(--teal);font-size:19px;font-weight:700;flex:0 0 auto}
   @media(max-width:640px){ .arrow{display:none} .step{flex:1 1 44%} }
@@ -60,8 +62,8 @@
 </head>
 <body>
 <header>
-  <h1>AI 논문 쓰기 파이프라인</h1>
-  <p>Sam Workshop · 8/1(토) 대구가톨릭대 의대 교수 풀데이 · Claude Team 시트만으로 완결 (API 키 불요)</p>
+  <h1>AI 논문 쓰기 파이프라인 — 10단계 전부</h1>
+  <p>아이디어 → 문헌 → 초안 → 검증 → 비평 → 투고 → <b>리뷰 대응</b> → 마무리 · Claude Team 시트만으로 완결(API 키 불요) · 8/1(토) 대구가톨릭대 의대 교수 풀데이</p>
 </header>
 
 <div class="wrap">
@@ -85,9 +87,9 @@
 
   <div class="band"><b>제출 · 리뷰 · 마무리</b><span class="rule"></span></div>
   <div class="flow">
-    <div class="step lock"><span class="no">8</span><span class="ic">⬆️</span><span class="nm">Submission<small>투고 준비</small></span><span class="lk">🔒 사람 주도</span></div>
+    <div class="step lock"><span class="no">8</span><span class="ic">⬆️</span><span class="nm">Submission<small>투고 준비</small></span><span class="draft">📝 워크시트·데스크리젝 점검</span><span class="lk">🔒 로그인·Submit은 저자</span></div>
     <div class="arrow">→</div>
-    <div class="step lock"><span class="no">9</span><span class="ic">🔄</span><span class="nm">Review<small>심사 대응</small></span><span class="lk">🔒 사람 주도</span></div>
+    <div class="step lock"><span class="no">9</span><span class="ic">🔄</span><span class="nm">Review<small>리뷰 대응(R&amp;R)</small></span><span class="draft">📝 point-by-point 응답서</span><span class="lk">🔒 수용·반박 결정은 저자</span></div>
     <div class="arrow">→</div>
     <div class="step"><span class="no">10</span><span class="ic">🚩</span><span class="nm">Wrap<small>마무리·다음</small></span><span class="stop">✋ 저자 정차</span><span class="gate">Human Final Gate</span></div>
   </div>
@@ -111,7 +113,11 @@
 
   <div class="tag">submission-directed &nbsp;≠&nbsp; submission-ready</div>
 
-  <p class="note">✋ 저자 정차 = 그 단계에서 저자가 검토·승인해야 다음으로 넘어가는 지점(①⑤⑥⑩). 🔒 = 포털 로그인·제출·실제 심사 원문은 사람이 직접. ＋GPT 선택 = 개인 ChatGPT 구독자만 곁들이는 보조 경로(② 심층 리서치 병행 · ⑥ 제2 심사자) — 기본은 Claude 단독으로 완결. 워크숍 산출물은 "투고 준비를 도운" 것이지 "그대로 투고 가능"이 아닙니다.</p>
+  <p class="note">✋ <b>저자 정차</b> = 그 단계에서 저자가 검토·승인해야 다음으로 넘어가는 지점(①⑤⑥⑩).<br>
+  📝 <b>초안은 도구가</b> — ⑧⑨도 도구가 일합니다. ⑧은 투고 워크시트와 데스크리젝 점검을, <b>⑨는 리비전 서신·리뷰어 코멘트를 넣으면 point-by-point 응답서와 개정 원고를 초안으로</b> 만듭니다.<br>
+  🔒 <b>마지막 행위는 사람이</b> — 🔒는 "도구가 아무것도 안 한다"가 아니라 <b>"최종 행위·판단은 저자가 한다"</b>는 뜻입니다: 포털 자격증명·로그인, <b>Submit 버튼</b>, 실제 심사 원문에 대한 <b>수용/반박 결정</b>. 자동화하지 않는 게 아니라 <b>해서는 안 되는</b> 지점(비가역·외부 노출·저자 책임).<br>
+  ＋GPT 선택 = 개인 ChatGPT 구독자만 곁들이는 보조 경로(② 심층 리서치 병행 · ⑥ 제2 심사자) — 기본은 Claude 단독으로 완결.<br>
+  ⓘ <b>게재 여부는 도구가 약속하지 않습니다.</b> 워크숍 산출물은 <b>submission-directed ≠ submission-ready</b> — "투고를 겨냥한 연습본"이고, 참고문헌 전수 실존 확인·AI 사용 공개문·데이터 적법성이 남습니다. <span class="sub">오늘 하루 도달 범위는 앞 단계 2~4개이고, 나머지는 같은 폴더에서 그대로 이어집니다.</span></p>
 
   <footer>AI 논문 쓰기 풀데이 워크숍 · 8월 1일(토) 10:00–16:00 · 대구 메리어트호텔 이스트홀 · 설치·실습 안내 → <a href="/0801.html">0801.html</a></footer>
 </div>
