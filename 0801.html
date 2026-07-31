@@ -231,7 +231,7 @@
   🔒 <b>다만 세 가지는 설계상 사람 몫으로 잠겨 있습니다</b> — 포털 <b>자격증명·로그인</b>, <b>Submit 버튼</b>, 그리고 <b>실제 심사 원문의 최종 판단</b>. 자동화하지 않는 것이 아니라 <b>자동화하면 안 되는</b> 지점입니다(비가역·외부 노출·저자 책임). 게재 여부는 도구가 약속할 수 있는 것이 아닙니다 — 오늘 산출물은 <b>"투고를 겨냥한 원고"이지 "투고해도 되는 원고"가 아닙니다</b>(<i>submission-directed ≠ submission-ready</i>). 그 사이에 <b>참고문헌 전수 실존 확인 · AI 사용 공개문 · 데이터 적법성</b>이 남습니다.<br>
   <span class="sub">오늘 하루의 도달 범위는 <b>앞 단계 2~4개</b>이고, 나머지는 <b>같은 폴더에서 그대로 이어집니다</b> — 프롬프트·스킬 전부 재사용.</span></div>
 
-  <h2><span class="n">＋</span>Claude 단독이 기본 · GPT는 선택 <span class="sub">· 개인 ChatGPT 구독자만 · 없어도 무방</span></h2>
+  <h2><span class="n">＋</span>Claude 단독이 기본 · GPT·Gemini는 선택 <span class="sub">· 본인 구독/계정 있는 분만 · 없어도 무방</span></h2>
   <div class="note">오늘 파이프라인은 <b>Claude Team 시트만으로 끝까지</b> 됩니다 — 추가 도구·API 키 불요. 아래는 <b>개인 ChatGPT(Plus/Pro) 구독이 있는 분</b>을 위한 선택 옵션이며(논문 도구 스킬에도 선택 단계로 반영돼 있음), 없어도 워크숍 진행엔 전혀 지장이 없습니다.</div>
   <table>
     <tr><th>단계</th><th>GPT를 이렇게 곁들일 수 있어요 <span style="font-weight:400">(선택)</span></th></tr>
@@ -239,10 +239,51 @@
     <tr><td><b>⑥ Critic</b></td><td>Claude 다관점 비평에 <b>GPT를 "제2 심사자"</b>로 추가 — 의견이 <b>엇갈릴수록</b> 값집니다(단일 모델 맹점 상쇄).</td></tr>
     <tr><td><b>보조</b></td><td>ChatGPT <b>에이전트·브라우징</b>으로 저널 투고규정·보고지침 페이지 확인 보조. 단 포털 로그인·제출은 🔒 본인이 직접.</td></tr>
   </table>
-  <div class="note"><b>연결 방법 2가지</b> · <b>간단</b> = 비평·질문을 브라우저 ChatGPT에 붙여넣기(설정 없음) · <b>무과금 연결(OAuth)</b> = <b>Codex OAuth</b>로 Code 탭 안에서 Claude가 GPT를 직접 호출(별도 <code>OPENAI_API_KEY</code> 과금 없이 <b>ChatGPT 구독 쿼터</b> 사용). 연결 설정은 집에서 아래 복붙:</div>
-  <div class="cmd"><button class="copy" onclick="copyCmd(this)">복사</button>
-    <code class="pre">ChatGPT 구독으로 GPT를 무과금 연결(OpenAI Codex CLI, OAuth 로그인)하고 싶어. 내 OS에 맞게 Codex를 설치하고 codex login으로 ChatGPT 계정 로그인하는 것까지 안내해줘. 시스템을 바꾸는 명령은 실행 전에 꼭 확인받아.</code></div>
-  <p class="sub">※ 공식 "무과금 API"가 아니라 <b>구독(ChatGPT Plus/Pro) OAuth 쿼터</b>를 쓰는 비공식 경로 — 쿼터 제한이 걸리면 유료 API 키 폴백이 필요할 수 있습니다. <b>Claude 단독도 완전한 경로</b>이니 부담 없이 선택하세요.</p>
+  <div class="note"><b>먼저 알아둘 것 — 돈이 나가는 방식이 셋 다 다릅니다.</b> 오늘 리터러시의 핵심 중 하나입니다.</div>
+  <table>
+    <tr><th>모델</th><th>인증 방식</th><th>비용</th></tr>
+    <tr><td><b>Claude</b> (오늘 주축)</td><td>Team 시트 로그인</td><td><span class="yes">주최측 지급 · 추가 0</span></td></tr>
+    <tr><td><b>GPT</b> (선택)</td><td><b>ChatGPT 구독 OAuth</b> — 이미 내고 계신 구독</td><td><span class="yes">추가 과금 0</span> · 구독 쿼터 차감</td></tr>
+    <tr><td><b>Gemini</b> (선택)</td><td><b>API 키</b> 발급</td><td>🔴 <b>건당 실제 과금</b> — 카드로 청구됩니다</td></tr>
+  </table>
+  <p class="sub">즉 <b>GPT는 이미 구독 중이면 공짜로 하나 더 얻는 것</b>이고, <b>Gemini는 쓰는 만큼 돈이 나갑니다.</b> 이 차이를 모르고 API 키를 붙이면 청구서로 알게 됩니다.</p>
+
+  <div class="card">
+    <h3>🅐 GPT 무과금 연결 <span class="pill">ChatGPT Plus/Pro 구독자만</span></h3>
+    <p class="what">공식 <b>Codex CLI</b>를 OAuth로 붙이면, Code 탭 안에서 Claude가 <b>GPT를 직접 호출</b>합니다 — <code>OPENAI_API_KEY</code> 없이 <b>구독 쿼터</b>로. 강사가 논문 자문에 실제로 쓰는 방식 그대로입니다.</p>
+    <div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
+      <code class="pre">ChatGPT 유료 구독(Plus/Pro)이 있어서, 내 구독 쿼터로 GPT를 무과금 연결하고 싶어. OpenAI 공식 Codex CLI를 OAuth로 붙이는 방식이야. 아래 순서대로 해주고, 시스템을 바꾸는 명령은 실행 전에 꼭 확인받아.
+
+1) node와 npm이 있는지 확인하고, 없으면 관리자 권한 없이(user 설치) 깔아줘.
+2) npm i -g @openai/codex 로 Codex CLI를 설치해줘.
+3) codex login 을 실행해줘 — 브라우저가 열리면 내 ChatGPT 계정으로 로그인할게.
+4) 어느 방식으로 붙었는지 확인해줘: 홈 폴더의 .codex/auth.json 에서 auth_mode 값만 봐줘. "chatgpt" 면 구독(무과금) 모드가 맞고, "apikey" 면 유료 과금 모드니까 알려줘. 토큰 값 자체는 절대 화면에 출력하지 마.
+5) 실제로 도는지 한 번 시험해줘:
+   codex exec --skip-git-repo-check --ephemeral -s read-only "한 문장으로 자기소개해줘"
+   답이 나오면 성공이야. 안 되면 어디서 막혔는지 알려줘.</code></div>
+    <p class="step-note">✅ <b>성공 판정 두 개</b> — ① 4번에서 <code>auth_mode</code>가 <b>"chatgpt"</b> (= 구독으로 쓰는 것. "apikey"면 카드로 쓰는 것) ② 5번에서 GPT 답이 한 줄 나오면 끝.<br>
+    ⚠️ <b>5번에서 노란 경고 로그가 여러 줄 지나갑니다 — 실패가 아닙니다.</b> 로그가 다 지나간 <b>맨 아래</b>에 답 문장이 나오면 성공입니다. <span class="sub">(강사 기기 실측: 약 4초)</span></p>
+    <p><b>연결했으면 ⑥ Critic에서 바로 이렇게 씁니다</b> — 오늘 GPT를 붙이는 이유가 이것입니다:</p>
+    <div class="cmd"><button class="copy" onclick="copyCmd(this)">복사</button>
+      <code class="pre">지금 원고를 비평할 때 GPT를 제2 심사자로 같이 써줘. codex exec로 GPT에게 같은 원고를 주고, 네 비평과 GPT 비평을 나란히 놓은 다음 두 모델의 판단이 엇갈리는 지점만 따로 표로 정리해줘. 엇갈리는 곳이 가장 먼저 볼 곳이야.</code></div>
+    <p class="step-note">🎯 <b>일치하는 지적보다 엇갈리는 지적이 값집니다</b> — 한 모델의 맹점을 다른 모델이 메우는 자리라서요. 리뷰어 2명을 미리 만나는 셈입니다.</p>
+    <p class="step-note">※ 공식 "무과금 API"가 아니라 <b>구독 OAuth 쿼터</b>를 정당하게 쓰는 경로입니다. 쿼터가 걸리면 잠시 쉬었다 다시 됩니다. <b>Claude 단독도 완전한 경로</b>이니 없어도 전혀 무방합니다.</p>
+  </div>
+
+  <div class="card">
+    <h3>🅖 Gemini API 연결 <span class="pill" style="background:var(--redBg);color:var(--red)">건당 과금 — 주의</span></h3>
+    <p class="what">Gemini는 구독 OAuth 경로가 없어 <b>API 키</b>를 씁니다. 긴 문헌을 한 번에 넣기 좋지만, <b>호출할 때마다 실제 요금이 발생</b>합니다. 오늘 워크숍엔 필요 없고, <b>집에서 천천히</b> 해보실 항목입니다.</p>
+    <div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
+      <code class="pre">Gemini를 API 키로 붙이고 싶어. 키가 새어나가지 않는 방식으로 해줘. 아래 순서대로 안내해줘.
+
+1) aistudio.google.com/apikey 에서 키를 발급받는 방법을 알려줘. 키는 내가 직접 받을게 — 채팅창에는 절대 붙여넣지 않을 거야.
+2) 이 폴더에 .env.local 파일을 만들어줘. 안에는 GEMINI_API_KEY= 까지만 써두고 값은 비워둬. 내가 메모장으로 열어서 직접 채워 넣을게.
+3) .gitignore에 .env.local을 추가해줘. 실수로 키가 업로드되는 걸 막는 표준 방법이야.
+4) 다 되면, 키가 잘 읽히는지 확인하는 아주 짧은 시험을 한 번만 돌려줘. 키 값 자체는 절대 화면에 출력하지 마.
+5) 마지막으로 이 모델이 대략 얼마씩 과금되는지, 어디서 사용량을 확인하는지 알려줘.</code></div>
+    <p class="step-note">🔒 <b>키를 채팅창에 붙여넣지 마세요.</b> 대화 기록에 남고, 그 기록이 어디로 가는지는 통제 밖입니다. <b>파일에 넣고 파일 이름만 알려주는 것</b>이 표준입니다 — 위 프롬프트가 그렇게 설계돼 있습니다.<br>
+    💳 발급 직후엔 무료 한도가 있을 수 있지만 <b>한도를 넘으면 조용히 유료로 넘어갑니다.</b> Google Cloud 콘솔에서 <b>예산 알림</b>을 걸어두시는 걸 권합니다.</p>
+  </div>
 
   <div class="session blue">🔵 3부 · 고급 활용 <span>진행 중 남는 시간에 수시로 — 관심 가는 것부터</span></div>
 
