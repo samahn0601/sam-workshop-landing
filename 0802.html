@@ -134,8 +134,10 @@
     <div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
       <code class="pre">이 폴더에서 sample_workspace_0802.zip과 notebooklm_0802.zip을 찾아, workshop 폴더를 만들어 각각 그 안에 압축 풀어줘. 압축을 풀었을 때 같은 이름 폴더가 한 겹 더 생기면 안쪽 내용을 위로 올려서 정리해줘. 다 되면 workshop 안에 어떤 파일이 생겼는지 목록으로 보여줘. 원래 zip 파일은 그대로 두고, 이 폴더의 다른 파일은 건드리지 마.</code></div>
     <p class="step-note">→ <code>다운로드/workshop/sample_workspace</code>·<code>…/notebooklm_0802</code>가 만들어집니다. <b>ZIP 안에 폴더가 한 겹 더 들어 있는 경우까지 알아서 정리</b>합니다 — 손으로 풀 때 가장 많이 헤매는 지점입니다.</p>
-    <p><b>4.</b> 다시 <b>폴더 선택 → 방금 만들어진 <code>workshop/sample_workspace</code></b>로 바꿔 주세요.<br>
-    <span class="sub">이 한 번은 손으로 해야 합니다. 이후 모든 프롬프트가 <b>"이 폴더의 …"</b>로 시작하기 때문에, <b>실습 자료만 든 깨끗한 폴더</b>를 열고 있어야 결과가 정확합니다.</span></p>
+    <p><b>4.</b> 다시 <b>폴더 선택 → 방금 만들어진 <code>workshop/sample_workspace</code></b>로 바꿔 주세요. <span class="sub">(경로는 3번에서 Claude가 알려줍니다 — 그대로 고르면 됩니다)</span></p>
+    <p class="step-note">💡 <b>왜 바꾸나</b> — 다음 프롬프트들이 <b>"이 폴더의 …"</b>로 시작하는데, <b>"이 폴더"가 곧 지금 열어둔 폴더</b>입니다.
+    다운로드 폴더를 그대로 두면 <b>"이 폴더의 파일을 모두 읽어"</b>가 <b style="color:#C0392B">여러분의 다운로드 폴더 전체</b>를 읽습니다 — 정리표에 개인 파일이 줄줄이 들어오고, 새로 만든 파일도 다운로드 폴더에 섞여 찾기 어려워집니다.
+    폴더를 바꾸는 이 동작이 바로 <b>"폴더 선택 = 안전경계"</b>를 손으로 해보는 것입니다.</p>
     <p class="step-note">안에 가상 강의노트 3개 + 성적표 CSV + 가상 증례(케이스 발표용)가 들어 있습니다 — 전부 교육용 가상 자료.</p>
   </div>
 
