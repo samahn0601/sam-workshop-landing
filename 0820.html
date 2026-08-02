@@ -345,7 +345,8 @@
 <div class="note">
   💡 <b>시연으로 보실 것 — 다른 회사 AI에게 교차검증받기.</b>
   같은 원고를 Claude 같은 <b>다른 벤더</b>에게도 비평시키면, 놓치는 지점이 서로 다릅니다.
-  <span class="sub">별도 구독이 필요해 오늘 실습에는 넣지 않았습니다. <b>⑥ 심사자 비평만으로도 충분합니다</b> — 여러 심사자 관점이 이미 안에 들어 있습니다.</span>
+  <span class="sub">붙이는 방법은 아래 <b>「＋ 모델을 하나 더 붙인다면」</b> 절에 있습니다(Claude 구독자는 추가 비용 0).
+  <b>구독이 없으셔도 ⑥ 심사자 비평만으로 충분합니다</b> — 여러 심사자 관점이 이미 안에 들어 있습니다.</span>
 </div>
 
 <p class="sub"><b>◆ 보조 도구 9개</b> — 수치 일관성 · 보고지침(STROBE·CONSORT 등) · 구조 점검(IMRaD) · 한글/영문 다듬기 · 그림 설계 · 9차원 점수 · 심층 감사 · 시험 문항(보너스). 자동으로 나오지 않습니다. 필요하시면 목록에서 고르거나 그냥 말씀하세요.</p>
@@ -438,6 +439,60 @@
   <tr><td><b>Word</b></td><td><b style="color:#C0392B">아직 없습니다</b> (2026년 8월 기준). 원고는 <b>Codex에서 파일로</b> 다루시면 됩니다</td></tr>
 </table>
 <p class="step-note">ChatGPT Free·Go·Plus·Pro와 Business·Enterprise·Edu 모두 됩니다. 다만 회사·학교 Microsoft 365는 <b>관리자 설정에 따라 막혀 있을 수</b> 있습니다.</p>
+
+<h2><span class="n">＋</span>모델을 하나 더 붙인다면 <span class="sub">· 선택 · 집에서 해도 됩니다 · 없어도 무방</span></h2>
+
+<div class="note">
+  <b>오늘은 ChatGPT 하나로 충분했습니다.</b> 그런데 <b>모델 하나만 믿으면 위험한 순간</b>이 있습니다 — 바로 <b>의학적 주장과 인용이 맞는지</b> 볼 때입니다.<br>
+  같은 원고를 <b>다른 회사 모델</b>에도 던져 보면 <b>두 답이 엇갈리는 지점</b>이 나옵니다. <b>거기가 원문을 펴야 할 자리</b>입니다.
+  한 모델만 쓰면 그 자리가 안 보입니다 — <b>틀린 답도 똑같이 자신 있게</b> 말하거든요.
+</div>
+
+<div class="note"><b>먼저 — 돈이 나가는 방식이 다릅니다.</b> 이걸 모르고 붙이면 청구서로 알게 됩니다.</div>
+<table>
+  <tr><th style="width:34%">무엇</th><th style="width:26%">인증</th><th>비용</th></tr>
+  <tr><td><b>ChatGPT</b> (오늘)</td><td>본인 구독 로그인</td><td><b class="yes">이미 내고 계신 것 · 추가 0</b></td></tr>
+  <tr><td><b>Claude</b> <span class="sub">구독자</span></td><td>Claude 구독 로그인(OAuth)</td><td><b class="yes">추가 0</b> — Pro/Max 구독 중일 때만</td></tr>
+  <tr><td>Claude <b>API 키</b> <span class="sub">(비구독자)</span></td><td>API 키 + 카드 등록</td><td>🔴 <b>쓰는 만큼 청구</b></td></tr>
+</table>
+
+<div class="warn">
+  🔴 <b>Claude 구독이 없으시면 API 키로 붙이지 마시길 권합니다.</b>
+  원고처럼 긴 글을 여러 번 검토시키면 <b>토큰이 금방 쌓입니다.</b> 계속 쓰실 거라면 <b>구독이 예측 가능하고 대개 더 쌉니다.</b>
+  이 절은 <b>이미 Claude 구독이 있는 분</b>을 위한 것입니다.
+</div>
+
+<div class="card">
+  <h3>🅒 Claude 구독이 이미 있다면 <span class="sub">· 추가 비용 0</span></h3>
+  <p class="what">이미 내고 계신 구독을 <b>Codex 안으로</b> 끌어옵니다. ChatGPT가 Claude를 직접 불러서 두 답을 나란히 보여줍니다.</p>
+  <div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
+    <code class="pre">Claude 유료 구독(Pro/Max)이 있어서, 내 구독으로 Claude를 추가 과금 없이 연결하고 싶어. API 키가 아니라 OAuth 로그인 방식이야 — Anthropic 공식 Claude Code CLI가 Claude 계정 로그인을 지원하고, ANTHROPIC_API_KEY는 필요 없어. "API 키가 있어야 한다"고 생각되더라도 일단 아래 순서대로 해보고, 실제로 막히는 지점만 알려줘. 시스템을 바꾸는 명령은 실행 전에 꼭 확인받아.
+
+1) node와 npm이 있는지 확인하고, 없으면 관리자 권한 없이(user 설치) 깔아줘.
+2) npm i -g @anthropic-ai/claude-code 로 설치해줘.
+3) claude auth login 을 실행해줘 — 브라우저가 열리면 내 Claude 계정으로 로그인할게. 이 명령은 내가 브라우저에서 로그인을 끝낼 때까지 기다리는 거니까, 바로 응답이 없어도 실패로 보지 말고 기다려줘.
+4) 어느 방식으로 붙었는지 확인해줘: claude auth status 를 실행해서 authMethod 와 subscriptionType 값만 알려줘. authMethod 가 "claude.ai" 면 구독 모드(추가 과금 0)야. 이메일·조직ID 같은 나머지 값은 화면에 출력하지 마.
+5) 도는지 한 번 시험해줘:
+   claude -p "한 문장으로 자기소개해줘"
+   답이 나오면 성공이야.</code></div>
+  <p class="step-note">⚠️ <b>3번에서 한참 아무 반응이 없어도 실패가 아닙니다.</b> 브라우저에서 로그인을 마칠 때까지 기다리는 중입니다.</p>
+
+  <div class="warn">🗣️ <b>그래도 "API 키가 필요합니다"라고 하면 — 이렇게 되받으세요.</b> 실제로 자주 그럽니다.
+    <div class="cmd" style="margin-top:8px"><button class="copy" onclick="copyCmd(this)">복사</button>
+    <code class="pre">아니야. Anthropic 공식 Claude Code CLI는 Claude Pro/Max 구독 계정으로 OAuth 로그인이 돼. API 키 없이 claude auth login 으로 붙일 수 있어. 그 방식으로 다시 해줘.</code></div>
+    <p class="step-note" style="margin-top:8px">💡 <b>이 장면 자체가 오늘의 교훈입니다</b> — AI가 "안 된다"고 해도 <b>그게 최종 판정이 아닙니다.</b> 근거를 대며 한 번 되물으면 되는 경우가 많습니다. 반대로 <b>AI가 "된다"고 한 것도 확인해야 하는 것</b>과 같은 이야기입니다.</p>
+  </div>
+
+  <p><b>연결했으면 이렇게 씁니다</b> — 같은 원고를 두 회사 모델에게 동시에 검사시키는 것:</p>
+  <div class="cmd"><button class="copy" onclick="copyCmd(this)">복사</button>
+    <code class="pre">이 원고의 의학적 주장과 참고문헌이 맞는지 검토해줘. 그리고 claude -p 로 Claude에게도 같은 원고를 주고 똑같이 검토시킨 다음, 너와 Claude의 판단이 엇갈리는 부분만 따로 표로 정리해줘. 엇갈리는 곳이 내가 원문으로 확인해야 할 곳이야.</code></div>
+  <p class="step-note">🎯 <b>일치하는 지적보다 엇갈리는 지적이 값집니다.</b> 두 모델이 다르게 말한다 = 그 내용은 <b>확실하지 않다</b>는 신호입니다. 투고 전 마지막 점검에 특히 유용합니다.</p>
+</div>
+
+<div class="note">
+  💡 <b>구독이 없어도 ⑥ 심사자 비평만으로 충분합니다.</b> 그 도구는 이미 <b>여러 심사자 관점</b>(방법론·통계·에디터)을 한 모델 안에서 돌립니다.
+  다른 회사 모델을 붙이는 건 <b>거기서 한 겹 더</b> 쌓는 것입니다.
+</div>
 
 <div class="session green">🔒 오늘 반드시 지킬 것 <span>· 생략 불가</span></div>
 
