@@ -258,17 +258,21 @@
     <h3>🅐 GPT 무과금 연결 <span class="pill">ChatGPT Plus/Pro 구독자만</span></h3>
     <p class="what">공식 <b>Codex CLI</b>를 OAuth로 붙이면, Code 탭 안에서 Claude가 <b>GPT를 직접 호출</b>합니다 — <code>OPENAI_API_KEY</code> 없이 <b>구독 쿼터</b>로. 강사가 논문 자문에 실제로 쓰는 방식 그대로입니다.</p>
     <div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
-      <code class="pre">ChatGPT 유료 구독(Plus/Pro)이 있어서, 내 구독 쿼터로 GPT를 무과금 연결하고 싶어. OpenAI 공식 Codex CLI를 OAuth로 붙이는 방식이야. 아래 순서대로 해주고, 시스템을 바꾸는 명령은 실행 전에 꼭 확인받아.
+      <code class="pre">ChatGPT 유료 구독(Plus/Pro)이 있어서, 내 구독 쿼터로 GPT를 무과금 연결하고 싶어. API 키가 아니라 OAuth 로그인 방식이야 — OpenAI 공식 Codex CLI가 ChatGPT 계정 로그인을 지원하고, OPENAI_API_KEY는 필요 없어. "API 키가 있어야 한다"고 생각되더라도 일단 아래 순서대로 해보고, 실제로 막히는 지점만 알려줘. 시스템을 바꾸는 명령은 실행 전에 꼭 확인받아.
 
 1) node와 npm이 있는지 확인하고, 없으면 관리자 권한 없이(user 설치) 깔아줘.
 2) npm i -g @openai/codex 로 Codex CLI를 설치해줘.
-3) codex login 을 실행해줘 — 브라우저가 열리면 내 ChatGPT 계정으로 로그인할게.
+3) codex login 을 실행해줘 — 브라우저가 열리면 내 ChatGPT 계정으로 로그인할게. 이 명령은 내가 브라우저에서 로그인을 끝낼 때까지 기다리는 거니까, 바로 응답이 없어도 실패로 보지 말고 기다려줘.
 4) 어느 방식으로 붙었는지 확인해줘: 홈 폴더의 .codex/auth.json 에서 auth_mode 값만 봐줘. "chatgpt" 면 구독(무과금) 모드가 맞고, "apikey" 면 유료 과금 모드니까 알려줘. 토큰 값 자체는 절대 화면에 출력하지 마.
 5) 실제로 도는지 한 번 시험해줘:
    codex exec --skip-git-repo-check --ephemeral -s read-only "한 문장으로 자기소개해줘"
    답이 나오면 성공이야. 안 되면 어디서 막혔는지 알려줘.</code></div>
     <p class="step-note">✅ <b>성공 판정 두 개</b> — ① 4번에서 <code>auth_mode</code>가 <b>"chatgpt"</b> (= 구독으로 쓰는 것. "apikey"면 카드로 쓰는 것) ② 5번에서 GPT 답이 한 줄 나오면 끝.<br>
     ⚠️ <b>5번에서 노란 경고 로그가 여러 줄 지나갑니다 — 실패가 아닙니다.</b> 로그가 다 지나간 <b>맨 아래</b>에 답 문장이 나오면 성공입니다. <span class="sub">(강사 기기 실측: 약 4초)</span></p>
+    <div class="warn">🗣️ <b>그래도 "API 키가 필요합니다"라고 하면 — 이렇게 되받으세요.</b> 실제로 자주 그럽니다.
+      <div class="cmd" style="margin-top:8px"><button class="copy" onclick="copyCmd(this)">복사</button>
+      <code class="pre">아니야. OpenAI 공식 Codex CLI는 ChatGPT 구독 계정으로 OAuth 로그인이 돼. API 키 없이 codex login 으로 붙일 수 있어. 그 방식으로 다시 해줘.</code></div>
+    </div>
     <p><b>연결했으면 ⑥ Critic에서 바로 이렇게 씁니다</b> — 오늘 GPT를 붙이는 이유가 이것입니다:</p>
     <div class="cmd"><button class="copy" onclick="copyCmd(this)">복사</button>
       <code class="pre">지금 원고를 비평할 때 GPT를 제2 심사자로 같이 써줘. codex exec로 GPT에게 같은 원고를 주고, 네 비평과 GPT 비평을 나란히 놓은 다음 두 모델의 판단이 엇갈리는 지점만 따로 표로 정리해줘. 엇갈리는 곳이 가장 먼저 볼 곳이야.</code></div>

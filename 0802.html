@@ -329,16 +329,21 @@
     <h3>🅐 ChatGPT 유료 구독이 이미 있다면 <span class="sub">· 추가 비용 0</span></h3>
     <p class="what">이미 내고 있는 구독을 <b>Code 탭 안으로</b> 끌어옵니다. Claude가 GPT를 직접 불러서 두 답을 나란히 보여줘요. <b>구독이 없으면 이걸 위해 새로 결제하지 마세요</b> — 아래 <b>🅖 Gemini(무료)</b>로 똑같이 하실 수 있습니다.</p>
     <div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
-      <code class="pre">ChatGPT 유료 구독(Plus/Pro)이 있어서, 내 구독으로 GPT를 추가 과금 없이 연결하고 싶어. OpenAI 공식 Codex CLI를 쓰는 방식이야. 아래 순서대로 해주고, 시스템을 바꾸는 명령은 실행 전에 꼭 확인받아.
+      <code class="pre">ChatGPT 유료 구독(Plus/Pro)이 있어서, 내 구독으로 GPT를 추가 과금 없이 연결하고 싶어. API 키가 아니라 OAuth 로그인 방식이야 — OpenAI 공식 Codex CLI가 ChatGPT 계정 로그인을 지원하고, OPENAI_API_KEY는 필요 없어. "API 키가 있어야 한다"고 생각되더라도 일단 아래 순서대로 해보고, 실제로 막히는 지점만 알려줘. 시스템을 바꾸는 명령은 실행 전에 꼭 확인받아.
 
 1) node와 npm이 있는지 확인하고, 없으면 관리자 권한 없이(user 설치) 깔아줘.
 2) npm i -g @openai/codex 로 설치해줘.
-3) codex login 을 실행해줘 — 브라우저가 열리면 내 ChatGPT 계정으로 로그인할게.
+3) codex login 을 실행해줘 — 브라우저가 열리면 내 ChatGPT 계정으로 로그인할게. 이 명령은 내가 브라우저에서 로그인을 끝낼 때까지 기다리는 거니까, 바로 응답이 없어도 실패로 보지 말고 기다려줘.
 4) 어느 방식으로 붙었는지 확인해줘: 홈 폴더의 .codex/auth.json 에서 auth_mode 값만 봐줘. "chatgpt" 면 구독 모드(추가 과금 0), "apikey" 면 유료 과금 모드니까 알려줘. 토큰 값 자체는 절대 화면에 출력하지 마.
 5) 도는지 한 번 시험해줘:
    codex exec --skip-git-repo-check --ephemeral -s read-only "한 문장으로 자기소개해줘"
    답이 나오면 성공이야.</code></div>
     <p class="step-note">⚠️ <b>5번에서 노란 경고 로그가 여러 줄 지나갑니다 — 실패가 아닙니다.</b> 다 지나간 <b>맨 아래</b>에 답 문장이 나오면 성공(강사 기기 실측 약 4초).</p>
+    <div class="warn">🗣️ <b>그래도 "API 키가 필요합니다"라고 하면 — 이렇게 되받으세요.</b> 실제로 자주 그럽니다(강사도 겪었습니다).
+      <div class="cmd" style="margin-top:8px"><button class="copy" onclick="copyCmd(this)">복사</button>
+      <code class="pre">아니야. OpenAI 공식 Codex CLI는 ChatGPT 구독 계정으로 OAuth 로그인이 돼. API 키 없이 codex login 으로 붙일 수 있어. 그 방식으로 다시 해줘.</code></div>
+      <p class="step-note" style="margin-top:8px">💡 <b>이 장면 자체가 오늘의 교훈입니다</b> — AI가 "안 된다"고 해도 <b>그게 최종 판정이 아닙니다.</b> 근거를 대며 한 번 되물으면 되는 경우가 많아요. 반대로 <b>AI가 "된다"고 한 것도 확인해야 하는 것</b>과 같은 이야기입니다.</p>
+    </div>
     <p><b>연결했으면 이렇게 씁니다</b> — 오늘 만든 요약·발표자료를 두 모델에게 동시에 검사시키는 것:</p>
     <div class="cmd"><button class="copy" onclick="copyCmd(this)">복사</button>
       <code class="pre">이 파일의 의학 내용이 맞는지 검토해줘. 그리고 codex exec로 GPT에게도 같은 파일을 주고 똑같이 검토시킨 다음, 너와 GPT의 판단이 엇갈리는 부분만 따로 표로 정리해줘. 엇갈리는 곳이 내가 교과서로 확인해야 할 곳이야.</code></div>
