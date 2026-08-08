@@ -118,7 +118,7 @@
   <span class="sub">Windows는 <b>버전 19041 이상</b>이 필요합니다(2020년 5월 이후 업데이트). 최근 5년 내 기기면 대부분 해당됩니다.</span></p>
 
   <div class="warn" style="margin-top:10px">
-    ⚠️ <b>앱이 가볍지 않습니다</b> — Mac은 받는 파일이 <b>약 570MB</b>, Windows는 스토어 표기 기준 <b>1.7GB</b>입니다.
+    ⚠️ <b>앱이 가볍지 않습니다</b> — Mac은 <b>약 570MB</b>, Windows는 <b>약 1.7GB</b>를 받습니다.
     강의실에서 30명이 동시에 받으면 오래 걸립니다 — <b>집이나 연구실에서 미리</b> 받아 오세요.
   </div>
 
@@ -153,9 +153,24 @@
   <div class="warn" style="margin-top:6px">
     ⚠️ 같은 페이지 <b>맨 아래에 「Mac 및 Windows용 ChatGPT Classic 다운로드」</b>가 따로 있습니다. <b>그건 누르지 마세요.</b>
   </div>
-  <p class="step-note"><b>Windows</b>를 누르면 <b>Microsoft Store</b>로 넘어갑니다 — 정상입니다(OpenAI 공식 페이지가 스토어로 보냅니다). 스토어에서 <b>게시자가 「OpenAI」</b>인지 한 번 보시면 확실합니다.
-  <b>Mac</b>은 OpenAI에서 <code>.dmg</code>를 바로 받아 실행하시면 됩니다.<br>
-  받는 양이 <b>Mac 약 570MB · Windows 1.7GB(스토어 표기)</b>라 회선에 따라 몇 분 걸립니다. <b>미리 받아 오시는 것이 좋습니다.</b></p>
+  <h4 style="margin:14px 0 2px;font-size:15px">🪟 Windows — <b>작은 파일이 먼저 받아집니다. 그게 정상입니다.</b></h4>
+  <table style="margin-top:6px">
+    <tr><td style="width:26px"><b>1</b></td><td><b>Windows</b> 버튼을 누릅니다</td></tr>
+    <tr><td><b>2</b></td><td><code>ChatGPT Installer.exe</code> 라는 <b>1.4MB짜리 작은 파일</b>이 받아집니다<br>
+      <span class="sub">⚠️ <b>이게 앱 본체가 아닙니다.</b> "1.7GB라더니?" 하고 당황하지 마세요 — 설치를 시작해 주는 <b>도우미 파일</b>입니다.</span></td></tr>
+    <tr><td><b>3</b></td><td>그 파일을 <b>실행</b>하면 <b>Microsoft Store 설치 도구</b>가 뜨고, 거기서 <b>진짜 앱(약 1.7GB)</b>을 받아 설치합니다</td></tr>
+    <tr><td><b>4</b></td><td>설치가 끝나면 받아둔 <code>ChatGPT Installer.exe</code>는 <b>지우셔도 됩니다</b></td></tr>
+  </table>
+  <p class="step-note">🔐 이 작은 파일은 <b>Microsoft가 서명한 정품 설치 도구</b>입니다(속성 → 디지털 서명에서 <b>Microsoft Corporation</b> 확인 가능). 경고가 떠도 정상입니다.<br>
+  스토어 화면이 뜨면 <b>게시자가 「OpenAI」</b>인지 한 번 보시면 확실합니다.</p>
+
+  <h4 style="margin:14px 0 2px;font-size:15px">🍎 Mac — 받아서 바로 실행</h4>
+  <p class="step-note"><b>macOS</b> 버튼을 누르면 OpenAI에서 <code>ChatGPT.dmg</code>(<b>약 570MB</b>)를 바로 받습니다. 열어서 응용 프로그램에 넣으시면 됩니다. <b>중간 단계가 없습니다.</b></p>
+
+  <div class="warn">
+    ⏱ <b>Windows는 두 번 받습니다</b>(1.4MB → 1.7GB), <b>Mac은 한 번</b>(570MB)입니다.
+    어느 쪽이든 회선에 따라 몇 분 걸리니 <b>집이나 연구실에서 미리</b> 받아 오세요.
+  </div>
 </div>
 
 <h3>지금 상황에 따라</h3>
@@ -547,6 +562,7 @@
 
 <table>
   <tr><th style="width:38%">증상</th><th>이렇게</th></tr>
+  <tr><td>받은 파일이 <b>1.4MB밖에 안 된다</b> (Windows)</td><td><b>정상입니다.</b> 그건 도우미 파일이고, <b>실행하면</b> 거기서 진짜 앱(1.7GB)을 받아 설치합니다</td></tr>
   <tr><td><b>왼쪽 위에 「Codex」가 없다</b></td><td><b>ChatGPT Classic을 여신 겁니다.</b> 새 ChatGPT 앱을 받으시거나(§1), 이미 있으면 그쪽을 여세요</td></tr>
   <tr><td>도구 목록이 안 보인다</td><td>폴더를 제대로 여셨는지 확인 → Codex 재시작</td></tr>
   <tr><td>인앱 브라우저에서 ChatGPT가 로그아웃 상태</td><td>정상입니다. <b>그 안에서 따로 로그인</b>하세요.</td></tr>
