@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 활용 논문 작성 · 병용 트랙 · 단국대 AI 논문 워크숍</title>
+<style>
+  :root{
+    --ink:#0F1F2E; --ink2:#182C3F; --line:#2A4156;
+    --teal:#0E7C7B; --tealDeep:#0A5C5B; --tealLt:#5BC8C5;
+    --paper:#F2F6F8; --mist:#DCE6EC; --muted:#55677A;
+    --red:#C0392B; --redBg:#FBECEA; --amber:#B9770E; --amberBg:#FCF3E3;
+    --green:#1E7E4F; --grnBg:#E9F4EE; --code:#0D1B26;
+    --violet:#6D28D9; --violetBg:#F1ECFD;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif;
+       color:var(--ink);background:var(--paper);line-height:1.55;-webkit-text-size-adjust:100%}
+  .wrap{max-width:820px;margin:0 auto;padding:0 18px 64px}
+  header{background:var(--ink);color:#fff;padding:32px 0 28px;border-bottom:4px solid var(--teal)}
+  header .wrap{padding-bottom:0}
+  .kicker{color:var(--tealLt);font-weight:700;letter-spacing:2px;font-size:13px;margin:0 0 8px}
+  h1{font-size:26px;margin:0 0 6px;line-height:1.25}
+  header p{color:#BBD2DC;margin:6px 0 0;font-size:14.5px}
+  h2{font-size:20px;margin:34px 0 6px;padding-top:10px;border-top:2px solid var(--mist)}
+  h2 .n{display:inline-block;background:var(--teal);color:#fff;width:30px;height:30px;border-radius:8px;
+        text-align:center;line-height:30px;font-size:16px;margin-right:9px;vertical-align:-3px}
+  h3{font-size:16px;margin:14px 0 2px;color:var(--ink)}
+  p{margin:7px 0}
+  .sub{color:var(--muted);font-size:13.5px}
+  .what{color:var(--tealDeep);font-size:13.5px;margin:2px 0 7px}
+  a{color:var(--teal);font-weight:600}
+  .card{background:#fff;border:1px solid var(--mist);border-radius:12px;padding:15px 18px;margin:11px 0}
+  .pre{display:block;border-radius:10px;background:var(--code);color:#eef;
+       font-family:Consolas,Menlo,monospace;font-size:13.5px;line-height:1.5;
+       padding:14px 68px 14px 16px;white-space:pre-wrap;word-break:break-word;margin:6px 0 0;overflow-x:auto}
+  .cmd{position:relative;margin:8px 0}
+  button.copy{position:absolute;top:10px;right:10px;background:var(--teal);color:#fff;border:0;
+       border-radius:7px;padding:6px 12px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit;z-index:2}
+  button.copy:hover{background:var(--tealDeep)}
+  button.copy.done{background:var(--green)}
+  .big .pre{font-size:14.5px;border:2px solid var(--tealLt)}
+  .pill{display:inline-block;background:var(--amberBg);color:var(--amber);font-weight:700;
+        border-radius:999px;padding:2px 10px;font-size:12px;margin-left:6px}
+  .pill.win{background:#e7f0fa;color:#2c5a8c}
+  .pill.opt{background:var(--mist);color:var(--muted)}
+  .warn{background:var(--redBg);border-left:4px solid var(--red);border-radius:8px;padding:11px 14px;margin:10px 0;font-size:13.5px}
+  .now{background:#E1F1F0;border:2px solid var(--teal);border-radius:12px;padding:14px 18px;margin:22px 0 6px;font-size:15px}
+  .now b{color:var(--tealDeep)}
+  .note{background:#fff;border-left:4px solid var(--teal);border-radius:8px;padding:11px 14px;margin:10px 0;font-size:13.5px}
+  .star{background:var(--amberBg);border-left:4px solid var(--amber);border-radius:8px;padding:11px 14px;margin:10px 0;font-size:13.5px}
+  .meta{background:var(--violetBg);border-left:4px solid var(--violet);border-radius:8px;padding:11px 14px;margin:10px 0;font-size:13.5px}
+  .gate{background:#fff;border:2px solid var(--red);border-radius:12px;padding:16px 18px;margin:14px 0}
+  .gate h3{color:var(--red);margin-top:0}
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--mist);vertical-align:top}
+  th{background:var(--ink);color:#fff;font-size:13px}
+  td .yes{color:var(--green);font-weight:700}
+  .links a{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--mist);
+        border-radius:10px;padding:12px 15px;margin:7px 0;text-decoration:none;color:var(--ink);font-weight:600}
+  .links a:hover{border-color:var(--teal)}
+  .links .ic{font-size:20px}
+  .links small{display:block;color:var(--muted);font-weight:400;font-size:12.5px}
+  footer{color:var(--muted);font-size:12.5px;text-align:center;margin-top:36px}
+  .step-note{font-size:13px;color:var(--muted);margin:5px 0 0}
+  .session{margin:36px 0 4px;padding:11px 16px;border-radius:10px;font-weight:800;font-size:18px}
+  .session span{font-weight:600;font-size:13.5px;margin-left:6px}
+  .session.green{background:var(--grnBg);border-left:5px solid var(--green);color:var(--green)}
+  .session.green span{color:#3a6b52}
+  .session.blue{background:#E1F1F0;border-left:5px solid var(--teal);color:var(--tealDeep)}
+  .session.blue span{color:#3f6f6e}
+  .session.violet{background:var(--violetBg);border-left:5px solid var(--violet);color:var(--violet)}
+  .session.violet span{color:#6b5b8c}
+  kbd{background:#fff;border:1px solid var(--muted);border-bottom-width:2px;border-radius:5px;
+      padding:1px 7px;font-family:Consolas,monospace;font-size:13px;font-weight:700}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <p class="kicker">단국대 AI 논문 워크숍 · 병용 트랙</p>
+    <h1>AI 활용 논문 작성<br>— 기획부터 투고·게재까지</h1>
+    <p>ChatGPT와 Claude를 함께 · 운전석 하나 + 보조 모델</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+<div class="now">
+  <b>오늘 목표는 논문 한 편을 완성해서 나가는 것이 아닙니다.</b><br>
+  가져가실 것은 <b>① 흐름의 이해</b>(워크플로우 및 파이프라인) · <b>② 두 AI를 역할 나눠 쓰기</b> · <b>③ 집에서 스스로 고쳐 쓸 능력</b>입니다.
+  못 끝낸 것은 <b>폴더째 가져가 이어가시면</b> 됩니다.
+</div>
+
+<!-- shared:device-gate:begin -->
+<div class="gate">
+  <h3>💻 <b>데스크탑 앱이 설치되는 기기</b>를 가져오세요</h3>
+  <p>가끔 노트북 대신 <b>태블릿</b>을 가져오시는 분들이 계십니다. 그런데 <b>오늘 쓰는 도구는 데스크탑 앱에서만</b> 동작합니다 — 웹과 모바일에는 아예 없습니다.</p>
+  <p><b>태블릿 중에도 되는 것이 있고 안 되는 것이 있습니다.</b> 갈리는 기준은 화면 크기나 가격이 아니라 <b>「Windows나 macOS가 도는 기기인가」</b> 하나입니다.</p>
+
+  <table style="margin-top:8px">
+    <tr><th style="width:50%">✅ 됩니다 <span class="sub">— 데스크탑 OS</span></th><th>❌ 안 됩니다 <span class="sub">— 모바일 OS</span></th></tr>
+    <tr>
+      <td>
+        Windows 노트북<br>
+        MacBook<br>
+        <b>Surface Pro · Surface Laptop</b> <span class="sub">(Windows라서 됩니다)</span>
+      </td>
+      <td>
+        <b>아이패드</b> — iPad Pro도 안 됩니다 <span class="sub">(iPadOS)</span><br>
+        갤럭시 탭 등 안드로이드 태블릿<br>
+        크롬북 <span class="sub">(ChromeOS)</span> · 스마트폰
+      </td>
+    </tr>
+  </table>
+
+  <p class="step-note"><b>🔎 내 기기가 되는지 확인하는 법</b> — 설정에서 <b>Windows 10/11</b> 또는 <b>macOS</b>라고 나오면 됩니다.
+  <b>iPadOS · Android · ChromeOS</b>라고 나오면 안 됩니다.<br>
+  <span class="sub">Windows는 <b>버전 19041 이상</b>이 필요합니다(2020년 5월 이후 업데이트). 최근 5년 내 기기면 대부분 해당됩니다.</span></p>
+
+  <div class="warn" style="margin-top:10px">
+    ⚠️ <b>오늘 쓰는 앱은 미리 받아 오세요.</b> 강의실에서 여러 명이 동시에 받으면 오래 걸립니다 — <b>집이나 연구실에서 미리</b> 받아 오시면 당일 시간을 법니다.
+  </div>
+
+  <p class="step-note"><b>충전기도 꼭 함께</b> 가져오세요. 실습 시간 내내 씁니다.<br>
+  혹시 태블릿만 가져오셨다면 — 당일 <b>2인 1조로 함께</b> 보시면 됩니다. 방법론은 그대로 배우실 수 있습니다.</p>
+</div>
+<!-- shared:device-gate:end -->
+
+<h2><span class="n">0</span>운전석 정하기 <span class="sub">· 병용 트랙만 있는 절</span></h2>
+
+<p class="what">두 앱을 동시에 몰지 않습니다. <b>파이프라인을 끝까지 도는 앱은 하나</b>이고, 다른 앱은 <b>문헌 엔진과 심사자</b>로만 부릅니다.</p>
+
+<div class="note">
+  <b>둘 다 구독하고 계신 분이 오늘 얻는 것은 세 가지입니다.</b><br>
+  <b>첫째, 문헌 딥리서치를 두 회사 엔진으로 돌립니다.</b> 두 엔진이 서로 놓친 문헌을 메우기 때문에 합집합이 한쪽보다 넓습니다.<br>
+  <b>둘째, ⑥ 심사자 비평에 다른 회사 모델을 네 번째 독립 심사자로 붙입니다.</b> 학습 데이터가 다른 모델이라서, 두 모델의 판단이 엇갈리는 자리가 드러납니다.<br>
+  <b>셋째, 운전석이 아닌 앱의 고급 기능을 브라우저 창으로 끌어다 씁니다.</b> ChatGPT Pro 구독자의 Pro 추론 프리셋이나 claude.ai의 연구 기능처럼, CLI에는 없고 앱에만 있는 기능이 그렇습니다.
+</div>
+
+<h3>규칙 세 줄</h3>
+
+<div class="card">
+  <p><b>① 두 구독 중 티어가 높은 쪽 앱을 운전석으로 삼습니다.</b> 한도가 더 넉넉한 쪽으로 파이프라인 전체를 돌리는 것이 안전합니다.</p>
+  <p><b>② 티어가 같으면 Claude 데스크탑 앱의 Code 탭을 권합니다.</b> 이유는 두 가지입니다. ⑥ 비평에서 리뷰어 셋을 서브에이전트로 동시에 띄울 수 있고, ChatGPT 쪽 고급 기능(Pro 프리셋과 딥리서치)은 어차피 브라우저 창으로 쓰기 때문입니다.</p>
+  <p><b>③ 이미 매일 쓰는 앱이 있으면 그 앱을 운전석으로 하셔도 됩니다.</b> 손에 익은 쪽이 실습 속도에서 유리합니다.</p>
+</div>
+
+<div class="star">
+  ⭐ <b>운전석을 정하면 이 페이지에서 읽을 곳이 줄어듭니다.</b><br>
+  <b>§1 · §2 · §4 · §5는 운전석 트랙 페이지(<a href="gpt.html">gpt.html</a> 또는 <a href="claude.html">claude.html</a>)의 같은 번호 절을 따르세요.</b>
+  이 페이지는 그 위에 <b>두 번째 앱을 붙이는 방법</b>만 다룹니다. 절 번호는 세 트랙이 같으니, 강사가 "지금 ○절입니다"라고 부르면 같은 자리에 계시게 됩니다.
+</div>
+
+<h3>단계별 역할</h3>
+
+<table>
+  <tr><th style="width:19%">단계</th><th style="width:26%">운전석 앱</th><th style="width:27%">두 번째 앱</th><th>왜</th></tr>
+  <tr>
+    <td><b>② 문헌</b></td>
+    <td>딥리서치를 한 번 돌립니다</td>
+    <td>다른 회사 딥리서치를 한 번 더 돌립니다</td>
+    <td>두 결과의 <b>합집합</b>을 씁니다. 한쪽에만 나온 문헌이 곧 다른 엔진의 사각지대였던 문헌입니다.</td>
+  </tr>
+  <tr>
+    <td><b>⑤ 인용 검증</b></td>
+    <td>스크립트로 돌립니다</td>
+    <td class="sub">쓰지 않습니다</td>
+    <td>엔진과 무관한 단계입니다. 실재 확인은 모델의 의견이 아니라 <b>조회 결과</b>로 판정합니다.</td>
+  </tr>
+  <tr>
+    <td><b>⑥ 비평</b></td>
+    <td>블라인드 3인 리뷰</td>
+    <td><b>네 번째 독립 심사자</b></td>
+    <td>학습 데이터가 다른 origin이 하나 늘어납니다. 산출은 <b>엇갈림 표</b>입니다.</td>
+  </tr>
+  <tr>
+    <td><b>⑦ 다듬기</b></td>
+    <td colspan="2">어느 쪽이든 됩니다</td>
+    <td>문장을 고르는 단계라 엔진 차이보다 <b>본인 취향</b>이 더 큽니다. 운전석에서 그냥 이어가셔도 좋습니다.</td>
+  </tr>
+</table>
+
+<p class="step-note">보시다시피 <b>두 번째 앱이 개입하는 단계는 ②와 ⑥ 둘뿐</b>입니다. 나머지는 운전석 하나로 끝까지 갑니다.</p>
+
+<div class="session blue">1부 · 시작 준비 <span>운전석과 조수석을 함께 준비합니다</span></div>
+
+<h2><span class="n">1</span>설치 <span class="sub">· 두 앱을 모두</span></h2>
+
+<p class="what">병용 트랙은 <b>두 앱을 모두 설치</b>합니다. 설치 상세는 각 트랙 페이지에 있으니, 여기서는 네 줄만 확인하세요.</p>
+
+<div class="card">
+  <p>· <b>ChatGPT 데스크탑 앱</b>을 설치합니다. 이름에 <b>Classic</b>이 붙지 않은 것을 받으세요. 상세는 <a href="gpt.html">gpt.html §1</a>.</p>
+  <p>· <b>Claude Desktop</b>을 설치합니다. 상세는 <a href="claude.html">claude.html §1</a>.</p>
+  <p>· <b>Windows</b>이면 <b>Git for Windows</b>도 함께 설치합니다.</p>
+  <p>· <b>두 계정 모두 유료 구독으로 로그인</b>합니다. 한쪽이 무료 계정이면 병용 트랙이 아니라 단독 트랙으로 가시는 편이 낫습니다.</p>
+  <p class="step-note">앱 두 개를 강의실에서 동시에 받으면 오래 걸립니다. 집이나 연구실에서 미리 받아 오시면 당일 시간을 법니다.</p>
+</div>
+
+<h2><span class="n">2</span>논문 도구 받기 <span class="sub">· 운전석 팩 하나만</span></h2>
+
+<p class="what">팩은 <b>하나만</b> 받습니다. 두 팩을 같은 폴더에 겹쳐 두면 어느 쪽 규칙을 따라야 하는지 앱이 헷갈립니다.</p>
+
+<table>
+  <tr><th style="width:30%">운전석</th><th style="width:34%">받을 팩</th><th>절차</th></tr>
+  <tr><td><b>ChatGPT</b> Codex 모드</td><td><a href="paper-workshop.zip">paper-workshop.zip</a></td><td><a href="gpt.html">gpt.html §2</a>를 그대로 따르세요</td></tr>
+  <tr><td><b>Claude</b> Code 탭</td><td><a href="sam-workshop-paper.zip">sam-workshop-paper.zip</a></td><td><a href="claude.html">claude.html §2</a>를 그대로 따르세요</td></tr>
+</table>
+
+<div class="warn">
+  ⚠️ <b>ZIP은 직접 풀지 마세요.</b> 받아만 두시고, 푸는 것과 확인은 트랙 페이지의 프롬프트 하나로 앱에게 시킵니다. 손으로 풀면 폴더가 이중으로 생겨 도구가 하나도 안 붙는데 오류도 안 뜹니다.
+</div>
+
+<h2><span class="n">3</span>시작 전 설정 <span class="sub">· 🔒 학습 끄기 · 구독 조합별 오늘의 설정</span></h2>
+
+<h3>🔒 학습 끄기는 두 계정 모두 해야 합니다</h3>
+
+<div class="warn">
+  <b>한쪽만 끄면 반쪽입니다.</b> 병용 트랙은 원고가 두 회사를 오가므로, <b>두 계정 모두</b> 꺼야 의미가 있습니다.<br>
+  <span class="sub">ChatGPT 개인 계정 — 앱 설정 → 계정(↗) → 웹 설정 → 데이터 제어 → 「모델 개선을 위한 데이터 학습 허용」 꺼짐.</span><br>
+  <span class="sub">Claude 개인 계정 — claude.ai 설정의 개인정보 항목에서 모델 개선 허용을 끕니다. 주소는 <code>claude.ai/settings/data-privacy-controls</code> 이고, 메뉴 이름은 화면 기준으로 확인하세요.</span><br>
+  <span class="sub">앱 자체 설정 메뉴에는 이 항목이 없습니다. "설정에 그게 없는데요"가 정상 반응이고, 웹 설정으로 넘어가야 나옵니다.</span>
+</div>
+
+<h3>구독 조합별 오늘의 설정</h3>
+
+<p class="what">원칙은 하나입니다. <b>평소에는 가볍게, 약점을 찾는 ⑥ 비평 한 곳만 무겁게</b> 씁니다.</p>
+
+<table>
+  <tr>
+    <th style="width:17%">내 구독 조합</th>
+    <th style="width:15%">권장 운전석</th>
+    <th style="width:19%">운전석 평소 설정</th>
+    <th style="width:19%">⑥ 비평 때</th>
+    <th style="width:16%">두 번째 앱의 역할</th>
+    <th>한도 주의</th>
+  </tr>
+  <tr>
+    <td><b>ChatGPT Plus<br>+ Claude Pro</b></td>
+    <td>Claude Code 탭 <span class="sub">(티어가 같아 규칙 ②)</span></td>
+    <td>Sonnet 5 · <code>medium</code> <!-- B2-a --><!-- B4-b --></td>
+    <td>Opus 5 · <code>xhigh</code><br><span class="sub"><code>/model</code>과 <code>/effort</code>로 바꿉니다</span> <!-- B2-b --><!-- B4-a --><!-- B4-b --></td>
+    <td>ChatGPT 웹 대화창의 딥리서치(②)와 <code>High</code> 프리셋 비평(⑥) <!-- A5-a --><!-- A4-b --></td>
+    <td>claude.ai와 Code, Desktop이 <b>한 한도를 공유</b>합니다<!--B3-a--><!--B3-b-->. Plus의 웹 대화창 상한은 <code>High</code>입니다 <!-- A4-b --></td>
+  </tr>
+  <tr>
+    <td><b>ChatGPT Plus<br>+ Claude Max</b></td>
+    <td>Claude Code 탭 <span class="sub">(Claude 티어가 높음)</span></td>
+    <td>Sonnet 5를 기본으로 두고 Opus 5도 상시 · <code>high</code> <!-- B3-d --><!-- B4-c --></td>
+    <td>Fable 5.1 또는 Opus 5 · <code>xhigh</code> 이상 <!-- B2-c --><!-- B4-b --></td>
+    <td>ChatGPT 웹 대화창의 딥리서치(②)와 <code>High</code> 프리셋 비평(⑥) <!-- A5-a --><!-- A4-b --></td>
+    <td>세션 한도 위에 <b>주간 한도</b>가 따로 있고 전 모델에 공통입니다<!-- B3-c -->. 무거운 모델을 오래 쓰면 주간에서 먼저 걸립니다</td>
+  </tr>
+  <tr>
+    <td><b>ChatGPT Pro<br>+ Claude Pro</b></td>
+    <td>ChatGPT Codex 모드 <span class="sub">(ChatGPT 티어가 높음)</span></td>
+    <td>Codex에서 <code>gpt-5.6-terra</code> · <code>High</code> <!-- A3-a --><!-- A3-b --></td>
+    <td>Codex에서 <code>gpt-5.6-sol</code> · <code>Extra High</code> 또는 <code>Max</code>. 웹 대화창이면 <code>Extra High</code>와 <code>Pro</code> 프리셋이 Pro부터 열립니다 <!-- A3-b --><!-- A3-c --><!-- A4-b --></td>
+    <td>Claude Pro의 <b>Opus 5가 네 번째 심사자</b>(⑥)이고, claude.ai의 연구 기능이 두 번째 문헌 엔진(②)입니다 <!-- B2-b --><!-- B5-a --></td>
+    <td>Codex는 Work와 Excel, Workspace Agents와 <b>한 풀을 공유</b>합니다<!-- A2-b -->. 웹 대화창 사용량은 <b>별도로 계산되는 것으로 보이지만 공식 문서로 확인되지 않았으니 화면의 사용량 표시를 확인하세요</b> <!-- A4-c --></td>
+  </tr>
+  <tr>
+    <td><b>ChatGPT Pro<br>+ Claude Max</b></td>
+    <td>Claude Code 탭 <span class="sub">(둘 다 상위 티어라 규칙 ②)</span></td>
+    <td>Sonnet 5를 기본으로 두고 Opus 5도 상시 · <code>high</code> <!-- B3-d --><!-- B4-c --></td>
+    <td>Fable 5.1 또는 Opus 5 · <code>xhigh</code> 이상 <!-- B2-c --><!-- B4-b --></td>
+    <td><b>ChatGPT 웹 대화창의 <code>Pro</code> 프리셋을 네 번째 심사자로</b> 쓸 수 있습니다. Pro부터 열리는 프리셋입니다 <!-- A4-b --></td>
+    <td>Claude는 채팅과 Code가 <b>한도를 공유</b>하니 비평을 두 번 돌리면 주간이 빨리 찹니다<!--B3-a--><!--B3-b--><!--B3-c-->. 사용량은 설정의 Usage에서 봅니다 <!-- B3-e --></td>
+  </tr>
+</table>
+
+<p class="step-note">확인일 2026-09-04 · 모델 이름과 한도는 자주 바뀌니 화면 기준으로 다시 확인하세요.</p>
+
+<div class="note">
+  <b>Claude Code 탭에서는 설정을 메뉴로도 바꿉니다.</b> 모델 메뉴는 <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>I</kbd>, 노력 메뉴는 <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>E</kbd>, 권한 모드 메뉴는 <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>M</kbd>입니다. macOS는 Ctrl 대신 Cmd를 씁니다<!-- B4-f -->. 슬래시 명령 <code>/model</code>과 <code>/effort</code>도 그대로 됩니다<!--B4-a--><!--B4-b-->.<br>
+  남은 양은 <b>모델 선택기 옆의 사용량 링</b>을 눌러 봅니다. 컨텍스트 사용량과 이 기간의 플랜 사용량이 같이 나옵니다<!-- B4-g -->.
+</div>
+
+<div class="note">
+  <b>딥리서치 남은 횟수는 숫자를 외우지 마세요.</b> 공식 안내가 월 몇 회라는 숫자를 더 이상 공개하지 않고, <b>앱 안의 사용량 카운터</b>를 보라고 합니다<!-- A5-b -->. 그러니 실습 전에 카운터를 한 번 열어 보시는 편이 정확합니다.
+</div>
+
+<h2><span class="n">4</span>입력창 한 바퀴 <span class="sub">· 운전석 기준으로</span></h2>
+
+<p class="what">입력창 구조는 운전석 앱마다 다릅니다. <b>운전석 트랙 페이지 §4</b>를 그대로 보세요. <a href="gpt.html">gpt.html §4</a> 또는 <a href="claude.html">claude.html §4</a>.</p>
+
+<div class="note">
+  <b>두 번째 앱은 입력창으로 만나지 않습니다.</b> CLI로 부르거나, 운전석 앱의 <b>브라우저 창</b>으로 사이트를 열어 만납니다.<br>
+  <b>다행히 두 앱의 내장 브라우저 열기 단축키가 같습니다.</b> 둘 다 Windows에서 <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>B</kbd>, macOS에서 <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>B</kbd>입니다<!--A6-a--><!--B6-a-->. 그래서 운전석을 어느 쪽으로 정하셔도 손가락 기억은 하나면 됩니다.<br>
+  <b>Claude 쪽은 이 키가 토글</b>이라 한 번 더 누르면 닫히고, 포커스된 패널만 닫을 때는 <kbd>Ctrl</kbd>+<kbd>\</kbd>입니다. macOS는 <kbd>Cmd</kbd>+<kbd>\</kbd>입니다<!-- B6-e -->.
+</div>
+
+<h2><span class="n">5</span>첫 실행 <span class="sub">· 운전석에서 "시작하자"</span></h2>
+
+<p class="what">실습 폴더를 열고 운전석 앱에 <b>"시작하자"</b> 한 마디를 넣습니다. 그러면 앱이 폴더를 읽고 어디서부터 할지 먼저 안내합니다.</p>
+
+<div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
+  <code class="pre">시작하자</code></div>
+
+<p class="step-note">화면 반응과 승인 창 체험은 운전석 트랙 페이지 §5에 있습니다. <a href="gpt.html">gpt.html §5</a> 또는 <a href="claude.html">claude.html §5</a>.</p>
+
+<div class="session blue">2부 · 병용의 값이 나오는 두 곳 <span>② 문헌과 ⑥ 비평</span></div>
+
+<h2><span class="n">6</span>문헌 찾기 <span class="sub">· 두 회사 딥리서치를 합칩니다</span></h2>
+
+<p class="what">운전석 딥리서치는 <b>운전석 트랙 페이지 §6</b>대로 한 번 돌립니다. 여기서는 <b>두 번째 회사 딥리서치를 같은 자리에서 한 번 더</b> 돌리는 방법을 다룹니다.</p>
+
+<div class="note">
+  <b>다른 회사 사이트는 운전석 앱의 내장 브라우저에서 엽니다.</b> 운전석이 Codex이면 그 브라우저에서 claude.ai의 연구 기능을, 운전석이 Claude이면 Browser pane에서 chatgpt.com의 딥리서치를 씁니다.<br>
+  근거는 두 가지입니다. <b>두 내장 브라우저 모두 외부 사이트 로그인이 됩니다</b><!--A6-c--><!--B6-c-->. 그리고 <b>둘 다 개인 브라우저와 분리된 프로필</b>이라서, 평소 로그인이 따라오지 않고 <b>그 창에서 따로 로그인</b>해야 합니다<!--A6-b--><!--B6-d-->.
+</div>
+
+<div class="warn">
+  🔑 <b>로그인은 사람이 합니다.</b> 비밀번호는 AI가 대신 입력하지 않습니다. 로그인이 안 돼 있으면 거기서 멈추고 여러분을 부르는 것이 정상 동작입니다.
+</div>
+
+<div class="card">
+  <h3>🅐 운전석이 <b>Codex</b>일 때 <span class="sub">· 내장 브라우저에서 claude.ai 연구 기능</span></h3>
+  <div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
+    <code class="pre">두 번째 문헌 엔진으로 Claude의 연구 기능을 쓰고 싶어. 아래 순서대로 네가 직접 해줘.
+
+1) 내장 브라우저를 열고 claude.ai 로 이동해줘.
+2) 로그인이 안 돼 있으면 거기서 멈추고 나에게 알려줘. 비밀번호는 절대 대신 입력하지 마. 내가 로그인을 끝낼 때까지 기다려줘.
+3) 새 대화를 열고 연구(Research) 기능을 켜줘.
+4) 아래 연구질문을 그대로 입력해줘.
+   [여기에 내 연구질문을 넣는다]
+5) 입력이 끝나면 전송 버튼을 눌러. Enter 키는 줄바꿈이 될 수 있어. 그다음 결과가 끝날 때까지 기다려줘. 몇 분 걸리니까 중간에 멈추지 마.
+6) 화면에 나온 결과를 그대로 02_research/deep_research_claude.md 에 저장해줘. 요약하지 말고, 없는 내용을 보충하지도 말고, 화면에 있는 것만 옮겨. 인용은 원문 표기 그대로 남겨.</code></div>
+  <p class="step-note">Claude의 연구 기능은 <b>유료 플랜</b>에서 열립니다<!-- B5-a -->. 무료 계정으로 로그인하면 메뉴가 안 보입니다.</p>
+</div>
+
+<div class="card">
+  <h3>🅑 운전석이 <b>Claude</b>일 때 <span class="sub">· Browser pane에서 chatgpt.com 딥리서치</span></h3>
+  <div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
+    <code class="pre">두 번째 문헌 엔진으로 ChatGPT의 딥리서치를 쓰고 싶어. 아래 순서대로 네가 직접 해줘.
+
+1) Browser pane을 열고 chatgpt.com 으로 이동해줘.
+2) 로그인이 안 돼 있으면 거기서 멈추고 나에게 알려줘. 비밀번호는 절대 대신 입력하지 마. 내가 로그인을 끝낼 때까지 기다려줘.
+3) 새 대화를 열고 딥리서치를 켜줘.
+4) 아래 연구질문을 그대로 입력해줘.
+   [여기에 내 연구질문을 넣는다]
+5) 입력이 끝나면 전송 버튼을 눌러. Enter 키는 줄바꿈이 될 수 있어. 그다음 결과가 끝날 때까지 기다려줘. 몇 분 걸리니까 중간에 멈추지 마.
+6) 화면에 나온 결과를 그대로 02_research/deep_research_chatgpt.md 에 저장해줘. 요약하지 말고, 없는 내용을 보충하지도 말고, 화면에 있는 것만 옮겨. 인용은 원문 표기 그대로 남겨.</code></div>
+  <p class="step-note">ChatGPT 딥리서치는 <b>Plus와 Pro에서 정식 제공</b>됩니다<!-- A5-a -->. 남은 횟수는 화면의 사용량 카운터로 확인하세요<!-- A5-b -->.</p>
+</div>
+
+<h3>두 결과를 합치기</h3>
+
+<p class="what">엔진 두 개를 돌린 값은 <b>합집합에서</b> 나옵니다. 한쪽에만 나온 문헌이 곧 다른 엔진의 사각지대였던 문헌이니, 그 표시를 남겨야 합니다.</p>
+
+<div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
+  <code class="pre">02_research 폴더의 두 딥리서치 결과를 합쳐줘. 같은 문헌은 중복을 제거하고, 한쪽에만 나온 문헌은 어느 엔진에서 나왔는지 표시해줘. 그리고 합친 목록을 근거 대장(③)으로 넘겨줘. 실재 여부는 아직 확정하지 말고, 전부 ⑤ 인용 검증에서 확인할 대상으로 표시해둬.</code></div>
+
+<div class="note">
+  <b>폴백은 간단합니다.</b> 내장 브라우저가 말을 안 들으면 각 사이트에서 직접 딥리서치를 돌리고, 결과를 복사해 운전석에 붙여 넣으시면 됩니다. 결과물은 같습니다.
+</div>
+
+<div class="warn">
+  🔒 <b>여기서 나온 인용은 아직 하나도 확인된 것이 아닙니다.</b> 두 엔진이 같이 말한 문헌도 마찬가지입니다. 실재 확인은 전부 <b>⑤</b>에서 합니다.
+</div>
+
+<h2><span class="n">7</span>핵심 흐름 ①~⑧ <span class="sub">· 세 트랙 공통</span></h2>
+
+<table>
+  <tr><th style="width:24%">단계</th><th style="width:22%">두 번째 앱</th><th>하는 일</th></tr>
+  <tr><td><b>① 주제·저널</b></td><td class="sub">쓰지 않습니다</td><td>연구질문을 잠그고 후보 저널을 좁힙니다</td></tr>
+  <tr><td><b>② 문헌</b> <span class="sub">(딥리서치)</span></td><td><b class="yes">개입</b> · 두 번째 엔진</td><td>두 회사 딥리서치의 합집합을 만듭니다</td></tr>
+  <tr><td><b>③ 근거·개요</b></td><td class="sub">쓰지 않습니다</td><td>주장마다 근거를 붙이고 스토리와 개요를 세웁니다</td></tr>
+  <tr><td><b>④ 초안</b></td><td class="sub">쓰지 않습니다</td><td>개요를 원고 문장으로 펴냅니다</td></tr>
+  <tr><td><b>⑤ 인용 검증</b> ★</td><td class="sub">쓰지 않습니다</td><td>참고문헌이 실제로 있는지 조회로 확인합니다</td></tr>
+  <tr><td><b>⑥ 심사자 비평</b> ★</td><td><b class="yes">개입</b> · 네 번째 심사자</td><td>블라인드 3인에 다른 회사 모델을 더합니다</td></tr>
+  <tr><td><b>⑦ 투고 전 점검</b></td><td class="sub">쓰지 않습니다</td><td>데스크 리젝트 사유를 미리 훑고 다듬습니다</td></tr>
+  <tr><td><b>⑧ 리뷰 대응</b></td><td class="sub">쓰지 않습니다</td><td>심사 결과를 받은 뒤 point-by-point 응답서를 만듭니다</td></tr>
+</table>
+
+<div class="star">
+  ⭐ <b>병용의 값은 ②와 ⑥에만 있습니다.</b> 나머지 여섯 단계는 운전석 하나로 도는 것이 빠르고, 두 앱을 다 켜 두면 한도만 두 배로 씁니다.
+</div>
+
+<p class="step-note">여덟 단계가 왜 이 순서인지, 두 팩의 번호가 어떻게 대응하는지는 <a href="pipeline.html">파이프라인 지도</a>에 한 장으로 정리돼 있습니다.</p>
+
+<h2><span class="n">8</span>⑥ 심사자 비평 <span class="sub">· 블라인드 3인 + 네 번째 심사자</span></h2>
+
+<p class="what">운전석에서 먼저 <b>블라인드 3인 리뷰</b>를 돌립니다. 리뷰어 셋(방법론 · 통계·논리 · 가혹한 데스크 에디터)을 <b>각각 새 컨텍스트</b>에서 돌리고, 서로의 결과와 초안 대화를 보여주지 않습니다. 같은 대화에서 페르소나만 바꾸면 초안의 전제가 문맥에 남아 셋이 같은 맹점을 공유하기 때문입니다.</p>
+
+<p class="step-note">3인 리뷰의 실행 상세는 운전석 트랙 페이지 §8에 있습니다. <a href="gpt.html">gpt.html §8</a> 또는 <a href="claude.html">claude.html §8</a>.</p>
+
+<div class="note">
+  <b>여기에 다른 회사 모델을 하나 붙이면 학습 데이터가 다른 <span style="color:#0A5C5B">네 번째 독립 origin</span>이 됩니다.</b>
+  결과 파일은 <code>06_critic/external_critic.md</code>이고, Area Chair가 리뷰어 셋의 파일과 이 파일을 함께 읽어 통합합니다. 즉 <b>세 명이 아니라 네 명의 입력</b>으로 통합이 돌아갑니다.
+</div>
+
+<h3>붙이는 방법 세 가지 · 위에서부터 되는 것을 쓰세요</h3>
+
+<div class="card">
+  <h3>(a) CLI를 구독 로그인으로 붙이기 <span class="pill">가장 매끄러움</span></h3>
+  <p class="what">운전석 앱 안에서 다른 회사 모델을 <b>직접 호출</b>하게 만드는 경로입니다. 붙이고 나면 엇갈림 표까지 한 번에 나옵니다.</p>
+
+  <h3 style="margin-top:16px">운전석이 <b>Claude</b>이면 · GPT를 붙입니다 <span class="sub">🅐</span></h3>
+  <div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
+    <code class="pre">ChatGPT 유료 구독(Plus/Pro)이 있어서, 내 구독 쿼터로 GPT를 무과금 연결하고 싶어. API 키가 아니라 OAuth 로그인 방식이야 — OpenAI 공식 Codex CLI가 ChatGPT 계정 로그인을 지원하고, OPENAI_API_KEY는 필요 없어. "API 키가 있어야 한다"고 생각되더라도 일단 아래 순서대로 해보고, 실제로 막히는 지점만 알려줘. 시스템을 바꾸는 명령은 실행 전에 꼭 확인받아.
+
+1) node와 npm이 있는지 확인하고, 없으면 관리자 권한 없이(user 설치) 깔아줘.
+2) npm i -g @openai/codex 로 Codex CLI를 설치해줘.
+3) codex login 을 실행해줘 — 브라우저가 열리면 내 ChatGPT 계정으로 로그인할게. 이 명령은 내가 브라우저에서 로그인을 끝낼 때까지 기다리는 거니까, 바로 응답이 없어도 실패로 보지 말고 기다려줘.
+4) 어느 방식으로 붙었는지 확인해줘: 홈 폴더의 .codex/auth.json 에서 auth_mode 값만 봐줘. "chatgpt" 면 구독(무과금) 모드가 맞고, "apikey" 면 유료 과금 모드니까 알려줘. 토큰 값 자체는 절대 화면에 출력하지 마.
+5) 실제로 도는지 한 번 시험해줘:
+   codex exec --skip-git-repo-check --ephemeral -s read-only "한 문장으로 자기소개해줘"
+   답이 나오면 성공이야. 안 되면 어디서 막혔는지 알려줘.</code></div>
+  <p class="step-note">✅ <b>성공 판정 두 개</b> — ① 4번에서 <code>auth_mode</code>가 <b>"chatgpt"</b> (= 구독으로 쓰는 것. "apikey"면 카드로 쓰는 것) ② 5번에서 GPT 답이 한 줄 나오면 끝.<br>
+  ⚠️ <b>5번에서 노란 경고 로그가 여러 줄 지나갑니다 — 실패가 아닙니다.</b> 로그가 다 지나간 <b>맨 아래</b>에 답 문장이 나오면 성공입니다.</p>
+  <div class="warn">🗣️ <b>그래도 "API 키가 필요합니다"라고 하면 — 이렇게 되받으세요.</b> 실제로 자주 그럽니다.
+    <div class="cmd" style="margin-top:8px"><button class="copy" onclick="copyCmd(this)">복사</button>
+    <code class="pre">아니야. OpenAI 공식 Codex CLI는 ChatGPT 구독 계정으로 OAuth 로그인이 돼. API 키 없이 codex login 으로 붙일 수 있어. 그 방식으로 다시 해줘.</code></div>
+  </div>
+  <p><b>연결했으면 ⑥ Critic에서 바로 이렇게 씁니다</b> — 오늘 GPT를 붙이는 이유가 이것입니다:</p>
+  <div class="cmd"><button class="copy" onclick="copyCmd(this)">복사</button>
+    <code class="pre">지금 원고를 비평할 때 GPT를 제2 심사자로 같이 써줘. codex exec로 GPT에게 같은 원고를 주고, 네 비평과 GPT 비평을 나란히 놓은 다음 두 모델의 판단이 엇갈리는 지점만 따로 표로 정리해줘. 엇갈리는 곳이 가장 먼저 볼 곳이야.</code></div>
+
+  <h3 style="margin-top:20px">운전석이 <b>Codex</b>이면 · Claude를 붙입니다 <span class="sub">🅒</span></h3>
+  <div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
+    <code class="pre">Claude 유료 구독(Pro/Max)이 있어서, 내 구독으로 Claude를 추가 과금 없이 연결하고 싶어. API 키가 아니라 OAuth 로그인 방식이야 — Anthropic 공식 Claude Code CLI가 Claude 계정 로그인을 지원하고, ANTHROPIC_API_KEY는 필요 없어. "API 키가 있어야 한다"고 생각되더라도 일단 아래 순서대로 해보고, 실제로 막히는 지점만 알려줘. 시스템을 바꾸는 명령은 실행 전에 꼭 확인받아.
+
+1) node와 npm이 있는지 확인하고, 없으면 관리자 권한 없이(user 설치) 깔아줘.
+2) npm i -g @anthropic-ai/claude-code 로 설치해줘.
+3) claude auth login 을 실행해줘 — 브라우저가 열리면 내 Claude 계정으로 로그인할게. 이 명령은 내가 브라우저에서 로그인을 끝낼 때까지 기다리는 거니까, 바로 응답이 없어도 실패로 보지 말고 기다려줘.
+4) 어느 방식으로 붙었는지 확인해줘: claude auth status 를 실행해서 authMethod 와 subscriptionType 값만 알려줘. authMethod 가 "claude.ai" 면 구독 모드(추가 과금 0)야. 이메일·조직ID 같은 나머지 값은 화면에 출력하지 마.
+5) 도는지 한 번 시험해줘:
+   claude -p "한 문장으로 자기소개해줘"
+   답이 나오면 성공이야.</code></div>
+  <p class="step-note">✅ <b>성공 판정 두 개</b> — ① 4번에서 <code>authMethod</code>가 <b>"claude.ai"</b> (= 구독으로 쓰는 것) ② 5번에서 Claude 답이 한 줄 나오면 끝.<br>
+  ⚠️ <b>3번에서 한참 아무 반응이 없어도 실패가 아닙니다.</b> 브라우저에서 로그인을 마칠 때까지 기다리는 중입니다.</p>
+  <div class="warn">🗣️ <b>그래도 "API 키가 필요합니다"라고 하면 — 이렇게 되받으세요.</b> 실제로 자주 그럽니다.
+    <div class="cmd" style="margin-top:8px"><button class="copy" onclick="copyCmd(this)">복사</button>
+    <code class="pre">아니야. Anthropic 공식 Claude Code CLI는 Claude Pro/Max 구독 계정으로 OAuth 로그인이 돼. API 키 없이 claude auth login 으로 붙일 수 있어. 그 방식으로 다시 해줘.</code></div>
+    <p class="step-note" style="margin-top:8px">💡 <b>이 장면 자체가 오늘의 교훈입니다</b> — AI가 "안 된다"고 해도 <b>그게 최종 판정이 아닙니다.</b> 근거를 대며 한 번 되물으면 되는 경우가 많습니다. 반대로 <b>AI가 "된다"고 한 것도 확인해야 하는 것</b>과 같은 이야기입니다.</p>
+  </div>
+  <p><b>연결했으면 이렇게 씁니다</b> — 같은 원고를 두 회사 모델에게 동시에 검사시키는 것:</p>
+  <div class="cmd"><button class="copy" onclick="copyCmd(this)">복사</button>
+    <code class="pre">이 원고의 의학적 주장과 참고문헌이 맞는지 검토해줘. 그리고 claude -p 로 Claude에게도 같은 원고를 주고 똑같이 검토시킨 다음, 너와 Claude의 판단이 엇갈리는 부분만 따로 표로 정리해줘. 엇갈리는 곳이 내가 원문으로 확인해야 할 곳이야.</code></div>
+</div>
+
+<div class="card">
+  <h3>(b) 브라우저 창으로 붙이기 <span class="pill opt">CLI가 안 될 때 · 고급 프리셋을 쓸 때</span></h3>
+  <p class="what">운전석 앱의 내장 브라우저에서 <b>다른 회사 웹 대화창</b>을 열고, 원고와 아래 비평 프롬프트를 넣습니다. 앱에만 있는 <b>고급 추론 프리셋</b>을 쓸 수 있다는 것이 이 경로의 장점입니다.</p>
+  <p>비평 프롬프트는 영문 그대로 넣습니다. 팩의 교차 벤더 비평이 쓰는 것과 같은 문안입니다.</p>
+  <div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
+    <code class="pre">You are a senior reviewer for a medical journal, seeing this manuscript for the
+first time. Read the attached manuscript and identify the top 5 issues that
+would matter most to a desk editor and reviewer. For each:
+- exact location (section, paragraph)
+- issue
+- severity (Critical / Major / Minor)
+- specific fix
+- reward-hacking risk if any
+
+Be terse. No prose. Bullet form.</code></div>
+  <p>결과는 <code>06_critic/external_critic.md</code>로 저장합니다. 그러면 Area Chair가 네 번째 입력으로 함께 읽습니다.</p>
+  <div class="note">
+    💎 <b>ChatGPT Pro 구독자는 여기서 <code>Pro</code> 프리셋을 고를 수 있습니다.</b> <code>Extra High</code>와 <code>Pro</code> 프리셋은 Pro 이상에서만 열리는 선택지입니다<!-- A4-b -->. Plus이면 <code>High</code>가 상한이고, 그것으로도 비평은 충분합니다.
+  </div>
+  <div class="warn">
+    🔒 <b>올리기 전에 원고에 환자 식별정보가 없는지 확인하세요.</b> 실제 투고를 앞둔 원고라면 외부 업로드에 대한 저널 정책도 함께 보셔야 합니다. 교차 벤더 출력도 미검증 인용을 담을 수 있으니 ⑤ 검증 원칙이 그대로 적용됩니다.
+  </div>
+</div>
+
+<div class="card">
+  <h3>(c) 손으로 옮기기 <span class="pill opt">둘 다 어려울 때</span></h3>
+  <p>다른 회사 앱에서 위 영문 프롬프트로 비평을 받고, 결과를 <b>복사해 운전석에 붙여 넣으시면</b> 됩니다. 네 번째 심사자라는 성질은 그대로 남습니다. 손이 한 번 더 가는 것뿐입니다.</p>
+</div>
+
+<div class="star">
+  🎯 <b>일치하는 지적보다 엇갈리는 지적이 값집니다.</b> 두 모델이 다르게 말한다 = 그 내용은 <b>확실하지 않다</b>는 신호입니다.
+  <b>두 모델이 다르게 말한 곳이 원문을 펴야 할 자리</b>입니다. 투고 전 마지막 점검에 특히 유용합니다.
+</div>
+
+<p class="step-note">※ 공식 "무과금 API"가 아니라 <b>구독 OAuth 쿼터</b>를 정당하게 쓰는 경로입니다. 쿼터가 걸리면 잠시 쉬었다 다시 됩니다. <b>단독 트랙만으로도 완전한 경로</b>이니 없어도 전혀 무방합니다.</p>
+
+<div class="session violet">3부 · 마무리 <span>도구를 스스로 고치기</span></div>
+
+<h2><span class="n">9</span>이건 완성품이 아니라 여러분의 초안입니다</h2>
+
+<p>오늘 받은 팩은 <b>고쳐 쓰라고 드리는 초안</b>입니다. 단계를 빼도 되고, 프롬프트를 본인 말로 바꿔도 되고, 본인 분야에 맞는 단계를 새로 넣어도 됩니다.</p>
+<p>고치는 방법 자체도 앱에게 시킬 수 있습니다. 상세는 운전석 트랙 페이지 §9에 있습니다. <a href="gpt.html">gpt.html §9</a> 또는 <a href="claude.html">claude.html §9</a>.</p>
+
+<h2><span class="n">10</span>더 넓히기 <span class="sub">· 선택 · 집에서 해도 됩니다</span></h2>
+
+<div class="card">
+  <h3>🅖 세 번째 엔진 · Gemini <span class="pill">무료 구글 계정이면 누구나</span></h3>
+  <p class="what">구글도 <b>공식 CLI</b>가 있고 <b>구글 계정 로그인(OAuth)</b>으로 붙습니다. API 키도 카드도 필요 없습니다. 심사자를 한 명 더 늘리고 싶으실 때 <b>가장 붙이기 쉬운 경로</b>입니다.</p>
+  <div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
+    <code class="pre">구글 공식 Gemini CLI를 내 구글 계정으로 연결하고 싶어. API 키가 아니라 OAuth 로그인 방식이야(무료 한도로 쓰는 것). 아래 순서대로 해주고, 시스템을 바꾸는 명령은 실행 전에 꼭 확인받아.
+
+1) node와 npm이 있는지 확인하고, 없으면 관리자 권한 없이(user 설치) 깔아줘.
+2) npm i -g @google/gemini-cli 로 설치해줘.
+3) gemini 를 한 번 실행해줘 — 인증 방식을 고르라고 하면 "Sign in with Google"(구글 계정 로그인)을 골라줘. 브라우저가 열리면 내 개인 구글 계정으로 로그인할게. API 키 방식은 고르지 마.
+4) 어느 방식으로 붙었는지 확인해줘: 홈 폴더의 .gemini/settings.json 에서 selectedAuthType 값만 봐줘. "oauth-personal" 이면 무료 로그인 모드가 맞아. 다른 값이면 알려줘. 토큰 값 자체는 절대 화면에 출력하지 마.
+5) 도는지 한 번 시험해줘:
+   gemini -p "한 문장으로 자기소개해줘"
+   답이 나오면 성공이야. 안 되면 어디서 막혔는지 알려줘.</code></div>
+  <p class="step-note">✅ <b>성공 판정</b>: 4번 <code>selectedAuthType</code>이 <b>"oauth-personal"</b> + 5번에서 답 한 줄.<br>
+  ⚠️ <b>개인 구글 계정</b>으로 하세요. 학교 Workspace 계정은 조직 정책으로 막혀 있을 수 있습니다.</p>
+</div>
+
+<div class="note"><b>먼저 — 돈이 나가는 방식이 다릅니다.</b> 이걸 모르고 붙이면 청구서로 알게 됩니다. 오늘 리터러시의 핵심 중 하나입니다.</div>
+
+<table>
+  <tr><th style="width:30%">무엇</th><th style="width:32%">인증</th><th>비용</th></tr>
+  <tr><td><b>ChatGPT</b> <span class="sub">(오늘 쓰는 것)</span></td><td>본인 구독 로그인</td><td><b class="yes">이미 내고 계신 것 · 추가 0</b></td></tr>
+  <tr><td><b>Claude</b> <span class="sub">(오늘 쓰는 것)</span></td><td>Claude 구독 로그인(OAuth)</td><td><b class="yes">추가 0</b> · Pro나 Max 구독 중일 때만</td></tr>
+  <tr><td><b>Gemini</b> <span class="sub">(선택)</span></td><td>구글 계정 OAuth · 공식 Gemini CLI</td><td><b class="yes">무료 한도 안에서</b> · 카드 불요 <span class="sub">(한도는 화면 기준으로 확인)</span></td></tr>
+  <tr><td><b>API 키</b> <span class="sub">(세 회사 모두 별개)</span></td><td>API 키 + 카드 등록</td><td>🔴 <b>쓰는 만큼 청구</b> · 구독과 전혀 다른 경로</td></tr>
+</table>
+
+<div class="warn">
+  🔴 <b>구독이 있으면 API 키로 붙일 이유가 없습니다.</b> 원고처럼 긴 글을 여러 번 검토시키면 토큰이 금방 쌓입니다. 계속 쓰실 거라면 <b>구독이 예측 가능하고 대개 더 쌉니다.</b>
+  <span class="sub">혹시 키를 쓰시게 되면 — 키는 <b>채팅창에 붙여넣지 말고</b> <code>.env.local</code>에 넣고 <code>.gitignore</code>에 등록, 그리고 <b>예산 알림</b>부터 거세요.</span>
+</div>
+
+<h2><span class="n">11</span>안전 게이트 5</h2>
+
+<!-- shared:safety-gates:begin -->
+<div class="session green">🔒 안전 게이트 5 <span>· 생략 불가</span></div>
+
+<p class="what">파이프라인 구조는 트랙마다, 참가자마다 다르게 바꾸셔도 됩니다. <b>다만 아래 다섯은 어떤 구조에서도 남습니다</b> — 되돌릴 수 없는 종류이기 때문입니다.</p>
+
+<table>
+  <tr><th style="width:32%">게이트</th><th>왜</th></tr>
+  <tr><td><b>🔒 학습 끄기</b></td><td>
+    실제 원고·연구 자료가 모델 학습에 들어가면 <b>되돌릴 수 없습니다.</b><br>
+    <span class="sub">ChatGPT 개인 계정 — 앱 설정 → 계정(↗) → 웹 설정 → 데이터 제어 → 「모델 개선을 위한 데이터 학습 허용」 꺼짐.</span><br>
+    <span class="sub">Claude 개인 계정 — claude.ai 설정 → 개인정보(Privacy) → 모델 개선 허용을 끕니다. 주소는 <code>claude.ai/settings/data-privacy-controls</code> 이고, 메뉴 이름은 화면 기준으로 확인하세요.</span><br>
+    <span class="sub">업무용(Team·Business·Enterprise) 계정은 이 개인 설정 항목이 없을 수 있고 학습 정책은 기관 계약을 따릅니다. 소속 기관 관리자 정책을 확인하세요.</span>
+  </td></tr>
+  <tr><td><b>🔒 환자 데이터 반입 금지</b></td><td><b>IRB 승인을 받은 연구 데이터여도</b> 이 실습 폴더에 넣지 않습니다. 오늘은 비식별·합성 자료로 합니다.</td></tr>
+  <tr><td><b>🔒 인용 실재 확인</b></td><td>날조 인용은 데스크 리젝트를 넘어 <b>연구 진실성 문제</b>가 됩니다.</td></tr>
+  <tr><td><b>🔒 제출은 사람이</b></td><td>포털 로그인·제출 버튼은 <b>저자 본인의 행위</b>입니다. AI가 누르지 않습니다.</td></tr>
+  <tr><td><b>🔒 의학적 판단 확인</b></td><td>약물 용량·IRB·가이드라인 서술은 <b>저자가 책임집니다.</b></td></tr>
+</table>
+
+<div class="warn">
+  ⚠️ 오늘 만드는 산출물은 <b>투고를 향한 원고(submission-directed)이지 투고 가능한 원고(submission-ready)가 아닙니다.</b>
+  실제 투고 전에 참고문헌·데이터·AI 공개문·공저자 승인을 <b>본인이 최종 확인</b>하셔야 합니다.
+</div>
+<!-- shared:safety-gates:end -->
+
+<h2><span class="n">12</span>집에 가서 이어가기</h2>
+
+<!-- shared:take-home:begin -->
+<div class="session blue">집에 가서 이어가기 <span>· 폴더 하나가 곧 프로젝트</span></div>
+
+<div class="card">
+  <p><b>폴더를 그대로 가져가시면 하던 자리에서 이어집니다.</b> 진행 상태가 폴더 안에 저장돼 있습니다.</p>
+  <p>다음에 열고 <b>"시작하자"</b>라고 하시면 <i>"지난번 ④까지 하셨습니다. 이어서 할까요?"</i>로 시작합니다.</p>
+  <p class="step-note">USB·클라우드 어디에 두셔도 됩니다.</p>
+</div>
+<!-- shared:take-home:end -->
+
+<h2><span class="n">13</span>막히면 <span class="sub">· 병용 트랙에서 자주 나오는 것</span></h2>
+
+<table>
+  <tr><th style="width:38%">증상</th><th>이렇게 하세요</th></tr>
+  <tr>
+    <td><b>"API 키가 필요합니다"라고 한다</b></td>
+    <td>§8의 <b>되받기 프롬프트</b>를 붙여넣으세요. 양쪽 방향 모두 있습니다. GPT를 붙일 때는 <code>codex login</code>, Claude를 붙일 때는 <code>claude auth login</code>이 구독 로그인 경로입니다. 자주 있는 오답이니 당황하지 않으셔도 됩니다.</td>
+  </tr>
+  <tr>
+    <td><b><code>codex login</code> 또는 <code>claude auth login</code>이 한참 반응이 없다</b></td>
+    <td><b>실패가 아닙니다.</b> 브라우저에서 여러분이 로그인을 끝낼 때까지 기다리는 중입니다. 브라우저 창을 찾아 로그인을 마치면 이어집니다.</td>
+  </tr>
+  <tr>
+    <td><b>내장 브라우저에서 다른 회사 사이트가 로그아웃 상태다</b></td>
+    <td><b>정상입니다.</b> 두 앱의 내장 브라우저는 개인 브라우저와 분리된 프로필을 쓰므로 평소 로그인이 따라오지 않습니다<!--A6-b--><!--B6-d-->. 그 창에서 <b>따로 한 번</b> 로그인하시면 됩니다. 비밀번호는 AI가 대신 넣지 않습니다.</td>
+  </tr>
+  <tr>
+    <td><b>쿼터에 걸렸다고 한다</b></td>
+    <td><b>잠시 쉬었다 다시 됩니다.</b> 구독 쿼터를 쓰는 경로라서 그렇습니다. Claude는 채팅과 Code가 한도를 공유하니 <!-- B3-b --> 비평을 두 번 돌린 직후에 자주 만납니다. 사용량은 설정의 Usage에서 확인하세요<!-- B3-e -->.</td>
+  </tr>
+  <tr>
+    <td><b>그 밖의 증상</b></td>
+    <td>운전석 트랙 페이지 §13을 보세요. <a href="gpt.html">gpt.html §13</a> 또는 <a href="claude.html">claude.html §13</a>. 앱 자체 문제는 대부분 그쪽에 정리돼 있습니다.</td>
+  </tr>
+</table>
+
+<h2><span class="n">14</span>AI가 "안 됩니다"라고 할 때</h2>
+
+<!-- shared:feasibility-rule:begin -->
+<h3>🪄 AI가 "안 됩니다"라고 할 때 — 이걸 붙여넣으세요</h3>
+
+<p class="what">가장 자주 겪는 실패는 <b>기능이 없어서</b>가 아니라 <b>AI가 지레 "불가능하다"고 답해서</b>입니다.
+아래는 그 판단을 강제로 점검시키는 규칙입니다.</p>
+
+<div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
+  <code class="pre">## 실현가능성 판단 규칙
+
+불가 판정 전에 다음을 구분하라.
+1. 기술적으로 불가능
+2. 공식 지원은 아니지만 가능 — 쓸 경우 비공식 경로임을 반드시 밝힌다
+3. 현재 방법만 실패
+4. 정보나 권한이 부족함
+5. 정책상 하지 않음 — 1번과 섞지 말 것. 우회로를 찾지 말 것.
+
+"불가능"이라고 답하려면 공식 문서 · 실제 오류 메시지 · 환경 제약 중
+최소 하나의 명확한 근거를 제시해야 한다. 그전에는:
+
+- 현재 환경과 설치된 도구를 직접 확인한다
+- 공식 경로를 우선 탐색한다
+- 첫 실패 후 최소 2개의 대안을 시도한다
+- 오류 메시지를 근거로 계획을 수정한다
+- 대안이 소진되거나 도구 호출 20회를 넘기면 멈추고 현황을 보고한다
+
+설명만 하지 말고 실제로 수행하라.
+성공 보고도 같은 기준이다 — 실행 출력이나 테스트 결과 없이 "됐습니다" 금지.
+막히면 "안 된다"가 아니라 어디까지 성공했고 무엇이 막혔는지 보고하라.
+
+예외 — 되돌릴 수 없는 작업은 이 규칙 밖이다.
+삭제, 원고 덮어쓰기, 결제, 외부 전송, 저널 제출, 인증정보 입력,
+force push, DB 마이그레이션은 시도 전에 먼저 확인받는다.</code></div>
+
+<div class="note">
+  <b>📌 매번 붙여넣기 번거로우시면 — 파일에 넣어두시면 됩니다.</b><br>
+  작업 폴더에 파일을 만들고 위 내용을 넣으면, <b>그 폴더에서는 항상 적용</b>됩니다.
+  만드는 것도 시킬 수 있습니다 — <i>"이 폴더에 파일 만들고 방금 규칙 넣어줘"</i>.
+  <span class="sub">Codex는 <code>AGENTS.md</code>, Claude Code는 <code>CLAUDE.md</code>가 같은 역할을 합니다.</span>
+</div>
+
+<div class="star">
+  ⭐ <b>왜 이게 오늘의 핵심에 닿는가</b> — 이 규칙의 마지막 두 줄이 진짜입니다.<br>
+  <b>"실행 출력 없이 '됐습니다' 금지"</b> · <b>"어디까지 성공했고 무엇이 막혔는지 보고하라"</b><br>
+  AI가 <b>안 된다고 할 때</b>도, <b>됐다고 할 때</b>도 근거를 요구하는 것 — 그게 오늘 배우실 판단의 전부입니다.
+  <span class="sub">되돌릴 수 없는 일(삭제·제출·결제)에는 이 규칙을 적용하지 않는다는 예외도 같은 이유입니다.</span>
+</div>
+<!-- shared:feasibility-rule:end -->
+
+<h2><span class="n">15</span>한 줄 정리</h2>
+
+<div class="card">
+  <p><b>① 운전석</b> · 티어가 높은 쪽 하나로 파이프라인 전체를 돕니다. 같으면 Claude Code 탭입니다.</p>
+  <p><b>② OAuth 연결</b> · 두 번째 모델은 구독 로그인으로 붙입니다. API 키가 아닙니다.</p>
+  <p><b>③ 독립 origin</b> · 다른 회사 모델은 네 번째 독립 심사자입니다. 블라인드 3인을 대체하지 않고 더합니다.</p>
+  <p><b>④ 엇갈림 표</b> · 일치가 아니라 <b>엇갈림</b>이 산출물입니다. 그 자리가 원문을 펴야 할 자리입니다.</p>
+  <p><b>⑤ 내장 브라우저</b> · 두 앱 모두 <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>B</kbd>이고(Claude는 토글), 그 안에서 로그인은 한 번 사람이 합니다.</p>
+</div>
+
+<h2><span class="n">🔗</span>링크</h2>
+
+<div class="links">
+  <a href="index.html">
+    <span class="ic">🏠</span><span>허브<small>index.html · 트랙 고르기와 오늘의 흐름</small></span></a>
+  <a href="gpt.html">
+    <span class="ic">🅶</span><span>GPT 트랙<small>gpt.html · 운전석이 ChatGPT일 때 §1·§2·§4·§5·§8·§9·§13</small></span></a>
+  <a href="claude.html">
+    <span class="ic">🅲</span><span>Claude 트랙<small>claude.html · 운전석이 Claude일 때 §1·§2·§4·§5·§8·§9·§13</small></span></a>
+  <a href="pipeline.html">
+    <span class="ic">🗺️</span><span>파이프라인 지도<small>pipeline.html · 공통 8단계 한눈에</small></span></a>
+  <a href="paper-workshop.zip">
+    <span class="ic">📦</span><span>Codex 팩<small>paper-workshop.zip · 운전석이 ChatGPT일 때</small></span></a>
+  <a href="sam-workshop-paper.zip">
+    <span class="ic">📦</span><span>Claude 팩<small>sam-workshop-paper.zip · 운전석이 Claude일 때</small></span></a>
+  <a href="https://developers.openai.com/codex/cli">
+    <span class="ic">📄</span><span>Codex CLI 문서<small>developers.openai.com · 구독 로그인 절차</small></span></a>
+  <a href="https://code.claude.com/docs/en/quickstart">
+    <span class="ic">📄</span><span>Claude Code 빠른 시작<small>code.claude.com · 구독 로그인 절차</small></span></a>
+  <a href="https://learn.chatgpt.com/docs/pricing">
+    <span class="ic">📊</span><span>ChatGPT 사용량·플랜 안내<small>learn.chatgpt.com · 플랜별 5시간 창 표</small></span></a>
+  <a href="../glossary.html">
+    <span class="ic">📖</span><span>용어집<small>모르는 말이 나오면</small></span></a>
+</div>
+
+<!-- shared:footer:begin -->
+<footer>AI 활용 논문 작성 — 기획부터 투고·게재까지 · 단국대 AI 논문 워크숍 · 안상현 · v1.0 (2026-09)<br>이 페이지는 회차마다 피드백을 반영해 갱신됩니다.</footer>
+<!-- shared:footer:end -->
+
+</div>
+
+<script>
+function copyCmd(btn){
+  var code = btn.parentElement.querySelector('code,.pre');
+  var text = code ? code.innerText : '';
+  function done(){ btn.textContent='복사됨 ✓'; btn.classList.add('done');
+    setTimeout(function(){ btn.textContent='복사'; btn.classList.remove('done'); },1500); }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done, function(){ legacy(text); done(); });
+  } else { legacy(text); done(); }
+}
+function legacy(text){
+  var ta=document.createElement('textarea'); ta.value=text;
+  ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta);
+  ta.select(); try{ document.execCommand('copy'); }catch(e){} document.body.removeChild(ta);
+}
+</script>
+</body>
+</html>
