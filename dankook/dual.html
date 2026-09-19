@@ -556,6 +556,30 @@ Be terse. No prose. Bullet form.</code></div>
 </div>
 <!-- shared:take-home:end -->
 
+<!-- shared:open-tools:begin -->
+<div class="session blue">🧰 집에서 더 쓰고 싶다면 · 공개 도구 <span>· 선택</span></div>
+
+<div class="card">
+  <h3>medsci-skills — 의사 연구자가 공개한 논문 검사 도구</h3>
+  <p>서울아산병원 영상의학과 남유진 선생님이 공개한 <b>MIT 오픈소스</b>입니다. Claude Code와 Codex 모두에서 쓸 수 있는 스킬 60개 가운데 오늘 파이프라인과 바로 이어지는 것은 세 가지입니다.</p>
+
+  <table>
+    <tr><th style="width:24%">공통 단계</th><th style="width:34%">스킬</th><th>하는 일</th></tr>
+    <tr><td><b>⑤ 인용 검증</b></td><td><code>/verify-refs</code></td><td>참고문헌을 PubMed·CrossRef와 대조해 조작·불일치를 찾습니다</td></tr>
+    <tr><td><b>⑦ 투고 전 점검</b></td><td><code>/check-reporting</code> · <code>/self-review</code></td><td>STROBE·CONSORT·PRISMA 등 보고지침 항목 점검과 심사자 시각 자가점검</td></tr>
+    <tr><td><b>⑧ 리뷰 대응</b></td><td><code>/revise</code></td><td>심사 의견을 분류해 point-by-point 답변서를 만들고, 답변서가 주장한 수정이 원고에 실제로 있는지 대조합니다</td></tr>
+  </table>
+
+  <p><b>설치 한 줄</b> — 터미널: <code>npx medsci-skills install</code> · Claude Code 안에서: <code>/plugin marketplace add Aperivue/medsci-skills</code></p>
+
+  <div class="warn">
+    ⚠️ <b>알아둘 한계</b> (2026-09 실측) — 철회 논문 확인이 없고, 한국 KCI 논문은 조회하지 않으며, 문체 검사는 영어 원고 전용입니다. 체크리스트 일부는 저작권 확인이 진행 중입니다. <b>국문 논문과 KCI 인용은 별도로 확인</b>하셔야 하고, 도구가 통과라고 해도 「검증 보고 규칙」대로 숫자를 되물으세요.
+  </div>
+
+  <p class="step-note">저장소: <a href="https://github.com/Aperivue/medsci-skills" target="_blank" rel="noopener">github.com/Aperivue/medsci-skills</a> · 논문: arXiv 2606.09500</p>
+</div>
+<!-- shared:open-tools:end -->
+
 <h2><span class="n">13</span>막히면 <span class="sub">· 병용 트랙에서 자주 나오는 것</span></h2>
 
 <table>
@@ -632,6 +656,41 @@ force push, DB 마이그레이션은 시도 전에 먼저 확인받는다.</code
 </div>
 <!-- shared:feasibility-rule:end -->
 
+<!-- shared:verify-report-rule:begin -->
+<h3>🧪 AI가 "검사했습니다"라고 할 때 — 이것도 붙여넣으세요</h3>
+
+<p class="what">두 번째로 자주 겪는 실패는 <b>검사를 하지 못했는데 "통과"라고 답하는 것</b>입니다. 검사 결과에 상태와 숫자를 붙이게 하는 규칙입니다.</p>
+
+<div class="cmd big"><button class="copy" onclick="copyCmd(this)">복사</button>
+  <code class="pre">## 검증 보고 규칙
+
+검사 결과는 네 가지 상태로만 보고한다.
+- PASS: 검사했고 문제 없음
+- FAIL: 검사했고 문제 발견
+- INCOMPLETE: 검사하지 못함 (입력 없음, 도구 없음, 네트워크 없음)
+- N/A: 해당 없음
+검사하지 못한 것을 PASS라고 쓰지 않는다. "확인했습니다"만으로는 보고가 아니다.
+
+모든 검사 보고에는 숫자를 붙인다.
+- 대상: 검사해야 할 항목 수 (예: 참고문헌 32건)
+- 검사: 실제로 대조한 수 (예: 29건)
+- 미검사: 못 한 수와 이유 (예: 3건, DOI 없음)
+- 발견: 문제 수와 위치
+
+인용은 존재 여부만이 아니라 저자·연도·저널이 원고와 같은지,
+철회(retraction)되지 않았는지까지 본다.
+재계산할 수 있는 숫자는 재계산한다 (백분율과 분모, 표 합계, p값과 검정통계량).
+말로만 보고하지 말고 도구 출력(실행한 명령, 결과 파일)을 함께 보여라.</code></div>
+
+<div class="note">
+  📌 앞의 규칙과 같은 파일(<code>AGENTS.md</code> / <code>CLAUDE.md</code>)에 이어서 넣으시면 됩니다.
+</div>
+
+<div class="star">
+  ⭐ <b>목표는 검사 개수가 아니라 "검사 안 했는데 통과"가 0건인 것</b>입니다. ⑤ 인용 검증과 ⑦ 투고 전 점검에서 도구가 통과라고 하면 <b>"몇 건 중 몇 건을 대조했나"</b>를 되물으세요. 「공개 도구」 절의 도구도 같은 원칙(검사 못 함 = 통과 아님)을 코드로 강제합니다.
+</div>
+<!-- shared:verify-report-rule:end -->
+
 <h2><span class="n">15</span>한 줄 정리</h2>
 
 <div class="card">
@@ -668,7 +727,7 @@ force push, DB 마이그레이션은 시도 전에 먼저 확인받는다.</code
 </div>
 
 <!-- shared:footer:begin -->
-<footer>AI 활용 논문 작성 — 기획부터 투고·게재까지 · 단국대 AI 논문 워크숍 · 안상현 · v1.0 (2026-09)<br>이 페이지는 회차마다 피드백을 반영해 갱신됩니다.</footer>
+<footer>AI 활용 논문 작성 — 기획부터 투고·게재까지 · 단국대 AI 논문 워크숍 · 안상현 · v1.2 (2026-09)<br>이 페이지는 회차마다 피드백을 반영해 갱신됩니다.</footer>
 <!-- shared:footer:end -->
 
 </div>
