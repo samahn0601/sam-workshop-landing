@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>학생 자료 받기 · 내 질문을, 내가 책임지는 논문으로</title>
+<meta name="description" content="예과 2학년 AI 논문 워크숍 학생 자료입니다. student-collab.zip 하나를 받아 압축을 풀고 START_HERE.html을 여세요.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:,">
+<meta property="og:title" content="학생 자료 받기 · AI 논문 워크숍">
+<meta property="og:description" content="student-collab.zip 하나를 받아 압축을 풀고 START_HERE.html을 여세요. 노트북에서 여는 주소입니다.">
+<style>
+:root{--bg:#f7f6ed;--ink:#183d34;--muted:#526e5a;--line:#d6ddcc;--panel:#fafbf2;--card:#ffffff;--dark:#173f35;--on-dark:#f2f6e6;--on-dark-muted:#c9d8c4;--accent:#da9552;--warn-bg:#fff1d6;--warn-line:#b9892b;--warn-ink:#4b3410;--code:#173f35}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic","Apple SD Gothic Neo",Arial,sans-serif}
+h1,h2,h3,p,li{word-break:keep-all;overflow-wrap:break-word}
+a{color:inherit;text-underline-offset:4px}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px}
+.hero{background:var(--dark);color:var(--on-dark);padding:44px 0 40px}
+.kicker{margin:0 0 14px;color:var(--accent);font-size:13px;font-weight:700;letter-spacing:.12em}
+.hero h1{margin:0 0 14px;font-size:clamp(30px,5vw,44px);line-height:1.25;letter-spacing:-.04em}
+.lead{margin:0 0 24px;max-width:640px;color:var(--on-dark-muted);font-size:17px}
+.lead b{color:var(--on-dark)}
+.cta{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px}
+.button{display:inline-block;border:0;border-radius:10px;padding:13px 20px;font:inherit;font-weight:700;text-decoration:none;cursor:pointer}
+.button.primary{background:var(--accent);color:#2a1a08}
+.button.primary:hover{background:#e7a96b}
+.button.dark{background:var(--dark);color:var(--on-dark)}
+.button.dark:hover{background:#21574a}
+.size{color:var(--on-dark-muted);font-size:14px}
+main{padding:8px 0 56px}
+.addr{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;margin:28px 0 8px;padding:22px 24px;background:var(--card);border:1px solid var(--line);border-radius:14px}
+.addr h2{margin:0 0 6px;font-size:19px;line-height:1.4}
+.addr p{margin:0 0 10px;color:var(--muted);font-size:15px}
+.url{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:0!important}
+.url code{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:6px 10px;color:var(--ink);font:600 15px/1.5 ui-monospace,Consolas,Menlo,monospace;overflow-wrap:anywhere}
+.url button{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:8px;padding:6px 12px;font:inherit;font-size:14px;font-weight:600;cursor:pointer}
+.qr{margin:0;text-align:center;color:var(--muted);font-size:12px}
+.qr svg{display:block;width:132px;height:132px;margin:0 auto 4px}
+section.block{margin-top:44px}
+section.block>h2{display:flex;align-items:center;gap:12px;margin:0 0 14px;font-size:24px;line-height:1.35;letter-spacing:-.03em}
+.n{flex:none;display:inline-grid;place-items:center;width:36px;height:36px;border-radius:10px;background:var(--dark);color:var(--on-dark);font-size:17px}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
+.step{min-width:0;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 24px}
+.step h3{display:flex;align-items:center;gap:12px;margin:0 0 8px;font-size:20px;line-height:1.4}
+.step p{margin:0 0 10px}
+.step ul{margin:6px 0 10px;padding-left:20px}
+.step li{margin:6px 0}
+.tree{margin:12px 0;padding:14px 16px;background:var(--code);color:var(--on-dark);border-radius:10px;font:14px/1.7 ui-monospace,Consolas,Menlo,"Malgun Gothic",monospace;white-space:pre;overflow-x:auto}
+.tree em{font-style:normal;color:var(--accent)}
+.warn{margin:12px 0 0;padding:12px 16px;background:var(--warn-bg);border-left:4px solid var(--warn-line);border-radius:8px;color:var(--warn-ink);font-size:15px}
+.note{margin:12px 0 0;padding:12px 16px;background:var(--panel);border-left:4px solid var(--ink);border-radius:8px;font-size:15px}
+.checks{margin:0;padding-left:20px}
+.checks li{margin:8px 0}
+.links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:14px 0 10px}
+.links a{display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;text-decoration:none;font-weight:700}
+.links a span{display:block;margin-top:2px;color:var(--muted);font-size:13px;font-weight:400}
+.links a:hover,.preview:hover{border-color:var(--ink)}
+.small{color:var(--muted);font-size:14px}
+.preview{display:block;margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 22px;text-decoration:none}
+.preview b{display:block;font-size:17px}
+.preview span{display:block;margin-top:4px;color:var(--muted);font-size:15px}
+footer{border-top:1px solid var(--line);padding:22px 0 40px;color:var(--muted);font-size:13px}
+footer code{font-size:12px;overflow-wrap:anywhere}
+@media(max-width:760px){
+ .hero{padding:34px 0 30px}
+ .lead{font-size:16px}
+ .addr{grid-template-columns:minmax(0,1fr);padding:18px}
+ .qr{display:none}
+ .step{padding:18px}
+ .links{grid-template-columns:minmax(0,1fr)}
+ section.block>h2{font-size:21px}
+}
+</style>
+</head>
+<body>
+<header class="hero">
+ <div class="wrap">
+  <p class="kicker">PREMED · YEAR 2 · AI 논문 워크숍 · 180분</p>
+  <h1>내 질문을,<br>내가 책임지는 논문으로</h1>
+  <p class="lead">수업 자료는 ZIP 파일 하나입니다. 내려받아 압축을 풀고 그 안의 <b>START_HERE.html</b>을 열면, 그다음부터는 그 안내를 위에서부터 따라가면 됩니다.</p>
+  <div class="cta">
+   <a class="button primary" href="/premed/student-collab.zip" download>student-collab.zip 내려받기</a>
+   <span class="size">ZIP 파일 · 89 KB</span>
+  </div>
+ </div>
+</header>
+
+<main class="wrap">
+ <section class="addr" aria-labelledby="addr-title">
+  <div>
+   <h2 id="addr-title">노트북 브라우저에서 이 주소를 여세요</h2>
+   <p>실습은 노트북의 데스크톱 앱과 폴더로 합니다. 휴대전화로 링크를 받았다면 노트북 브라우저 주소창에 아래 주소를 입력하세요.</p>
+   <p class="url"><code>sam-workshop-landing.vercel.app/premed</code><button type="button" data-copy>주소 복사</button></p>
+  </div>
+  <figure class="qr" aria-hidden="true"><svg viewBox="0 0 37 37" class="segno"><title>QR: https://sam-workshop-landing.vercel.app/premed/</title><path fill="#fff" d="M0 0h37v37h-37z"/><path class="qrline" stroke="#183d34" d="M2 2.5h7m1 0h3m2 0h2m1 0h6m1 0h1m2 0h7m-33 1h1m5 0h1m1 0h1m3 0h2m4 0h1m3 0h3m1 0h1m5 0h1m-33 1h1m1 0h3m1 0h1m2 0h1m5 0h1m1 0h1m1 0h2m2 0h2m1 0h1m1 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m1 0h2m2 0h1m1 0h1m1 0h1m2 0h2m1 0h1m1 0h1m1 0h1m1 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m3 0h2m2 0h1m5 0h2m2 0h1m1 0h1m1 0h3m1 0h1m-33 1h1m5 0h1m2 0h4m1 0h1m3 0h4m2 0h1m1 0h1m5 0h1m-33 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-25 1h1m2 0h2m1 0h1m2 0h1m2 0h1m1 0h3m-25 1h1m1 0h2m1 0h3m1 0h1m1 0h2m1 0h1m1 0h4m1 0h1m1 0h2m1 0h1m2 0h1m1 0h2m-31 1h1m2 0h1m1 0h1m2 0h1m7 0h2m1 0h3m2 0h2m1 0h2m1 0h1m-33 1h2m4 0h2m3 0h2m1 0h1m1 0h2m2 0h1m1 0h3m1 0h4m1 0h2m-33 1h1m2 0h1m1 0h1m1 0h1m1 0h7m2 0h2m2 0h1m1 0h2m1 0h1m1 0h1m2 0h1m-32 1h2m2 0h2m1 0h2m1 0h2m2 0h1m2 0h1m4 0h2m3 0h2m-27 1h1m1 0h1m2 0h2m1 0h1m1 0h1m2 0h3m5 0h1m2 0h1m3 0h1m-30 1h5m3 0h2m1 0h1m1 0h2m4 0h2m1 0h1m1 0h1m1 0h2m-30 1h3m7 0h1m2 0h1m2 0h1m2 0h3m3 0h3m1 0h2m-30 1h1m2 0h1m1 0h4m1 0h1m3 0h1m2 0h2m1 0h3m1 0h2m1 0h3m-29 1h1m1 0h1m4 0h3m3 0h1m1 0h1m2 0h4m2 0h1m1 0h2m1 0h2m-33 1h1m2 0h2m1 0h2m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m2 0h1m1 0h1m2 0h4m1 0h2m-32 1h1m1 0h2m1 0h1m7 0h4m2 0h1m2 0h4m2 0h1m-28 1h3m2 0h1m2 0h1m1 0h1m1 0h3m2 0h1m1 0h1m1 0h2m3 0h1m1 0h3m-32 1h3m2 0h1m7 0h1m1 0h1m1 0h2m4 0h1m1 0h2m2 0h1m2 0h1m-31 1h2m2 0h6m1 0h2m1 0h1m1 0h1m2 0h1m1 0h1m2 0h2m1 0h1m1 0h2m-32 1h3m1 0h1m1 0h1m2 0h2m1 0h1m2 0h1m2 0h1m3 0h1m2 0h1m1 0h1m3 0h1m-33 1h1m2 0h1m2 0h1m1 0h1m1 0h4m1 0h1m1 0h1m4 0h1m1 0h5m2 0h2m-25 1h4m1 0h5m1 0h1m2 0h3m3 0h2m1 0h1m-32 1h7m1 0h5m1 0h1m4 0h1m2 0h3m1 0h1m1 0h1m-29 1h1m5 0h1m1 0h1m2 0h2m1 0h2m5 0h1m1 0h2m3 0h4m-32 1h1m1 0h3m1 0h1m3 0h1m2 0h1m1 0h1m1 0h1m1 0h2m2 0h6m1 0h3m-33 1h1m1 0h3m1 0h1m1 0h2m2 0h3m3 0h3m1 0h2m3 0h1m1 0h4m-33 1h1m1 0h3m1 0h1m1 0h2m1 0h1m1 0h2m4 0h1m4 0h1m1 0h2m-28 1h1m5 0h1m3 0h1m2 0h5m1 0h1m2 0h1m1 0h1m1 0h3m3 0h1m-33 1h7m1 0h3m3 0h5m2 0h1m1 0h1m1 0h1m2 0h1m1 0h1"/></svg><figcaption>휴대전화로 스캔</figcaption></figure>
+ </section>
+
+ <section class="block" aria-labelledby="steps-title">
+  <h2 id="steps-title">받는 순서는 세 단계입니다</h2>
+  <ol class="steps">
+   <li class="step">
+    <h3><span class="n">1</span>student-collab.zip 내려받기</h3>
+    <p>학생 안내(START_HERE.html), 실행기(pipeline.py), 단계별 요청문(prompts 폴더)이 모두 이 파일 하나에 들어 있습니다. 내려받은 파일은 보통 다운로드 폴더에 저장됩니다.</p>
+    <a class="button dark" href="/premed/student-collab.zip" download>student-collab.zip 내려받기</a>
+   </li>
+   <li class="step">
+    <h3><span class="n">2</span>압축 풀기</h3>
+    <ul>
+     <li><b>Windows</b>: 다운로드 폴더에서 student-collab.zip을 오른쪽 클릭하고 <b>모두 추출</b> → <b>추출</b>을 누릅니다. 다운로드 폴더 안에 student-collab 폴더가 생깁니다.</li>
+     <li><b>macOS</b>: 다운로드 폴더에서 student-collab.zip을 더블클릭합니다. Safari가 내려받으면서 이미 풀었다면 생긴 student-collab 폴더를 그대로 씁니다.</li>
+     <li><b>반디집·7-Zip</b>: ‘여기에 풀기’가 아니라 ‘student-collab\에 풀기’를 고릅니다. ‘여기에 풀기’는 파일을 다운로드 폴더에 흩어 놓습니다.</li>
+    </ul>
+    <p class="warn">Windows에서 ZIP을 더블클릭만 하면 압축 안을 들여다보는 창이 열릴 뿐, 파일이 풀린 것은 아닙니다. OneDrive 안의 깊은 폴더가 아니라 다운로드 폴더처럼 짧은 위치에 풀어야 Windows의 경로 길이 제한(260자)에 걸리지 않습니다. 이미 작업한 폴더가 있다면 지우거나 ZIP으로 덮어쓰지 마세요.</p>
+   </li>
+   <li class="step">
+    <h3><span class="n">3</span>START_HERE.html 열기</h3>
+    <p>풀린 student-collab 폴더에서 START_HERE.html을 더블클릭하면 브라우저에 학생 안내가 열립니다. 맨 위에 노란 경고가 없고 같은 폴더에 pipeline.py가 보이면 제대로 푼 것입니다.</p>
+<pre class="tree">다운로드/
+└─ student-collab/      <em>← 데스크톱 앱에 연결할 폴더</em>
+   ├─ START_HERE.html   <em>← 브라우저로 여는 학생 안내</em>
+   ├─ pipeline.py       <em>← 함께 보여야 합니다</em>
+   ├─ prompts/ · core/
+   └─ incoming/         <em>← 드래프트 사본을 넣는 곳</em></pre>
+    <p class="note">앱 설치와 로그인, 폴더 연결, 첫 요청, H1–H5에서 붙일 문장, 막혔을 때 할 일이 모두 START_HERE.html에 있습니다. 수업은 이 안내를 기준으로 진행합니다.</p>
+   </li>
+  </ol>
+ </section>
+
+ <section class="block" aria-labelledby="prep-title">
+  <h2 id="prep-title">수업 전에 확인할 것</h2>
+  <ul class="checks">
+   <li><b>노트북과 충전기</b>를 가져옵니다. 태블릿이나 휴대전화만으로는 로컬 실행 실습을 하기 어렵습니다.</li>
+   <li><b>ChatGPT 또는 Claude 중 1개 이상의 유료 구독 계정</b>과 로그인 수단이 필요합니다. 두 개가 있으면 서로 다른 제공자의 비평을 경험합니다. API 키나 별도 API 결제는 필요 없습니다.</li>
+   <li>현재 요금제에서 <b>로컬 폴더 작업</b>을 쓸 수 있는지 확인합니다. 2026-10-11 공식 안내 기준으로 ChatGPT 데스크톱 앱의 로컬 작업은 Plus·Pro·Business·Edu·Enterprise 요금제 표에 있고, Free·Go는 일부 모델만 순차 제공으로 표시됩니다. Claude의 Code 탭은 Pro·Max·Team·Enterprise가 필요합니다.</li>
+   <li><b>Windows 또는 macOS 노트북</b>을 씁니다. 기관 관리 기기는 설치 권한을 미리 확인합니다. Intel Mac이면 강사에게 미리 알려 주세요. 2026-10-11 공식 안내에서 ChatGPT 앱의 macOS 다운로드는 Apple Silicon용으로 표시되어 있었습니다. Windows ARM 노트북은 Claude 앱의 ARM64 설치 파일을 씁니다.</li>
+   <li><b>관심 있는 논문 주제 한 문장</b>, 또는 AI 서비스와 함께 써도 되는 권한이 확인된 드래프트 사본 한 문단을 준비합니다. 주제만 있어도 충분합니다.</li>
+  </ul>
+
+  <h3>미리 설치하려면 (필수 아님)</h3>
+  <div class="links">
+   <a href="https://chatgpt.com/download/" target="_blank" rel="noreferrer">ChatGPT 데스크톱 앱 ↗<span>Codex 로컬 폴더 작업 포함</span></a>
+   <a href="https://code.claude.com/docs/en/desktop-quickstart" target="_blank" rel="noreferrer">Claude 데스크톱 앱 ↗<span>Code 탭 시작 안내</span></a>
+   <a href="https://www.python.org/downloads/" target="_blank" rel="noreferrer">Python 3.11 이상 ↗<span>공식 설치 파일</span></a>
+  </div>
+  <p class="small">Windows는 Python install manager를 설치한 뒤 터미널에서 python을 한 번 입력하면 최신 Python을 내려받습니다. 두 구독이 있어도 로컬 폴더에는 주 작업 앱 한 곳만 연결하고, 다른 서비스는 비평을 받을 새 대화로만 씁니다. 사전 설치는 참가 조건이 아니며, 설치와 로그인은 수업 시간에 함께 합니다.</p>
+
+  <p class="warn">환자 식별정보, 비밀번호·API 키 같은 비밀값, 허가 없는 공동저자 원고, 기관 기밀은 가져오지 마세요. 로컬 폴더를 쓰는 데스크톱 AI도 파일 내용을 외부 서비스에서 처리할 수 있습니다. 권한이 애매하면 주제를 추상화해 준비하고, 주제가 없으면 수업에서 주는 예시를 씁니다.</p>
+ </section>
+
+ <section class="block" aria-labelledby="goal-title">
+  <h2 id="goal-title">오늘의 목표</h2>
+  <p>3시간 안에 논문 전체를 자동으로 완성하는 수업이 아닙니다. 주장 1개, 출처 1개, 짧은 문단 1개로 질문→근거→작성→비평→수정·공개(H1–H5)를 한 번 끝까지 해 보고, AI에게 맡긴 일과 내가 판단한 일을 기록으로 남깁니다.</p>
+  <a class="preview" href="/premed/collab-anatomy.html"><b>미리 보기 (선택): 실행기를 갑문 그림으로 보기 →</b><span>AI는 칸에 물(단계 파일)을 채우고, 다음 칸으로 가는 수문은 내가 판단을 저장해야 열립니다. 수업에서 함께 봅니다.</span></a>
+ </section>
+</main>
+
+<footer>
+ <div class="wrap">Student Collab v2.4 · 자료 빌드 2026-10-12 · student-collab.zip 91,138바이트 · SHA-256 <code>f5ebc188a8d32bb0fcd48704e11ec7325df3bd01254b66e4b5e5d505f417b062</code></div>
+</footer>
+
+<script>
+(function(){
+ var btn=document.querySelector('[data-copy]');
+ if(!btn)return;
+ var url='https://sam-workshop-landing.vercel.app/premed/';
+ function done(text){btn.textContent=text;setTimeout(function(){btn.textContent='주소 복사';},1800);}
+ btn.addEventListener('click',function(){
+  if(navigator.clipboard&&window.isSecureContext){
+   navigator.clipboard.writeText(url).then(function(){done('복사했습니다');},function(){done('주소를 직접 선택하세요');});
+  }else{done('주소를 직접 선택하세요');}
+ });
+})();
+</script>
+</body>
+</html>
