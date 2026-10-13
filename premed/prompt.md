@@ -1,6 +1,6 @@
 # 2026년 10월 14일 의대생 AI 논문 워크숍 — 준비 프롬프트
 
-이 파일과 같은 로컬 작업 폴더에 `pipeline.zip`이 있습니다. 학생이 “프롬프트대로 준비하고 시작해줘”라고 하면 이 지시를 따라 주세요.
+이 파일과 같은 로컬 작업 폴더에 `pipeline.zip`이 있습니다. 학생이 “prompt.md를 읽고 그대로 준비해서 시작해 줘.” 또는 “프롬프트대로 준비하고 시작해줘”라고 하면 이 지시를 따라 주세요.
 
 수업 패키지 기대값: `pipeline.zip`, 137,215 bytes, SHA-256 `acfdd46638db9fbdfd3bc2a861e3fbab60afc1ae0dceb5af13364d1128b196ae`. ZIP 안의 설치 도구 `premed-workshop/install.py` SHA-256: `811e9ae15c94acdedf90d33dfc69e6c5ded8473e270f0518485ebb3f372c5564`. 게시 파일이 이 값과 다르면 실행을 멈추고 강사에게 알립니다.
 

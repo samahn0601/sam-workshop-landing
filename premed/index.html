@@ -2,61 +2,157 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>2026.10.14 의대생 AI 논문 워크숍 준비</title>
-<meta name="description" content="프롬프트와 수업 패키지를 받아 Codex Local 또는 Claude Code Local에서 준비를 시작합니다.">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>학생 자료 받기 · AI와 함께, 내 첫 논문 작업</title>
+<meta name="description" content="2026년 10월 14일 의대생 AI 논문 워크숍 학생 자료입니다. 파일 두 개를 받고 데스크톱 앱에 한 문장을 보내면 AI가 수업 폴더를 준비합니다.">
 <meta name="robots" content="noindex">
 <link rel="icon" href="data:,">
+<meta property="og:title" content="학생 자료 받기 · AI 논문 워크숍">
+<meta property="og:description" content="prompt.md와 pipeline.zip을 노트북에서 받고, 데스크톱 앱에 한 문장을 보내세요.">
 <style>
-:root{color-scheme:light;--bg:#f5f4ed;--paper:#fffef9;--ink:#183d33;--muted:#576b62;--line:#d9e0d6;--green:#174d3e;--lime:#d7ee78;--blue:#2456b7;--soft:#ebf1e8;--shadow:0 18px 45px rgba(21,54,42,.08)}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}a{color:inherit}header,main,footer{width:min(900px,calc(100% - 32px));margin:auto}.mast{display:flex;justify-content:space-between;align-items:center;padding:16px 0;color:var(--muted);font-size:.9rem}.brand{font-weight:800;color:var(--green)}.hero{background:var(--green);color:#f7f8ef;border-radius:24px;padding:clamp(24px,4vw,42px);box-shadow:var(--shadow)}.eyebrow{color:#d7ee78;font-size:.76rem;font-weight:800;letter-spacing:.12em}.hero h1{font-size:clamp(2rem,5vw,3.15rem);line-height:1.08;letter-spacing:-.04em;margin:13px 0}.hero p{max-width:700px;color:#e4ebdf;margin:0;font-size:1.02rem}.section{padding:25px 0}.section h2{font-size:1.45rem;letter-spacing:-.025em;margin:0 0 3px}.lede{margin:0 0 12px;color:var(--muted);font-size:.94rem}.downloads{display:grid;grid-template-columns:1fr 1fr;gap:12px}.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:17px;box-shadow:0 5px 17px rgba(21,54,42,.035)}.download h3{font-size:1.05rem;line-height:1.3;margin:0 0 4px}.download p{font-size:.88rem;margin:0 0 12px;color:var(--muted)}.button{display:flex;min-height:48px;align-items:center;justify-content:center;border-radius:11px;background:var(--lime);color:var(--green);font-weight:850;text-decoration:none;padding:10px 14px;text-align:center}.button.secondary{background:#e7edfb;color:#1849a5}.button:hover{filter:brightness(.97)}a:focus-visible,summary:focus-visible{outline:3px solid #ee9147;outline-offset:3px}.callout{border-left:4px solid #d6b355;background:#fff7e4;border-radius:0 11px 11px 0;padding:10px 14px;margin:11px 0 0;color:#50452f}.callout strong{display:block;font-size:.84rem}.quote{font-weight:750}.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.number{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--lime);font-weight:850;color:var(--green)}.step h3{font-size:1rem;line-height:1.35;margin:10px 0 4px}.step p{color:var(--muted);margin:0;font-size:.9rem}.path{font-family:ui-monospace,Consolas,monospace}.subtle{color:var(--muted);font-size:.9rem}details{background:var(--paper);border:1px solid var(--line);border-radius:13px;padding:13px 16px;margin-top:12px}summary{font-weight:750;cursor:pointer}.details-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding-top:12px}.detail-item{background:var(--soft);border-radius:11px;padding:12px}.detail-item strong{display:block;font-size:.92rem;margin-bottom:3px}.detail-item p{margin:0;color:var(--muted);font-size:.86rem}.detail-item a,.material-links a{color:var(--blue);font-weight:700}.material-links{display:flex;gap:10px 18px;flex-wrap:wrap;padding-top:12px}.materials{border-top:1px solid var(--line);padding:8px 0 22px}footer{padding:0 0 24px;color:var(--muted);font-size:.83rem}@media(max-width:680px){header,main,footer{width:min(100% - 24px,560px)}.mast{font-size:.8rem}.hero{border-radius:20px;padding:23px}.hero h1{font-size:2.08rem;margin:10px 0}.hero p{font-size:.95rem}.section{padding:21px 0}.section h2{font-size:1.3rem}.downloads,.steps,.details-grid{grid-template-columns:1fr}.downloads{gap:9px}.card{padding:15px}.download p{margin-bottom:9px}.button{min-height:46px}.step h3{margin-top:8px}}
+:root{--bg:#fbf6ee;--ink:#173548;--muted:#526471;--line:#d2ddd8;--panel:#f4f8f3;--card:#ffffff;--dark:#173548;--on-dark:#f4f1ea;--on-dark-muted:#c6d4dc;--teal:#087e78;--accent:#e57538;--warn-bg:#fff1d6;--warn-line:#b9892b;--warn-ink:#4b3410}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic","Apple SD Gothic Neo",Arial,sans-serif}
+h1,h2,h3,p,li{word-break:keep-all;overflow-wrap:break-word}
+a{color:inherit;text-underline-offset:4px}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+.wrap{max-width:880px;margin:0 auto;padding:0 20px}
+.hero{background:var(--dark);color:var(--on-dark);padding:40px 0 36px}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:28px;align-items:center}
+.kicker{margin:0 0 12px;color:#f0a06e;font-size:13px;font-weight:700;letter-spacing:.12em}
+.hero h1{margin:0 0 12px;font-size:clamp(28px,4.6vw,42px);line-height:1.25;letter-spacing:-.04em}
+.lead{margin:0 0 22px;color:var(--on-dark-muted);font-size:17px}
+.downloads{display:flex;flex-wrap:wrap;gap:12px}
+.dl{display:inline-flex;flex-direction:column;min-width:210px;padding:12px 18px;border-radius:12px;background:var(--accent);color:#2a1606;text-decoration:none;font-weight:800;font-size:18px;line-height:1.35}
+.dl small{font-weight:600;font-size:13px;opacity:.85}
+.dl:hover{background:#f08a52}
+.hint{margin:14px 0 0;color:var(--on-dark-muted);font-size:14px}
+.qr{margin:0;text-align:center;color:var(--on-dark-muted);font-size:12px}
+.qr svg{display:block;width:150px;height:150px;margin:0 auto 6px;border-radius:10px;background:#fff;padding:6px}
+main{padding:6px 0 56px}
+.say{margin:26px 0 6px;padding:20px 22px;background:var(--card);border:1px solid var(--line);border-left:6px solid var(--teal);border-radius:14px}
+.say h2{margin:0 0 6px;font-size:18px;color:var(--teal)}
+.say-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.say code{flex:1 1 320px;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font:700 17px/1.5 ui-monospace,Consolas,"Malgun Gothic",monospace;overflow-wrap:anywhere}
+button.copy{border:0;border-radius:10px;background:var(--teal);color:#fff;padding:10px 16px;font:inherit;font-weight:700;cursor:pointer}
+.say p{margin:8px 0 0;color:var(--muted);font-size:14px}
+section.block{margin-top:40px}
+section.block>h2{display:flex;align-items:center;gap:12px;margin:0 0 14px;font-size:23px;line-height:1.35;letter-spacing:-.03em}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:minmax(0,1fr);gap:14px}
+.step{min-width:0;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 22px}
+.step h3{display:flex;align-items:center;gap:12px;margin:0 0 6px;font-size:19px;line-height:1.4}
+.n{flex:none;display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--dark);color:var(--on-dark);font-size:16px}
+.step p{margin:0 0 8px}
+.step ul{margin:4px 0 8px;padding-left:20px}
+.step li{margin:4px 0}
+.links{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0 0}
+.links a{display:inline-block;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px 12px;text-decoration:none;font-weight:700;font-size:15px}
+.links a:hover{border-color:var(--ink)}
+.warn{margin:12px 0 0;padding:12px 16px;background:var(--warn-bg);border-left:4px solid var(--warn-line);border-radius:8px;color:var(--warn-ink);font-size:15px}
+.note{margin:12px 0 0;padding:12px 16px;background:var(--panel);border-left:4px solid var(--teal);border-radius:8px;font-size:15px}
+.checks{margin:0;padding-left:20px}.checks li{margin:6px 0}
+.small{color:var(--muted);font-size:14px}
+footer{border-top:1px solid var(--line);padding:20px 0 36px;color:var(--muted);font-size:13px}
+footer code{font-size:12px;overflow-wrap:anywhere}
+@media(max-width:760px){
+ .hero{padding:30px 0 28px}
+ .hero-grid{grid-template-columns:minmax(0,1fr)}
+ .qr{display:none}
+ .dl{min-width:0;flex:1 1 100%}
+ .step{padding:16px 18px}
+}
 </style>
 </head>
 <body>
-<header class="mast"><div class="brand">의대생 AI 논문 워크숍</div><div>2026년 10월 14일</div></header>
-<main>
-  <section class="hero" aria-labelledby="page-title">
-    <div class="eyebrow">DESKTOP AI · LOCAL WORKSPACE</div>
-    <h1 id="page-title">파일 두 개를 받고,<br>준비는 AI에게 맡기세요.</h1>
-    <p>Codex Local 또는 Claude Code Local에서 두 파일을 읽게 한 뒤, 한 문장을 보내면 AI가 현재 작업 폴더 안에 수업 환경을 준비합니다.</p>
-  </section>
+<header class="hero">
+ <div class="wrap hero-grid">
+  <div>
+   <p class="kicker">의대생 AI 논문 워크숍 · 2026.10.14</p>
+   <h1>파일 두 개를 받고,<br>준비는 AI에게 맡기세요</h1>
+   <p class="lead">노트북에서 두 파일을 받은 뒤, 데스크톱 앱에서 다운로드 폴더를 열고 아래 문장 하나를 보내면 AI가 수업 폴더를 만들고 준비를 마칩니다.</p>
+   <div class="downloads">
+    <a class="dl" href="/premed/prompt.md" download>① prompt.md 받기<small>AI가 읽을 준비 안내</small></a>
+    <a class="dl" href="/premed/pipeline.zip" download>② pipeline.zip 받기<small>수업 파이프라인 · 압축 풀지 않기</small></a>
+   </div>
+   <p class="hint">두 파일 모두 다운로드 폴더에 그대로 둡니다. 주소: <b>sam-workshop-landing.vercel.app/premed</b></p>
+  </div>
+  <figure class="qr" aria-hidden="true"><svg viewBox="0 0 37 37" class="segno"><title>QR: https://sam-workshop-landing.vercel.app/premed/</title><path fill="#fff" d="M0 0h37v37h-37z"/><path class="qrline" stroke="#173548" d="M2 2.5h7m1 0h3m2 0h2m1 0h6m1 0h1m2 0h7m-33 1h1m5 0h1m1 0h1m3 0h2m4 0h1m3 0h3m1 0h1m5 0h1m-33 1h1m1 0h3m1 0h1m2 0h1m5 0h1m1 0h1m1 0h2m2 0h2m1 0h1m1 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m1 0h2m2 0h1m1 0h1m1 0h1m2 0h2m1 0h1m1 0h1m1 0h1m1 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m3 0h2m2 0h1m5 0h2m2 0h1m1 0h1m1 0h3m1 0h1m-33 1h1m5 0h1m2 0h4m1 0h1m3 0h4m2 0h1m1 0h1m5 0h1m-33 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-25 1h1m2 0h2m1 0h1m2 0h1m2 0h1m1 0h3m-25 1h1m1 0h2m1 0h3m1 0h1m1 0h2m1 0h1m1 0h4m1 0h1m1 0h2m1 0h1m2 0h1m1 0h2m-31 1h1m2 0h1m1 0h1m2 0h1m7 0h2m1 0h3m2 0h2m1 0h2m1 0h1m-33 1h2m4 0h2m3 0h2m1 0h1m1 0h2m2 0h1m1 0h3m1 0h4m1 0h2m-33 1h1m2 0h1m1 0h1m1 0h1m1 0h7m2 0h2m2 0h1m1 0h2m1 0h1m1 0h1m2 0h1m-32 1h2m2 0h2m1 0h2m1 0h2m2 0h1m2 0h1m4 0h2m3 0h2m-27 1h1m1 0h1m2 0h2m1 0h1m1 0h1m2 0h3m5 0h1m2 0h1m3 0h1m-30 1h5m3 0h2m1 0h1m1 0h2m4 0h2m1 0h1m1 0h1m1 0h2m-30 1h3m7 0h1m2 0h1m2 0h1m2 0h3m3 0h3m1 0h2m-30 1h1m2 0h1m1 0h4m1 0h1m3 0h1m2 0h2m1 0h3m1 0h2m1 0h3m-29 1h1m1 0h1m4 0h3m3 0h1m1 0h1m2 0h4m2 0h1m1 0h2m1 0h2m-33 1h1m2 0h2m1 0h2m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m2 0h1m1 0h1m2 0h4m1 0h2m-32 1h1m1 0h2m1 0h1m7 0h4m2 0h1m2 0h4m2 0h1m-28 1h3m2 0h1m2 0h1m1 0h1m1 0h3m2 0h1m1 0h1m1 0h2m3 0h1m1 0h3m-32 1h3m2 0h1m7 0h1m1 0h1m1 0h2m4 0h1m1 0h2m2 0h1m2 0h1m-31 1h2m2 0h6m1 0h2m1 0h1m1 0h1m2 0h1m1 0h1m2 0h2m1 0h1m1 0h2m-32 1h3m1 0h1m1 0h1m2 0h2m1 0h1m2 0h1m2 0h1m3 0h1m2 0h1m1 0h1m3 0h1m-33 1h1m2 0h1m2 0h1m1 0h1m1 0h4m1 0h1m1 0h1m4 0h1m1 0h5m2 0h2m-25 1h4m1 0h5m1 0h1m2 0h3m3 0h2m1 0h1m-32 1h7m1 0h5m1 0h1m4 0h1m2 0h3m1 0h1m1 0h1m-29 1h1m5 0h1m1 0h1m2 0h2m1 0h2m5 0h1m1 0h2m3 0h4m-32 1h1m1 0h3m1 0h1m3 0h1m2 0h1m1 0h1m1 0h1m1 0h2m2 0h6m1 0h3m-33 1h1m1 0h3m1 0h1m1 0h2m2 0h3m3 0h3m1 0h2m3 0h1m1 0h4m-33 1h1m1 0h3m1 0h1m1 0h2m1 0h1m1 0h2m4 0h1m4 0h1m1 0h2m-28 1h1m5 0h1m3 0h1m2 0h5m1 0h1m2 0h1m1 0h1m1 0h3m3 0h1m-33 1h7m1 0h3m3 0h5m2 0h1m1 0h1m1 0h1m2 0h1m1 0h1"/></svg>휴대전화로 스캔</figure>
+ </div>
+</header>
 
-  <section class="section" aria-labelledby="files-title">
-    <h2 id="files-title">먼저 두 파일 다운로드</h2>
-    <p class="lede">같은 위치에 저장해 앱의 로컬 작업 폴더로 엽니다.</p>
-    <div class="downloads">
-      <article class="card download"><h3>1. 프롬프트</h3><p>작업 범위, 안전 경계, 수업 진행이 들어 있습니다.</p><a class="button" href="prompt.md" download>prompt.md 다운로드</a></article>
-      <article class="card download"><h3>2. 수업 파이프라인</h3><p>설치 도구와 수업 자료를 담은 단일 패키지입니다.</p><a class="button secondary" href="pipeline.zip" download>pipeline.zip 다운로드</a></article>
-    </div>
-    <div class="callout"><strong>Local 대화에 보낼 한 문장</strong><span class="path quote">프롬프트대로 준비하고 시작해줘</span></div>
-  </section>
+<main class="wrap">
+ <div class="say" role="region" aria-labelledby="say-title">
+  <h2 id="say-title">앱에 보낼 한 문장</h2>
+  <div class="say-row"><code id="first-request">prompt.md를 읽고 그대로 준비해서 시작해 줘.</code><button class="copy" type="button" data-copy>복사</button></div>
+  <p>일반 채팅이 아니라 Codex 또는 Claude Code의 Local 화면, 두 파일이 있는 폴더를 연 상태에서 보냅니다.</p>
+ </div>
 
-  <section class="section" aria-labelledby="steps-title">
-    <h2 id="steps-title">학생이 할 일은 세 단계</h2>
-    <div class="steps" style="margin-top:12px">
-      <article class="card step"><span class="number">1</span><h3>데스크톱 앱 설치·로그인</h3><p>ChatGPT 데스크톱 앱에서 Codex를 쓰거나 Claude 데스크톱 앱에서 Code를 엽니다. 사용할 수 있는 계정으로 로그인하세요.</p></article>
-      <article class="card step"><span class="number">2</span><h3>두 파일이 있는 위치 열기</h3><p>앱의 로컬 작업 공간에서 다운로드한 파일이 든 폴더를 엽니다. 새 빈 폴더, ZIP 해제, Python 설치는 필요하지 않습니다.</p></article>
-      <article class="card step"><span class="number">3</span><h3>위 문장 한 번 보내기</h3><p>일반 Chat 대화가 아니라 로컬 파일을 다루는 Codex 또는 Code Local 세션에서 보냅니다.</p></article>
-    </div>
-    <details>
-      <summary>앱에서 Local 작업 공간 여는 방법</summary>
-      <div class="details-grid">
-        <div class="detail-item"><strong>ChatGPT 데스크톱 → Codex</strong><p>먼저 <a href="https://chatgpt.com/download/" target="_blank" rel="noreferrer">ChatGPT 앱 다운로드 ↗</a>에서 설치하고 로그인합니다. 상단 메뉴에서 Codex를 선택해 두 파일이 있는 로컬 폴더를 연 뒤, <a href="https://help.openai.com/en/articles/20001275-chatgpt-work-and-codex" target="_blank" rel="noreferrer">OpenAI 공식 안내</a>를 참고하세요.</p></div>
-        <div class="detail-item"><strong>Claude 데스크톱 → Code → Local</strong><p><a href="https://claude.com/download" target="_blank" rel="noreferrer">Claude 앱 다운로드 ↗</a>에서 설치하고 로그인한 뒤, Code 탭에서 Local을 고르고 폴더를 선택합니다. 계정이 업그레이드를 요구하면 결제하지 말고 Codex 또는 강사 안내를 이용하세요. 자세한 내용은 <a href="https://code.claude.com/docs/en/desktop-quickstart" target="_blank" rel="noreferrer">Claude 공식 안내</a>를 참고하세요.</p></div>
-      </div>
-    </details>
-  </section>
+ <section class="block" aria-labelledby="steps-title">
+  <h2 id="steps-title">순서는 세 단계입니다</h2>
+  <ol class="steps">
+   <li class="step">
+    <h3><span class="n">1</span>데스크톱 앱 설치·로그인</h3>
+    <p>ChatGPT를 쓰면 <b>ChatGPT 데스크톱 앱의 Codex</b>, Claude를 쓰면 <b>Claude 데스크톱 앱의 Code → Local</b>을 씁니다. API 키나 별도 결제는 필요 없습니다.</p>
+    <div class="links"><a href="https://chatgpt.com/download/" target="_blank" rel="noreferrer">ChatGPT 데스크톱 앱 ↗</a><a href="https://code.claude.com/docs/en/desktop-quickstart" target="_blank" rel="noreferrer">Claude 데스크톱 앱 ↗</a></div>
+   </li>
+   <li class="step">
+    <h3><span class="n">2</span>다운로드 폴더 열기</h3>
+    <ul>
+     <li><b>Codex</b>: 폴더 열기에서 두 파일이 있는 다운로드 폴더를 고릅니다.</li>
+     <li><b>Claude</b>: Code 탭 → Local → Select folder에서 다운로드 폴더를 고릅니다.</li>
+    </ul>
+   </li>
+   <li class="step">
+    <h3><span class="n">3</span>위 문장 보내기</h3>
+    <p>AI가 다운로드 폴더 안에 <b>premed-workshop</b> 폴더를 새로 만들고, 압축 해제와 Python 확인, 실행 점검까지 한 뒤 준비 완료(READY)를 알려 줍니다.</p>
+    <ul>
+     <li>앱이 명령 실행이나 폴더 접근 허용을 물으면 내용을 읽고 이 수업 폴더에 관한 것만 허용합니다. Full access나 권한 우회는 고르지 않습니다.</li>
+     <li>Python이 없다는 말이 나오면 AI가 먼저 준비를 시도합니다. 막히면 <a href="https://www.python.org/downloads/" target="_blank" rel="noreferrer">python.org</a>에서 설치하고 같은 문장을 다시 보냅니다.</li>
+     <li>결제나 업그레이드를 요구하면 결제하지 말고 강사에게 알려 주세요.</li>
+    </ul>
+   </li>
+  </ol>
+  <p class="note">전에 student-collab.zip을 받았다면, 오늘은 그 대신 위의 두 파일을 씁니다.</p>
+ </section>
 
-  <section class="materials" aria-label="수업 자료와 개인정보 안내">
-    <details>
-      <summary>강의와 보조 자료 보기</summary>
-      <div class="material-links">
-        <a href="lecture.html">강의 HTML</a><a href="lecture.pdf">강의 PDF</a><a href="one-page-notes.pdf">한 장 정리 PDF</a><a href="collab-anatomy.html">Student Collab 구조 참고</a>
-      </div>
-    </details>
-    <p class="subtle">실습은 수업 패키지의 합성 예시와 공개 자료를 기본으로 합니다. 본인 또는 사용 권한이 확인된 공저자 초안도 기관 보안 규정과 동의가 AI 처리를 허용할 때 사용할 수 있습니다. 환자 식별정보와 기관 기밀, 동의·권한이 확인되지 않은 파일은 입력하거나 외부 서비스로 보내지 마세요. Local 앱도 AI 서비스가 내용을 처리할 수 있습니다.</p>
-  </section>
+ <section class="block" aria-labelledby="prep-title">
+  <h2 id="prep-title">수업 전에 확인할 것</h2>
+  <ul class="checks">
+   <li><b>노트북과 충전기</b>를 가져옵니다. 휴대전화나 태블릿만으로는 실습할 수 없습니다.</li>
+   <li><b>ChatGPT 또는 Claude 유료 구독 계정 1개 이상</b>과 로그인 수단이 필요합니다. 두 개가 있으면 서로 다른 AI의 비평도 받아 봅니다.</li>
+   <li>관심 있는 연구 주제 한 문장이 있으면 좋습니다. 없어도 괜찮습니다. 수업은 모두 같은 합성 사례로 처음부터 끝까지 진행합니다.</li>
+  </ul>
+  <p class="warn">환자 식별정보, 비밀번호·API 키 같은 비밀값, 허가 없는 공동저자 원고, 기관 기밀은 넣지 마세요. 내 컴퓨터 폴더에서 작업하는 앱도 파일 내용을 AI 서비스에서 처리할 수 있습니다.</p>
+ </section>
+
+ <section class="block" aria-labelledby="more-title">
+  <h2 id="more-title">수업 자료</h2>
+  <div class="links">
+   <a href="/premed/lecture.html">강의 슬라이드</a>
+   <a href="/premed/lecture.pdf">강의 PDF</a>
+   <a href="/premed/one-page-notes.pdf">한 장 연구 노트</a>
+   <a href="/premed/collab-anatomy.html">파이프라인을 갑문 그림으로 보기</a>
+  </div>
+  <p class="small">강의 슬라이드는 인터넷 없이도 열리는 HTML 한 파일입니다. ← →로 넘기고 F로 전체 화면을 켭니다.</p>
+ </section>
 </main>
-<footer>작업이 멈추면 AI가 확인한 단계와 오류만 강사에게 보여 주세요. 앱이 요청하는 필요한 권한만 검토하고, 업그레이드나 별도 API 구매는 하지 않습니다.</footer>
+
+<footer>
+ <div class="wrap">pipeline.zip 137,215바이트 · SHA-256 <code>acfdd46638db9fbdfd3bc2a861e3fbab60afc1ae0dceb5af13364d1128b196ae</code> · 강의 2026-10-13 판</div>
+</footer>
+
+<script>
+(function(){
+ var btn=document.querySelector('[data-copy]'),src=document.getElementById('first-request');
+ if(!btn||!src)return;
+ function done(text){btn.textContent=text;setTimeout(function(){btn.textContent='복사';},1800);}
+ btn.addEventListener('click',function(){
+  var text=src.textContent;
+  if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(text).then(function(){done('복사했습니다');},function(){done('직접 선택하세요');});}
+  else{done('직접 선택하세요');}
+ });
+})();
+</script>
 </body>
 </html>
