@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>강사 메모 · AI 논문 워크숍</title>
+<meta name="description" content="장별 시간표와 강사 메모를 휴대전화에서 봅니다.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:,">
+<style>
+:root{--bg:#fbf6ee;--ink:#173548;--muted:#526471;--line:#d2ddd8;--panel:#f4f8f3;--card:#fff;--dark:#173548;--on-dark:#f4f1ea;--on-dark-muted:#c6d4dc;--teal:#087e78;--accent:#e57538}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic","Apple SD Gothic Neo",Arial,sans-serif}
+h1,h2,h3,p,li,td,th{word-break:keep-all;overflow-wrap:break-word}
+a{color:inherit;text-underline-offset:4px}a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.wrap{max-width:880px;margin:0 auto;padding:0 20px}
+.hero{background:var(--dark);color:var(--on-dark);padding:30px 0 26px}
+.kicker{margin:0 0 8px;color:#f0a06e;font-size:13px;font-weight:700;letter-spacing:.12em}
+.hero h1{margin:0 0 8px;font-size:clamp(26px,4vw,36px);line-height:1.25;letter-spacing:-.03em}
+.hero p{margin:0;color:var(--on-dark-muted)}
+.hero a{color:var(--on-dark)}
+main{padding:18px 0 56px}
+.step{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin:14px 0}
+.step h2{display:flex;align-items:center;gap:10px;margin:0 0 8px;font-size:20px;line-height:1.4}
+.n{flex:none;display:inline-grid;place-items:center;min-width:34px;height:34px;padding:0 6px;border-radius:10px;background:var(--dark);color:var(--on-dark);font-size:15px}
+.slide{margin-left:auto;font-size:13px;font-weight:600;color:var(--muted)}
+.say{display:flex;align-items:flex-start;gap:10px;margin:8px 0;padding:10px 12px;background:var(--panel);border:1px solid var(--line);border-left:5px solid var(--teal);border-radius:10px}
+.say code{flex:1;min-width:0;font:600 15.5px/1.55 ui-monospace,Consolas,"Malgun Gothic",monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.say button{flex:none;border:0;border-radius:8px;background:var(--teal);color:#fff;padding:7px 12px;font:inherit;font-size:14px;font-weight:700;cursor:pointer}
+.step ul{margin:6px 0 0;padding-left:20px}.step li{margin:4px 0}
+.done{margin:8px 0 0;font-size:14px;color:var(--teal);font-weight:700}
+.note{margin:6px 0 14px;padding:12px 16px;background:var(--card);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:10px;font-size:15px}
+h2.sec{font-size:22px;margin:30px 0 6px}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:15px;background:var(--card)}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}th{background:var(--panel)}
+code{font-family:ui-monospace,Consolas,"Malgun Gothic",monospace;font-size:.93em}
+.doc h2{font-size:22px;margin:28px 0 8px}.doc p{margin:8px 0}.doc li{margin:5px 0}
+footer{border-top:1px solid var(--line);padding:18px 0 32px;color:var(--muted);font-size:13px}
+@media(max-width:760px){.say{flex-wrap:wrap}.say button{width:100%}.slide{display:none}table{display:block;overflow-x:auto}}
+</style>
+</head>
+<body>
+<style>.jump{position:sticky;top:0;z-index:2;display:flex;flex-wrap:nowrap;overflow-x:auto;gap:6px;margin:0 -20px;padding:8px 20px;background:var(--bg);border-bottom:1px solid var(--line)}.jump a{flex:none;min-width:36px;padding:5px 0;border:1px solid var(--line);border-radius:8px;background:var(--card);text-align:center;text-decoration:none;font-size:14px;font-weight:700}.doc h2{scroll-margin-top:64px}@media(min-width:761px){.jump{flex-wrap:wrap}.doc h2{scroll-margin-top:110px}}</style><header class="hero"><div class="wrap">
+<p class="kicker">강사용 · 휴대전화로 보는 강사 메모</p>
+<h1>AI와 함께, 내 첫 논문 작업 — 강사 진행안</h1>
+<p>발표 화면의 <b>N</b> 키(강사 메모)와 같은 글입니다. <a href="/premed/lecture.html">강의 슬라이드</a> · <a href="/premed/simulation.html">시뮬레이션 기록</a> · <a href="/premed/steps.html">실습 문장 모음</a></p>
+</div></header>
+<main class="wrap doc">
+<nav class="jump" aria-label="장으로 이동"><a href="#s1">1</a><a href="#s2">2</a><a href="#s3">3</a><a href="#s4">4</a><a href="#s5">5</a><a href="#s6">6</a><a href="#s7">7</a><a href="#s8">8</a><a href="#s9">9</a><a href="#s10">10</a><a href="#s11">11</a><a href="#s12">12</a><a href="#s13">13</a><a href="#s14">14</a><a href="#s15">15</a><a href="#s16">16</a><a href="#s17">17</a><a href="#s18">18</a><a href="#s19">19</a><a href="#s20">20</a><a href="#s21">21</a><a href="#s22">22</a><a href="#s23">23</a><a href="#s24">24</a><a href="#s25">25</a><a href="#s26">26</a><a href="#s27">27</a></nav>
+<p>2026-10-14 · 본문 26장 + 출처 1장 · 180분 · 자료 https://sam-workshop-landing.vercel.app/premed/</p>
+<table><thead><tr><th>시간</th><th>장</th><th>학생이 하는 일</th></tr></thead><tbody><tr><td>0–2분</td><td>1. AI와 함께, 내 첫 논문 작업</td><td>“교수님, 논문은 어디서 시작해요?”</td></tr><tr><td>2–5분</td><td>2. 연구는 궁금한 것을 확인하는 일</td><td>궁금한 점 하나를 한 문장으로 말해 보세요.</td></tr><tr><td>5–8분</td><td>3. 논문은 연구를 다른 사람이 확인할 수 있게 쓴 기록</td><td>다른 사람이 내 결론을 다시 확인할 수 있을까요?</td></tr><tr><td>8–12분</td><td>4. 이름을 올리면 함께 책임집니다</td><td>네 가지를 모두 갖춰야 저자입니다. AI는 책임질 수 없어 저자가 될 수 없고, 쓴 사실은 밝힙니다.</td></tr><tr><td>12–16분</td><td>5. 의학 논문은 동료의 질문을 통과합니다</td><td>심사를 통과해도 오류가 없다는 보증은 아닙니다.</td></tr><tr><td>16–19분</td><td>6. SCIE는 저널 목록입니다, 논문의 성적표가 아닙니다</td><td>저널 이름보다 논문 내용을 먼저 봅니다.</td></tr><tr><td>19–24분</td><td>7. 아직 배우지 않은 판단까지 맡기면?</td><td>오늘의 규칙: 먼저 내 생각 → AI와 함께 → 원문 확인 → 내 말로 설명</td></tr><tr><td>24–27분</td><td>8. AI가 쓴 문장을 내가 설명할 수 있나요?</td><td>막힌 곳이 바로 다음에 읽을 곳입니다.</td></tr><tr><td>27–30분</td><td>9. 일은 AI에게 맡기고, 판단은 내가 합니다</td><td>AI의 문장은 확률로 만들어집니다. 숫자는 코드로 계산하고, 사실은 원문으로 확인합니다.</td></tr><tr><td>30–34분</td><td>10. 파이프라인: AI가 채우고, 내가 관문을 엽니다</td><td>오늘은 합성 사례로 처음부터 끝까지 한 번 갑니다.</td></tr><tr><td>34–38분</td><td>11. 앱을 설치하고 로그인합니다</td><td>일반 채팅이 아니라, 내 컴퓨터 폴더를 다루는 화면을 엽니다.</td></tr><tr><td>38–41분</td><td>12. 파일 두 개를 받으세요</td><td>압축은 풀지 말고, 다운로드 폴더에 그대로 둡니다.</td></tr><tr><td>41–50분</td><td>13. 폴더를 열고, 한 문장만 보냅니다</td><td>prompt.md를 읽고 그대로 준비해서 시작해 줘.</td></tr><tr><td>50–54분</td><td>14. 오늘은 이 사례로 처음부터 갑니다</td><td>자료의 guided 집단을 힌트형 AI로 연습한 집단으로 가정합니다. 합성 자료 24명, 실제 연구가 아닙니다.</td></tr><tr><td>54–62분</td><td>15. 먼저 질문과 범위를 정합니다</td><td>prompts/01-topic-or-draft.md를 읽고 H1을 진행해줘. 오늘 합성 사례로 할게(guided를 힌트형 AI 연습 집단으로 가정). 자료는 수업 예제, 범위는 전체 원고, 모델은 모르면 UNKNOWN. 내 질문:</td></tr><tr><td>62–80분</td><td>16. 검색한 논문은 원문을 열어 봅니다</td><td>prompts/02-evidence.md를 읽고 H2를 진행해줘. 주장: 답을 바로 알려 주는 AI로 연습하면 AI 없이 보는 시험에서 점수가 낮아질 수 있다는 연구가 있다.</td></tr><tr><td>80–94분</td><td>17. 계산 전에 자료부터 봅니다</td><td>synthetic_quiz.csv의 분석 계획을 먼저 보여 줘. 내가 확인한 뒤 실행해.</td></tr><tr><td>94–106분</td><td>18. 분석을 실행하고 결과를 설명합니다</td><td>이 질문과 분석계획을 읽고 승인합니다. 계획대로 실행하고 결과표를 보여 줘.</td></tr><tr><td>106–118분</td><td>19. 원고 전체의 자리를 잡습니다</td><td>prompts/03-write.md를 읽고 H3를 진행해줘. 분석 결과를 넣어 전체 원고 초안으로 써 줘.</td></tr><tr><td>118–128분</td><td>20. 여러 눈으로 비평받고, 내가 판정합니다</td><td>prompts/04-critic.md를 읽고 H4 비평 요청을 만들어줘.</td></tr><tr><td>128–140분</td><td>21. 고친 이유가 보이게 남깁니다</td><td>prompts/05-revise-export.md를 읽고 H5를 진행해줘.</td></tr><tr><td>140–150분</td><td>22. 읽히는 문장으로 다듬습니다</td><td>판단 저장 전에, 뜻과 수치는 그대로 두고 revision.md 문장만 쉽게 고쳐 줘. 바뀐 곳은 표시해 줘.</td></tr><tr><td>150–158분</td><td>23. 제출할 파일을 한 묶음으로 준비합니다</td><td>제출 파일 묶음을 만들어 줘. 빠진 것을 먼저 보여 줘.</td></tr><tr><td>158–165분</td><td>24. 브라우저 투고, 입력은 AI와 함께 제출 버튼은 저자가</td><td>연습 투고 화면을 열어 줘. 클릭은 내가 직접 할게.</td></tr><tr><td>165–172분</td><td>25. 마지막 결정은 실제 원고를 보고 합니다</td><td>“AI가 확인했다” 대신 “내가 무엇을 확인했다”고 말합니다.</td></tr><tr><td>172–180분</td><td>26. 이제 내 프로젝트로 이어 가세요</td><td>친구에게 60초 · 어떤 결정을 왜 했나요?</td></tr></tbody></table>
+<h2 id="s1">1. AI와 함께, 내 첫 논문 작업 (2분)</h2>
+<p>오늘의 목표를 먼저 말한다. 앞 45분은 논문의 세계와 AI를 쓰는 태도, 이어서 20분 동안 앱과 수업 파일을 준비하고, 나머지 시간에는 모두 같은 합성 사례로 질문부터 연습 투고까지 함께 간다. 3시간 안에 실제 연구와 게재가 끝나는 것은 아니며, 오늘 익힌 흐름을 자기 프로젝트에 다시 쓰는 것이 목표다. 시작하자마자 12번 장의 자료 주소를 잠깐 띄워 다운로드를 걸어 두면 설치 시간이 줄어든다.</p>
+<h2 id="s2">2. 연구는 궁금한 것을 확인하는 일 (3분)</h2>
+<p>관찰에서 질문이 생기고, 확인할 방법을 정해 자료를 모으고, 그 결과를 해석하는 과정이 연구다. AI가 질문을 대신 만들어 주기 전에 내가 왜 궁금한지 먼저 말하게 한다. 아직 관찰하지 않은 결과를 만들어 쓰지 않는다는 원칙을 여기서 처음 말한다.</p>
+<h2 id="s3">3. 논문은 연구를 다른 사람이 확인할 수 있게 쓴 기록 (3분)</h2>
+<p>의학 원저는 보통 IMRaD 순서로 쓴다. 서론은 왜 이 질문이 중요한지, 방법은 누구를 어떻게 연구했는지, 결과는 무엇을 발견했는지, 고찰은 그 결과의 의미와 한계를 쓴다. 증례 보고나 종설처럼 형식이 다른 논문도 있다. 글을 빨리 쓸 수 있게 되어도 연구를 수행한 사실이 생기는 것은 아니다.</p>
+<h2 id="s4">4. 이름을 올리면 함께 책임집니다 (4분)</h2>
+<p>ICMJE 권고의 네 조건을 하나씩 짚는다. 네 조건을 모두 충족해야 저자이고, 일부만 해당하면 감사의 글에 기여자로 적는다. 그림에서 네 사람은 각각 자료를 보고, 원고를 고치고, 최종본을 승인하고, 책임을 지는 역할을 맡고 있고, 로봇은 원 밖에서 도구만 건넨다. ICMJE는 AI를 저자로 올리지 말고 원고 작성에 AI를 썼다면 그 사용을 밝히라고 권고한다. 출력물을 쓸 권리나 저작권 문제는 저자 자격과 다른 질문이라는 점도 짧게 구분한다.</p>
+<h2 id="s5">5. 의학 논문은 동료의 질문을 통과합니다 (4분)</h2>
+<p>투고하면 편집자가 먼저 저널 범위와 기본 품질을 보고 심사로 보낼 원고를 고른다. 심사자는 보통 새로운가, 믿을 만한가, 중요한가를 묻는다. 결정은 수락, 수정 후 재심, 거절로 나뉘고, 수정 요청을 받으면 지적마다 무엇을 바꿨는지와 그 근거를 답장으로 쓴다. 의학 논문이 이런 과정을 거치는 이유는 진료 결정과 다음 연구의 근거로 쓰이기 때문이다. 오늘 받을 AI 비평은 저널의 공식 동료심사가 아니라 투고 전에 스스로 점검하는 연습이다.</p>
+<h2 id="s6">6. SCIE는 저널 목록입니다, 논문의 성적표가 아닙니다 (3분)</h2>
+<p>학생들이 말하는 &quot;SCIE 논문&quot;은 이 색인에 들어 있는 저널에 실린 논문을 뜻한다. Clarivate는 정해진 기준으로 저널을 선정하고 다시 평가하므로 등재 여부는 바뀔 수 있고, 특정 저널의 현재 등재는 Master Journal List에서 확인한다. 등재 여부나 영향력지수는 저널 단위 정보이며, 개별 논문의 설계와 결론이 타당한지는 따로 읽어야 한다. 학교나 기관이 업적을 볼 때 SCIE를 기준으로 삼는 경우가 많아 자주 듣게 된다는 점도 말해 준다.</p>
+<h2 id="s7">7. 아직 배우지 않은 판단까지 맡기면? (5분)</h2>
+<p>의학교육에서는 AI 사용의 위험을 세 가지로 나눠 말한다(Abdulnour 등, NEJM 2025). 처음 배울 과정을 AI가 먼저 해 버리면 그 능력을 기를 기회 자체를 놓치는데, 이것이 never-skilling이고 처음 논문을 접하는 여러분에게 가장 해당한다. 예를 들어 검색식을 한 번도 직접 짜 보지 않으면 검색 결과가 이상해도 알아차리지 못하고, 요약만 읽으면 원문을 읽는 힘이 자라지 않는다. 고교 수학 연구에서는 답을 바로 주는 AI로 연습한 학생이 연습 점수는 올랐지만 AI 없이 본 시험에서는 AI를 쓰지 않은 학생보다 낮았고, 힌트를 주도록 설계한 AI에서는 이 손해가 대부분 줄었다(Bastani 등, PNAS 2025). 의대생에게 그대로 일반화하지는 않되, 오늘 실습이 &quot;먼저 내 생각 → AI와 함께 → 원문 확인 → 내 말로 설명&quot; 순서로 짜인 이유로 연결한다. 세 용어는 위험을 구분하는 틀이지 개인의 능력을 진단하는 말이 아니다.</p>
+<h2 id="s8">8. AI가 쓴 문장을 내가 설명할 수 있나요? (3분)</h2>
+<p>40초 생각하고 옆 사람에게 한 문장으로 설명하게 한다. 설명이 안 되면 AI에게 쉬운 설명을 받은 뒤 원문과 대조하고, 다시 자기 말로 말해 보게 한다. AI를 많이 썼는지 적게 썼는지로 평가하지 않고, 설명할 수 있는지로 본다.</p>
+<h2 id="s9">9. 일은 AI에게 맡기고, 판단은 내가 합니다 (3분)</h2>
+<p>오늘 앱에게는 컴퓨터 일을 말로 맡긴다. 폴더 만들기, 압축 풀기, Python 준비, 코드 실행, 파일 형식 맞추기와 기록은 AI가 하고, 실행 결과 파일을 직접 열어 확인한다. 반대로 질문, 근거가 내 문장을 실제로 지지하는지, 결과의 해석, 채택 여부의 결정과 책임은 내가 한다. 언어 모델의 답은 같은 질문에도 달라질 수 있는 확률적 생성이고, 코드 계산과 규칙 검사는 같은 입력이면 같은 결과가 나오는 결정적 과정이라는 차이를 짚는다. 도구나 권한이 없을 때 AI가 실행한 척하지 않고 어디서 막혔는지 말하게 하는 것도 이 장의 약속이다.</p>
+<h2 id="s10">10. 파이프라인: AI가 채우고, 내가 관문을 엽니다 (4분)</h2>
+<p>워크플로는 사람이 정한 작업 순서이고, 파이프라인은 AI가 그 순서를 실제로 돌리는 흐름이다. Collab은 단계마다 사람이 판단하는 관문(H1–H5)을 두어서, 검토 화면에서 판단을 저장해야 다음 단계가 열린다. 그림처럼 AI가 칸에 물, 곧 파일을 채우고, 수문은 내가 연다. 오늘 실습은 질문, 근거, 분석, 원고, 비평, 수정, 제출 파일 묶음, 연습 투고 화면까지다. 실제 저널 투고에서도 AI가 입력과 첨부를 도울 수 있지만, 마지막 제출 결정과 버튼은 저자의 몫이다. 시간이 있으면 갑문 그림을 열어 Space로 한 칸을 함께 넘겨 본다.</p>
+<h2 id="s11">11. 앱을 설치하고 로그인합니다 (4분)</h2>
+<p>ChatGPT를 쓰는 학생은 ChatGPT 데스크톱 앱의 Codex를, Claude를 쓰는 학생은 Claude 데스크톱 앱의 Code 탭에서 Local을 연다. 둘 다 별도의 API 키나 터미널 설치가 필요 없다. 웹 브라우저의 일반 채팅에 파일을 첨부하는 것만으로는 내 컴퓨터 폴더에서 작업할 수 없다. 요금제나 기관 기기 제한으로 막히면 새로 결제하지 말고 강사에게 알리거나 짝의 화면으로 따라간다. 이 장에서 앱 다운로드를 시작해 두고 바로 다음 장으로 넘어가도 된다.</p>
+<h2 id="s12">12. 파일 두 개를 받으세요 (3분)</h2>
+<p>자료 주소를 띄우고 QR도 보여 준다. 노트북 브라우저에서 주소를 열어 prompt.md와 pipeline.zip 두 파일을 받는다. prompt.md는 AI가 읽을 준비 안내이고, pipeline.zip은 수업 파이프라인 전체다. 압축은 학생이 풀지 않는다. 같은 파일을 두 번 받아 이름 뒤에 (1)이 붙어도 AI가 알맞은 파일을 고른다. 휴대전화로 QR을 찍은 학생은 주소만 확인하고, 내려받기는 노트북에서 한다. 같은 페이지의 &quot;실습 문장 모음&quot;(steps.html)에 단계별로 붙일 문장이 복사 버튼과 함께 모여 있으니, 학생에게 그 탭을 열어 두게 한다.</p>
+<h2 id="s13">13. 폴더를 열고, 한 문장만 보냅니다 (9분)</h2>
+<p>붙일 문장: <code>prompt.md를 읽고 그대로 준비해서 시작해 줘.</code></p>
+<p>다운로드 폴더를 앱의 작업 폴더로 열고 문장 하나를 보낸다. AI가 prompt.md를 읽고 파일 해시를 확인한 뒤, 다운로드 폴더 안에 premed-workshop 폴더를 새로 만들고 압축 해제와 Python 확인, 실행 점검까지 한다. 앱이 명령 실행이나 폴더 접근 허용을 물으면 내용을 읽고 이 수업 폴더에 관한 것만 허용한다. Full access나 권한 우회는 고르지 않는다. Python이 없다는 말이 나오면 AI가 먼저 사용자 폴더에 준비를 시도한다. 완료 보고에 premed-workshop 위치와 준비 완료(READY)가 보이면 통과다. 9분 안에 안 되면 짝의 화면으로 따라가고, 쉬는 시간에 다시 설치를 돕는다. 시뮬레이션에서는 문장 하나로 약 1분 만에 READY까지 갔다. 준비가 끝나면 AI가 주제, 자료 종류, 모델 이름을 묻는데, 15장의 문장이 이 세 가지에 한 번에 답한다.</p>
+<h2 id="s14">14. 오늘은 이 사례로 처음부터 갑니다 (4분)</h2>
+<p>모든 실습을 한 사례로 이어 간다. 힌트를 주는 AI로 연습한 집단과 비교 집단의 퀴즈 점수 차이를 묻는 사례이고, 자료는 수업용 합성 자료 24명이다. 앞에서 본 고교 수학 연구는 배경으로 읽는 별도 문헌이지 이 자료의 출처가 아니다. 매 단계는 아래 띠의 네 동작으로 진행한다. 안내 문장을 붙이면 AI가 파일을 만들고 검토 화면을 연다. 검토 화면에서 결정과 이유, 모르는 점을 직접 쓰고 판단 저장을 누른 뒤, &quot;판단 저장했어&quot; 문장을 대화에 붙여야 다음 단계가 열린다. 자기 자료를 쓰려는 학생은 자료 권한과 비식별 여부를 먼저 확인한다. 자료 사전에는 guided가 가상의 학습 조건이라고만 적혀 있어서, 이 가정을 먼저 밝히지 않으면 AI가 단계마다 같은 질문을 다시 한다. 15장의 문장에 가정을 넣어 둔 이유다. 붙일 문장은 프로젝터를 보고 타이핑하지 말고 자료 페이지의 &quot;실습 문장 모음&quot;에서 복사하게 한다. AI 답 맨 아래의 &quot;다음에 붙여 넣을 문장&quot;을 복사해도 된다.</p>
+<h2 id="s15">15. 먼저 질문과 범위를 정합니다 (8분)</h2>
+<p>붙일 문장: <code>prompts/01-topic-or-draft.md를 읽고 H1을 진행해줘. 오늘 합성 사례로 할게(guided를 힌트형 AI 연습 집단으로 가정). 자료는 수업 예제, 범위는 전체 원고, 모델은 모르면 UNKNOWN. 내 질문:</code></p>
+<p>2분 동안 질문을 직접 쓰고, 3분 동안 AI와 범위를 좁히고, 3분 동안 짝에게 설명한다. 이 문장 하나에 주제, 자료 종류(수업 예제), 범위(전체 원고), 모델 이름이 모두 들어 있어서 AI가 되묻지 않고 H1 프로젝트를 만든다(재시험에서 확인). &quot;내 질문:&quot; 뒤에 학생이 한 문장을 덧붙이게 해야 scope.md의 질문 칸이 학생의 말로 채워진다. 자료 종류는 프로젝트를 만든 뒤 바꿀 수 없으니, 아이디어만 있는 학생은 처음부터 실습 문장 모음의 &#x27;내 주제로 할 때&#x27; 문장을 보낸다. 이 경로는 H1·H2·H3 문장만 다르고 17·18장(분석)을 건너뛴다. 초안 파일이나 데이터가 있는 학생도 오늘은 수업 사례나 아이디어로 끝까지 가 보고, 수업 뒤 같은 폴더에서 새 프로젝트로 시작하게 한다(같은 페이지의 &#x27;수업 뒤에 이어 하기&#x27;). 검토 화면의 개념 질문은 &quot;이 질문으로 무엇을 알아보려 하고, 답을 알아도 여전히 모르는 것은 무엇인가&quot;이다. 실제 연구라면 대상 모집, 설계, 자료 권한, IRB를 지도교수와 정해야 하며 AI가 대신 끝낸 것처럼 기록하지 않는다.</p>
+<h2 id="s16">16. 검색한 논문은 원문을 열어 봅니다 (18분)</h2>
+<p>붙일 문장: <code>prompts/02-evidence.md를 읽고 H2를 진행해줘. 주장: 답을 바로 알려 주는 AI로 연습하면 AI 없이 보는 시험에서 점수가 낮아질 수 있다는 연구가 있다.</code></p>
+<p>H2에서 AI는 학생의 주장 한 문장을 먼저 받아야 검색을 시작한다. 그래서 붙일 문장 끝에 예시 주장을 넣었다. 시뮬레이션에서 AI는 약 2분 동안 출처 후보 두 개(Bastani 등 PNAS 2025 초록, 해설 기사)를 찾고 읽을 위치와 질문을 주었다. 학생은 4분 동안 원문을 직접 읽고, 출처가 주장을 어디까지 지지하는지 검토 화면에 쓴다. 출판사 페이지가 막히면 AI가 초록 페이지로 대신 확인하고 그 사실을 기록한다. AI 참고문헌의 흔한 문제는 없는 논문, 주장과 다른 내용, 철회된 논문이다. 쉬기 전에 통계 도구 준비를 보내 두면 휴식 동안 설치가 끝난다(이 PC에서 약 1분, 새 노트북은 패키지를 받느라 더 걸린다).</p>
+<h2 id="s17">17. 계산 전에 자료부터 봅니다 (14분)</h2>
+<p>붙일 문장: <code>synthetic_quiz.csv의 분석 계획을 먼저 보여 줘. 내가 확인한 뒤 실행해.</code></p>
+<p>4분 자료 열기, 4분 분석 계획 읽기, 4분 질문과 수정, 2분 결정 기록. AI는 계획만 만들고 승인 전에는 계산하지 않는다. 계획에는 질문, 설계(독립 두 집단), 사용할 열, 기준군, Welch t 검정, 결측 처리가 나온다. 독립성, 분포, 짝지음·군집 여부, 표본과 인과 해석의 한계 가운데 하나를 골라 자기 말로 설명해야 다음으로 간다. 내 주제로 하는 학생은 17·18장을 건너뛰고, 이 시간에 H2 출처 원문을 더 읽은 뒤 &#x27;내 주제로 할 때&#x27;의 H3 문장으로 넘어간다.</p>
+<h2 id="s18">18. 분석을 실행하고 결과를 설명합니다 (12분)</h2>
+<p>붙일 문장: <code>이 질문과 분석계획을 읽고 승인합니다. 계획대로 실행하고 결과표를 보여 줘.</code></p>
+<p>보낼 때는 &quot;두 집단 학생이 서로 달라 독립이다&quot;처럼 가정 한 문장을 승인 문장 앞에 붙인다. 승인 문장은 학생이 직접 보내야 기록되고, AI가 대신 승인으로 적지 않는다. 시뮬레이션에서는 승인부터 실행과 결과 검증까지 약 40초였다. 결과는 평균 차이 6.50점, 95% 신뢰구간 −1.74~14.74, p=.116(Welch t 검정)이고, 화면의 수치가 다르면 자료와 코드부터 대조한다. AI는 결과 문단을 숫자로만 쓰고 해석은 학생에게 맡긴다. 신뢰구간이 0을 포함한다는 것, p값 하나로 효과가 없다고 할 수 없다는 것, 합성 자료라 인과를 말할 수 없다는 것을 짚는다.</p>
+<h2 id="s19">19. 원고 전체의 자리를 잡습니다 (12분)</h2>
+<p>붙일 문장: <code>prompts/03-write.md를 읽고 H3를 진행해줘. 분석 결과를 넣어 전체 원고 초안으로 써 줘.</code></p>
+<p>4분 전체 개요, 5분 초안 읽기, 3분 빈 곳 표시. 학생이 쓴 결과 설명은 고찰에 원문 그대로 들어가므로, 과장된 표현이 있으면 H4 비평에서 다시 걸린다. 시뮬레이션에서 AI는 약 2분 동안 전체 원고를 쓰고, 학생의 H2 판단과 어긋나는 문장을 스스로 빼고 그 사실을 기록했다. 합성 사례임을 제목과 방법, 결과에 표시하고 실제 참가자나 IRB 승인을 꾸며 넣지 않는다. 검토 화면에는 내가 정한 것과 AI가 제안한 것을 나눠 적는다. 내 주제로 하는 학생은 결과 섹션을 미완료로 두는 H3 문장을 쓴다. 수업 합성 자료의 수치를 자기 원고에 넣지 않는다.</p>
+<h2 id="s20">20. 여러 눈으로 비평받고, 내가 판정합니다 (10분)</h2>
+<p>붙일 문장: <code>prompts/04-critic.md를 읽고 H4 비평 요청을 만들어줘.</code></p>
+<p>3분 비평 받기, 4분 중요한 지적 두 개를 원문과 대조, 3분 결정. AI가 비평 화면을 열면 요청을 복사해 새 대화(구독이 둘이면 다른 서비스)에 붙이고, 받은 응답 전체를 비평 화면에 붙여 저장한 뒤 &quot;비평 응답 저장했어 …&quot; 문장을 보낸다. 그러면 AI가 지적을 정리해 판단을 묻고, 학생은 &quot;비평에 대한 내 판단을 말할게 …&quot; 뒤에 지적마다 채택·기각·보류와 이유를 쓴다. 시뮬레이션에서 비평 왕복은 약 2분이었고, 비평은 학생이 결과 설명에 쓴 &quot;무작위 배정이 아니라서&quot; 같은 과장을 실제로 짚었다. 여러 AI가 같은 말을 해도 같은 오류일 수 있으므로 근거로 판정한다. 판정은 반드시 번호와 함께 보낸다. 리허설에서 &quot;가장 중요한 지적 하나는 채택&quot;처럼 번호 없이 보내자 AI가 몇 번인지 되묻고 검토 화면을 만들지 않았다.</p>
+<h2 id="s21">21. 고친 이유가 보이게 남깁니다 (12분)</h2>
+<p>붙일 문장: <code>prompts/05-revise-export.md를 읽고 H5를 진행해줘.</code></p>
+<p>5분 수정, 4분 전후 비교와 재확인, 3분 짝 피드백. H5에서 AI는 채택한 지적만 반영한 revision.md, 바뀐 부분 비교, 실제 기록만으로 쓴 AI 사용 공개문 초안을 만든다(시뮬레이션에서 약 1분 30초). 학생이 쓴 문장은 AI가 고치지 않고 남기므로, 고치고 싶으면 원하는 문장을 직접 알려 준다. 근거가 있으면 기각과 보류도 정당한 판단이다. 공개문에는 실제로 쓴 도구와 목적, 내가 검토한 범위를 쓴다.</p>
+<h2 id="s22">22. 읽히는 문장으로 다듬습니다 (10분)</h2>
+<p>붙일 문장: <code>판단 저장 전에, 뜻과 수치는 그대로 두고 revision.md 문장만 쉽게 고쳐 줘. 바뀐 곳은 표시해 줘.</code></p>
+<p>4분 표현 다듬기, 4분 원문·표·인용 대조, 2분 한 절을 자기 말로 설명. H5 판단을 저장한 뒤에 문장을 고치면 승인한 파일이 바뀌어 단계를 다시 열어야 하므로, 다듬기는 반드시 판단 저장 전에 한다. 다듬기는 AI 사용을 숨기거나 탐지를 피하는 일이 아니다. 뜻이 달라졌으면 문장이 좋아졌어도 되돌린다. 판단을 저장하면 H1–H5가 끝나고 결과물이 내보내진다.</p>
+<h2 id="s23">23. 제출할 파일을 한 묶음으로 준비합니다 (8분)</h2>
+<p>붙일 문장: <code>제출 파일 묶음을 만들어 줘. 빠진 것을 먼저 보여 줘.</code></p>
+<p>3분 파일 목록과 질문 답하기, 3분 실제 파일 열기, 2분 묶기. AI는 커버레터와 저자 체크리스트 초안을 기록된 사실만으로 쓰고, 저자 표시, 단독 저자 여부와 IRB·이해충돌, 공개문이 사실과 맞는지, 이 대화 밖의 AI 사용을 묻는다. 학생이 두 파일을 읽은 뒤 내린 지시 문장이 파일 해시와 함께 기록되어야 묶음(upload.zip)이 만들어진다. 시뮬레이션에서는 질문부터 검증(CLASSROOM_PACKAGE_VERIFIED)까지 세 번 주고받아 약 1분 30초였다. 이 묶음은 수업 파일이 온전하다는 뜻이지 실제 투고 준비가 끝났다는 뜻이 아니다. H4 비평을 받은 새 대화도 이 대화 밖의 AI 사용에 들어간다. 학생이 &quot;밖에서는 AI를 안 썼다&quot;고 답하면 AI가 기록과 다르다고 바로잡는다(리허설에서 확인). 내 주제로 하는 학생은 사람에게서 자료를 모으지 않았다면 IRB는 해당 없다고 답하고, 모을 계획이면 지도교수와 정한다고 답한다.</p>
+<h2 id="s24">24. 브라우저 투고, 입력은 AI와 함께 제출 버튼은 저자가 (7분)</h2>
+<p>붙일 문장: <code>연습 투고 화면을 열어 줘. 클릭은 내가 직접 할게.</code></p>
+<p>2분 화면 열기, 3분 제목 입력과 upload.zip 선택, 검토 체크, 연습 제출, 2분 접수증 확인과 실제 제출 위치 설명. 연습 투고 화면은 내 컴퓨터(localhost)에서만 열리고, 올린 묶음의 해시가 맞으면 TRAINING 접수증을 만든다. 실제 저널로는 아무것도 보내지 않는다. AI는 연습 서버를 별도 프로세스로 띄워(finish.py portal --detach) 대화 턴이 끝나도 화면이 열려 있게 하고, 서버는 접수증이 생기거나 60분이 지나면 스스로 꺼진다. 그래도 주소가 안 열리면 &quot;연습 투고 서버를 다시 켜 줘&quot;라고 보낸다. 실제 투고에서는 저자의 직접 지시가 있을 때 앱의 브라우저 도구로 입력과 업로드를 도울 수 있지만, 로그인과 본인 확인, 최종 제출 결정은 저자가 한다. 접수번호와 확인 메일 같은 실제 증거로 접수를 확인한다.</p>
+<h2 id="s25">25. 마지막 결정은 실제 원고를 보고 합니다 (7분)</h2>
+<p>3분 확인 목록, 2분 남은 항목, 2분 최종 판단과 책임 설명. 공저자 동의, IRB 또는 면제, 개인정보와 자료 권한, 저널 규정처럼 실제로 해당하는 항목을 확인한다. AI는 공저자나 기관의 결정을 대신 만들 수 없다. 공개문에는 실제로 쓴 도구와 표시된 모델, 사용일, 목적, 내가 검토한 범위를 쓴다. 파일 완성, 제출, 게재는 서로 다른 단계이며, 미완료와 미확인 항목은 지우지 않고 남긴다.</p>
+<h2 id="s26">26. 이제 내 프로젝트로 이어 가세요 (8분)</h2>
+<p>2분 동안 프로젝트 폴더를 직접 열고, 60초씩 두 명이 설명하고, 2분 동안 다음 할 일을 적고, 2분 마무리한다. 오늘 전체 흐름을 한 번 지나갔다고 연구가 끝난 것은 아니다. 완료한 단계, 실행한 검사, 남은 근거, 지도교수에게 물을 일을 남긴다. premed-workshop 폴더를 지우지 않으면 집에서도 같은 앱으로 이어서 할 수 있고, 자기 주제로는 H1부터 새 프로젝트를 만들면 된다. 필요한 문장은 실습 문장 모음의 &#x27;수업 뒤에 이어 하기&#x27;에 있다.</p>
+<h2 id="s27">27. 필요할 때 원문을 다시 여세요 (0분)</h2>
+<p>출처는 규정·앱 안내·연구 사례를 구분해 읽는다. Clarivate 선정 페이지는 공식 검색 색인에서 확인했고 직접 페이지 열기는 오류였다. 특정 저널 현재 등재는 Master Journal List에서 별도 조회한다. PNAS 사례는 고교 수학 연구이고 수업 합성 자료의 원자료가 아니다.</p>
+</main>
+<footer><div class="wrap">원본: workshop/premed-total-workflow-20261013/LECTURER_NOTES.md (editorial/slides.json에서 생성)</div></footer>
+
+</body>
+</html>
