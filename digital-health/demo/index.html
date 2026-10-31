@@ -1,0 +1,1763 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="description" content="대학생 걷기 앱 알림 연구(합성 사례)로 질문→분석 계획→데이터→초안→비평·저자 결정→수정·패키지 6단계를 보여 주는 오프라인 교육 시연. 실시간 AI 응답이 아니다.">
+<title>걷기 앱 알림 연구 6단계 시연 · 합성 데이터</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23132238'/%3E%3Ccircle cx='11' cy='20' r='4' fill='%23157A7F'/%3E%3Ccircle cx='21' cy='12' r='4' fill='%23E6A017'/%3E%3C/svg%3E">
+<style>
+/* ───────── 디자인 토큰: 아이보리 · 네이비 · 틸 · 앰버 ───────── */
+:root{
+  --ivory:#F6F1E6; --ivory-2:#FDFAF3; --paper:#FFFFFF;
+  --navy:#132238; --navy-2:#1E3356; --ink:#1C2433; --muted:#5B6476;
+  --teal:#157A7F; --teal-ink:#0D5F63; --teal-soft:#DCEFEF; --teal-line:#9ED0D0;
+  --amber:#E6A017; --amber-ink:#7C5300; --amber-soft:#FFF0CC; --amber-line:#EACB7E;
+  --line:#E3DACB; --line-2:#CFC4AF;
+  --danger:#A53C2F; --danger-soft:#F9E3DF;
+  --radius:14px;
+  --shadow:0 1px 2px rgba(19,34,56,.05), 0 8px 24px rgba(19,34,56,.06);
+  --top-h:64px; --bar-h:62px;
+}
+*{box-sizing:border-box}
+html{font-size:clamp(15px, 0.9vw + 6.5px, 19px); -webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--ivory); color:var(--ink);
+  font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic","맑은 고딕","Noto Sans KR",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  line-height:1.55; word-break:keep-all; overflow-wrap:anywhere;
+  min-height:100vh; display:flex; flex-direction:column;
+}
+:focus-visible{outline:3px solid var(--amber); outline-offset:2px; border-radius:4px}
+.skip{position:absolute; left:-999px; top:0; background:var(--navy); color:#fff; padding:.5rem .8rem; z-index:50}
+.skip:focus{left:8px; top:8px}
+.vh{position:absolute!important; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap}
+
+/* ───────── 상단: 브랜드 · 합성 배지 · 단계 이동 ───────── */
+.top{
+  display:flex; align-items:center; gap:.9rem; flex-wrap:wrap;
+  padding:.55rem clamp(16px,2.5vw,36px); background:var(--navy); color:#fff; min-height:var(--top-h);
+}
+.brand{font-weight:800; font-size:.98rem; letter-spacing:-.01em; line-height:1.2}
+.brand-sub{display:block; font-size:.76rem; opacity:.8; font-weight:600}
+.syn{
+  margin:0; background:var(--amber); color:var(--navy); font-weight:800; font-size:.8rem;
+  padding:.3rem .75rem; border-radius:999px; white-space:nowrap; letter-spacing:.01em;
+}
+.stepnav{margin-left:auto}
+.stepnav ol{list-style:none; display:flex; gap:.35rem; margin:0; padding:0}
+.stepnav button{
+  font:inherit; font-size:.78rem; font-weight:700; color:#fff; background:transparent;
+  border:1px solid rgba(255,255,255,.4); border-radius:999px; padding:.3rem .7rem; cursor:pointer;
+  display:inline-flex; gap:.4rem; align-items:center; line-height:1.2;
+}
+.stepnav button:hover{background:rgba(255,255,255,.12)}
+.stepnav button .no{display:inline-grid; place-items:center; width:1.35rem; height:1.35rem; border-radius:50%; background:rgba(255,255,255,.18); font-size:.72rem}
+.stepnav button[aria-current="step"]{background:#fff; color:var(--navy); border-color:#fff}
+.stepnav button[aria-current="step"] .no{background:var(--teal); color:#fff}
+
+/* ───────── 본문 덱 ───────── */
+.deck{flex:1; min-height:0; padding:0 clamp(16px,2.5vw,36px)}
+.step{display:none; scroll-margin-top:140px} /* #step-N 딥링크로 열어도 브라우저의 해시 스크롤이 상단 배지를 가리지 않게 한다 */
+.step.is-active{display:grid; grid-template-rows:auto minmax(0,1fr); gap:.55rem; padding:.7rem 0 .9rem}
+.step-head{display:grid; gap:.15rem}
+.kicker{color:var(--teal-ink); font-weight:800; font-size:.8rem; letter-spacing:.08em}
+.step-head h1{font-size:clamp(1.45rem, 2.3vw, 2.05rem); line-height:1.2; margin:0; color:var(--navy); font-weight:800; letter-spacing:-.015em}
+.step-head h1:focus{outline:none}
+.lede{margin:.15rem 0 0; color:var(--muted); font-size:.98rem; max-width:78ch}
+.step-body{display:grid; gap:.9rem; grid-template-columns:minmax(0,1fr); min-height:0; min-width:0}
+.col{display:grid; gap:.8rem; align-content:start; min-width:0}
+.col > *{min-width:0}
+.panel, figure.chart, .think{min-width:0; max-width:100%}
+.bubble, .table-scroll, pre.code{min-width:0; max-width:100%}
+
+/* 패널 */
+.panel{background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:.85rem 1rem; box-shadow:var(--shadow)}
+.panel > h2{font-size:.82rem; letter-spacing:.04em; color:var(--teal-ink); margin:0 0 .55rem; display:flex; align-items:center; gap:.5rem; flex-wrap:wrap}
+.panel > h2 .ico{display:inline-grid; place-items:center; width:1.5rem; height:1.5rem; border-radius:8px; background:var(--teal-soft); color:var(--teal-ink); font-size:.8rem}
+.panel.out > h2 .ico{background:var(--amber-soft); color:var(--amber-ink)}
+.panel.run > h2 .ico{background:var(--teal-soft)}
+.panel.check > h2 .ico{background:var(--navy); color:#fff}
+.panel p{margin:.35rem 0}
+.panel ul{margin:.3rem 0; padding-left:1.1rem}
+.panel li{margin:.2rem 0}
+.chip{display:inline-block; font-size:.7rem; font-weight:800; padding:.12rem .5rem; border-radius:999px; border:1px solid; line-height:1.5; vertical-align:middle; letter-spacing:.01em}
+.chip-sim{background:var(--amber-soft); color:var(--amber-ink); border-color:var(--amber-line)}
+.chip-run{background:var(--teal-soft); color:var(--teal-ink); border-color:var(--teal-line)}
+.chip-syn{background:var(--ivory); color:var(--navy); border-color:var(--line-2)}
+.chip-high{background:var(--danger-soft); color:var(--danger); border-color:#E3B1A9}
+.chip-mid{background:var(--amber-soft); color:var(--amber-ink); border-color:var(--amber-line)}
+.chip-ok{background:var(--teal-soft); color:var(--teal-ink); border-color:var(--teal-line)}
+.chip-warn{background:var(--danger-soft); color:var(--danger); border-color:#E3B1A9}
+
+/* 요청(프롬프트) */
+.ask textarea{
+  width:100%; min-height:5.2em; font:inherit; font-size:.93rem; line-height:1.5; padding:.6rem .75rem;
+  border:1px solid var(--line-2); border-radius:10px; background:var(--ivory-2); color:var(--ink); resize:vertical;
+}
+.ask .row{display:flex; gap:.5rem; align-items:center; flex-wrap:wrap; margin-top:.5rem}
+.copy-status{font-size:.82rem; color:var(--teal-ink); font-weight:700; min-height:1.2em}
+
+/* 출력 */
+.bubble{background:var(--ivory-2); border-left:4px solid var(--amber); padding:.65rem .9rem; border-radius:8px; font-size:.94rem}
+.run .bubble{border-left-color:var(--teal)}
+.bubble dl{margin:0; display:grid; grid-template-columns:auto 1fr; gap:.15rem .7rem}
+.bubble dt{font-weight:800; color:var(--navy-2); white-space:nowrap}
+.bubble dd{margin:0}
+.bubble ol, .bubble ul{margin:.3rem 0; padding-left:1.2rem}
+.note{font-size:.84rem; color:var(--muted); margin:.5rem 0 0}
+.note strong{color:var(--ink)}
+blockquote.ms{margin:.4rem 0 0; padding:.7rem .9rem; background:var(--ivory-2); border-radius:10px; border:1px solid var(--line); font-size:.95rem; line-height:1.65}
+blockquote.ms + blockquote.ms{margin-top:.5rem}
+mark.over{background:var(--amber-soft); color:var(--amber-ink); padding:0 .15em; border-radius:3px; text-decoration:underline dotted var(--danger) 2px; text-underline-offset:.15em; font-weight:700}
+mark.bound{background:var(--teal-soft); color:var(--teal-ink); padding:0 .15em; border-radius:3px; font-weight:700}
+.legend{display:flex; gap:.9rem; flex-wrap:wrap; font-size:.8rem; color:var(--muted); margin-top:.45rem}
+.legend .sw{display:inline-block; width:.9em; height:.9em; border-radius:3px; vertical-align:-.1em; margin-right:.3em}
+
+/* 확인 목록 */
+.checks{list-style:none; margin:0; padding:0; display:grid; gap:.45rem}
+.checks label{display:flex; gap:.6rem; align-items:flex-start; cursor:pointer; font-size:.95rem}
+.checks input{width:1.15rem; height:1.15rem; margin:.2rem 0 0; accent-color:var(--teal); flex:none}
+.checks input:checked + span{color:var(--teal-ink)}
+
+/* 버튼 */
+.btn{font:inherit; font-weight:800; font-size:.88rem; padding:.48rem .95rem; border-radius:10px; border:1px solid var(--navy); background:var(--navy); color:#fff; cursor:pointer; line-height:1.3}
+.btn:hover{background:var(--navy-2)}
+.btn.ghost{background:transparent; color:var(--navy)}
+.btn.ghost:hover{background:rgba(19,34,56,.06)}
+.btn.teal{background:var(--teal); border-color:var(--teal)}
+.btn.teal:hover{background:var(--teal-ink)}
+.btn.sm{font-size:.8rem; padding:.35rem .7rem}
+.btn[disabled]{opacity:.45; cursor:not-allowed}
+
+/* 세그먼트 토글 */
+.seg{display:inline-flex; border:1px solid var(--navy); border-radius:999px; overflow:hidden; background:#fff}
+.seg button{font:inherit; font-weight:800; font-size:.88rem; padding:.45rem 1rem; background:transparent; border:0; color:var(--navy); cursor:pointer}
+.seg button + button{border-left:1px solid var(--navy)}
+.seg button[aria-pressed="true"]{background:var(--navy); color:#fff}
+.seg button:focus-visible{outline-offset:-3px}
+
+/* 표 */
+.table-scroll{overflow:auto; max-height:16rem; border:1px solid var(--line); border-radius:10px; background:#fff}
+table.tbl{border-collapse:collapse; width:100%; font-size:.88rem; font-variant-numeric:tabular-nums}
+.tbl th, .tbl td{padding:.38rem .55rem; border-bottom:1px solid var(--line); text-align:right; white-space:nowrap}
+.tbl th:first-child, .tbl td:first-child{text-align:left}
+.tbl thead th{position:sticky; top:0; background:var(--ivory-2); color:var(--navy-2); font-weight:800; z-index:1}
+.tbl tbody tr:last-child td{border-bottom:0}
+.tbl tr.hi td{background:var(--teal-soft); font-weight:800}
+.result{
+  margin-top:.6rem; display:grid; grid-template-columns:repeat(auto-fit,minmax(9rem,1fr)); gap:.5rem;
+}
+.result .kpi{background:var(--navy); color:#fff; border-radius:12px; padding:.6rem .75rem}
+.result .kpi .k{font-size:.72rem; opacity:.85; font-weight:700; letter-spacing:.03em}
+.result .kpi .v{font-size:1.25rem; font-weight:800; font-variant-numeric:tabular-nums; line-height:1.2}
+.result .kpi .s{font-size:.72rem; opacity:.85}
+.result .kpi.teal{background:var(--teal)}
+.result .kpi.light{background:var(--ivory-2); color:var(--ink); border:1px solid var(--line)}
+pre.code{margin:.4rem 0 0; background:#0F1A2B; color:#E8EEF7; font-size:.78rem; line-height:1.45; padding:.7rem .85rem; border-radius:10px; overflow:auto; max-height:14rem}
+details.more{margin-top:.5rem}
+details.more > summary{cursor:pointer; font-weight:800; color:var(--teal-ink); font-size:.88rem; list-style:none; display:flex; align-items:center; gap:.4rem}
+details.more > summary::before{content:"▸"; transition:transform .15s; display:inline-block}
+details.more[open] > summary::before{transform:rotate(90deg)}
+details.more > summary::-webkit-details-marker{display:none}
+
+/* 그림 */
+figure.chart{margin:0; background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:.7rem .8rem .5rem; box-shadow:var(--shadow)}
+figure.chart svg{width:100%; height:auto; display:block}
+figure.chart figcaption{font-size:.8rem; color:var(--muted); margin-top:.35rem}
+.chart-head{display:flex; align-items:center; justify-content:space-between; gap:.5rem; flex-wrap:wrap; margin-bottom:.2rem}
+.chart-head h3{margin:0; font-size:.9rem; color:var(--navy)}
+.dot{transform-box:fill-box; transform-origin:center; animation:drop .5s ease-out both; animation-delay:calc(var(--i) * 14ms)}
+@keyframes drop{from{opacity:0; transform:translateY(-10px)} to{opacity:1; transform:none}}
+.recheck{display:flex; gap:.5rem; align-items:flex-start; font-size:.84rem; margin-top:.45rem; padding:.5rem .7rem; border-radius:10px; background:var(--teal-soft); color:var(--teal-ink)}
+.recheck.bad{background:var(--danger-soft); color:var(--danger)}
+.recheck b{flex:none}
+
+/* 시각 보조(깔때기·타임라인·봉인 카드) */
+.funnel{display:grid; gap:.45rem; justify-items:center}
+.funnel > div{border-radius:10px; padding:.55rem .8rem; text-align:center; font-weight:700; font-size:.9rem}
+.funnel .f1{width:100%; background:var(--ivory-2); border:1px dashed var(--line-2); color:var(--muted)}
+.funnel .f2{width:86%; background:var(--teal-soft); color:var(--teal-ink); border:1px solid var(--teal-line)}
+.funnel .f3{width:70%; background:var(--navy); color:#fff}
+.funnel .arrow{width:auto; padding:0; color:var(--muted); font-size:1rem; line-height:1}
+.pico{display:grid; grid-template-columns:auto 1fr; gap:.25rem .7rem; font-size:.9rem; margin-top:.5rem}
+.pico b{color:var(--teal-ink)}
+.majors{list-style:none; padding:0; margin:.3rem 0 0; display:grid; gap:.35rem; font-size:.88rem}
+.majors li{display:grid; grid-template-columns:auto 1fr; gap:.5rem; align-items:start}
+.majors .tag{font-size:.7rem; font-weight:800; color:var(--navy); background:var(--ivory); border:1px solid var(--line-2); border-radius:6px; padding:.1rem .4rem; white-space:nowrap; margin-top:.15rem}
+.timeline{display:grid; grid-template-columns:repeat(4,1fr); gap:.35rem; margin-top:.4rem}
+.timeline > div{background:var(--ivory-2); border:1px solid var(--line); border-radius:10px; padding:.5rem .4rem; text-align:center; font-size:.8rem; font-weight:700; color:var(--navy-2); position:relative}
+.timeline > div b{display:block; font-size:1rem; color:var(--teal-ink)}
+.timeline > div.r{background:var(--amber-soft); border-color:var(--amber-line); color:var(--amber-ink)}
+.sealed{position:relative; border:2px solid var(--navy); border-radius:12px; padding:.8rem .9rem .9rem; background:var(--paper); overflow:hidden}
+.sealed .stamp{position:absolute; right:.6rem; top:.6rem; transform:rotate(-8deg); border:2px solid var(--danger); color:var(--danger); font-weight:800; font-size:.72rem; padding:.2rem .5rem; border-radius:6px; letter-spacing:.04em; background:rgba(255,255,255,.85)}
+.sealed h3{margin:0 0 .4rem; font-size:.95rem; color:var(--navy)}
+.sealed ul{margin:0; padding-left:1.1rem; font-size:.88rem}
+.contrast{display:grid; gap:.4rem; margin-top:.3rem}
+.contrast > div{border-radius:10px; padding:.55rem .75rem; font-size:.86rem}
+.contrast .obs{background:var(--ivory-2); border:1px solid var(--line)}
+.contrast .rct{background:var(--teal-soft); border:1px solid var(--teal-line)}
+.contrast .syn-note{background:var(--amber-soft); border:1px solid var(--amber-line); color:var(--amber-ink); font-weight:700}
+
+/* 20초 생각 */
+.think{background:var(--paper); border:1px solid var(--amber-line); border-radius:var(--radius); padding:.8rem .95rem; box-shadow:var(--shadow)}
+.think .q{margin:.3rem 0 .5rem; font-weight:800; font-size:1rem; color:var(--navy)}
+.timer{display:flex; align-items:center; gap:.6rem; flex-wrap:wrap}
+.timer .ringwrap{position:relative; width:3rem; height:3rem; flex:none}
+.timer svg{width:100%; height:100%; transform:rotate(-90deg)}
+.timer .ring-bg{fill:none; stroke:var(--line); stroke-width:4}
+.timer .ring-fg{fill:none; stroke:var(--amber); stroke-width:4; stroke-linecap:round; transition:stroke-dashoffset 1s linear}
+.timer .count{position:absolute; inset:0; display:grid; place-items:center; font-weight:800; font-variant-numeric:tabular-nums; color:var(--navy); font-size:.95rem}
+.think.done .ring-fg{stroke:var(--teal)}
+.think .t-status{font-size:.8rem; color:var(--muted); min-height:1.2em; margin:.3rem 0 0}
+.think details{margin-top:.5rem}
+.think summary{cursor:pointer; font-weight:800; color:var(--teal-ink); font-size:.9rem}
+.think details p{margin:.4rem 0 0; font-size:.92rem}
+
+/* 비평·결정 */
+.finding{border:1px solid var(--line); border-radius:12px; padding:.7rem .85rem; background:#fff; display:grid; gap:.4rem}
+.finding + .finding{margin-top:.6rem}
+.finding .fh{display:flex; align-items:center; gap:.5rem; flex-wrap:wrap}
+.finding .fid{font-weight:800; color:var(--navy)}
+.finding .quote{font-size:.9rem; background:var(--ivory-2); border-left:3px solid var(--amber); padding:.35rem .6rem; border-radius:6px; margin:0}
+.finding .why, .finding .fix{font-size:.88rem; margin:0}
+.finding .why b, .finding .fix b{color:var(--teal-ink)}
+.finding fieldset{border:1px dashed var(--line-2); border-radius:10px; padding:.45rem .7rem .55rem; margin:0}
+.finding legend{font-size:.78rem; font-weight:800; color:var(--navy-2); padding:0 .3rem}
+.finding .opts{display:flex; gap:.9rem; flex-wrap:wrap; font-size:.9rem}
+.finding .opts label{display:inline-flex; align-items:center; gap:.35rem; cursor:pointer}
+.finding .opts input{accent-color:var(--teal); width:1.05rem; height:1.05rem}
+.finding .reason{margin-top:.4rem; display:none; gap:.4rem; align-items:center; flex-wrap:wrap; font-size:.85rem}
+.finding .reason input{font:inherit; font-size:.85rem; padding:.3rem .5rem; border:1px solid var(--line-2); border-radius:8px; flex:1; min-width:10rem}
+.finding.reject .reason{display:flex}
+.ledger{list-style:none; margin:.3rem 0 0; padding:0; display:grid; gap:.35rem; font-size:.88rem}
+.ledger li{display:grid; grid-template-columns:auto auto 1fr; gap:.5rem; align-items:center; padding:.4rem .6rem; border-radius:8px; background:var(--ivory-2); border:1px solid var(--line)}
+.ledger .st{font-weight:800; font-size:.78rem; padding:.1rem .45rem; border-radius:999px}
+.ledger .st.pending{background:var(--line); color:var(--muted)}
+.ledger .st.accept{background:var(--teal-soft); color:var(--teal-ink)}
+.ledger .st.modify{background:var(--amber-soft); color:var(--amber-ink)}
+.ledger .st.reject{background:var(--danger-soft); color:var(--danger)}
+.ledger .why{color:var(--muted); font-size:.8rem}
+.count-line{font-weight:800; color:var(--navy); margin:.2rem 0 0; font-size:.9rem}
+
+/* 패키지 미리보기 */
+.pkg{list-style:none; margin:.3rem 0 0; padding:0; display:grid; gap:.4rem; grid-template-columns:repeat(auto-fill,minmax(13rem,1fr))}
+.pkg li{display:grid; gap:.25rem; padding:.55rem .7rem; border-radius:10px; border:1px solid var(--line); background:#fff; font-size:.86rem}
+.pkg li b{color:var(--navy)}
+.pkg .st{justify-self:start}
+.refs{margin:.3rem 0 0; padding-left:1.1rem; font-size:.84rem}
+.refs li{margin:.25rem 0}
+.refs a{color:var(--teal-ink); word-break:break-all}
+.refs .st{color:var(--amber-ink); font-weight:700; font-size:.78rem}
+.habit{display:grid; grid-template-columns:repeat(3,1fr); gap:.4rem; margin-top:.4rem}
+.habit > div{background:var(--navy); color:#fff; border-radius:10px; padding:.55rem .6rem; font-size:.82rem; text-align:center; font-weight:700}
+.habit > div b{display:block; font-size:.72rem; opacity:.8; letter-spacing:.06em}
+.habit > div:nth-child(2){background:var(--teal)}
+
+/* 하단 바 */
+.bar{
+  position:sticky; bottom:0; display:flex; align-items:center; gap:.8rem;
+  padding:.55rem clamp(16px,2.5vw,36px); background:var(--ivory-2); border-top:1px solid var(--line); min-height:var(--bar-h);
+}
+.progress{flex:1; display:grid; gap:.3rem; min-width:0}
+#progress{font-size:.85rem; font-weight:800; color:var(--navy-2); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.progress-track{height:6px; background:var(--line); border-radius:999px; overflow:hidden}
+#progress-fill{height:100%; background:var(--teal); width:16.667%; transition:width .3s}
+.bar .hint{font-size:.76rem; color:var(--muted)}
+
+dialog{border:0; border-radius:var(--radius); padding:1.1rem 1.3rem; max-width:34rem; width:calc(100% - 2rem); box-shadow:var(--shadow); color:var(--ink); background:#fff}
+dialog::backdrop{background:rgba(19,34,56,.45)}
+dialog h2{margin:0 0 .5rem; color:var(--navy); font-size:1.1rem}
+dialog table{border-collapse:collapse; width:100%; font-size:.9rem}
+dialog td{padding:.3rem .4rem; border-bottom:1px solid var(--line)}
+dialog kbd{font:inherit; font-size:.8rem; font-weight:800; background:var(--ivory); border:1px solid var(--line-2); border-bottom-width:2px; border-radius:6px; padding:.05rem .4rem}
+.err{background:var(--danger-soft); color:var(--danger); border:1px solid #E3B1A9; padding:.7rem 1rem; border-radius:10px; margin:.8rem 0; font-weight:700}
+
+/* ───────── 넓은 화면(1000px 이상): 세로 고정, 열마다 스크롤 ───────── */
+@media (min-width:1000px){
+  body{height:100vh; overflow:hidden}
+  .deck{height:calc(100vh - var(--top-h) - var(--bar-h))}
+  .step.is-active{height:100%}
+  .step-body{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}
+  .col{min-height:0; overflow:auto; scrollbar-gutter:stable; padding-right:.3rem; padding-bottom:.2rem}
+}
+/* ───────── 좁은 화면(700px 이하, 390px 폭 포함) ───────── */
+@media (max-width:700px){
+  .top{gap:.5rem; padding:.5rem 16px}
+  .brand{font-size:.9rem}
+  .brand-sub{display:none}
+  .syn{font-size:.7rem; padding:.25rem .55rem; white-space:normal}
+  .stepnav{margin-left:0; width:100%}
+  .stepnav ol{justify-content:space-between}
+  .stepnav button .lbl{display:none}
+  .stepnav button{padding:.25rem .5rem}
+  .deck{padding:0 16px}
+  .step-head h1{font-size:1.35rem}
+  .bar{padding:.5rem 16px; gap:.5rem}
+  .bar .hint{display:none}
+  .btn.nav{padding:.45rem .7rem; font-size:.82rem}
+  .result{grid-template-columns:1fr 1fr}
+  .timeline{grid-template-columns:1fr 1fr}
+  .habit{grid-template-columns:1fr}
+  .pkg{grid-template-columns:1fr}
+  .bubble dl{grid-template-columns:1fr}
+  .bubble dt{margin-top:.3rem}
+}
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{animation:none!important; transition:none!important}
+}
+@media print{
+  body{height:auto; overflow:visible; background:#fff}
+  .top, .bar{position:static}
+  .stepnav, .btn, .copy-status, .timer, .bar .hint{display:none!important}
+  .step{display:grid!important; page-break-after:always; height:auto!important}
+  .col{overflow:visible!important; max-height:none!important}
+  .table-scroll{max-height:none}
+}
+</style>
+</head>
+<body data-step="1" data-total="6">
+<a class="skip" href="#deck">본문으로 건너뛰기</a>
+
+<header class="top">
+  <div>
+    <div class="brand">AI를 활용한 디지털헬스케어 논문작성<span class="brand-sub">걷기 앱 알림 사례 · 질문에서 패키지까지 6단계 시연</span></div>
+  </div>
+  <p class="syn" role="note" id="syn-banner">합성 데이터로 만든 시연 · 실시간 AI 응답 아님</p>
+  <nav class="stepnav" aria-label="단계 이동">
+    <ol>
+      <li><button type="button" data-goto="1"><span class="no">1</span><span class="lbl">질문</span></button></li>
+      <li><button type="button" data-goto="2"><span class="no">2</span><span class="lbl">분석 계획</span></button></li>
+      <li><button type="button" data-goto="3"><span class="no">3</span><span class="lbl">데이터와 표</span></button></li>
+      <li><button type="button" data-goto="4"><span class="no">4</span><span class="lbl">초안</span></button></li>
+      <li><button type="button" data-goto="5"><span class="no">5</span><span class="lbl">비평·결정</span></button></li>
+      <li><button type="button" data-goto="6"><span class="no">6</span><span class="lbl">수정·패키지</span></button></li>
+    </ol>
+  </nav>
+</header>
+
+<main id="deck" class="deck">
+<noscript><p class="err">이 시연은 자바스크립트가 있어야 숫자와 그림을 그립니다. 브라우저에서 자바스크립트를 켜 주세요.</p></noscript>
+<div id="data-error" class="err" hidden>case.json 이 아직 이 파일에 들어 있지 않습니다. demo 폴더에서 compute_case.py 를 한 번 실행하면 숫자가 채워집니다.</div>
+
+<!-- ───────────────── STEP 1 질문 ───────────────── -->
+<section class="step is-active" id="step-1" data-step="1" aria-labelledby="h-1" aria-current="step">
+  <div class="step-head">
+    <span class="kicker">STEP 1 / 6 · 질문</span>
+    <h1 id="h-1" tabindex="-1">막연한 궁금증을, 데이터가 답할 수 있는 질문으로</h1>
+    <p class="lede">"앱이 건강에 좋을까?"는 잴 수 없다. 대상·중재·비교·결과·기간을 정하면 데이터가 답할 수 있는 질문이 되고, 동시에 결론의 범위도 정해진다.</p>
+  </div>
+  <div class="step-body">
+    <div class="col col-flow">
+      <article class="panel ask">
+        <h2><span class="ico" aria-hidden="true">1</span>AI에게 요청 <span class="chip chip-syn">편집 가능 · 복사해서 쓰기</span></h2>
+        <label class="vh" for="ask-1">AI에게 보낼 요청문</label>
+        <textarea id="ask-1" spellcheck="false">나는 디지털헬스 연구를 처음 해 보는 학부생이다. "걷기 앱 알림을 보내면 대학생이 더 많이 걸을까?"라는 생각을 연구 질문으로 다듬고 싶다. 대상·중재·비교·결과·기간을 한 줄씩 구체화해 주고, 이 질문으로는 답할 수 없는 것도 3가지 적어 줘. 모르는 것은 모른다고 말해 줘.</textarea>
+        <div class="row">
+          <button type="button" class="btn teal sm copy" data-for="ask-1">프롬프트 복사</button>
+          <button type="button" class="btn ghost sm reset" data-for="ask-1">원래 문구로</button>
+          <span class="copy-status" role="status" aria-live="polite"></span>
+        </div>
+      </article>
+      <article class="panel out">
+        <h2><span class="ico" aria-hidden="true">2</span>표시된 출력 <span class="chip chip-sim">시연용 고정 응답 · 실시간 AI 아님</span></h2>
+        <div class="bubble" id="out-1">
+          <dl>
+            <dt>대상(P)</dt><dd data-fill="design.population"></dd>
+            <dt>중재(I)</dt><dd data-fill="design.intervention"></dd>
+            <dt>비교(C)</dt><dd data-fill="design.comparator"></dd>
+            <dt>결과(O)</dt><dd data-fill="design.outcome"></dd>
+            <dt>기간</dt><dd>기준 측정 1주 → 중재 4주 → 추적 측정 1주</dd>
+          </dl>
+          <p style="margin:.6rem 0 .2rem"><b>연구 질문:</b> <span data-fill="design.question"></span></p>
+          <p style="margin:.4rem 0 .1rem"><b>이 질문이 답하지 못하는 것</b></p>
+          <ol id="cannot-1"></ol>
+        </div>
+        <p class="note">실제 세션이라면 모델이 이 자리에서 답을 만든다. 시연에서는 교육용으로 미리 써 둔 문장을 보여 준다.</p>
+      </article>
+      <article class="panel check">
+        <h2><span class="ico" aria-hidden="true">3</span>학생이 확인할 것</h2>
+        <ul class="checks">
+          <li><label><input type="checkbox"><span>'건강'이 '걸음수'로 바뀐 것을 알고 있다. 측정할 수 있게 됐지만, 결론도 걸음수에 묶인다.</span></label></li>
+          <li><label><input type="checkbox"><span>비교군이 '아무것도 안 함'이 아니라 '알림 없는 같은 앱'인 이유를 내 말로 설명할 수 있다.</span></label></li>
+          <li><label><input type="checkbox"><span>'답할 수 없는 것 3가지'를 메모했다. 이 메모가 나중에 논의의 한계 문단이 된다.</span></label></li>
+        </ul>
+      </article>
+    </div>
+    <aside class="col col-visual" aria-label="보조 설명">
+      <section class="panel">
+        <h2><span class="ico" aria-hidden="true">◆</span>질문이 좁아지는 모양</h2>
+        <div class="funnel" aria-label="막연한 궁금증에서 1차 결과 하나로 좁아지는 흐름">
+          <div class="f1">앱이 건강에 좋을까?</div>
+          <div class="arrow" aria-hidden="true">▼</div>
+          <div class="f2">대학생에게 걷기 앱 알림을 보내면 4주 후 일평균 걸음수가 늘까?</div>
+          <div class="arrow" aria-hidden="true">▼</div>
+          <div class="f3">1차 결과 하나: 변화량(추적−기준)의 군 간 평균 차이</div>
+        </div>
+        <div class="habit" aria-label="Never-skilling 습관">
+          <div><b>AI 전</b>20초 먼저 생각</div>
+          <div><b>AI</b>요청·출력·확인</div>
+          <div><b>AI 후</b>내 말로 다시 설명</div>
+        </div>
+      </section>
+      <section class="think" data-think>
+        <span class="chip chip-sim">20초 생각</span>
+        <p class="q">'건강'을 '걸음수'로 바꾸면 무엇을 얻고 무엇을 잃을까?</p>
+        <div class="timer">
+          <div class="ringwrap"><svg viewBox="0 0 48 48" aria-hidden="true"><circle class="ring-bg" cx="24" cy="24" r="20"/><circle class="ring-fg" cx="24" cy="24" r="20"/></svg><span class="count" aria-hidden="true">20</span></div>
+          <button type="button" class="btn sm t-start">20초 시작</button>
+          <button type="button" class="btn ghost sm t-pause">일시정지</button>
+          <button type="button" class="btn ghost sm t-reset">초기화</button>
+        </div>
+        <p class="t-status" role="status" aria-live="polite"></p>
+        <details><summary>정답 예시 보기</summary>
+          <p><b>얻는 것:</b> 4주 안에 잴 수 있고 숫자로 비교할 수 있다. <b>잃는 것:</b> 결론이 걸음수에 한정된다. "건강이 좋아졌다"는 이 연구로는 말할 수 없고, 그 말을 쓰고 싶다면 건강 결과를 따로 측정하는 다른 연구가 필요하다.</p>
+        </details>
+      </section>
+      <section class="panel">
+        <h2><span class="ico" aria-hidden="true">≋</span>같은 사례, 다른 전공의 질문 <span class="chip chip-syn">예시 · 이 시연에서는 다루지 않음</span></h2>
+        <ul class="majors">
+          <li><span class="tag">공학·컴퓨팅</span><span>알림이 실제로 전달·열람된 비율은 얼마이고, 걸음수 센서 오차는 결과를 얼마나 흔드는가?</span></li>
+          <li><span class="tag">디자인·UX</span><span>알림 문구와 시간대에 따라 알림을 꺼 버리는 학생 비율이 달라지는가?</span></li>
+          <li><span class="tag">간호·보건·심리</span><span>알림을 받은 학생이 4주 뒤에도 걷기를 유지하는가, 알림 피로는 없는가?</span></li>
+          <li><span class="tag">통계·데이터</span><span>변화량 분포가 치우쳐 있으면 평균 차이 말고 무엇을 함께 보고해야 하는가?</span></li>
+          <li><span class="tag">경영·정책</span><span>학생 1명의 걸음수를 늘리는 데 드는 알림 비용은 얼마이고, 학교가 도입할 가치가 있는가?</span></li>
+        </ul>
+      </section>
+    </aside>
+  </div>
+</section>
+
+<!-- ───────────────── STEP 2 분석 계획 ───────────────── -->
+<section class="step" id="step-2" data-step="2" aria-labelledby="h-2">
+  <div class="step-head">
+    <span class="kicker">STEP 2 / 6 · 분석 계획</span>
+    <h1 id="h-2" tabindex="-1">결과를 보기 전에, 계산 방법을 적어 둔다</h1>
+    <p class="lede">1차 결과 하나와 계산 방법, 보고할 숫자를 데이터를 열기 전에 고정한다. 나중에 바꾸면 '변경'으로 기록하고 이유를 쓴다.</p>
+  </div>
+  <div class="step-body">
+    <div class="col col-flow">
+      <article class="panel ask">
+        <h2><span class="ico" aria-hidden="true">1</span>AI에게 요청 <span class="chip chip-syn">편집 가능 · 복사해서 쓰기</span></h2>
+        <label class="vh" for="ask-2">AI에게 보낼 요청문</label>
+        <textarea id="ask-2" spellcheck="false">위 연구 질문의 분석 계획을 데이터를 보기 전에 정하려고 한다. 1차 결과변수 하나, 불확실성을 보여 줄 방법, 보고할 숫자, 표본 수에 대한 설명(교육용 예시라 40명 고정), 결측 처리 원칙을 10줄 안에 써 줘. 2차 분석은 '탐색적'이라고 표시해 줘.</textarea>
+        <div class="row">
+          <button type="button" class="btn teal sm copy" data-for="ask-2">프롬프트 복사</button>
+          <button type="button" class="btn ghost sm reset" data-for="ask-2">원래 문구로</button>
+          <span class="copy-status" role="status" aria-live="polite"></span>
+        </div>
+      </article>
+      <article class="panel out">
+        <h2><span class="ico" aria-hidden="true">2</span>표시된 출력 <span class="chip chip-sim">시연용 고정 응답 · 실시간 AI 아님</span></h2>
+        <div class="bubble">
+          <dl>
+            <dt>고정일</dt><dd><span data-fill="analysis_plan.fixed_before_data"></span> (데이터를 열기 전)</dd>
+            <dt>1차 결과</dt><dd data-fill="analysis_plan.primary_outcome"></dd>
+            <dt>불확실성</dt><dd data-fill="analysis_plan.uncertainty"></dd>
+            <dt>검정</dt><dd data-fill="analysis_plan.test"></dd>
+            <dt>참고</dt><dd data-fill="analysis_plan.reference"></dd>
+            <dt>보고</dt><dd id="plan-report"></dd>
+            <dt>표본</dt><dd data-fill="analysis_plan.sample_size"></dd>
+            <dt>결측</dt><dd data-fill="analysis_plan.missing"></dd>
+            <dt>2차</dt><dd data-fill="analysis_plan.secondary"></dd>
+          </dl>
+        </div>
+        <p class="note">부트스트랩은 "자료를 복원추출로 1만 번 다시 뽑아 평균 차이가 얼마나 흔들리는지 본다"는 방법이다. 공식 하나로 끝나는 t 구간보다 설명이 쉽고, 어떤 방법을 썼는지 적어 두면 누구나 다시 계산할 수 있다.</p>
+      </article>
+      <article class="panel check">
+        <h2><span class="ico" aria-hidden="true">3</span>학생이 확인할 것</h2>
+        <ul class="checks">
+          <li><label><input type="checkbox"><span>1차 결과가 하나다. 여러 개를 두면 결과를 본 뒤 '가장 좋은 것'을 고르고 싶어진다.</span></label></li>
+          <li><label><input type="checkbox"><span>차이의 방향(알림군 − 대조군)과 단위(걸음/일)가 적혀 있다.</span></label></li>
+          <li><label><input type="checkbox"><span>이 계획의 날짜가 데이터를 열어 본 날짜보다 앞선다.</span></label></li>
+        </ul>
+      </article>
+    </div>
+    <aside class="col col-visual" aria-label="보조 설명">
+      <section class="panel">
+        <h2><span class="ico" aria-hidden="true">◆</span>연구 흐름과 봉인된 계획</h2>
+        <div class="timeline" aria-label="연구 일정">
+          <div><b>1주</b>기준 측정</div>
+          <div class="r"><b>배정</b>1:1 무작위<br><small>(합성 라벨)</small></div>
+          <div><b>4주</b>중재<br><small>알림 vs 없음</small></div>
+          <div><b>1주</b>추적 측정</div>
+        </div>
+        <div class="sealed" style="margin-top:.7rem">
+          <span class="stamp" aria-hidden="true">데이터 열기 전 고정</span>
+          <h3>분석 계획 v1 · <span data-fill="analysis_plan.fixed_before_data"></span></h3>
+          <ul>
+            <li>1차 결과: 변화량의 군 간 평균 차이(알림군 − 대조군)</li>
+            <li>95% CI: 부트스트랩 백분위법, B=<span data-num="B_boot"></span>, 시드 고정</li>
+            <li>p: 순열 검정, B=<span data-num="B_perm"></span>, 시드 고정</li>
+            <li>변경 시: 날짜·이유를 적고 '변경'으로 남긴다</li>
+          </ul>
+        </div>
+      </section>
+      <section class="panel">
+        <h2><span class="ico" aria-hidden="true">≠</span>연관과 비교, 그리고 합성 자료</h2>
+        <div class="contrast">
+          <div class="obs"><b>관찰 연관:</b> "앱을 많이 쓴 학생이 더 걸었다." 많이 걷는 학생이 앱도 많이 쓸 수 있다. 연관은 효과의 증명이 아니다.</div>
+          <div class="rct"><b>무작위 비교:</b> 알림을 받을지 말지를 무작위로 정하면 두 군이 비교 가능해진다. 그래서 "차이"를 말할 근거가 생긴다.</div>
+          <div class="syn-note">단, 이 시연의 배정은 합성 라벨이다. 합성 자료에 무작위 배정이 있어도 임상적 결론은 나오지 않는다.</div>
+        </div>
+      </section>
+    </aside>
+  </div>
+</section>
+
+<!-- ───────────────── STEP 3 데이터와 표 ───────────────── -->
+<section class="step" id="step-3" data-step="3" aria-labelledby="h-3">
+  <div class="step-head">
+    <span class="kicker">STEP 3 / 6 · 합성 데이터와 표</span>
+    <h1 id="h-3" tabindex="-1">합성 데이터 40명, 계획대로 계산한 표</h1>
+    <p class="lede">숫자는 모델의 암산이 아니라 코드 실행값이어야 한다. 이 화면의 숫자는 demo 폴더의 compute_case.py 가 계산했고, 브라우저가 평균·SD·차이를 다시 계산해 대조한다.</p>
+  </div>
+  <div class="step-body">
+    <div class="col col-flow">
+      <article class="panel ask">
+        <h2><span class="ico" aria-hidden="true">1</span>AI에게 요청 <span class="chip chip-syn">편집 가능 · 복사해서 쓰기</span></h2>
+        <label class="vh" for="ask-3">AI에게 보낼 요청문</label>
+        <textarea id="ask-3" spellcheck="false">첨부한 synthetic_steps.csv(40명; participant_id, group, baseline_steps, followup_steps, change_steps)를 분석 계획대로 계산해 줘. 코드를 실행해서 군별 n·평균·SD(기준/추적/변화), 변화량의 군 간 평균 차이와 95% 신뢰구간(부트스트랩 백분위법, B=10,000, 시드 고정), 순열 검정 p를 표로 보여 주고, 계산에 쓴 코드도 함께 보여 줘. 결과를 해석하지 말고 숫자만 줘.</textarea>
+        <div class="row">
+          <button type="button" class="btn teal sm copy" data-for="ask-3">프롬프트 복사</button>
+          <button type="button" class="btn ghost sm reset" data-for="ask-3">원래 문구로</button>
+          <span class="copy-status" role="status" aria-live="polite"></span>
+        </div>
+      </article>
+      <article class="panel out run">
+        <h2><span class="ico" aria-hidden="true">2</span>표시된 출력 <span class="chip chip-run">스크립트 실행 결과 · compute_case.py</span> <span class="chip chip-syn">합성 자료</span></h2>
+        <div class="bubble">
+          <div class="table-scroll" style="max-height:none">
+            <table class="tbl" id="tbl-summary" aria-describedby="tbl-summary-cap">
+              <caption id="tbl-summary-cap" class="vh">군별 요약: n, 기준·추적·변화 걸음수의 평균±SD</caption>
+              <thead><tr><th scope="col">군</th><th scope="col">n</th><th scope="col">기준(걸음/일)</th><th scope="col">추적(걸음/일)</th><th scope="col">변화(추적−기준)</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div class="result" aria-label="1차 결과">
+            <div class="kpi"><div class="k">평균 차이 (알림군 − 대조군)</div><div class="v"><span data-num="diff"></span> <small>걸음/일</small></div><div class="s">변화량의 군 간 차이</div></div>
+            <div class="kpi teal"><div class="k">95% 신뢰구간 · 부트스트랩</div><div class="v" data-num="ci"></div><div class="s">백분위법 · B=<span data-num="B_boot"></span> · 시드 고정</div></div>
+            <div class="kpi light"><div class="k">순열 검정 p (양측)</div><div class="v" data-num="p"></div><div class="s">라벨 섞기 B=<span data-num="B_perm"></span></div></div>
+            <div class="kpi light"><div class="k">참고 · Welch t</div><div class="v">t=<span data-num="welch_t"></span></div><div class="s">df=<span data-num="welch_df"></span> · CI <span data-num="welch_ci"></span> (임계값 수치 계산)</div></div>
+          </div>
+          <details class="more"><summary>계산에 쓴 코드 보기 (compute_case.py 발췌)</summary>
+<pre class="code"><code>def mean(xs):  return sum(xs) / len(xs)
+def sd(xs):                       # 표본 표준편차 (n-1)
+    m = mean(xs)
+    return math.sqrt(sum((x - m) ** 2 for x in xs) / (len(xs) - 1))
+
+def bootstrap_mean_diff_ci(a, b, B=10_000, seed=20261032, conf=0.95):
+    rng = random.Random(seed)     # 시드 고정 → 누가 돌려도 같은 구간
+    diffs = []
+    for _ in range(B):
+        sa = sum(a[int(rng.random()*len(a))] for _ in a) / len(a)
+        sb = sum(b[int(rng.random()*len(b))] for _ in b) / len(b)
+        diffs.append(sa - sb)
+    diffs.sort()
+    return quantile(diffs, 0.025), quantile(diffs, 0.975)</code></pre>
+          </details>
+        </div>
+        <p class="note"><strong>실제 세션이라면</strong> 모델이 코드를 실행해 이 표를 만든다. 그때도 "코드를 보여 줘"라고 요청해 실제로 실행했는지 확인한다. 코드 없이 숫자만 오면 암산일 수 있다.</p>
+      </article>
+      <article class="panel check">
+        <h2><span class="ico" aria-hidden="true">3</span>학생이 확인할 것</h2>
+        <ul class="checks">
+          <li><label><input type="checkbox"><span>n이 20 + 20 = 40이고, 결측이 없다. 표의 n이 CSV 행 수와 같다.</span></label></li>
+          <li><label><input type="checkbox"><span>차이의 방향이 '알림군 − 대조군'이고 단위가 걸음/일이다. 대조군이 줄었다면 "알림군이 더 걸었다"가 아니라 "차이"를 말한다.</span></label></li>
+          <li><label><input type="checkbox"><span>신뢰구간이 0을 포함하는지 보고, 문장의 강도를 거기에 맞춘다.</span></label></li>
+        </ul>
+      </article>
+    </div>
+    <aside class="col col-visual" aria-label="그림과 원자료">
+      <figure class="chart">
+        <div class="chart-head"><h3>그림 1. 참여자별 변화량과 군 평균(95% CI) · 합성 자료</h3><button type="button" class="btn ghost sm" id="chart-replay">다시 그리기</button></div>
+        <svg id="chart" viewBox="0 0 560 360" role="img" aria-label="변화량 점그림"></svg>
+        <figcaption>점 하나가 참여자 한 명의 변화량(추적 − 기준, 걸음/일). 가로선은 군 평균, 세로선은 부트스트랩 95% 신뢰구간. 오른쪽 마름모는 군 간 평균 차이와 그 신뢰구간. 0선 위면 증가.</figcaption>
+        <div class="recheck" id="recheck" role="status"><b>재계산 중…</b></div>
+      </figure>
+      <section class="panel">
+        <details class="more" id="raw-details"><summary>원자료 40행 보기 (synthetic_steps.csv와 같은 내용)</summary>
+          <div class="table-scroll" style="margin-top:.5rem">
+            <table class="tbl" id="tbl-raw">
+              <caption class="vh">참여자별 합성 원자료</caption>
+              <thead><tr><th scope="col">ID</th><th scope="col">군</th><th scope="col">기준</th><th scope="col">추적</th><th scope="col">변화</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </details>
+        <p class="note">생성 방법: 시드 <span data-num="seed"></span>로 1:1 배정을 섞고, 기준 걸음수와 변화량을 정규분포에서 뽑아 10걸음 단위로 반올림했다(생성 모수는 case.json의 generation 항목). 실제 사람의 자료가 아니다.</p>
+      </section>
+    </aside>
+  </div>
+</section>
+
+<!-- ───────────────── STEP 4 초안 ───────────────── -->
+<section class="step" id="step-4" data-step="4" aria-labelledby="h-4">
+  <div class="step-head">
+    <span class="kicker">STEP 4 / 6 · 원고 초안</span>
+    <h1 id="h-4" tabindex="-1">표를 근거로 초안을 쓰게 한다. 그리고 의심한다</h1>
+    <p class="lede">"표의 숫자만 쓰고 측정하지 않은 것은 주장하지 마"라고 지시해도, 초안에는 과장이 섞여 들어온다. 지시는 보장이 아니다.</p>
+  </div>
+  <div class="step-body">
+    <div class="col col-flow">
+      <article class="panel ask">
+        <h2><span class="ico" aria-hidden="true">1</span>AI에게 요청 <span class="chip chip-syn">편집 가능 · 복사해서 쓰기</span></h2>
+        <label class="vh" for="ask-4">AI에게 보낼 요청문</label>
+        <textarea id="ask-4" spellcheck="false">위 표를 바탕으로 결과(Results) 문단 1개와 논의(Discussion) 첫 문단을 학술 논문 문체로 써 줘. 숫자는 표의 값만 쓰고, 측정하지 않은 결과는 주장하지 마. 자료가 교육용 합성 자료라는 점도 적어 줘.</textarea>
+        <div class="row">
+          <button type="button" class="btn teal sm copy" data-for="ask-4">프롬프트 복사</button>
+          <button type="button" class="btn ghost sm reset" data-for="ask-4">원래 문구로</button>
+          <span class="copy-status" role="status" aria-live="polite"></span>
+        </div>
+      </article>
+      <article class="panel out">
+        <h2><span class="ico" aria-hidden="true">2</span>표시된 출력 <span class="chip chip-sim">시연용 고정 응답 · 실시간 AI 아님</span></h2>
+        <p style="margin:.2rem 0 0;font-weight:800;color:var(--navy-2);font-size:.85rem">결과(Results) 초안 — 숫자는 표에서 그대로</p>
+        <blockquote class="ms" id="draft-results"></blockquote>
+        <p style="margin:.6rem 0 0;font-weight:800;color:var(--navy-2);font-size:.85rem">논의(Discussion) 첫 문단 초안 — 과장이 섞였다</p>
+        <blockquote class="ms" id="draft-discussion"></blockquote>
+        <div class="legend"><span><span class="sw" style="background:var(--amber-soft);border:1px solid var(--amber-line)"></span>노란 표시 = 표가 뒷받침하지 않는 말</span></div>
+      </article>
+      <article class="panel check">
+        <h2><span class="ico" aria-hidden="true">3</span>학생이 확인할 것</h2>
+        <ul class="checks">
+          <li><label><input type="checkbox"><span>결과 문단의 숫자가 표와 한 글자도 다르지 않다. 반올림 자리까지 같다.</span></label></li>
+          <li><label><input type="checkbox"><span>측정하지 않은 '건강'과 '지속'이 논의에 들어왔다. 지시했는데도 들어왔다는 점을 기억한다.</span></label></li>
+          <li><label><input type="checkbox"><span>대상(한 대학 40명)과 기간(4주)을 넘는 일반화가 있다.</span></label></li>
+        </ul>
+      </article>
+    </div>
+    <aside class="col col-visual" aria-label="보조 설명">
+      <section class="think" data-think>
+        <span class="chip chip-sim">20초 생각</span>
+        <p class="q">논의 초안에서 데이터가 뒷받침하지 않는 단어를 3개 찾아보자.</p>
+        <div class="timer">
+          <div class="ringwrap"><svg viewBox="0 0 48 48" aria-hidden="true"><circle class="ring-bg" cx="24" cy="24" r="20"/><circle class="ring-fg" cx="24" cy="24" r="20"/></svg><span class="count" aria-hidden="true">20</span></div>
+          <button type="button" class="btn sm t-start">20초 시작</button>
+          <button type="button" class="btn ghost sm t-pause">일시정지</button>
+          <button type="button" class="btn ghost sm t-reset">초기화</button>
+        </div>
+        <p class="t-status" role="status" aria-live="polite"></p>
+        <details><summary>정답 예시 보기</summary>
+          <p><b>입증</b>(단일 소규모 합성 자료가 쓸 말이 아니다) · <b>건강을 개선</b>(측정하지 않았다) · <b>모든 대학생</b>(한 대학 40명이다). 덤으로 <b>'유의하게'</b>는 구간 없이 쓰면 크기를 숨기고, <b>'더 많이 걸었다'</b>는 '변화량의 차이'와 다른 말이다.</p>
+        </details>
+      </section>
+      <section class="panel">
+        <h2><span class="ico" aria-hidden="true">≠</span>지시 ≠ 보장</h2>
+        <div class="contrast">
+          <div class="obs"><b>지시:</b> "측정하지 않은 결과는 주장하지 마" → <b>초안:</b> "건강을 개선함을 입증" → <b>확인:</b> 결과변수 목록과 대조</div>
+          <div class="obs"><b>지시:</b> "숫자는 표의 값만" → <b>초안:</b> 숫자는 맞지만 '더 많이 걸었다'로 비교 대상이 바뀜 → <b>확인:</b> 무엇과 무엇의 차이인지</div>
+          <div class="obs"><b>지시:</b> "합성 자료라는 점도 적어 줘" → <b>초안:</b> 결과 문단에는 있고 논의에는 없음 → <b>확인:</b> 숫자가 나오는 모든 곳</div>
+        </div>
+        <p class="note">초안은 출발점이다. 고치는 일은 다음 두 단계에서 저자가 한다.</p>
+      </section>
+    </aside>
+  </div>
+</section>
+
+<!-- ───────────────── STEP 5 비평과 저자 결정 ───────────────── -->
+<section class="step" id="step-5" data-step="5" aria-labelledby="h-5">
+  <div class="step-head">
+    <span class="kicker">STEP 5 / 6 · 비평과 저자 결정</span>
+    <h1 id="h-5" tabindex="-1">AI 비평은 권고, 결정은 저자가 한다</h1>
+    <p class="lede">심사자처럼 비평하게 한 뒤, 지적마다 수용·수정 수용·기각을 내가 고르고 사유를 남긴다. AI가 알아서 고치게 두지 않는다.</p>
+  </div>
+  <div class="step-body">
+    <div class="col col-flow">
+      <article class="panel ask">
+        <h2><span class="ico" aria-hidden="true">1</span>AI에게 요청 <span class="chip chip-syn">편집 가능 · 복사해서 쓰기</span></h2>
+        <label class="vh" for="ask-5">AI에게 보낼 요청문</label>
+        <textarea id="ask-5" spellcheck="false">다음 결과·논의 문단을 까다로운 심사자처럼 비평해 줘. 지적마다 ① 문제 문장 ② 왜 문제인지 ③ 고친 예문을 쓰고, 심각도(높음/중간/낮음)를 표시해 줘. 숫자는 바꾸지 마. 내가 결정할 수 있게 지적만 하고 본문을 고치지는 마.</textarea>
+        <div class="row">
+          <button type="button" class="btn teal sm copy" data-for="ask-5">프롬프트 복사</button>
+          <button type="button" class="btn ghost sm reset" data-for="ask-5">원래 문구로</button>
+          <span class="copy-status" role="status" aria-live="polite"></span>
+        </div>
+      </article>
+      <article class="panel out">
+        <h2><span class="ico" aria-hidden="true">2</span>표시된 출력 <span class="chip chip-sim">시연용 고정 응답 · 실시간 AI 아님</span> <span class="chip chip-syn">지적마다 저자 결정</span></h2>
+        <div id="findings"></div>
+      </article>
+      <article class="panel check">
+        <h2><span class="ico" aria-hidden="true">3</span>학생이 확인할 것</h2>
+        <ul class="checks">
+          <li><label><input type="checkbox"><span>지적 4건을 모두 내가 결정했다. 결정하지 않은 지적은 '보류'로 남고 사라지지 않는다.</span></label></li>
+          <li><label><input type="checkbox"><span>기각한 지적에는 사유를 적었다. 기각은 기록에서 지우는 것이 아니다.</span></label></li>
+          <li><label><input type="checkbox"><span>숫자는 바뀌지 않았다. 바뀌는 것은 문장이다.</span></label></li>
+        </ul>
+      </article>
+    </div>
+    <aside class="col col-visual" aria-label="결정 기록">
+      <section class="panel">
+        <h2><span class="ico" aria-hidden="true">✎</span>저자 결정 기록 <span class="chip chip-syn">이 화면 안에서만 저장</span></h2>
+        <p class="count-line" id="ledger-count">0 / 4 결정</p>
+        <ul class="ledger" id="ledger" aria-live="polite"></ul>
+        <p class="note">AI 비평은 권고다. 받아들일지, 고쳐서 받아들일지, 기각할지는 저자가 정하고 책임진다. 기각한 지적도 기록에 남겨 두면 심사자가 같은 질문을 할 때 답이 준비되어 있다.</p>
+      </section>
+      <section class="panel">
+        <h2><span class="ico" aria-hidden="true">◆</span>심각도 읽는 법</h2>
+        <ul style="font-size:.9rem">
+          <li><span class="chip chip-high">높음</span> 데이터가 뒷받침하지 않는 결론. 그대로 두면 심사에서 바로 지적된다.</li>
+          <li><span class="chip chip-mid">중간</span> 숫자의 의미를 흐리는 표현. 구간·대상·자료 성격을 적으면 해결된다.</li>
+          <li><span class="chip chip-syn">낮음</span> 문체·용어. 이 시연에는 없다.</li>
+        </ul>
+      </section>
+    </aside>
+  </div>
+</section>
+
+<!-- ───────────────── STEP 6 수정 문단과 패키지 ───────────────── -->
+<section class="step" id="step-6" data-step="6" aria-labelledby="h-6">
+  <div class="step-head">
+    <span class="kicker">STEP 6 / 6 · 수정 문단과 패키지 미리보기</span>
+    <h1 id="h-6" tabindex="-1">범위를 지킨 문장으로 고치고, 제출 전 묶음을 본다</h1>
+    <p class="lede">같은 숫자로도 과장된 문장과 범위를 지킨 문장이 갈린다. 파일이 완성되는 것과 제출이 끝나는 것은 다른 일이다.</p>
+  </div>
+  <div class="step-body">
+    <div class="col col-flow">
+      <article class="panel ask">
+        <h2><span class="ico" aria-hidden="true">1</span>AI에게 요청 <span class="chip chip-syn">편집 가능 · 복사해서 쓰기</span></h2>
+        <label class="vh" for="ask-6">AI에게 보낼 요청문</label>
+        <textarea id="ask-6" spellcheck="false">비평 F1~F4 중 내가 '수용' 또는 '수정 수용'으로 결정한 것만 반영해 논의 첫 문단을 다시 써 줘. 숫자는 표와 같게 유지하고, 측정한 것(걸음수)·대상(한 대학 40명)·기간(4주)·자료 성격(교육용 합성)을 문장 안에 적어 줘. 기각한 F-번호는 반영하지 말고, 바꾼 곳을 목록으로 알려 줘.</textarea>
+        <div class="row">
+          <button type="button" class="btn teal sm copy" data-for="ask-6">프롬프트 복사</button>
+          <button type="button" class="btn ghost sm reset" data-for="ask-6">원래 문구로</button>
+          <span class="copy-status" role="status" aria-live="polite"></span>
+        </div>
+      </article>
+      <article class="panel out">
+        <h2><span class="ico" aria-hidden="true">2</span>표시된 출력 <span class="chip chip-sim">시연용 고정 응답 · 실시간 AI 아님</span></h2>
+        <div class="seg" role="group" aria-label="논의 문단 버전 선택 (단축키 T)">
+          <button type="button" class="seg-btn" data-version="inflated" aria-pressed="true">과장된 초안</button>
+          <button type="button" class="seg-btn" data-version="bounded" aria-pressed="false">범위를 지킨 수정문</button>
+        </div>
+        <blockquote class="ms" id="ms-text" aria-live="polite"></blockquote>
+        <div class="legend" id="ms-legend"></div>
+        <p class="note" id="ms-note">이 수정문은 F1~F4를 모두 수용한 경우의 예시다. 기각한 지적이 있다면 그 부분은 그대로 두고, 기각 사유를 기록에 남긴다. 숫자는 두 버전에서 같다.</p>
+      </article>
+      <article class="panel check">
+        <h2><span class="ico" aria-hidden="true">3</span>학생이 확인할 것</h2>
+        <ul class="checks">
+          <li><label><input type="checkbox"><span>수정문의 숫자가 표와 같다. 문장을 고치다가 숫자가 바뀌지 않았다.</span></label></li>
+          <li><label><input type="checkbox"><span>한계에 '걸음수만 · 4주 · 한 대학 · 합성'이 들어 있다.</span></label></li>
+          <li><label><input type="checkbox"><span>'파일 완성'과 '제출 완료'를 구분해 말할 수 있다. 제출 결정과 접수 확인은 사람이 한다.</span></label></li>
+        </ul>
+      </article>
+    </div>
+    <aside class="col col-visual" aria-label="패키지 미리보기와 마무리">
+      <section class="panel">
+        <h2><span class="ico" aria-hidden="true">▣</span>패키지 미리보기 <span class="chip chip-syn">교육용 축약판 · 예시</span></h2>
+        <ul class="pkg">
+          <li><b>제목 페이지</b><span class="st chip chip-ok">파일 완성</span></li>
+          <li><b>초록</b> 합성 자료 명시<span class="st chip chip-ok">파일 완성</span></li>
+          <li><b>본문</b> 서론·방법·결과·논의<span class="st chip chip-ok">파일 완성</span></li>
+          <li><b>표 1</b> 군별 요약<span class="st chip chip-run">스크립트 값</span></li>
+          <li><b>그림 1</b> 변화량 점그림<span class="st chip chip-run">스크립트 값</span></li>
+          <li><b>참고문헌</b> 실재·서지 검증<span class="st chip chip-mid">사람 확인 필요</span></li>
+          <li><b>자료 공개문</b> 합성 CSV 첨부<span class="st chip chip-ok">파일 완성</span></li>
+          <li><b>AI 사용 고지</b> 무엇을 어디에 썼는지<span class="st chip chip-mid">저자 작성</span></li>
+          <li><b>보고지침 점검</b> CONSORT 2025 · CONSORT-EHEALTH<span class="st chip chip-mid">항목별 사람 확인</span></li>
+          <li><b>커버레터</b> 기여·적합성<span class="st chip chip-mid">저자 작성</span></li>
+        </ul>
+        <p class="note"><strong>파일 완성 ≠ 제출 완료.</strong> 제출 버튼을 누르는 결정과 접수 확인은 저자가 한다. 이 묶음은 교육용 축약판 파이프라인이 만드는 예시이며, 실제 저널별 모든 검증을 갖췄다고 주장하지 않는다. 파이프라인 다운로드는 수업 뒤 선택 자료이고, 이 강의에는 터미널·파이썬·압축 해제 실습이 없다.</p>
+      </section>
+      <section class="think" data-think>
+        <span class="chip chip-sim">20초 생각</span>
+        <p class="q">이것이 실제 연구였다면, 제출 버튼을 누르기 전에 사람이 꼭 확인해야 하는 것 하나는?</p>
+        <div class="timer">
+          <div class="ringwrap"><svg viewBox="0 0 48 48" aria-hidden="true"><circle class="ring-bg" cx="24" cy="24" r="20"/><circle class="ring-fg" cx="24" cy="24" r="20"/></svg><span class="count" aria-hidden="true">20</span></div>
+          <button type="button" class="btn sm t-start">20초 시작</button>
+          <button type="button" class="btn ghost sm t-pause">일시정지</button>
+          <button type="button" class="btn ghost sm t-reset">초기화</button>
+        </div>
+        <p class="t-status" role="status" aria-live="polite"></p>
+        <details><summary>정답 예시 보기</summary>
+          <p>여러 답이 맞다. IRB 승인과 참여자 동의, 공저자 전원의 승인, 원자료와 표의 대조, 저널 투고 규정, AI 사용 고지. 공통점은 AI가 대신 "확인했다"고 말할 수 없는 것들이라는 점이다.</p>
+        </details>
+      </section>
+      <section class="panel">
+        <h2><span class="ico" aria-hidden="true">※</span>공식 지침 링크 <span class="chip chip-ok">확인 2026-10-31 · coordinator</span></h2>
+        <ol class="refs" id="refs"></ol>
+        <div class="habit" aria-label="Never-skilling 습관">
+          <div><b>AI 전</b>20초 먼저 생각</div>
+          <div><b>AI</b>요청·출력·확인</div>
+          <div><b>AI 후</b>내 말로 다시 설명</div>
+        </div>
+      </section>
+    </aside>
+  </div>
+</section>
+</main>
+
+<footer class="bar">
+  <button type="button" class="btn ghost nav" id="prev">← 이전</button>
+  <div class="progress"><span id="progress" aria-live="polite">1 / 6 · 질문</span><div class="progress-track" aria-hidden="true"><div id="progress-fill"></div></div></div>
+  <span class="hint">← → 단계 이동 · 1~6 바로 가기 · T 문장 토글 · ? 단축키</span>
+  <button type="button" class="btn ghost nav" id="help-btn" aria-haspopup="dialog">단축키</button>
+  <button type="button" class="btn nav" id="next">다음 →</button>
+</footer>
+
+<dialog id="help" aria-labelledby="help-h">
+  <h2 id="help-h">단축키</h2>
+  <table>
+    <tr><td><kbd>→</kbd> <kbd>PageDown</kbd></td><td>다음 단계</td></tr>
+    <tr><td><kbd>←</kbd> <kbd>PageUp</kbd></td><td>이전 단계</td></tr>
+    <tr><td><kbd>1</kbd>~<kbd>6</kbd></td><td>해당 단계로 바로 가기</td></tr>
+    <tr><td><kbd>Home</kbd> / <kbd>End</kbd></td><td>첫 단계 / 마지막 단계</td></tr>
+    <tr><td><kbd>T</kbd></td><td>6단계에서 과장 문장 ↔ 수정 문장 토글</td></tr>
+    <tr><td><kbd>Tab</kbd> <kbd>Space</kbd> <kbd>Enter</kbd></td><td>버튼·체크·선택·펼치기 조작</td></tr>
+    <tr><td><kbd>?</kbd> / <kbd>Esc</kbd></td><td>이 안내 열기 / 닫기</td></tr>
+  </table>
+  <p class="note">현재 단계는 <code>body[data-step]</code>, <code>.step.is-active</code>, <code>#progress</code>에서 읽을 수 있다. 입력 칸에 커서가 있을 때는 단계 이동 단축키가 꺼진다.</p>
+  <div style="margin-top:.6rem;text-align:right"><button type="button" class="btn sm" id="help-close">닫기</button></div>
+</dialog>
+
+<!-- 계산 결과(case.json)를 compute_case.py 가 아래 블록에 주입한다. 손으로 고치지 않는다. -->
+<script id="case-data" type="application/json">
+{
+  "schema": "dku-digital-health-demo-case/2",
+  "case_date": "2026-10-31",
+  "title": "대학생에게 걷기 앱 알림을 보내면 걸음수가 늘까? — 교육용 합성 사례",
+  "disclaimer": {
+    "banner": "합성 데이터로 만든 시연 · 실시간 AI 응답 아님",
+    "data": "이 자료의 참여자·앱·걸음수는 모두 컴퓨터가 만든 합성값이다. 실제 사람·실제 앱·실제 효과와 무관하다.",
+    "randomization": "'무작위 배정'은 설계 설명을 위한 합성 라벨이다. 합성 자료에 무작위 배정이 있어도 임상적 결론은 나오지 않는다.",
+    "numbers": "모든 숫자는 demo/compute_case.py 가 실행해서 계산한 값이다. 언어 모델의 암산이 아니다.",
+    "ai_text": "시연 화면의 'AI 응답'은 교육용으로 미리 써 둔 고정 문장이다. 실시간 AI 응답이 아니다.",
+    "association_vs_causation": "'앱을 많이 쓴 학생이 더 걸었다'는 관찰 연관이고, 연관은 효과의 증명이 아니다. 무작위 배정은 비교 가능성을 높이지만, 합성 자료에서는 그조차 교육 예시일 뿐이다."
+  },
+  "generation": {
+    "script": "demo/compute_case.py",
+    "data_of_record": "demo/synthetic_steps.csv",
+    "seed": 20261031,
+    "method": "python random.Random(seed) · shuffle(1:1 배정) · gauss(기준, 변화) · 10걸음 단위 반올림",
+    "params": {
+      "n_per_group": 20,
+      "baseline_mean": 6400.0,
+      "baseline_sd": 1400.0,
+      "baseline_clip": [
+        3000,
+        11000
+      ],
+      "change_mean_by_group": {
+        "notification": 700.0,
+        "control": 100.0
+      },
+      "change_sd": 950.0,
+      "followup_min": 1500
+    },
+    "note": "생성 모수는 시드와 함께 실행 전에 정했고 결과를 보고 바꾸지 않았다. 신뢰구간이 0을 포함하는지는 실행 결과에 따른다."
+  },
+  "design": {
+    "question": "대학생에게 걷기 앱 알림을 보내면 4주 후 일평균 걸음수가 늘까?",
+    "population": "한 대학 재학생 40명(합성)",
+    "intervention": "걷기 앱 + 하루 2회 알림(아침·오후), 4주",
+    "comparator": "같은 걷기 앱, 알림 없음",
+    "outcome": "일평균 걸음수 변화(추적 1주 평균 − 기준 1주 평균)",
+    "timeline": [
+      "기준 측정 1주",
+      "무작위 배정(합성 라벨)",
+      "중재 4주",
+      "추적 측정 1주"
+    ],
+    "allocation": "1:1, 20명/군",
+    "cannot_answer": [
+      "알림이 '건강'(체중·혈압·기분)을 바꾸는지",
+      "4주 뒤에도 효과가 유지되는지",
+      "다른 대학·연령·국가 학생에게도 같은지"
+    ]
+  },
+  "analysis_plan": {
+    "fixed_before_data": "2026-10-31",
+    "primary_outcome": "변화량(추적−기준)의 군 간 평균 차이(알림군 − 대조군)",
+    "uncertainty": "95% 신뢰구간 — 부트스트랩 백분위법(군별 복원추출, B=10,000, 시드 고정)",
+    "test": "순열 검정(라벨 섞기 B=10,000, 시드 고정) 양측 p",
+    "reference": "Welch t 통계량·자유도·구간은 참고로만 보고(임계값은 수치 계산)",
+    "report": [
+      "군별 n · 평균 · SD (기준/추적/변화)",
+      "평균 차이와 95% CI",
+      "순열 검정 p"
+    ],
+    "sample_size": "교육용 합성 예시로 20명/군 고정. 실제 연구는 검정력 계산으로 정한다.",
+    "missing": "합성 자료에는 결측이 없다. 실제 연구는 배정대로 분석(ITT)하고 결측 처리 방법을 미리 적는다.",
+    "secondary": "기준 걸음수 수준별 차이 — 탐색적. 이번 시연에서는 수행하지 않음."
+  },
+  "columns": [
+    "participant_id",
+    "group",
+    "baseline_steps",
+    "followup_steps",
+    "change_steps"
+  ],
+  "rows": [
+    {
+      "participant_id": "P01",
+      "group": "control",
+      "baseline_steps": 5070,
+      "followup_steps": 5430,
+      "change_steps": 360
+    },
+    {
+      "participant_id": "P02",
+      "group": "control",
+      "baseline_steps": 5600,
+      "followup_steps": 4970,
+      "change_steps": -630
+    },
+    {
+      "participant_id": "P03",
+      "group": "control",
+      "baseline_steps": 5390,
+      "followup_steps": 5260,
+      "change_steps": -130
+    },
+    {
+      "participant_id": "P04",
+      "group": "control",
+      "baseline_steps": 6930,
+      "followup_steps": 7130,
+      "change_steps": 200
+    },
+    {
+      "participant_id": "P05",
+      "group": "notification",
+      "baseline_steps": 5900,
+      "followup_steps": 6930,
+      "change_steps": 1030
+    },
+    {
+      "participant_id": "P06",
+      "group": "notification",
+      "baseline_steps": 6540,
+      "followup_steps": 8630,
+      "change_steps": 2090
+    },
+    {
+      "participant_id": "P07",
+      "group": "notification",
+      "baseline_steps": 6980,
+      "followup_steps": 7380,
+      "change_steps": 400
+    },
+    {
+      "participant_id": "P08",
+      "group": "notification",
+      "baseline_steps": 5510,
+      "followup_steps": 6010,
+      "change_steps": 500
+    },
+    {
+      "participant_id": "P09",
+      "group": "notification",
+      "baseline_steps": 9470,
+      "followup_steps": 11390,
+      "change_steps": 1920
+    },
+    {
+      "participant_id": "P10",
+      "group": "control",
+      "baseline_steps": 8140,
+      "followup_steps": 6760,
+      "change_steps": -1380
+    },
+    {
+      "participant_id": "P11",
+      "group": "control",
+      "baseline_steps": 6340,
+      "followup_steps": 5720,
+      "change_steps": -620
+    },
+    {
+      "participant_id": "P12",
+      "group": "notification",
+      "baseline_steps": 5480,
+      "followup_steps": 5450,
+      "change_steps": -30
+    },
+    {
+      "participant_id": "P13",
+      "group": "notification",
+      "baseline_steps": 5830,
+      "followup_steps": 6400,
+      "change_steps": 570
+    },
+    {
+      "participant_id": "P14",
+      "group": "notification",
+      "baseline_steps": 4820,
+      "followup_steps": 5020,
+      "change_steps": 200
+    },
+    {
+      "participant_id": "P15",
+      "group": "control",
+      "baseline_steps": 7910,
+      "followup_steps": 7770,
+      "change_steps": -140
+    },
+    {
+      "participant_id": "P16",
+      "group": "notification",
+      "baseline_steps": 5190,
+      "followup_steps": 5000,
+      "change_steps": -190
+    },
+    {
+      "participant_id": "P17",
+      "group": "control",
+      "baseline_steps": 4560,
+      "followup_steps": 4650,
+      "change_steps": 90
+    },
+    {
+      "participant_id": "P18",
+      "group": "control",
+      "baseline_steps": 7780,
+      "followup_steps": 8210,
+      "change_steps": 430
+    },
+    {
+      "participant_id": "P19",
+      "group": "control",
+      "baseline_steps": 7020,
+      "followup_steps": 7710,
+      "change_steps": 690
+    },
+    {
+      "participant_id": "P20",
+      "group": "control",
+      "baseline_steps": 8310,
+      "followup_steps": 7680,
+      "change_steps": -630
+    },
+    {
+      "participant_id": "P21",
+      "group": "control",
+      "baseline_steps": 6420,
+      "followup_steps": 6470,
+      "change_steps": 50
+    },
+    {
+      "participant_id": "P22",
+      "group": "notification",
+      "baseline_steps": 5790,
+      "followup_steps": 5830,
+      "change_steps": 40
+    },
+    {
+      "participant_id": "P23",
+      "group": "notification",
+      "baseline_steps": 6730,
+      "followup_steps": 8100,
+      "change_steps": 1370
+    },
+    {
+      "participant_id": "P24",
+      "group": "control",
+      "baseline_steps": 6080,
+      "followup_steps": 5040,
+      "change_steps": -1040
+    },
+    {
+      "participant_id": "P25",
+      "group": "control",
+      "baseline_steps": 5340,
+      "followup_steps": 4170,
+      "change_steps": -1170
+    },
+    {
+      "participant_id": "P26",
+      "group": "notification",
+      "baseline_steps": 6710,
+      "followup_steps": 8070,
+      "change_steps": 1360
+    },
+    {
+      "participant_id": "P27",
+      "group": "control",
+      "baseline_steps": 4620,
+      "followup_steps": 4240,
+      "change_steps": -380
+    },
+    {
+      "participant_id": "P28",
+      "group": "notification",
+      "baseline_steps": 7080,
+      "followup_steps": 6790,
+      "change_steps": -290
+    },
+    {
+      "participant_id": "P29",
+      "group": "notification",
+      "baseline_steps": 5950,
+      "followup_steps": 6730,
+      "change_steps": 780
+    },
+    {
+      "participant_id": "P30",
+      "group": "control",
+      "baseline_steps": 9660,
+      "followup_steps": 9970,
+      "change_steps": 310
+    },
+    {
+      "participant_id": "P31",
+      "group": "notification",
+      "baseline_steps": 6530,
+      "followup_steps": 5620,
+      "change_steps": -910
+    },
+    {
+      "participant_id": "P32",
+      "group": "control",
+      "baseline_steps": 5920,
+      "followup_steps": 5880,
+      "change_steps": -40
+    },
+    {
+      "participant_id": "P33",
+      "group": "control",
+      "baseline_steps": 7050,
+      "followup_steps": 6620,
+      "change_steps": -430
+    },
+    {
+      "participant_id": "P34",
+      "group": "notification",
+      "baseline_steps": 4460,
+      "followup_steps": 4100,
+      "change_steps": -360
+    },
+    {
+      "participant_id": "P35",
+      "group": "notification",
+      "baseline_steps": 8460,
+      "followup_steps": 9950,
+      "change_steps": 1490
+    },
+    {
+      "participant_id": "P36",
+      "group": "control",
+      "baseline_steps": 6320,
+      "followup_steps": 7190,
+      "change_steps": 870
+    },
+    {
+      "participant_id": "P37",
+      "group": "notification",
+      "baseline_steps": 7020,
+      "followup_steps": 9530,
+      "change_steps": 2510
+    },
+    {
+      "participant_id": "P38",
+      "group": "control",
+      "baseline_steps": 4790,
+      "followup_steps": 3880,
+      "change_steps": -910
+    },
+    {
+      "participant_id": "P39",
+      "group": "notification",
+      "baseline_steps": 5300,
+      "followup_steps": 5400,
+      "change_steps": 100
+    },
+    {
+      "participant_id": "P40",
+      "group": "notification",
+      "baseline_steps": 6460,
+      "followup_steps": 5560,
+      "change_steps": -900
+    }
+  ],
+  "groups": {
+    "notification": {
+      "key": "notification",
+      "label": "알림군",
+      "n": 20,
+      "baseline": {
+        "mean": 6310.5,
+        "sd": 1184.5
+      },
+      "followup": {
+        "mean": 6894.5,
+        "sd": 1883.6
+      },
+      "change": {
+        "mean": 584.0,
+        "sd": 968.6,
+        "ci95_bootstrap": [
+          175.5,
+          1010.5
+        ],
+        "min": -910,
+        "max": 2510
+      },
+      "display": {
+        "baseline": "6,310.5±1,184.5",
+        "followup": "6,894.5±1,883.6",
+        "change": "+584.0±968.6",
+        "change_mean": "+584.0",
+        "change_ci95": "175.5~1,010.5"
+      }
+    },
+    "control": {
+      "key": "control",
+      "label": "대조군",
+      "n": 20,
+      "baseline": {
+        "mean": 6462.5,
+        "sd": 1386.8
+      },
+      "followup": {
+        "mean": 6237.5,
+        "sd": 1589.2
+      },
+      "change": {
+        "mean": -225.0,
+        "sd": 624.5,
+        "ci95_bootstrap": [
+          -492.5,
+          37.0
+        ],
+        "min": -1380,
+        "max": 870
+      },
+      "display": {
+        "baseline": "6,462.5±1,386.8",
+        "followup": "6,237.5±1,589.2",
+        "change": "-225.0±624.5",
+        "change_mean": "-225.0",
+        "change_ci95": "-492.5~37.0"
+      }
+    }
+  },
+  "primary_result": {
+    "outcome": "변화량의 군 간 평균 차이(알림군 − 대조군), 걸음/일",
+    "mean_difference": 809.0,
+    "ci95": [
+      332.5,
+      1313.5
+    ],
+    "ci95_method": "부트스트랩 백분위법, 군별 복원추출, B=10,000, seed=20261032",
+    "ci95_width": 981.0,
+    "ci_includes_zero": false,
+    "p_permutation": 0.0035,
+    "p_method": "순열 검정(라벨 섞기), B=10,000, seed=20261033, p=(개수+1)/(B+1)",
+    "welch_reference": {
+      "t": 3.139,
+      "df": 32.47,
+      "se": 257.7,
+      "p_two_sided": 0.0036,
+      "ci95": [
+        284.4,
+        1333.6
+      ],
+      "t_crit_0975": 2.0358,
+      "note": "참고용. 임계값은 불완전 베타 함수를 수치 계산해 얻었고 닫힌 형식으로 자가검사했다(외운 표 값 아님)."
+    },
+    "interpretation_hint": "95% 부트스트랩 신뢰구간(332.5~1,313.5)이 0을 포함하지 않으므로 '알림군의 변화량이 더 컸다'고 말할 수 있다. 다만 구간 폭이 981.0걸음으로 넓어 효과의 크기는 불확실하고, 측정한 것은 걸음수뿐이다.",
+    "computed_by": "demo/compute_case.py (Python 표준 라이브러리만 사용)",
+    "display": {
+      "mean_difference": "+809.0",
+      "ci95": "332.5~1,313.5",
+      "ci95_width": "981.0",
+      "p_permutation": "0.003",
+      "B_boot": "10,000",
+      "B_perm": "10,000",
+      "welch_t": "3.14",
+      "welch_df": "32.5",
+      "welch_ci95": "284.4~1,333.6",
+      "welch_p": "0.004"
+    }
+  },
+  "manuscript": {
+    "results_paragraph": "알림군(n=20)의 일평균 걸음수는 기준 6,310.5±1,184.5에서 추적 6,894.5±1,883.6로, 대조군(n=20)은 6,462.5±1,386.8에서 6,237.5±1,589.2로 변하였다(평균±SD, 걸음/일). 변화량(추적−기준)은 알림군 +584.0±968.6, 대조군 -225.0±624.5였고, 사전에 정한 1차 결과인 변화량의 군 간 평균 차이(알림군−대조군)는 +809.0걸음(95% CI 332.5~1,313.5, 부트스트랩 백분위법 B=10,000; 순열 검정 p=0.003)이었다. 모든 수치는 교육용 합성 자료에서 계산한 값이다.",
+    "discussion_inflated": "본 연구는 걷기 앱 알림이 대학생의 신체활동을 유의하게 증진시켜 건강을 개선함을 입증하였다. 알림군은 대조군보다 일평균 809.0걸음 더 많이 걸었으며, 이 효과는 지속될 것으로 기대된다. 따라서 모든 대학생에게 알림 기반 개입을 적용할 수 있음을 시사한다.",
+    "inflated_markers": [
+      "입증하였다",
+      "건강을 개선함",
+      "유의하게",
+      "더 많이 걸었으며",
+      "지속될 것으로 기대된다",
+      "모든 대학생에게"
+    ],
+    "discussion_bounded": "이 교육용 합성 자료에서, 4주 동안 하루 2회 알림을 받은 알림군(n=20)의 일평균 걸음수 변화는 대조군(n=20)보다 평균 +809.0걸음 더 컸다(95% 신뢰구간 332.5~1,313.5, 부트스트랩). 측정한 결과는 걸음수만이므로 건강 결과에 대해서는 말할 수 없고, 4주 이후의 유지 여부와 다른 대학·연령의 학생에 대한 일반화도 이 자료의 범위를 넘는다. 이 자료는 교육용 합성 데이터이므로 실제 효과에 대한 근거가 아니다.",
+    "bounded_additions": [
+      "교육용 합성 자료",
+      "4주 동안",
+      "n=20",
+      "95% 신뢰구간",
+      "걸음수 변화",
+      "걸음수만",
+      "4주 이후",
+      "일반화도 이 자료의 범위를 넘는다",
+      "실제 효과에 대한 근거가 아니다"
+    ]
+  },
+  "critic_findings": [
+    {
+      "id": "F1",
+      "severity": "높음",
+      "quote": "건강을 개선함을 입증하였다",
+      "why": "측정한 결과변수는 일평균 걸음수 하나다. 체중·혈압·기분 같은 건강 결과는 측정하지 않았고, '입증'은 단일 소규모 합성 연구가 쓸 수 있는 말이 아니다.",
+      "fix": "\"알림군의 일평균 걸음수 변화가 대조군보다 평균 +809.0걸음 더 컸다\"처럼 측정한 것만 쓴다."
+    },
+    {
+      "id": "F2",
+      "severity": "높음",
+      "quote": "모든 대학생에게 알림 기반 개입을 적용할 수 있음",
+      "why": "한 대학의 40명을 4주 관찰한 자료다. 다른 대학·연령·국가·계절로 일반화할 근거가 없다.",
+      "fix": "대상과 기간을 문장 안에 적는다: \"한 대학 재학생 40명을 4주 동안 관찰한 결과이며 다른 집단으로 일반화할 수 없다.\""
+    },
+    {
+      "id": "F3",
+      "severity": "중간",
+      "quote": "유의하게 … 일평균 809.0걸음 더 많이 걸었으며",
+      "why": "'유의하게'만 쓰면 효과의 크기와 불확실성이 사라진다. 또 비교한 것은 '걸음수'가 아니라 '변화량(추적−기준)'의 군 간 차이다.",
+      "fix": "\"변화량의 군 간 차이는 +809.0걸음(95% CI 332.5~1,313.5)\"처럼 구간을 함께 쓰고 비교 대상을 정확히 적는다."
+    },
+    {
+      "id": "F4",
+      "severity": "중간",
+      "quote": "(합성·교육용 자료 표기 없음) / 지속될 것으로 기대된다",
+      "why": "숫자가 나오는 모든 곳에 합성 자료임을 적어야 독자가 실제 결과로 오해하지 않는다. 4주 뒤 유지는 측정하지 않았다.",
+      "fix": "\"교육용 합성 자료\"를 첫 문장에 넣고, 유지 효과는 '측정하지 않았다'고 한계에 적는다."
+    }
+  ],
+  "deck_placeholders": {
+    "DEMO_RESULT": "알림군(n=20)의 일평균 걸음수 변화는 대조군(n=20)보다 평균 +809.0걸음 더 컸다(95% 신뢰구간 332.5~1,313.5, 부트스트랩). (교육용 합성 자료)",
+    "DEMO_RESULT_SHORT": "평균 차이 +809.0걸음 (95% CI 332.5~1,313.5, 부트스트랩; 합성 자료)",
+    "DEMO_TABLE_ROW_NOTIFICATION": "알림군 · n=20 · 기준 6,310.5±1,184.5 · 추적 6,894.5±1,883.6 · 변화 +584.0±968.6",
+    "DEMO_TABLE_ROW_CONTROL": "대조군 · n=20 · 기준 6,462.5±1,386.8 · 추적 6,237.5±1,589.2 · 변화 -225.0±624.5",
+    "DEMO_STATS_LINE": "95% CI 332.5~1,313.5(부트스트랩 B=10,000) · 순열 검정 p=0.003 · 참고 Welch t=3.14, df=32.5"
+  },
+  "references_source": "work/dku-digital-health-online-20261031/references.json (authors · ai · consort · ehealth)",
+  "references": [
+    {
+      "id": "authors",
+      "title": "ICMJE · 저자와 기여자",
+      "org": "ICMJE",
+      "url": "https://www.icmje.org/recommendations/browse/roles-and-responsibilities/defining-the-role-of-authors-and-contributors.html",
+      "supports": "저자는 기여, 작성·비판적 검토, 최종 승인, 책임의 네 조건을 모두 충족한다.",
+      "status": "확인 2026-10-31 · coordinator · 공식 페이지"
+    },
+    {
+      "id": "ai",
+      "title": "ICMJE · 저자의 AI 사용",
+      "org": "ICMJE",
+      "url": "https://www.icmje.org/recommendations/browse/artificial-intelligence/ai-use-by-authors.html",
+      "supports": "AI는 저자가 될 수 없으며 인간이 검토·책임지고 사용을 공개한다. 저널 규정에 맞춰 사용 방법을 밝힌다.",
+      "status": "확인 2026-10-31 · coordinator · 공식 페이지"
+    },
+    {
+      "id": "consort",
+      "title": "CONSORT 2025 · 무작위시험 보고",
+      "org": "EQUATOR Network",
+      "url": "https://www.equator-network.org/reporting-guidelines/consort/",
+      "supports": "무작위시험 보고를 위한 현재 기본 지침. 연구 설계에 맞는 보고 지침을 고른다.",
+      "status": "확인 2026-10-31 · coordinator · EQUATOR 공식 색인"
+    },
+    {
+      "id": "ehealth",
+      "title": "CONSORT-EHEALTH · 디지털 개입 보고",
+      "org": "JMIR",
+      "url": "https://www.jmir.org/2011/4/e126/",
+      "doi": "10.2196/jmir.1923",
+      "supports": "웹·모바일 개입의 구성, 이용 상황, 중도 이탈 등 재현과 해석에 필요한 세부를 보고하는 확장 지침.",
+      "status": "확인 2026-10-31 · coordinator · 원 지침 본문"
+    }
+  ]
+}
+</script>
+
+<script>
+(function () {
+  'use strict';
+  var TOTAL = 6;
+  var NAMES = ['질문', '분석 계획', '데이터와 표', '초안', '비평과 결정', '수정과 패키지'];
+  var body = document.body;
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ───── 데이터 읽기 ───── */
+  var CASE = null;
+  try {
+    CASE = JSON.parse(document.getElementById('case-data').textContent);
+    if (!CASE || !CASE.rows || !CASE.primary_result) { CASE = null; }
+  } catch (e) { CASE = null; }
+  if (!CASE) { document.getElementById('data-error').hidden = false; }
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function fmtInt(x) { return Number(x).toLocaleString('ko-KR'); }
+  function get(obj, path) {
+    return path.split('.').reduce(function (o, k) { return (o == null) ? undefined : o[k]; }, obj);
+  }
+
+  /* ───── 단계 이동 ───── */
+  var current = 1;
+  var steps = Array.prototype.slice.call(document.querySelectorAll('.step'));
+  var navBtns = Array.prototype.slice.call(document.querySelectorAll('.stepnav button'));
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var progress = document.getElementById('progress');
+  var fill = document.getElementById('progress-fill');
+
+  function go(n, opts) {
+    opts = opts || {};
+    n = Math.max(1, Math.min(TOTAL, Number(n) || 1));
+    current = n;
+    steps.forEach(function (s) {
+      var active = Number(s.dataset.step) === n;
+      s.classList.toggle('is-active', active);
+      if (active) { s.setAttribute('aria-current', 'step'); } else { s.removeAttribute('aria-current'); }
+    });
+    navBtns.forEach(function (b) {
+      if (Number(b.dataset.goto) === n) { b.setAttribute('aria-current', 'step'); } else { b.removeAttribute('aria-current'); }
+    });
+    body.dataset.step = String(n);
+    progress.textContent = n + ' / ' + TOTAL + ' · ' + NAMES[n - 1];
+    fill.style.width = (n / TOTAL * 100) + '%';
+    prevBtn.disabled = (n === 1);
+    nextBtn.disabled = (n === TOTAL);
+    nextBtn.textContent = (n === TOTAL) ? '마지막 단계' : '다음 →';
+    // 처음 열 때는 해시를 쓰지 않는다: 로드 시점에 해시가 있으면 브라우저가 섹션으로 스크롤해 상단 배지가 가려진다.
+    if (!opts.noHash && history.replaceState) { history.replaceState(null, '', '#step-' + n); }
+    document.querySelectorAll('.col').forEach(function (c) { c.scrollTop = 0; });
+    if (!opts.noFocus) {
+      var h = document.getElementById('h-' + n);
+      if (h) { h.focus({ preventScroll: true }); }
+    }
+    if (window.innerWidth < 1000) { window.scrollTo(0, 0); }
+  }
+  prevBtn.addEventListener('click', function () { go(current - 1); });
+  nextBtn.addEventListener('click', function () { go(current + 1); });
+  navBtns.forEach(function (b) { b.addEventListener('click', function () { go(b.dataset.goto); }); });
+  window.addEventListener('hashchange', function () {
+    var m = /^#step-([1-6])$/.exec(location.hash);
+    if (m && Number(m[1]) !== current) { go(m[1]); }
+  });
+
+  /* ───── 도움말 ───── */
+  var help = document.getElementById('help');
+  function openHelp() { if (help && typeof help.showModal === 'function' && !help.open) { help.showModal(); } }
+  function closeHelp() { if (help && help.open) { help.close(); } }
+  document.getElementById('help-btn').addEventListener('click', openHelp);
+  document.getElementById('help-close').addEventListener('click', closeHelp);
+
+  /* ───── 키보드 ───── */
+  document.addEventListener('keydown', function (e) {
+    var t = e.target;
+    var tag = t && t.tagName;
+    var typing = tag === 'TEXTAREA' || (tag === 'INPUT' && t.type !== 'checkbox' && t.type !== 'radio') || (t && t.isContentEditable);
+    if (e.key === 'Escape') { closeHelp(); return; }
+    if (typing || (help && help.open)) { return; }
+    if (tag === 'INPUT' && t.type === 'radio' && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) { return; }
+    if (e.altKey || e.ctrlKey || e.metaKey) { return; }
+    switch (e.key) {
+      case 'ArrowRight': case 'PageDown': e.preventDefault(); go(current + 1); return;
+      case 'ArrowLeft': case 'PageUp': e.preventDefault(); go(current - 1); return;
+      case 'Home': e.preventDefault(); go(1); return;
+      case 'End': e.preventDefault(); go(TOTAL); return;
+      case '?': e.preventDefault(); openHelp(); return;
+      case 't': case 'T': if (current === 6) { e.preventDefault(); toggleVersion(); } return;
+    }
+    if (/^[1-6]$/.test(e.key)) { e.preventDefault(); go(Number(e.key)); }
+  });
+
+  /* ───── 프롬프트 복사(대체 경로 포함)·원래 문구 ───── */
+  document.querySelectorAll('textarea[id^="ask-"]').forEach(function (ta) { ta.dataset.default = ta.value; });
+  function setStatus(el, msg) { if (el) { el.textContent = msg; } }
+  function copyFrom(ta, statusEl) {
+    var text = ta.value;
+    var done = false;
+    function fallback() {
+      try {
+        ta.focus(); ta.select();
+        var ok = document.execCommand && document.execCommand('copy');
+        setStatus(statusEl, ok ? '복사됨 (대체 방식) · Ctrl+V로 붙여넣기' : '자동 복사가 막혔습니다. 글을 선택해 두었으니 Ctrl+C로 복사하세요');
+      } catch (err) {
+        setStatus(statusEl, '자동 복사가 막혔습니다. 글을 직접 선택해 Ctrl+C로 복사하세요');
+      }
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () {
+        done = true; setStatus(statusEl, '복사됨 · Ctrl+V로 붙여넣기');
+      }, function () { if (!done) { fallback(); } });
+    } else { fallback(); }
+  }
+  document.querySelectorAll('.copy').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var ta = document.getElementById(btn.dataset.for);
+      copyFrom(ta, btn.parentNode.querySelector('.copy-status'));
+    });
+  });
+  document.querySelectorAll('.reset').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var ta = document.getElementById(btn.dataset.for);
+      ta.value = ta.dataset.default;
+      setStatus(btn.parentNode.querySelector('.copy-status'), '원래 문구로 되돌렸습니다');
+    });
+  });
+
+  /* ───── 20초 생각 타이머(유한·일시정지·초기화) ───── */
+  document.querySelectorAll('[data-think]').forEach(function (el) {
+    var TOTAL_S = 20, remain = TOTAL_S, timer = null;
+    var count = el.querySelector('.count');
+    var ring = el.querySelector('.ring-fg');
+    var status = el.querySelector('.t-status');
+    var C = 2 * Math.PI * 20;
+    ring.style.strokeDasharray = String(C);
+    function render() { count.textContent = String(remain); ring.style.strokeDashoffset = String(C * (1 - remain / TOTAL_S)); }
+    function stop() { if (timer) { clearInterval(timer); timer = null; } el.classList.remove('running'); }
+    function tick() {
+      remain -= 1; render();
+      if (remain <= 0) { stop(); el.classList.add('done'); setStatus(status, '20초가 지났습니다. 정답 예시를 열어 보세요'); }
+    }
+    function start() {
+      if (timer) { return; }
+      if (remain <= 0) { remain = TOTAL_S; el.classList.remove('done'); render(); }
+      timer = setInterval(tick, 1000); el.classList.add('running'); setStatus(status, '생각하는 중… ' + remain + '초');
+    }
+    function pause() { if (timer) { stop(); setStatus(status, '일시정지 · ' + remain + '초 남음'); } }
+    function reset() { stop(); remain = TOTAL_S; el.classList.remove('done'); render(); setStatus(status, ''); }
+    el.querySelector('.t-start').addEventListener('click', start);
+    el.querySelector('.t-pause').addEventListener('click', pause);
+    el.querySelector('.t-reset').addEventListener('click', reset);
+    render();
+  });
+
+  /* ───── 숫자·문장 채우기 ───── */
+  var version = 'inflated';
+  function toggleVersion() { version = (version === 'inflated') ? 'bounded' : 'inflated'; renderVersion(); }
+  function renderVersion() {
+    if (!CASE) { return; }
+    var m = CASE.manuscript;
+    var el = document.getElementById('ms-text');
+    var legend = document.getElementById('ms-legend');
+    if (version === 'inflated') {
+      el.innerHTML = markup(m.discussion_inflated, m.inflated_markers, 'over');
+      legend.innerHTML = '<span><span class="sw" style="background:var(--amber-soft);border:1px solid var(--amber-line)"></span>노란 표시 = 표가 뒷받침하지 않는 말</span>';
+    } else {
+      el.innerHTML = markup(m.discussion_bounded, m.bounded_additions, 'bound');
+      legend.innerHTML = '<span><span class="sw" style="background:var(--teal-soft);border:1px solid var(--teal-line)"></span>청록 표시 = 범위를 지키는 말(측정한 것·대상·기간·자료 성격·불확실성)</span>';
+    }
+    document.querySelectorAll('.seg-btn').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.version === version)); });
+    el.dataset.version = version;
+  }
+  function markup(text, markers, cls) {
+    var sorted = (markers || []).slice().sort(function (a, b) { return b.length - a.length; });
+    if (!sorted.length) { return esc(text); }
+    var re = new RegExp(sorted.map(function (s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }).join('|'), 'g');
+    var out = '', last = 0, mt;
+    while ((mt = re.exec(text)) !== null) {
+      out += esc(text.slice(last, mt.index)) + '<mark class="' + cls + '">' + esc(mt[0]) + '</mark>';
+      last = mt.index + mt[0].length;
+      if (mt[0].length === 0) { re.lastIndex++; }
+    }
+    return out + esc(text.slice(last));
+  }
+  document.querySelectorAll('.seg-btn').forEach(function (b) {
+    b.addEventListener('click', function () { version = b.dataset.version; renderVersion(); });
+  });
+
+  function fillAll() {
+    if (!CASE) { return; }
+    var pr = CASE.primary_result, gi = CASE.groups.notification, gc = CASE.groups.control;
+    var D = pr.display || {};
+    var V = {
+      diff: D.mean_difference, ci: D.ci95, ci_w: D.ci95_width, p: D.p_permutation,
+      B_boot: D.B_boot, B_perm: D.B_perm,
+      welch_t: D.welch_t, welch_df: D.welch_df, welch_ci: D.welch_ci95,
+      seed: String(CASE.generation.seed),
+      n_i: String(gi.n), n_c: String(gc.n)
+    };
+    document.querySelectorAll('[data-num]').forEach(function (el) { var k = el.dataset.num; if (V[k] != null) { el.textContent = V[k]; } });
+    document.querySelectorAll('[data-fill]').forEach(function (el) { var v = get(CASE, el.dataset.fill); if (v != null) { el.textContent = String(v); } });
+
+    var cannot = document.getElementById('cannot-1');
+    cannot.innerHTML = CASE.design.cannot_answer.map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('');
+    document.getElementById('plan-report').textContent = CASE.analysis_plan.report.join(' · ');
+
+    // 요약표
+    var tb = document.querySelector('#tbl-summary tbody');
+    tb.innerHTML = [gi, gc].map(function (g) {
+      return '<tr><th scope="row">' + esc(g.label) + '</th><td>' + g.n + '</td><td>' + esc(g.display.baseline) + '</td><td>' + esc(g.display.followup) + '</td><td>' + esc(g.display.change) + '</td></tr>';
+    }).join('') + '<tr class="hi"><th scope="row">차이(알림군 − 대조군)</th><td>' + (gi.n + gc.n) + '</td><td>—</td><td>—</td><td>' + esc(D.mean_difference) + ' (95% CI ' + esc(D.ci95) + ')</td></tr>';
+
+    // 원자료표
+    var rb = document.querySelector('#tbl-raw tbody');
+    rb.innerHTML = CASE.rows.map(function (r) {
+      var lbl = CASE.groups[r.group] ? CASE.groups[r.group].label : r.group;
+      var ch = r.change_steps;
+      return '<tr><td>' + esc(r.participant_id) + '</td><td>' + esc(lbl) + '</td><td>' + fmtInt(r.baseline_steps) + '</td><td>' + fmtInt(r.followup_steps) + '</td><td>' + (ch > 0 ? '+' : '') + fmtInt(ch) + '</td></tr>';
+    }).join('');
+
+    // 초안
+    document.getElementById('draft-results').textContent = CASE.manuscript.results_paragraph;
+    document.getElementById('draft-discussion').innerHTML = markup(CASE.manuscript.discussion_inflated, CASE.manuscript.inflated_markers, 'over');
+
+    // 참고 링크
+    document.getElementById('refs').innerHTML = CASE.references.map(function (r) {
+      return '<li><a href="' + esc(r.url) + '" target="_blank" rel="noopener noreferrer">' + esc(r.title) + '</a> — ' + esc(r.supports) + ' <span class="st">[' + esc(r.status) + ']</span></li>';
+    }).join('');
+
+    renderVersion();
+    buildFindings();
+    drawChart();
+    recheck();
+  }
+
+  /* ───── 비평 카드와 저자 결정 기록 ───── */
+  var DEC_LABEL = { accept: '수용', modify: '수정 수용', reject: '기각', pending: '보류' };
+  function buildFindings() {
+    var box = document.getElementById('findings');
+    box.innerHTML = CASE.critic_findings.map(function (f) {
+      var sev = f.severity === '높음' ? 'chip-high' : 'chip-mid';
+      var name = 'dec-' + f.id;
+      return '<article class="finding" data-id="' + esc(f.id) + '">' +
+        '<div class="fh"><span class="fid">' + esc(f.id) + '</span><span class="chip ' + sev + '">' + esc(f.severity) + '</span></div>' +
+        '<p class="quote">“' + esc(f.quote) + '”</p>' +
+        '<p class="why"><b>왜 문제인가</b> ' + esc(f.why) + '</p>' +
+        '<p class="fix"><b>고친 예문</b> ' + esc(f.fix) + '</p>' +
+        '<fieldset><legend>저자 결정</legend><div class="opts">' +
+        ['accept', 'modify', 'reject'].map(function (v) {
+          return '<label><input type="radio" name="' + name + '" value="' + v + '">' + DEC_LABEL[v] + '</label>';
+        }).join('') +
+        '</div><div class="reason"><label for="' + name + '-why">기각 사유</label><input id="' + name + '-why" type="text" placeholder="왜 받아들이지 않는지 한 줄"></div></fieldset>' +
+        '</article>';
+    }).join('');
+    box.addEventListener('change', function (e) {
+      var t = e.target;
+      if (t && t.type === 'radio') {
+        var card = t.closest('.finding');
+        card.classList.toggle('reject', t.value === 'reject');
+        if (t.value === 'reject') { var inp = card.querySelector('.reason input'); if (inp) { inp.focus(); } }
+      }
+      updateLedger();
+    });
+    box.addEventListener('input', function (e) { if (e.target && e.target.type === 'text') { updateLedger(); } });
+    updateLedger();
+  }
+  function updateLedger() {
+    var items = CASE.critic_findings.map(function (f) {
+      var sel = document.querySelector('input[name="dec-' + f.id + '"]:checked');
+      var d = sel ? sel.value : 'pending';
+      var reason = '';
+      var inp = document.getElementById('dec-' + f.id + '-why');
+      if (d === 'reject' && inp) { reason = inp.value.trim(); }
+      return { id: f.id, decision: d, reason: reason, quote: f.quote };
+    });
+    var n = items.filter(function (i) { return i.decision !== 'pending'; }).length;
+    document.getElementById('ledger-count').textContent = n + ' / ' + items.length + ' 결정' + (n === items.length ? ' · 모두 결정됨' : '');
+    document.getElementById('ledger').innerHTML = items.map(function (i) {
+      var why = i.decision === 'reject' ? (i.reason ? '사유: ' + esc(i.reason) : '사유를 적어 주세요') : (i.decision === 'pending' ? '아직 결정 전' : '저자 결정');
+      return '<li><span class="fid">' + esc(i.id) + '</span><span class="st ' + i.decision + '">' + DEC_LABEL[i.decision] + '</span><span class="why">' + why + '</span></li>';
+    }).join('');
+  }
+
+  /* ───── 그림: 변화량 점그림 + 군 평균·95% CI + 차이 ───── */
+  function drawChart() {
+    var svg = document.getElementById('chart');
+    if (!svg || !CASE) { return; }
+    var W = 560, H = 360, padL = 64, padR = 18, padT = 26, padB = 46;
+    var gi = CASE.groups.notification, gc = CASE.groups.control, pr = CASE.primary_result;
+    var vals = CASE.rows.map(function (r) { return r.change_steps; });
+    var lo = Math.min.apply(null, vals.concat([pr.ci95[0], gi.change.ci95_bootstrap[0], gc.change.ci95_bootstrap[0], 0]));
+    var hi = Math.max.apply(null, vals.concat([pr.ci95[1], gi.change.ci95_bootstrap[1], gc.change.ci95_bootstrap[1], 0]));
+    var pad = (hi - lo) * 0.08; lo -= pad; hi += pad;
+    var y = function (v) { return padT + (hi - v) / (hi - lo) * (H - padT - padB); };
+    var cols = [
+      { key: 'notification', x: padL + (W - padL - padR) * 0.2, label: gi.label + ' (n=' + gi.n + ')', g: gi, color: '#157A7F' },
+      { key: 'control', x: padL + (W - padL - padR) * 0.5, label: gc.label + ' (n=' + gc.n + ')', g: gc, color: '#1E3356' }
+    ];
+    var xd = padL + (W - padL - padR) * 0.83;
+    var parts = [];
+    // 격자·축
+    var step = 500;
+    var start = Math.ceil(lo / step) * step;
+    for (var v = start; v <= hi; v += step) {
+      parts.push('<line x1="' + padL + '" x2="' + (W - padR) + '" y1="' + y(v).toFixed(1) + '" y2="' + y(v).toFixed(1) + '" stroke="' + (v === 0 ? '#5B6476' : '#E3DACB') + '" stroke-width="' + (v === 0 ? 1.5 : 1) + '"' + (v === 0 ? '' : ' stroke-dasharray="3 4"') + '/>');
+      parts.push('<text x="' + (padL - 8) + '" y="' + (y(v) + 4).toFixed(1) + '" text-anchor="end" font-size="11" fill="#5B6476">' + (v > 0 ? '+' : '') + fmtInt(v) + '</text>');
+    }
+    parts.push('<text x="14" y="' + (padT - 10) + '" font-size="11" fill="#5B6476">걸음/일 (추적 − 기준)</text>');
+    // 점·평균·CI
+    var idx = 0;
+    cols.forEach(function (c) {
+      var rows = CASE.rows.filter(function (r) { return r.group === c.key; });
+      rows.forEach(function (r, i) {
+        var jitter = ((i % 7) - 3) * 9;         // 결정적 지터(난수 아님)
+        parts.push('<circle class="dot" style="--i:' + (idx++) + '" cx="' + (c.x + jitter).toFixed(1) + '" cy="' + y(r.change_steps).toFixed(1) + '" r="5" fill="' + c.color + '" fill-opacity="0.55" stroke="#fff" stroke-width="1"><title>' + esc(r.participant_id) + ' · ' + (r.change_steps > 0 ? '+' : '') + fmtInt(r.change_steps) + '</title></circle>');
+      });
+      var ci = c.g.change.ci95_bootstrap, m = c.g.change.mean;
+      parts.push('<line x1="' + (c.x + 44) + '" x2="' + (c.x + 44) + '" y1="' + y(ci[0]).toFixed(1) + '" y2="' + y(ci[1]).toFixed(1) + '" stroke="' + c.color + '" stroke-width="3" stroke-linecap="round"/>');
+      parts.push('<line x1="' + (c.x + 36) + '" x2="' + (c.x + 52) + '" y1="' + y(m).toFixed(1) + '" y2="' + y(m).toFixed(1) + '" stroke="' + c.color + '" stroke-width="4"/>');
+      parts.push('<text x="' + (c.x + 58) + '" y="' + (y(m) + 4).toFixed(1) + '" font-size="12" font-weight="700" fill="' + c.color + '">' + esc(c.g.display.change_mean) + '</text>');
+      parts.push('<text x="' + c.x.toFixed(1) + '" y="' + (H - 22) + '" text-anchor="middle" font-size="12.5" font-weight="700" fill="#132238">' + esc(c.label) + '</text>');
+    });
+    // 차이 마름모
+    var d = pr.mean_difference, dci = pr.ci95;
+    parts.push('<line x1="' + xd + '" x2="' + xd + '" y1="' + y(dci[0]).toFixed(1) + '" y2="' + y(dci[1]).toFixed(1) + '" stroke="#E6A017" stroke-width="3" stroke-linecap="round"/>');
+    parts.push('<polygon points="' + xd + ',' + (y(d) - 9).toFixed(1) + ' ' + (xd + 9) + ',' + y(d).toFixed(1) + ' ' + xd + ',' + (y(d) + 9).toFixed(1) + ' ' + (xd - 9) + ',' + y(d).toFixed(1) + '" fill="#E6A017" stroke="#132238" stroke-width="1.5"/>');
+    parts.push('<text x="' + (xd + 14) + '" y="' + (y(d) + 4).toFixed(1) + '" font-size="12" font-weight="800" fill="#7C5300">' + esc(pr.display.mean_difference) + '</text>');
+    parts.push('<text x="' + xd + '" y="' + (H - 22) + '" text-anchor="middle" font-size="12.5" font-weight="700" fill="#132238">차이(알림 − 대조)</text>');
+    parts.push('<text x="' + xd + '" y="' + (H - 7) + '" text-anchor="middle" font-size="10.5" fill="#5B6476">95% CI ' + esc(pr.display.ci95) + '</text>');
+    parts.push('<text x="' + (W - padR) + '" y="' + (padT - 10) + '" text-anchor="end" font-size="10.5" fill="#7C5300" font-weight="700">합성 자료 · 교육용</text>');
+    svg.innerHTML = parts.join('');
+    svg.setAttribute('aria-label', '변화량 점그림. ' + gi.label + ' 평균 ' + gi.display.change_mean + ' (95% CI ' + gi.display.change_ci95 + '), ' + gc.label + ' 평균 ' + gc.display.change_mean + ' (95% CI ' + gc.display.change_ci95 + '), 군 간 차이 ' + pr.display.mean_difference + ' (95% CI ' + pr.display.ci95 + '). 교육용 합성 자료.');
+    if (reduced) { svg.querySelectorAll('.dot').forEach(function (c) { c.classList.remove('dot'); }); }
+  }
+  var replay = document.getElementById('chart-replay');
+  if (replay) { replay.addEventListener('click', drawChart); }
+
+  /* ───── 브라우저 재계산: 평균·SD·차이·행 수를 case.json 값과 대조 ───── */
+  function recheck() {
+    var out = document.getElementById('recheck');
+    if (!CASE) { return; }
+    var tol = 0.051; // case.json 은 소수 1자리로 반올림되어 있다
+    var mean = function (a) { return a.reduce(function (s, x) { return s + x; }, 0) / a.length; };
+    var sd = function (a) { var m = mean(a); return Math.sqrt(a.reduce(function (s, x) { return s + (x - m) * (x - m); }, 0) / (a.length - 1)); };
+    var probs = [];
+    var by = { notification: [], control: [] };
+    CASE.rows.forEach(function (r) {
+      if (r.change_steps !== r.followup_steps - r.baseline_steps) { probs.push(r.participant_id + ' 변화량'); }
+      if (by[r.group]) { by[r.group].push(r); }
+    });
+    ['notification', 'control'].forEach(function (g) {
+      var G = CASE.groups[g], rows = by[g];
+      if (rows.length !== G.n) { probs.push(G.label + ' n'); }
+      [['baseline_steps', 'baseline'], ['followup_steps', 'followup'], ['change_steps', 'change']].forEach(function (p) {
+        var a = rows.map(function (r) { return r[p[0]]; });
+        if (Math.abs(mean(a) - G[p[1]].mean) > tol) { probs.push(G.label + ' ' + p[1] + ' 평균'); }
+        if (Math.abs(sd(a) - G[p[1]].sd) > tol) { probs.push(G.label + ' ' + p[1] + ' SD'); }
+      });
+    });
+    var diff = mean(by.notification.map(function (r) { return r.change_steps; })) - mean(by.control.map(function (r) { return r.change_steps; }));
+    if (Math.abs(diff - CASE.primary_result.mean_difference) > tol) { probs.push('평균 차이'); }
+    if (CASE.rows.length !== 40) { probs.push('행 수 ' + CASE.rows.length); }
+    if (probs.length === 0) {
+      out.className = 'recheck';
+      out.innerHTML = '<b>✓ 브라우저 재계산 일치</b><span>40행에서 평균·SD·평균 차이를 지금 다시 계산해 스크립트 값과 맞췄다. 신뢰구간과 p는 스크립트(시드 고정 부트스트랩·순열)의 값이다.</span>';
+      body.dataset.recheck = 'pass';
+    } else {
+      out.className = 'recheck bad';
+      out.innerHTML = '<b>✗ 불일치</b><span>' + esc(probs.join(', ')) + ' — case.json 을 다시 만들어야 한다.</span>';
+      body.dataset.recheck = 'fail';
+    }
+  }
+
+  /* ───── 시작 ───── */
+  fillAll();
+  var m0 = /^#step-([1-6])$/.exec(location.hash);
+  go(m0 ? Number(m0[1]) : 1, { noFocus: true, noHash: true });
+  // 딥링크(#step-N)로 열었을 때 브라우저의 해시 스크롤이 상단 배지를 가리지 않도록 로드 후 맨 위로 되돌린다.
+  window.addEventListener('load', function () { if (window.innerWidth < 1000) { window.scrollTo(0, 0); } });
+  window.demo = { go: go, step: function () { return current; }, toggleVersion: toggleVersion, version: function () { return version; } };
+})();
+</script>
+</body>
+</html>
