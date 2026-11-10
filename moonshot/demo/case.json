@@ -1,0 +1,556 @@
+{
+  "schema": "dku-digital-health-demo-case/2",
+  "case_date": "2026-10-31",
+  "title": "대학생에게 걷기 앱 알림을 보내면 걸음수가 늘까? — 교육용 합성 사례",
+  "disclaimer": {
+    "banner": "합성 데이터로 만든 시연 · 실시간 AI 응답 아님",
+    "data": "이 자료의 참여자·앱·걸음수는 모두 컴퓨터가 만든 합성값이다. 실제 사람·실제 앱·실제 효과와 무관하다.",
+    "randomization": "'무작위 배정'은 설계 설명을 위한 합성 라벨이다. 합성 자료에 무작위 배정이 있어도 임상적 결론은 나오지 않는다.",
+    "numbers": "모든 숫자는 demo/compute_case.py 가 실행해서 계산한 값이다. 언어 모델의 암산이 아니다.",
+    "ai_text": "시연 화면의 'AI 응답'은 교육용으로 미리 써 둔 고정 문장이다. 실시간 AI 응답이 아니다.",
+    "association_vs_causation": "'앱을 많이 쓴 학생이 더 걸었다'는 관찰 연관이고, 연관은 효과의 증명이 아니다. 무작위 배정은 비교 가능성을 높이지만, 합성 자료에서는 그조차 교육 예시일 뿐이다."
+  },
+  "generation": {
+    "script": "demo/compute_case.py",
+    "data_of_record": "demo/synthetic_steps.csv",
+    "seed": 20261031,
+    "method": "python random.Random(seed) · shuffle(1:1 배정) · gauss(기준, 변화) · 10걸음 단위 반올림",
+    "params": {
+      "n_per_group": 20,
+      "baseline_mean": 6400.0,
+      "baseline_sd": 1400.0,
+      "baseline_clip": [
+        3000,
+        11000
+      ],
+      "change_mean_by_group": {
+        "notification": 700.0,
+        "control": 100.0
+      },
+      "change_sd": 950.0,
+      "followup_min": 1500
+    },
+    "note": "생성 모수는 시드와 함께 실행 전에 정했고 결과를 보고 바꾸지 않았다. 신뢰구간이 0을 포함하는지는 실행 결과에 따른다."
+  },
+  "design": {
+    "question": "대학생에게 걷기 앱 알림을 보내면 4주 후 일평균 걸음수가 늘까?",
+    "population": "한 대학 재학생 40명(합성)",
+    "intervention": "걷기 앱 + 하루 2회 알림(아침·오후), 4주",
+    "comparator": "같은 걷기 앱, 알림 없음",
+    "outcome": "일평균 걸음수 변화(추적 1주 평균 − 기준 1주 평균)",
+    "timeline": [
+      "기준 측정 1주",
+      "무작위 배정(합성 라벨)",
+      "중재 4주",
+      "추적 측정 1주"
+    ],
+    "allocation": "1:1, 20명/군",
+    "cannot_answer": [
+      "알림이 '건강'(체중·혈압·기분)을 바꾸는지",
+      "4주 뒤에도 효과가 유지되는지",
+      "다른 대학·연령·국가 학생에게도 같은지"
+    ]
+  },
+  "analysis_plan": {
+    "fixed_before_data": "2026-10-31",
+    "primary_outcome": "변화량(추적−기준)의 군 간 평균 차이(알림군 − 대조군)",
+    "uncertainty": "95% 신뢰구간 — 부트스트랩 백분위법(군별 복원추출, B=10,000, 시드 고정)",
+    "test": "순열 검정(라벨 섞기 B=10,000, 시드 고정) 양측 p",
+    "reference": "Welch t 통계량·자유도·구간은 참고로만 보고(임계값은 수치 계산)",
+    "report": [
+      "군별 n · 평균 · SD (기준/추적/변화)",
+      "평균 차이와 95% CI",
+      "순열 검정 p"
+    ],
+    "sample_size": "교육용 합성 예시로 20명/군 고정. 실제 연구는 검정력 계산으로 정한다.",
+    "missing": "합성 자료에는 결측이 없다. 실제 연구는 배정대로 분석(ITT)하고 결측 처리 방법을 미리 적는다.",
+    "secondary": "기준 걸음수 수준별 차이 — 탐색적. 이번 시연에서는 수행하지 않음."
+  },
+  "columns": [
+    "participant_id",
+    "group",
+    "baseline_steps",
+    "followup_steps",
+    "change_steps"
+  ],
+  "rows": [
+    {
+      "participant_id": "P01",
+      "group": "control",
+      "baseline_steps": 5070,
+      "followup_steps": 5430,
+      "change_steps": 360
+    },
+    {
+      "participant_id": "P02",
+      "group": "control",
+      "baseline_steps": 5600,
+      "followup_steps": 4970,
+      "change_steps": -630
+    },
+    {
+      "participant_id": "P03",
+      "group": "control",
+      "baseline_steps": 5390,
+      "followup_steps": 5260,
+      "change_steps": -130
+    },
+    {
+      "participant_id": "P04",
+      "group": "control",
+      "baseline_steps": 6930,
+      "followup_steps": 7130,
+      "change_steps": 200
+    },
+    {
+      "participant_id": "P05",
+      "group": "notification",
+      "baseline_steps": 5900,
+      "followup_steps": 6930,
+      "change_steps": 1030
+    },
+    {
+      "participant_id": "P06",
+      "group": "notification",
+      "baseline_steps": 6540,
+      "followup_steps": 8630,
+      "change_steps": 2090
+    },
+    {
+      "participant_id": "P07",
+      "group": "notification",
+      "baseline_steps": 6980,
+      "followup_steps": 7380,
+      "change_steps": 400
+    },
+    {
+      "participant_id": "P08",
+      "group": "notification",
+      "baseline_steps": 5510,
+      "followup_steps": 6010,
+      "change_steps": 500
+    },
+    {
+      "participant_id": "P09",
+      "group": "notification",
+      "baseline_steps": 9470,
+      "followup_steps": 11390,
+      "change_steps": 1920
+    },
+    {
+      "participant_id": "P10",
+      "group": "control",
+      "baseline_steps": 8140,
+      "followup_steps": 6760,
+      "change_steps": -1380
+    },
+    {
+      "participant_id": "P11",
+      "group": "control",
+      "baseline_steps": 6340,
+      "followup_steps": 5720,
+      "change_steps": -620
+    },
+    {
+      "participant_id": "P12",
+      "group": "notification",
+      "baseline_steps": 5480,
+      "followup_steps": 5450,
+      "change_steps": -30
+    },
+    {
+      "participant_id": "P13",
+      "group": "notification",
+      "baseline_steps": 5830,
+      "followup_steps": 6400,
+      "change_steps": 570
+    },
+    {
+      "participant_id": "P14",
+      "group": "notification",
+      "baseline_steps": 4820,
+      "followup_steps": 5020,
+      "change_steps": 200
+    },
+    {
+      "participant_id": "P15",
+      "group": "control",
+      "baseline_steps": 7910,
+      "followup_steps": 7770,
+      "change_steps": -140
+    },
+    {
+      "participant_id": "P16",
+      "group": "notification",
+      "baseline_steps": 5190,
+      "followup_steps": 5000,
+      "change_steps": -190
+    },
+    {
+      "participant_id": "P17",
+      "group": "control",
+      "baseline_steps": 4560,
+      "followup_steps": 4650,
+      "change_steps": 90
+    },
+    {
+      "participant_id": "P18",
+      "group": "control",
+      "baseline_steps": 7780,
+      "followup_steps": 8210,
+      "change_steps": 430
+    },
+    {
+      "participant_id": "P19",
+      "group": "control",
+      "baseline_steps": 7020,
+      "followup_steps": 7710,
+      "change_steps": 690
+    },
+    {
+      "participant_id": "P20",
+      "group": "control",
+      "baseline_steps": 8310,
+      "followup_steps": 7680,
+      "change_steps": -630
+    },
+    {
+      "participant_id": "P21",
+      "group": "control",
+      "baseline_steps": 6420,
+      "followup_steps": 6470,
+      "change_steps": 50
+    },
+    {
+      "participant_id": "P22",
+      "group": "notification",
+      "baseline_steps": 5790,
+      "followup_steps": 5830,
+      "change_steps": 40
+    },
+    {
+      "participant_id": "P23",
+      "group": "notification",
+      "baseline_steps": 6730,
+      "followup_steps": 8100,
+      "change_steps": 1370
+    },
+    {
+      "participant_id": "P24",
+      "group": "control",
+      "baseline_steps": 6080,
+      "followup_steps": 5040,
+      "change_steps": -1040
+    },
+    {
+      "participant_id": "P25",
+      "group": "control",
+      "baseline_steps": 5340,
+      "followup_steps": 4170,
+      "change_steps": -1170
+    },
+    {
+      "participant_id": "P26",
+      "group": "notification",
+      "baseline_steps": 6710,
+      "followup_steps": 8070,
+      "change_steps": 1360
+    },
+    {
+      "participant_id": "P27",
+      "group": "control",
+      "baseline_steps": 4620,
+      "followup_steps": 4240,
+      "change_steps": -380
+    },
+    {
+      "participant_id": "P28",
+      "group": "notification",
+      "baseline_steps": 7080,
+      "followup_steps": 6790,
+      "change_steps": -290
+    },
+    {
+      "participant_id": "P29",
+      "group": "notification",
+      "baseline_steps": 5950,
+      "followup_steps": 6730,
+      "change_steps": 780
+    },
+    {
+      "participant_id": "P30",
+      "group": "control",
+      "baseline_steps": 9660,
+      "followup_steps": 9970,
+      "change_steps": 310
+    },
+    {
+      "participant_id": "P31",
+      "group": "notification",
+      "baseline_steps": 6530,
+      "followup_steps": 5620,
+      "change_steps": -910
+    },
+    {
+      "participant_id": "P32",
+      "group": "control",
+      "baseline_steps": 5920,
+      "followup_steps": 5880,
+      "change_steps": -40
+    },
+    {
+      "participant_id": "P33",
+      "group": "control",
+      "baseline_steps": 7050,
+      "followup_steps": 6620,
+      "change_steps": -430
+    },
+    {
+      "participant_id": "P34",
+      "group": "notification",
+      "baseline_steps": 4460,
+      "followup_steps": 4100,
+      "change_steps": -360
+    },
+    {
+      "participant_id": "P35",
+      "group": "notification",
+      "baseline_steps": 8460,
+      "followup_steps": 9950,
+      "change_steps": 1490
+    },
+    {
+      "participant_id": "P36",
+      "group": "control",
+      "baseline_steps": 6320,
+      "followup_steps": 7190,
+      "change_steps": 870
+    },
+    {
+      "participant_id": "P37",
+      "group": "notification",
+      "baseline_steps": 7020,
+      "followup_steps": 9530,
+      "change_steps": 2510
+    },
+    {
+      "participant_id": "P38",
+      "group": "control",
+      "baseline_steps": 4790,
+      "followup_steps": 3880,
+      "change_steps": -910
+    },
+    {
+      "participant_id": "P39",
+      "group": "notification",
+      "baseline_steps": 5300,
+      "followup_steps": 5400,
+      "change_steps": 100
+    },
+    {
+      "participant_id": "P40",
+      "group": "notification",
+      "baseline_steps": 6460,
+      "followup_steps": 5560,
+      "change_steps": -900
+    }
+  ],
+  "groups": {
+    "notification": {
+      "key": "notification",
+      "label": "알림군",
+      "n": 20,
+      "baseline": {
+        "mean": 6310.5,
+        "sd": 1184.5
+      },
+      "followup": {
+        "mean": 6894.5,
+        "sd": 1883.6
+      },
+      "change": {
+        "mean": 584.0,
+        "sd": 968.6,
+        "ci95_bootstrap": [
+          175.5,
+          1010.5
+        ],
+        "min": -910,
+        "max": 2510
+      },
+      "display": {
+        "baseline": "6,310.5±1,184.5",
+        "followup": "6,894.5±1,883.6",
+        "change": "+584.0±968.6",
+        "change_mean": "+584.0",
+        "change_ci95": "175.5~1,010.5"
+      }
+    },
+    "control": {
+      "key": "control",
+      "label": "대조군",
+      "n": 20,
+      "baseline": {
+        "mean": 6462.5,
+        "sd": 1386.8
+      },
+      "followup": {
+        "mean": 6237.5,
+        "sd": 1589.2
+      },
+      "change": {
+        "mean": -225.0,
+        "sd": 624.5,
+        "ci95_bootstrap": [
+          -492.5,
+          37.0
+        ],
+        "min": -1380,
+        "max": 870
+      },
+      "display": {
+        "baseline": "6,462.5±1,386.8",
+        "followup": "6,237.5±1,589.2",
+        "change": "-225.0±624.5",
+        "change_mean": "-225.0",
+        "change_ci95": "-492.5~37.0"
+      }
+    }
+  },
+  "primary_result": {
+    "outcome": "변화량의 군 간 평균 차이(알림군 − 대조군), 걸음/일",
+    "mean_difference": 809.0,
+    "ci95": [
+      332.5,
+      1313.5
+    ],
+    "ci95_method": "부트스트랩 백분위법, 군별 복원추출, B=10,000, seed=20261032",
+    "ci95_width": 981.0,
+    "ci_includes_zero": false,
+    "p_permutation": 0.0035,
+    "p_method": "순열 검정(라벨 섞기), B=10,000, seed=20261033, p=(개수+1)/(B+1)",
+    "welch_reference": {
+      "t": 3.139,
+      "df": 32.47,
+      "se": 257.7,
+      "p_two_sided": 0.0036,
+      "ci95": [
+        284.4,
+        1333.6
+      ],
+      "t_crit_0975": 2.0358,
+      "note": "참고용. 임계값은 불완전 베타 함수를 수치 계산해 얻었고 닫힌 형식으로 자가검사했다(외운 표 값 아님)."
+    },
+    "interpretation_hint": "95% 부트스트랩 신뢰구간(332.5~1,313.5)이 0을 포함하지 않으므로 '알림군의 변화량이 더 컸다'고 말할 수 있다. 다만 구간 폭이 981.0걸음으로 넓어 효과의 크기는 불확실하고, 측정한 것은 걸음수뿐이다.",
+    "computed_by": "demo/compute_case.py (Python 표준 라이브러리만 사용)",
+    "display": {
+      "mean_difference": "+809.0",
+      "ci95": "332.5~1,313.5",
+      "ci95_width": "981.0",
+      "p_permutation": "0.003",
+      "B_boot": "10,000",
+      "B_perm": "10,000",
+      "welch_t": "3.14",
+      "welch_df": "32.5",
+      "welch_ci95": "284.4~1,333.6",
+      "welch_p": "0.004"
+    }
+  },
+  "manuscript": {
+    "results_paragraph": "알림군(n=20)의 일평균 걸음수는 기준 6,310.5±1,184.5에서 추적 6,894.5±1,883.6로, 대조군(n=20)은 6,462.5±1,386.8에서 6,237.5±1,589.2로 변하였다(평균±SD, 걸음/일). 변화량(추적−기준)은 알림군 +584.0±968.6, 대조군 -225.0±624.5였고, 사전에 정한 1차 결과인 변화량의 군 간 평균 차이(알림군−대조군)는 +809.0걸음(95% CI 332.5~1,313.5, 부트스트랩 백분위법 B=10,000; 순열 검정 p=0.003)이었다. 모든 수치는 교육용 합성 자료에서 계산한 값이다.",
+    "discussion_inflated": "본 연구는 걷기 앱 알림이 대학생의 신체활동을 유의하게 증진시켜 건강을 개선함을 입증하였다. 알림군은 대조군보다 일평균 809.0걸음 더 많이 걸었으며, 이 효과는 지속될 것으로 기대된다. 따라서 모든 대학생에게 알림 기반 개입을 적용할 수 있음을 시사한다.",
+    "inflated_markers": [
+      "입증하였다",
+      "건강을 개선함",
+      "유의하게",
+      "더 많이 걸었으며",
+      "지속될 것으로 기대된다",
+      "모든 대학생에게"
+    ],
+    "discussion_bounded": "이 교육용 합성 자료에서, 4주 동안 하루 2회 알림을 받은 알림군(n=20)의 일평균 걸음수 변화는 대조군(n=20)보다 평균 +809.0걸음 더 컸다(95% 신뢰구간 332.5~1,313.5, 부트스트랩). 측정한 결과는 걸음수만이므로 건강 결과에 대해서는 말할 수 없고, 4주 이후의 유지 여부와 다른 대학·연령의 학생에 대한 일반화도 이 자료의 범위를 넘는다. 이 자료는 교육용 합성 데이터이므로 실제 효과에 대한 근거가 아니다.",
+    "bounded_additions": [
+      "교육용 합성 자료",
+      "4주 동안",
+      "n=20",
+      "95% 신뢰구간",
+      "걸음수 변화",
+      "걸음수만",
+      "4주 이후",
+      "일반화도 이 자료의 범위를 넘는다",
+      "실제 효과에 대한 근거가 아니다"
+    ]
+  },
+  "critic_findings": [
+    {
+      "id": "F1",
+      "severity": "높음",
+      "quote": "건강을 개선함을 입증하였다",
+      "why": "측정한 결과변수는 일평균 걸음수 하나다. 체중·혈압·기분 같은 건강 결과는 측정하지 않았고, '입증'은 단일 소규모 합성 연구가 쓸 수 있는 말이 아니다.",
+      "fix": "\"알림군의 일평균 걸음수 변화가 대조군보다 평균 +809.0걸음 더 컸다\"처럼 측정한 것만 쓴다."
+    },
+    {
+      "id": "F2",
+      "severity": "높음",
+      "quote": "모든 대학생에게 알림 기반 개입을 적용할 수 있음",
+      "why": "한 대학의 40명을 4주 관찰한 자료다. 다른 대학·연령·국가·계절로 일반화할 근거가 없다.",
+      "fix": "대상과 기간을 문장 안에 적는다: \"한 대학 재학생 40명을 4주 동안 관찰한 결과이며 다른 집단으로 일반화할 수 없다.\""
+    },
+    {
+      "id": "F3",
+      "severity": "중간",
+      "quote": "유의하게 … 일평균 809.0걸음 더 많이 걸었으며",
+      "why": "'유의하게'만 쓰면 효과의 크기와 불확실성이 사라진다. 또 비교한 것은 '걸음수'가 아니라 '변화량(추적−기준)'의 군 간 차이다.",
+      "fix": "\"변화량의 군 간 차이는 +809.0걸음(95% CI 332.5~1,313.5)\"처럼 구간을 함께 쓰고 비교 대상을 정확히 적는다."
+    },
+    {
+      "id": "F4",
+      "severity": "중간",
+      "quote": "(합성·교육용 자료 표기 없음) / 지속될 것으로 기대된다",
+      "why": "숫자가 나오는 모든 곳에 합성 자료임을 적어야 독자가 실제 결과로 오해하지 않는다. 4주 뒤 유지는 측정하지 않았다.",
+      "fix": "\"교육용 합성 자료\"를 첫 문장에 넣고, 유지 효과는 '측정하지 않았다'고 한계에 적는다."
+    }
+  ],
+  "deck_placeholders": {
+    "DEMO_RESULT": "알림군(n=20)의 일평균 걸음수 변화는 대조군(n=20)보다 평균 +809.0걸음 더 컸다(95% 신뢰구간 332.5~1,313.5, 부트스트랩). (교육용 합성 자료)",
+    "DEMO_RESULT_SHORT": "평균 차이 +809.0걸음 (95% CI 332.5~1,313.5, 부트스트랩; 합성 자료)",
+    "DEMO_TABLE_ROW_NOTIFICATION": "알림군 · n=20 · 기준 6,310.5±1,184.5 · 추적 6,894.5±1,883.6 · 변화 +584.0±968.6",
+    "DEMO_TABLE_ROW_CONTROL": "대조군 · n=20 · 기준 6,462.5±1,386.8 · 추적 6,237.5±1,589.2 · 변화 -225.0±624.5",
+    "DEMO_STATS_LINE": "95% CI 332.5~1,313.5(부트스트랩 B=10,000) · 순열 검정 p=0.003 · 참고 Welch t=3.14, df=32.5"
+  },
+  "references_source": "work/dku-digital-health-online-20261031/references.json (authors · ai · consort · ehealth)",
+  "references": [
+    {
+      "id": "authors",
+      "title": "ICMJE · 저자와 기여자",
+      "org": "ICMJE",
+      "url": "https://www.icmje.org/recommendations/browse/roles-and-responsibilities/defining-the-role-of-authors-and-contributors.html",
+      "supports": "저자는 기여, 작성·비판적 검토, 최종 승인, 책임의 네 조건을 모두 충족한다.",
+      "status": "확인 2026-10-31 · coordinator · 공식 페이지"
+    },
+    {
+      "id": "ai",
+      "title": "ICMJE · 저자의 AI 사용",
+      "org": "ICMJE",
+      "url": "https://www.icmje.org/recommendations/browse/artificial-intelligence/ai-use-by-authors.html",
+      "supports": "AI는 저자가 될 수 없으며 인간이 검토·책임지고 사용을 공개한다. 저널 규정에 맞춰 사용 방법을 밝힌다.",
+      "status": "확인 2026-10-31 · coordinator · 공식 페이지"
+    },
+    {
+      "id": "consort",
+      "title": "CONSORT 2025 · 무작위시험 보고",
+      "org": "EQUATOR Network",
+      "url": "https://www.equator-network.org/reporting-guidelines/consort/",
+      "supports": "무작위시험 보고를 위한 현재 기본 지침. 연구 설계에 맞는 보고 지침을 고른다.",
+      "status": "확인 2026-10-31 · coordinator · EQUATOR 공식 색인"
+    },
+    {
+      "id": "ehealth",
+      "title": "CONSORT-EHEALTH · 디지털 개입 보고",
+      "org": "JMIR",
+      "url": "https://www.jmir.org/2011/4/e126/",
+      "doi": "10.2196/jmir.1923",
+      "supports": "웹·모바일 개입의 구성, 이용 상황, 중도 이탈 등 재현과 해석에 필요한 세부를 보고하는 확장 지침.",
+      "status": "확인 2026-10-31 · coordinator · 원 지침 본문"
+    }
+  ]
+}

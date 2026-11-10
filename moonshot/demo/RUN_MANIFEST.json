@@ -1,0 +1,26 @@
+{
+  "status": "TEACHING_DEMO_EXECUTED",
+  "real_submission_ready": false,
+  "real_journal_submission": false,
+  "time_utc": "2026-11-10T10:47:23.238280+00:00",
+  "python": "3.12.14",
+  "calculation": "Actual Python execution from bundled synthetic CSV",
+  "narrative": "Fixed educational text; not a live AI response",
+  "input_sha256": "f600f4e56ce54c0986bf5fd2d943fd6114f3604713392f36eda2bed4464de96a",
+  "code_sha256": "f5287db6c9c1bec9449046177916c5dda8bbd069f3932eb43dbf0723b879261f",
+  "runner_sha256": "4ea7c22dbbb1f2ed1821d8897905507d37c796b941c9d76e285774daa2d24c80",
+  "outputs": {
+    "case.json": "b1b89d81c13260c72e3afb348dbd6db48587a0472bf43a2b6cff5af15e1c327f",
+    "claims.csv": "1508ac2c841e830e7b67790a351af11b6229becff616d9fe8374eb9ddcd73d2a",
+    "draft-before.md": "d4d44706487b6cda65758dcd6a64d5ca7b7528432c5f018fcfd325b0ced00454",
+    "figure1.svg": "fbd66ed05ce54897799d4dd520066d41c901c233abbbfb47944495c083562a65",
+    "manuscript.docx": "6ba8a4becfdb31720bd21eb1df25e03da77c6e0d245ed6d1418393b71cc4439c",
+    "manuscript.md": "ce77c53e42d9ef3d23fd8ec80f85af5ee31637f11c43a559b395af23f85ec608",
+    "result.json": "b06e843be8bc5b6663285381f7dddff2770cf8a3e2595b9b09f5eb8c82a664db",
+    "results.md": "87845b9b8876d3a91e0832453e86b11e0047f6d1a3a59733df5f82cd3ff688f1",
+    "review-decisions.csv": "969b5549a5162d705693ef4ed38e4bba180dff3c20dd08d7fe2c0c148e0806d6",
+    "revision.md": "51a5a06e8c6743c94aef8f6a11143edb1c5eec9815daf4721b47dd431f3886f6",
+    "submission-status.json": "921c36853a1e8b863b2abe6a85c084bc20da02df07a4178eb69f5cc8da673e34",
+    "table1.csv": "c4445f02ac43e9be422b6ad5d34c23a6e3fd5a94890d88db3468822af8a10f96"
+  }
+}

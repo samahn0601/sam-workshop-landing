@@ -1,0 +1,4 @@
+﻿claim_id,claim,source,locator,verification,scope
+C01,4주 변화량의 군 간 평균 차이 +809.0걸음,result.json,mean_difference / ci95,CODE_RECOMPUTED,교육용 합성 자료만
+C02,실제 선행 연구는 일차의료 성인의 8주 스마트폰 앱 연구,https://pmc.ncbi.nlm.nih.gov/articles/PMC4073723/,Methods: study population and intervention,원문 대조가 필요한 외부 근거,대학생 알림 단독 효과의 증거가 아님
+C03,알림이 모든 대학생의 건강을 개선한다,없음,걸음수 이외의 건강 결과는 측정하지 않음,REJECTED,측정·대상·기간을 넘어선 주장
