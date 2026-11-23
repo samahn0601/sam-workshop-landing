@@ -43,45 +43,49 @@ html[data-q17="entry"]{scroll-padding-top:0}html[data-q17="entry"] body{backgrou
 .q17-share{display:flex;flex-wrap:wrap;align-items:center;gap:6px}.q17-share button{padding:7px 9px;font-size:13px}#legacy-workbook .toolbar .q17-return{display:inline-flex;align-items:center;min-height:34px;padding:2px 8px;border-radius:4px;font-size:13px;text-underline-offset:3px}.q17-tag{color:#245e48;font-weight:650}
 @media(max-width:700px){#qr17 h1 br{display:initial}}
 #qr17 .q17-practice{display:table;margin:13px 0 0;padding:6px 0;font-size:16px;font-weight:650;line-height:1.5;text-underline-offset:4px}
+#qr17 #q17-copy{cursor:pointer;font:inherit;font-weight:700;color:#fff;background:#1c513f;border:1px solid #1c513f;min-height:48px;padding:10px 21px}
+#qr17 #q17-copy:hover{background:#123f2f}#qr17 .q17-direct{display:inline-block;margin-top:6px;font-size:15px}
+#qr17 .q17-steps .q17-request{margin:8px 0 13px;padding:12px 15px;border-left:3px solid #47745b;color:#213a2e;background:#eff3ec;font:inherit;line-height:1.7;user-select:text}
+#qr17 .q17-steps .q17-end{color:#345542;margin-bottom:4px}
 </style><script>(function(){
-  const entryIDs=new Set(['','files','setup','paper','qr17','qr17-title','qr17-download','q17-next','q17-prompt']);
+  const entryIDs=new Set(['','start','files','setup','manual','paper','qr17','qr17-title','qr17-download','q17-next','q17-prompt']);
   function setPanel(){const id=location.hash.slice(1);document.documentElement.dataset.q17=entryIDs.has(id)?'entry':'book';}
   setPanel();window.addEventListener('hashchange',setPanel);
 })();
-</script><noscript><style>#legacy-workbook #section-select,#legacy-workbook #mode-toggle,#legacy-workbook #previous,#legacy-workbook #next,#q17-copy{display:none}.q17-return{margin-top:1em}</style></noscript></head>
+</script><noscript><style>#legacy-workbook #section-select,#legacy-workbook #mode-toggle,#legacy-workbook #previous,#legacy-workbook #next,#qr17 #q17-copy,#q17-copy-url{display:none!important}.q17-return{margin-top:1em}</style></noscript></head>
 <body><main id="qr17" aria-labelledby="qr17-title">
   <div class="q17-wrap" id="files">
     <div class="q17-meta"><span>영리더스 아카데미</span><span>2026. 11. 28.</span></div>
-    <div class="q17-grid">
+    <div class="q17-grid" id="start">
       <div class="q17-intro">
         <p class="q17-label">장표 17 <span aria-hidden="true">/</span> 논문 워크숍</p>
-        <h1 id="qr17-title">실습 폴더를<br> 열어 주세요.</h1>
-        <p class="q17-lead">오늘 함께 읽을 논문과 빈 근거표가<br class="q17-wide"> 한 폴더에 들어 있습니다.</p>
-        <a id="qr17-download" class="q17-primary" href="1128-assets/20261123/paper-workshop-1128.zip" download="paper-workshop-1128.zip"><svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m-4.5-4.5L12 15l4.5-4.5M4 16v4h16v-4"/></svg>당일 실습 폴더 받기</a>
-        <div class="q17-filename">paper-workshop-1128.zip</div>
+        <h1 id="qr17-title">논문 실습 시작하기</h1>
+        <p class="q17-lead">ChatGPT 데스크톱 앱에서 로컬 Codex를 열고 시작 요청문을 붙여넣으세요. 로컬 폴더를 쓸 수 있는 Work에서도 가능합니다.</p>
+        <button class="q17-primary" id="q17-copy" type="button" aria-controls="q17-prompt">시작 요청문 복사</button>
         <a class="q17-practice" id="qr17-practice" href="1128-practice.html#plot">32장 그림 만들기 → 59장 바뀐 문장 보기</a>
+        <a class="q17-direct" id="qr17-download" href="1128-assets/20261123/paper-workshop-1128.zip" download="paper-workshop-1128.zip">당일 실습 폴더 받기</a>
         <details class="q17-phone"><summary>휴대폰으로 QR을 여셨나요?</summary><p>노트북 브라우저에서 같은 주소를 열면 됩니다.</p><div class="q17-share"><span class="q17-url" id="q17-address">sam-workshop-landing.vercel.app/1128.html</span><button type="button" id="q17-copy-url" aria-label="강의 주소 복사">주소 복사</button></div></details>
       </div>
-      <section class="q17-steps" aria-labelledby="q17-next"><h2 id="q17-next">파일을 받은 다음</h2>
-        <ol>
-          <li><div><strong>압축을 모두 풉니다.</strong><p>ZIP 파일 안을 미리 보는 것과 압축을 푸는 것은 다릅니다.</p></div></li>
-          <li><div><strong>풀린 폴더를 Codex에서 엽니다.</strong><p><code>시작하기.md</code>와 <code>AGENTS.md</code>가 나란히 보이면 맞습니다. <code>시작하기.md</code>를 열어 보세요.</p></div></li>
-          <li><div><strong>첫 요청을 입력합니다.</strong><div class="q17-command"><code id="q17-prompt" tabindex="-1">시작하자</code><button type="button" id="q17-copy" aria-label="첫 요청 복사">복사</button></div><p>오늘의 공개 논문과 빈 근거표가 보이면 준비됐습니다.</p></div></li>
-        </ol>
+      <section class="q17-steps" aria-labelledby="q17-next">
+        <h2 id="q17-next">앱에 보낼 요청문</h2>
+        <p class="q17-request" id="q17-prompt" tabindex="0">https://sam-workshop-landing.vercel.app/1128.html 에서 ‘당일 실습 폴더 받기’를 눌러 줘. 받은 ZIP을 지금 허용한 작업 폴더 안의 새 폴더에 풀어 줘. 그 안의 시작하기.md와 AGENTS.md를 읽고 ‘시작하자’ 단계까지만 진행해 줘. 논문 카드와 빈 근거표를 보여 주고, 어느 군을 비교할지 내게 물은 뒤 기다려 줘.</p>
+        <p class="q17-end">TASMINH4 논문 카드와 빈 근거표가 보이고, 앱이 “어느 군을 비교할까요?”라고 물으면 준비가 끝납니다.</p>
+        <noscript><p>위 요청문을 선택해서 복사하세요.</p></noscript>
       </section>
     </div>
     <div class="q17-extras">
-      <details id="setup"><summary>앱 설치와 데이터 설정</summary><div class="q17-detail"><p><a href="https://developers.openai.com/codex/app/" target="_blank" rel="noopener">Codex 공식 안내</a>에서 앱을 준비하세요. 개인 계정은 ChatGPT 설정 → 데이터 제어에서 ‘모두를 위한 모델 개선’을 끕니다. <a href="https://help.openai.com/en/articles/7730893-data-controls-faq" target="_blank" rel="noopener">데이터 제어 안내</a></p><p>Codex로 ZIP을 풀었다면 새 프로젝트를 열어 <code>paper-workshop-1128</code> 폴더를 다시 선택하세요. 수업에는 제공된 공개 자료만 씁니다.</p></div></details>
+      <details id="manual"><summary>앱이 파일을 받거나 열지 못할 때</summary><div class="q17-detail"><p>사이트나 폴더 접근을 묻는 창이 뜨면 수업에 사용할 폴더를 선택해 허용하세요. 다운로드가 막혀 있으면 위 ‘당일 실습 폴더 받기’를 직접 눌러 ZIP을 새 폴더에 풉니다. <code>시작하기.md</code>와 <code>AGENTS.md</code>가 나란히 있는 폴더를 Codex에서 열고 <code>시작하자</code>라고 입력하세요.</p><p>앱에서 로컬 폴더를 열 수 없다면 <a href="#paper">브라우저에서 같은 예제 보기</a>로 이어가세요.</p></div></details>
+      <details id="setup"><summary>앱 설치와 데이터 설정</summary><div class="q17-detail"><p><a href="https://developers.openai.com/codex/app/" target="_blank" rel="noopener">Codex 공식 안내</a>에서 앱을 준비하세요. 개인 계정은 ChatGPT 설정 → 데이터 제어에서 ‘모두를 위한 모델 개선’을 끕니다. <a href="https://help.openai.com/en/articles/7730893-data-controls-faq" target="_blank" rel="noopener">데이터 제어 안내</a></p><p>앱이 이미 설치되어 있으면 <a href="#start">17장 시작 요청문</a>을 복사해 보내세요. 수업에는 제공된 공개 자료만 씁니다.</p></div></details>
       <details id="paper"><summary>Codex 없이 같은 예제 보기</summary><div class="q17-detail"><h3>오늘 읽을 논문 · TASMINH4</h3><p>장표 23에서 읽을 논문입니다. <a href="https://pubmed.ncbi.nlm.nih.gov/29499873/" target="_blank" rel="noopener">PubMed 공개 초록 · PMID 29499873</a>의 Methods와 Findings를 엽니다.</p><p><strong>통상관리군과 비교할 군은 자가측정 단독군인가요, 원격 모니터링을 더한 군인가요?</strong> 선택한 군과 평가 시점, 지표, 단위를 적어 보세요. 두 군의 차이는 부호까지 확인하세요.</p><details class="q17-key"><summary>적은 뒤 대조하기 · 오프라인 메모</summary><p>오늘의 비교는 자가측정 단독군 − 통상관리군입니다. 12개월 진료실 수축기혈압의 조정 평균차는 −3.5 mmHg(95% 신뢰구간 −5.8 ~ −1.2)입니다. 이 요약만 봤다면 표에는 ‘원문 미대조’라고 기록하세요.</p></details></div></details>
     </div>
-    <div class="q17-more"><span>선택 실습</span><a href="#start" id="qr17-ibs">IBS 식이 연구로 연습하기 <span aria-hidden="true">↗</span></a></div>
+    <div class="q17-more"><span>선택 실습</span><a href="#ibs-start" id="qr17-ibs">IBS 식이 연구로 연습하기 <span aria-hidden="true">↗</span></a></div>
   </div>
   <span class="q17-sr" id="q17-status" role="status" aria-live="polite"></span>
 </main>
 <div id="legacy-workbook"><a href="#main" class="skip">본문으로 건너뛰기</a><header class="hero"><div class="container"><p class="date">2026. 11. 28.　대한소화기기능성질환·운동학회 영리더스 아카데미</p><h1>선택 실습 · IBS 식이 연구</h1><p>소화기내과 교수·전임의를 위한 AI 의학논문 작성과 바이브 코딩 실습</p><p class="meta">안상현 · 단국대학교병원 가정의학과 · AX센터</p></div></header>
-<nav class="toolbar" aria-label="강의 이동"><a class="q17-return" href="#files">← 장표 17 · 당일 실습 폴더로</a><div class="controls"><label for="section-select">바로 가기</label><select id="section-select" aria-label="강의 절 선택"><option value="start">01 오늘의 질문</option><option value="ibs-setup">02 환경 준비</option><option value="ibs-files">03 실습 파일</option><option value="sam">04 파이프라인 확인</option><option value="evidence">05 인용 검증</option><option value="review">06 원고 쓰기</option><option value="coding">07 합성 자료 분석</option><option value="record">08 수정·기록</option><option value="policy">09 저자 책임</option><option value="after">10 다음 연구에 적용</option><option value="help">11 도움말</option><option value="resources">12 자료·출처</option></select></div><div class="controls"><button id="previous" aria-label="이전 절" type="button">이전</button><span id="step-count">1 / 12</span><button id="next" aria-label="다음 절" type="button">다음</button><button id="mode-toggle" class="primary" aria-pressed="false" type="button">강의 화면</button></div></nav>
-<div class="intro container"><p><strong>강의에서 할 일</strong>　공개 논문으로 원고 한 문장을 고칩니다. 이어서 합성 자료로 표와 그림을 만들고 같은 코드로 다시 확인합니다.</p><div class="toc" aria-label="목차"><a href="#start">01 오늘의 질문</a><a href="#ibs-setup">02 환경 준비</a><a href="#ibs-files">03 실습 파일</a><a href="#sam">04 파이프라인 확인</a><a href="#evidence">05 인용 검증</a><a href="#review">06 원고 쓰기</a><a href="#coding">07 합성 자료 분석</a><a href="#record">08 수정·기록</a><a href="#policy">09 저자 책임</a><a href="#after">10 다음 연구에 적용</a><a href="#help">11 도움말</a><a href="#resources">12 자료·출처</a></div><p class="small">‘강의 화면’에서 한 절씩 봅니다. ← →로 이동하고 Esc로 전체 읽기로 돌아옵니다.</p></div>
-<main id="main" class="container" tabindex="-1"><section class="lesson" id="start" aria-labelledby="start-title"><div class="section-meta">01 <b class="q17-tag">IBS 선택 실습</b> <span>시작</span></div><h2 id="start-title" tabindex="-1">이 문장을 초록에 써도 될까요?</h2>
+<nav class="toolbar" aria-label="강의 이동"><a class="q17-return" href="#files">← 장표 17 · 당일 실습 폴더로</a><div class="controls"><label for="section-select">바로 가기</label><select id="section-select" aria-label="강의 절 선택"><option value="ibs-start">01 오늘의 질문</option><option value="ibs-setup">02 환경 준비</option><option value="ibs-files">03 실습 파일</option><option value="sam">04 파이프라인 확인</option><option value="evidence">05 인용 검증</option><option value="review">06 원고 쓰기</option><option value="coding">07 합성 자료 분석</option><option value="record">08 수정·기록</option><option value="policy">09 저자 책임</option><option value="after">10 다음 연구에 적용</option><option value="help">11 도움말</option><option value="resources">12 자료·출처</option></select></div><div class="controls"><button id="previous" aria-label="이전 절" type="button">이전</button><span id="step-count">1 / 12</span><button id="next" aria-label="다음 절" type="button">다음</button><button id="mode-toggle" class="primary" aria-pressed="false" type="button">강의 화면</button></div></nav>
+<div class="intro container"><p><strong>강의에서 할 일</strong>　공개 논문으로 원고 한 문장을 고칩니다. 이어서 합성 자료로 표와 그림을 만들고 같은 코드로 다시 확인합니다.</p><div class="toc" aria-label="목차"><a href="#ibs-start">01 오늘의 질문</a><a href="#ibs-setup">02 환경 준비</a><a href="#ibs-files">03 실습 파일</a><a href="#sam">04 파이프라인 확인</a><a href="#evidence">05 인용 검증</a><a href="#review">06 원고 쓰기</a><a href="#coding">07 합성 자료 분석</a><a href="#record">08 수정·기록</a><a href="#policy">09 저자 책임</a><a href="#after">10 다음 연구에 적용</a><a href="#help">11 도움말</a><a href="#resources">12 자료·출처</a></div><p class="small">‘강의 화면’에서 한 절씩 봅니다. ← →로 이동하고 Esc로 전체 읽기로 돌아옵니다.</p></div>
+<main id="main" class="container" tabindex="-1"><section class="lesson" id="ibs-start" aria-labelledby="start-title"><div class="section-meta">01 <b class="q17-tag">IBS 선택 실습</b> <span>시작</span></div><h2 id="start-title" tabindex="-1">이 문장을 초록에 써도 될까요?</h2>
 <p class="lead">과민성장증후군(IBS) 환자의 식이 연구를 읽고 동료가 다음과 같이 썼습니다.</p>
 <blockquote class="case-line">“저포드맵 식이가 전통적 IBS 식이 조언보다 우월했다.”</blockquote>
 <p>수업을 위해 만든 초안입니다. 그대로 둘지, 고칠지, 근거를 더 볼지 먼저 골라 보세요. 옆 사람에게 <strong>판단을 바꿀 숫자 하나</strong>를 말한 뒤 AI의 의견을 듣습니다.</p>
@@ -174,7 +178,7 @@ B−A 보정 차이(점), 95% 신뢰구간과 p값을 구하고 표·그림·잔
     status.textContent=ok?label+' 복사 완료.':'선택된 텍스트를 직접 복사하세요.';
     btn.textContent=ok?'복사됨':'직접 복사';clearTimeout(timer);timer=setTimeout(()=>{btn.textContent=original;status.textContent='';},2200);
   });}
-  bind('q17-copy','q17-prompt','첫 요청');
+  bind('q17-copy','q17-prompt','시작 요청문');
   bind('q17-copy-url','q17-address','강의 주소','https://sam-workshop-landing.vercel.app/1128.html');
 })();
 </script><script>
