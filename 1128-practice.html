@@ -1,0 +1,272 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="data:,"><title>32장 그림 만들기 → 59장 바뀐 문장 보기 · 영리더스 아카데미</title>
+<style>
+*{box-sizing:border-box}html{scroll-padding-top:12px}body{margin:0;background:#faf9f5;color:#1e3229;font:17px/1.68 "Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif;word-break:keep-all;overflow-wrap:anywhere}
+main{max-width:850px;margin:0 auto;padding:0 25px 48px}a{color:#215c45;text-underline-offset:4px}a:hover{text-decoration-thickness:2px}a:focus-visible,summary:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:3px solid #af5d21;outline-offset:3px}
+.mast{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:20px 0 11px;border-bottom:1px solid #b5c1b7;font-size:14px;color:#536359}.mast a{font-weight:650}
+nav{display:flex;flex-wrap:wrap;gap:4px 18px;margin:0;padding:11px 0 7px;font-size:15px}nav a{padding:3px 0}
+section{scroll-margin-top:10px}.part{font-size:14px;color:#2c6b52;font-weight:700;margin:15px 0 6px}
+h1,h2,h3{line-height:1.35;letter-spacing:-.05em}h1{font-size:clamp(29px,4vw,43px);margin:4px 0 10px}h2{font-size:clamp(23px,3.6vw,31px);margin:5px 0 12px}h3{font-size:18px;margin:15px 0 2px}p{margin:8px 0 12px}
+.later{border-top:1px solid #b9c6bc;margin-top:27px;padding-top:7px}.context{max-width:64ch}.small,figcaption{font-size:14px;color:#465d50}
+details{margin:0}summary{color:#234c38;font-weight:650;cursor:pointer;padding:8px 2px}details>p,details>pre{margin-left:2px}
+.make{margin:17px 0 11px;border:1px solid #b7c9b9;background:#fff;border-radius:7px}.make>summary{padding:13px 15px;background:#edf3eb;border-radius:6px}.output{padding:0 14px 10px}.output svg{display:block;width:100%;height:auto;max-height:230px}figure{margin:12px 0 14px}.table{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:15px;text-align:left}th,td{padding:7px 8px;border-bottom:1px solid #d6dfd6}th{background:#f2f5ef}caption{text-align:left;font-weight:650;margin:0 0 4px}
+.tools{border-bottom:1px solid #ced8cc}.tools details{border-top:1px solid #ced8cc;padding:2px 0}.tools details[open]{padding-bottom:12px}pre{font:15px/1.67 ui-monospace,Consolas,"Malgun Gothic",monospace;white-space:pre-wrap;word-break:normal;overflow-wrap:anywhere;padding:11px 13px;margin:6px 0;background:#eef2eb;border-radius:4px}
+button{font:inherit;font-size:14px;padding:7px 12px;min-height:38px;background:#fff;color:#214e3b;border:1px solid #93ad98;border-radius:5px;cursor:pointer}button:hover{background:#eaf1e9}
+.advance{display:inline-block;padding:9px 0;font-weight:700}.sample{border-left:3px solid #b97b63;padding:7px 12px;margin:10px 0;background:#f5eee9}.diffrow{display:grid;grid-template-columns:4.3em 1fr;gap:8px;padding:10px 12px;margin:5px 0;border-left:3px solid #b97b63;background:#f6efeb}.diffrow.add{border-color:#548069;background:#edf3ed}.diffrow b{font-size:14px}.readlinks{display:flex;gap:6px 16px;flex-wrap:wrap}
+.foot{margin:26px 0 0;border-top:1px solid #bcc8bf;padding-top:12px}.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+@media(max-width:550px){body{font-size:16px}main{padding:0 17px 35px}.mast{padding-top:14px}nav{gap:2px 14px;font-size:14px}.output{padding:0 6px 8px}th,td{padding:5px 3px;font-size:14px}.diffrow{grid-template-columns:1fr;gap:0}.part{margin-top:12px}}
+@media print{body{background:#fff}.mast a,nav,button,.advance,.foot{display:none}section,figure{break-inside:avoid}}
+</style></head><body><main>
+<div id="plot"><div class="mast"><a href="1128.html#files">← 17장 실습 입구</a><span>영리더스 아카데미</span></div>
+<nav aria-label="강의 장표 바로 가기"><a href="#plot">32장 그림</a><a href="#wording">38장 문장 고치기</a><a href="#readme">59장 바뀐 문장</a></nav></div>
+<section aria-labelledby="plot-title"><p class="part">32–33장 · 바이브코딩</p><h1 id="plot-title">논문에서 읽은 값으로 그림 만들기</h1>
+<p class="context">23장에서 읽은 <a href="https://pubmed.ncbi.nlm.nih.gov/29499873/" target="_blank" rel="noopener">TASMINH4 공개 초록</a>을 다시 펼쳐 보세요. 12개월 진료실 수축기혈압을 <strong>자가측정 단독군 − 통상관리군</strong> 순서로 비교합니다.</p>
+<p>아래에서 당일 ZIP의 공개 요약값 한 행으로 그려 보세요. Codex를 쓰는 분은 같은 CSV로 만든 자신의 그림과 대조해 보세요.</p>
+<details class="make" id="make-figure"><summary>이 CSV로 표와 그림 만들기</summary><div class="output">
+<div class="table"><table><caption>12개월 진료실 수축기혈압 · 두 군의 조정 평균차</caption><thead><tr><th scope="col">비교</th><th scope="col">추정값</th><th scope="col">95% 신뢰구간</th></tr></thead><tbody><tr><td>자가측정 단독군 − 통상관리군</td><td id="point">−3.5 mmHg</td><td id="interval">−5.8 ~ −1.2 mmHg</td></tr></tbody></table></div>
+<figure><div id="graph" role="img" aria-label="자가측정 단독군과 통상관리군의 조정 평균차 −3.5 mmHg, 95% 신뢰구간 −5.8에서 −1.2."><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="532.8pt" height="151.2pt" viewBox="0 0 532.8 151.2" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <title>TASMINH4: self-monitoring alone minus usual care, 12 months</title>
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title>TASMINH4: self-monitoring alone minus usual care, 12 months</dc:title>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 151.2 
+L 532.8 151.2 
+L 532.8 0 
+L 0 0 
+L 0 151.2 
+z
+" style="fill: none; opacity: 0"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 21.312 105.84 
+L 511.488 105.84 
+L 511.488 15.12 
+L 21.312 15.12 
+L 21.312 105.84 
+z
+" style="fill: none"/>
+   </g>
+   <g id="line2d_1">
+    <path d="M 413.4528 105.84 
+L 413.4528 15.12 
+" clip-path="url(#pb2df7eabac)" style="fill: none; stroke-dasharray: 5.6,4.2; stroke-dashoffset: 0; stroke: #69756c; stroke-width: 1.4"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_2">
+      <defs>
+       <path id="m997a0f7c45" d="M 0 0 
+L 0 4 
+" style="stroke: #526158; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#m997a0f7c45" x="21.312" y="105.84" style="fill: #526158; stroke: #526158; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_1">
+      <text style="font-size: 10px; font-family: 'Malgun Gothic'; text-anchor: middle; fill: #526158" x="21.312" y="120.932188" transform="rotate(-0 21.312 120.932188)">-8</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_3">
+      <g>
+       <use xlink:href="#m997a0f7c45" x="119.3472" y="105.84" style="fill: #526158; stroke: #526158; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_2">
+      <text style="font-size: 10px; font-family: 'Malgun Gothic'; text-anchor: middle; fill: #526158" x="119.3472" y="120.932188" transform="rotate(-0 119.3472 120.932188)">-6</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_4">
+      <g>
+       <use xlink:href="#m997a0f7c45" x="217.3824" y="105.84" style="fill: #526158; stroke: #526158; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_3">
+      <text style="font-size: 10px; font-family: 'Malgun Gothic'; text-anchor: middle; fill: #526158" x="217.3824" y="120.932188" transform="rotate(-0 217.3824 120.932188)">-4</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_5">
+      <g>
+       <use xlink:href="#m997a0f7c45" x="315.4176" y="105.84" style="fill: #526158; stroke: #526158; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_4">
+      <text style="font-size: 10px; font-family: 'Malgun Gothic'; text-anchor: middle; fill: #526158" x="315.4176" y="120.932188" transform="rotate(-0 315.4176 120.932188)">-2</text>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_6">
+      <g>
+       <use xlink:href="#m997a0f7c45" x="413.4528" y="105.84" style="fill: #526158; stroke: #526158; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_5">
+      <text style="font-size: 10px; font-family: 'Malgun Gothic'; text-anchor: middle; fill: #526158" x="413.4528" y="120.932188" transform="rotate(-0 413.4528 120.932188)">0</text>
+     </g>
+    </g>
+    <g id="xtick_6">
+     <g id="line2d_7">
+      <g>
+       <use xlink:href="#m997a0f7c45" x="511.488" y="105.84" style="fill: #526158; stroke: #526158; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_6">
+      <text style="font-size: 10px; font-family: 'Malgun Gothic'; text-anchor: middle; fill: #526158" x="511.488" y="120.932188" transform="rotate(-0 511.488 120.932188)">2</text>
+     </g>
+    </g>
+    <g id="text_7">
+     <text style="font-size: 11px; font-family: 'Malgun Gothic'; text-anchor: middle; fill: #263f32" x="266.4" y="138.690938" transform="rotate(-0 266.4 138.690938)">조정 평균차 (mmHg)</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2"/>
+   <g id="patch_3">
+    <path d="M 21.312 105.84 
+L 511.488 105.84 
+" style="fill: none; stroke: #9ca99f; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="LineCollection_1">
+    <path d="M 129.15072 59.554286 
+L 354.63168 59.554286 
+" clip-path="url(#pb2df7eabac)" style="fill: none; stroke: #195f51; stroke-width: 3.4"/>
+   </g>
+   <g id="line2d_8">
+    <defs>
+     <path id="m6577b279be" d="M 0 9 
+L 0 -9 
+" style="stroke: #195f51; stroke-width: 2.3"/>
+    </defs>
+    <g clip-path="url(#pb2df7eabac)">
+     <use xlink:href="#m6577b279be" x="129.15072" y="59.554286" style="fill: #195f51; stroke: #195f51; stroke-width: 2.3"/>
+    </g>
+   </g>
+   <g id="line2d_9">
+    <g clip-path="url(#pb2df7eabac)">
+     <use xlink:href="#m6577b279be" x="354.63168" y="59.554286" style="fill: #195f51; stroke: #195f51; stroke-width: 2.3"/>
+    </g>
+   </g>
+   <g id="text_8">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #21483b" x="129.15072" y="52.219821" transform="rotate(-0 129.15072 52.219821)">−5.8</text>
+   </g>
+   <g id="text_9">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #21483b" x="354.63168" y="52.219821" transform="rotate(-0 354.63168 52.219821)">−1.2</text>
+   </g>
+   <g id="text_10">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #21483b" x="241.8912" y="80.454107" transform="rotate(-0 241.8912 80.454107)">−3.5</text>
+   </g>
+   <g id="line2d_10">
+    <defs>
+     <path id="md036f61cc1" d="M 0 5 
+C 1.326016 5 2.597899 4.473168 3.535534 3.535534 
+C 4.473168 2.597899 5 1.326016 5 0 
+C 5 -1.326016 4.473168 -2.597899 3.535534 -3.535534 
+C 2.597899 -4.473168 1.326016 -5 0 -5 
+C -1.326016 -5 -2.597899 -4.473168 -3.535534 -3.535534 
+C -4.473168 -2.597899 -5 -1.326016 -5 0 
+C -5 1.326016 -4.473168 2.597899 -3.535534 3.535534 
+C -2.597899 4.473168 -1.326016 5 0 5 
+z
+" style="stroke: #195f51"/>
+    </defs>
+    <g clip-path="url(#pb2df7eabac)">
+     <use xlink:href="#md036f61cc1" x="241.8912" y="59.554286" style="fill: #195f51; stroke: #195f51"/>
+    </g>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pb2df7eabac">
+   <rect x="21.312" y="15.12" width="490.176" height="90.72"/>
+  </clipPath>
+ </defs>
+</svg>
+</div><figcaption>점은 두 군의 차이, 가로선은 95% 신뢰구간입니다. 세로 점선은 차이가 없는 값인 0입니다.</figcaption></figure>
+<p class="small">공개 초록의 요약값을 옮긴 그림입니다. 개인별 혈압 자료로 모형을 다시 적합한 결과는 아닙니다.</p>
+<noscript><p class="small">스크립트가 꺼져 있어 같은 CSV에서 미리 그린 그림을 표시합니다.</p></noscript></div></details>
+<div class="tools"><details id="prompt-help"><summary>Codex에 줄 요청문</summary><pre id="prompt-text" tabindex="-1">연습자료/TASMINH4_공개요약값.csv를 열어 표와 95% 신뢰구간 그림을 만들어 줘. 아래에 CSV를 붙여넣었다면 그 두 줄을 써 줘. 자가측정 단독군 − 통상관리군, 12개월 진료실 수축기혈압, mmHg를 표시하고 그림에 0 기준선을 넣어 줘. 점추정이 신뢰구간 안에 있는지 확인해. 개인별 데이터를 만들거나 회귀분석을 다시 하지 말고, 만든 파일을 알려 줘.</pre><button type="button" data-copy="prompt-text">요청문 복사</button></details>
+<details id="csv-help"><summary>파일을 못 읽었다면: CSV 두 줄 복사하기</summary><p>머리글과 값 한 줄을 요청문 뒤에 붙여 넣으세요. 이 두 줄만 봤다면 원문 확인 상태는 ‘원문 미대조’로 적습니다.</p><pre id="csv-text" tabindex="-1">pmid,source_locator,intervention,comparator,followup_months,outcome,estimate_type,estimate,ci95_low,ci95_high,unit
+29499873,Abstract: Findings,self-monitoring alone,usual care,12,clinic systolic blood pressure,adjusted mean difference,-3.5,-5.8,-1.2,mmHg</pre><button type="button" data-copy="csv-text">CSV 복사</button></details></div>
+<a class="advance" id="advance-word" href="#wording">38장: 이 그림을 문장으로 설명하기 →</a></section>
+<section class="later" id="wording" aria-labelledby="word-title"><p class="part">38–39장 · 원고 검토</p><h2 id="word-title">이 문장은 무엇을 비교했나요?</h2>
+<p class="sample"><strong>교육용 초안</strong><br>자가측정으로 혈압이 3.5 mmHg 감소했다.</p><p>이대로면 같은 사람의 혈압을 치료 전후로 비교한 것처럼 읽힐 수 있습니다. 비교군과 평가 시점을 넣어 한 문장으로 다시 써 보세요.</p><a class="advance" id="advance-readme" href="#readme">59장 바뀐 문장 보기 →</a></section>
+<section class="later" id="readme" aria-labelledby="readme-title"><p class="part">59–60장 · Markdown과 GitHub</p><h2 id="readme-title">바뀐 문장 보기</h2><p>방금 쓴 문장을 교육용 README의 수정 전후와 나란히 놓고 보세요.</p>
+<div class="diffrow" id="before"><b>수정 전</b><span>자가측정으로 혈압이 3.5 mmHg 감소했다.</span></div><div class="diffrow add" id="after"><b>수정 후</b><span>12개월 진료실 수축기혈압은 자가측정 단독군이 통상관리군보다 낮았다(조정 평균차 −3.5 mmHg, 95% 신뢰구간 −5.8~−1.2).</span></div>
+<p><strong>수정 이유</strong>　같은 군의 전후 변화로 오해되지 않도록 비교군과 시점을 명시했다.</p>
+<div class="tools"><details id="markdown"><summary>같은 문장을 Markdown 원문으로 보기</summary><pre id="readme-text" tabindex="-1"># 공개 요약값으로 만든 그림
+
+논문: TASMINH4 · 출처: PMID 29499873
+
+근거 문장: 12개월 진료실 수축기혈압은 자가측정 단독군이 통상관리군보다 낮았다(조정 평균차 −3.5 mmHg, 95% 신뢰구간 −5.8~−1.2).
+
+수정 이유: 같은 군의 전후 변화로 오해되지 않도록 비교군과 시점을 명시했다.</pre><button type="button" data-copy="readme-text">README 복사</button></details></div>
+<p>GitHub에서도 어떤 줄을 지우고 더했는지 찾을 수 있습니다. 아래 공식 예제는 README의 저작권 연도를 2025에서 2026으로 고친 기록입니다. 위 논문 문장은 이 수업에서 만든 예시입니다.</p>
+<p class="readlinks"><a href="https://github.com/skills/introduction-to-github/commit/15400e36199a617552fc18a264a5adff0ec8ac84" target="_blank" rel="noopener">GitHub에서 실제 변경 한 건 보기 ↗</a><a href="https://github.com/skills/introduction-to-github/blob/15400e36199a617552fc18a264a5adff0ec8ac84/README.md" target="_blank" rel="noopener">공식 예제 README</a><a href="https://github.com/skills/introduction-to-github/blob/15400e36199a617552fc18a264a5adff0ec8ac84/LICENSE" target="_blank" rel="noopener">LICENSE</a></p></section>
+<div class="foot"><a href="1128.html#files">← 17장 실습 입구로 돌아가기</a></div><div id="status" role="status" aria-live="polite" class="sr"></div>
+</main><script>(() => {
+  'use strict';
+  const byId = id => document.getElementById(id);
+  function publicRow(){
+    const rows=byId('csv-text').textContent.trim().split(/\r?\n/);
+    if(rows.length!==2) throw Error('CSV 행 수');
+    const fields=rows[0].split(','),values=rows[1].split(',');
+    if(fields.length!==values.length) throw Error('CSV 열 수');
+    const r=Object.fromEntries(fields.map((k,i)=>[k,values[i]]));
+    const est=Number(r.estimate),lo=Number(r.ci95_low),hi=Number(r.ci95_high);
+    if(r.pmid!=='29499873'||r.intervention!=='self-monitoring alone'||r.comparator!=='usual care'||r.outcome!=='clinic systolic blood pressure'||r.followup_months!=='12'||r.unit!=='mmHg'||!r.estimate||!r.ci95_low||!r.ci95_high||![est,lo,hi].every(Number.isFinite)||lo>est||est>hi)throw Error('비교·단위·구간');
+    return {est,lo,hi,unit:r.unit};
+  }
+  const fmt=n=>String(n).replace('-','−');
+  function draw(){
+    const {est,lo,hi,unit}=publicRow();
+    const compact=window.matchMedia('(max-width:550px)').matches,W=compact?360:720,H=compact?162:170,pad=32,Y=65;
+    const min=Math.floor(Math.min(0,lo)/2)*2-2,max=Math.ceil(Math.max(0,hi)/2)*2+2;
+    const x=n=>pad+(n-min)/(max-min)*(W-2*pad);
+    const ns='http://www.w3.org/2000/svg';
+    const make=(tag,attrs,t)=>{const el=document.createElementNS(ns,tag);for(const [k,v] of Object.entries(attrs))el.setAttribute(k,String(v));if(t!==undefined)el.textContent=t;return el};
+    const svg=make('svg',{viewBox:'0 0 '+W+' '+H,'aria-hidden':'true',focusable:'false','data-rendered-from':'public-csv'});
+    const add=(tag,attrs,t)=>svg.appendChild(make(tag,attrs,t));
+    const line=(x1,y1,x2,y2,color,width,more={})=>add('line',{x1,y1,x2,y2,stroke:color,'stroke-width':width,...more});
+    const text=(xx,yy,t,size=14,bold=false)=>add('text',{x:xx,y:yy,'text-anchor':'middle','font-size':size,'font-family':'system-ui, sans-serif','font-weight':bold?650:400,fill:'#284839'},t);
+    line(x(0),18,x(0),117,'#647e6a',1.4,{'stroke-dasharray':'5 4','data-zero':'true'});
+    line(x(min),117,x(max),117,'#98a99e',1.2);
+    for(let n=min;n<=max;n+=2){line(x(n),117,x(n),122,'#7e9587',1);text(x(n),140,fmt(n),12);}
+    line(x(lo),Y,x(hi),Y,'#185e48',4,{'data-ci':'true'});line(x(lo),Y-8,x(lo),Y+8,'#185e48',2.5);line(x(hi),Y-8,x(hi),Y+8,'#185e48',2.5);
+    add('circle',{cx:x(est),cy:Y,r:6,fill:'#185e48','data-effect':'true'});text(x(lo),47,fmt(lo),15,true);text(x(hi),47,fmt(hi),15,true);text(x(est),93,fmt(est),16,true);text(W/2,158,'조정 평균차 ('+unit+')',13);
+    byId('graph').replaceChildren(svg);byId('point').textContent=fmt(est)+' '+unit;byId('interval').textContent=fmt(lo)+' ~ '+fmt(hi)+' '+unit;
+  }
+  const step=byId('make-figure');
+  function showChart(){
+    if(!step.open)return;
+    try{draw();}catch(e){byId('status').textContent='CSV를 확인하지 못해 미리 그린 예제 그림을 표시합니다.';}
+  }
+  step.addEventListener('toggle',showChart);window.matchMedia('(max-width:550px)').addEventListener?.('change',showChart);
+  document.querySelectorAll('button[data-copy]').forEach(btn=>{
+    const original=btn.textContent,src=byId(btn.dataset.copy);let timer;
+    btn.addEventListener('click',async()=>{
+      let ok=false;
+      try{if(navigator.clipboard&&navigator.clipboard.writeText){await navigator.clipboard.writeText(src.textContent);ok=true;}}catch(e){}
+      if(!ok){const r=document.createRange();r.selectNodeContents(src);src.focus({preventScroll:true});const sel=window.getSelection();sel.removeAllRanges();sel.addRange(r);try{ok=document.execCommand('copy')===true;}catch(e){}if(ok)sel.removeAllRanges();}
+      btn.textContent=ok?'복사됨':'선택한 글을 직접 복사';byId('status').textContent=ok?original+' 완료':'글이 선택됐습니다. 복사 메뉴 또는 Ctrl+C를 사용하세요.';
+      clearTimeout(timer);timer=setTimeout(()=>{btn.textContent=original;byId('status').textContent='';},2300);
+    });
+  });
+})();
+</script><noscript><style>button[data-copy]{display:none}</style></noscript></body></html>

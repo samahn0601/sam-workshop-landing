@@ -42,6 +42,7 @@ html[data-q17="entry"]{scroll-padding-top:0}html[data-q17="entry"] body{backgrou
 @media print{html[data-q17="entry"] #legacy-workbook,html[data-q17="book"] #qr17{display:none!important}#qr17{color:black}.q17-grid{display:block}.q17-meta,.q17-steps{margin-bottom:15px}}
 .q17-share{display:flex;flex-wrap:wrap;align-items:center;gap:6px}.q17-share button{padding:7px 9px;font-size:13px}#legacy-workbook .toolbar .q17-return{display:inline-flex;align-items:center;min-height:34px;padding:2px 8px;border-radius:4px;font-size:13px;text-underline-offset:3px}.q17-tag{color:#245e48;font-weight:650}
 @media(max-width:700px){#qr17 h1 br{display:initial}}
+#qr17 .q17-practice{display:table;margin:13px 0 0;padding:6px 0;font-size:16px;font-weight:650;line-height:1.5;text-underline-offset:4px}
 </style><script>(function(){
   const entryIDs=new Set(['','files','setup','paper','qr17','qr17-title','qr17-download','q17-next','q17-prompt']);
   function setPanel(){const id=location.hash.slice(1);document.documentElement.dataset.q17=entryIDs.has(id)?'entry':'book';}
@@ -58,6 +59,7 @@ html[data-q17="entry"]{scroll-padding-top:0}html[data-q17="entry"] body{backgrou
         <p class="q17-lead">오늘 함께 읽을 논문과 빈 근거표가<br class="q17-wide"> 한 폴더에 들어 있습니다.</p>
         <a id="qr17-download" class="q17-primary" href="1128-assets/20261123/paper-workshop-1128.zip" download="paper-workshop-1128.zip"><svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m-4.5-4.5L12 15l4.5-4.5M4 16v4h16v-4"/></svg>당일 실습 폴더 받기</a>
         <div class="q17-filename">paper-workshop-1128.zip</div>
+        <a class="q17-practice" id="qr17-practice" href="1128-practice.html#plot">32장 그림 만들기 → 59장 바뀐 문장 보기</a>
         <details class="q17-phone"><summary>휴대폰으로 QR을 여셨나요?</summary><p>노트북 브라우저에서 같은 주소를 열면 됩니다.</p><div class="q17-share"><span class="q17-url" id="q17-address">sam-workshop-landing.vercel.app/1128.html</span><button type="button" id="q17-copy-url" aria-label="강의 주소 복사">주소 복사</button></div></details>
       </div>
       <section class="q17-steps" aria-labelledby="q17-next"><h2 id="q17-next">파일을 받은 다음</h2>
