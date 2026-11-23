@@ -47,33 +47,68 @@ html[data-q17="entry"]{scroll-padding-top:0}html[data-q17="entry"] body{backgrou
 #qr17 #q17-copy:hover{background:#123f2f}#qr17 .q17-direct{display:inline-block;margin-top:6px;font-size:15px}
 #qr17 .q17-steps .q17-request{margin:8px 0 13px;padding:12px 15px;border-left:3px solid #47745b;color:#213a2e;background:#eff3ec;font:inherit;line-height:1.7;user-select:text}
 #qr17 .q17-steps .q17-end{color:#345542;margin-bottom:4px}
+html[data-q17-stage="prep"] #start,html[data-q17-stage="day"] #prep{display:none}
+#qr17 .prep-panel{padding:clamp(24px,4vw,47px) 0 25px}
+#qr17 .prep-panel h1{font-size:clamp(32px,4.2vw,50px);margin:0 0 6px;line-height:1.18;letter-spacing:-.06em}
+#qr17 .prep-lead{margin:0 0 23px;color:#40594d;font-size:clamp(16px,1.65vw,19px)}
+.prep-steps{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,70px)}
+#qr17 .prep-steps>section{border-top:1px solid #a7b9ac;padding-top:13px}
+#qr17 .prep-steps h2{font-size:clamp(20px,2.15vw,24px);line-height:1.4;color:#214435;margin:0 0 6px;letter-spacing:-.045em}
+#qr17 .prep-steps p{margin:0 0 9px;line-height:1.65}#qr17 .prep-steps .prep-hint{color:#455e50;font-size:15px}
+.prep-tools,.prep-actions{display:flex;flex-wrap:wrap;align-items:center;gap:11px 20px}
+#qr17 #prep-copy{padding:5px 12px;min-height:36px;font:inherit;font-size:15px;font-weight:650;border:1px solid #9bb1a2;border-radius:5px;background:#edf2eb;color:#204f37;cursor:pointer}
+#qr17 #prep-copy:hover{background:#dce9df}#qr17 .prep-tools a,#qr17 .prep-preview summary{font-size:15px}
+#qr17 .prep-preview{margin:6px 0 0}#qr17 .prep-preview summary{color:#40594d}
+#qr17 .prep-preview p{margin:6px 0 0;padding-left:10px;border-left:2px solid #a6b8ab;color:#344d40;user-select:text}
+#qr17 .prep-actions{margin-top:23px}#qr17 .prep-practice{font-size:15px}#qr17 .q17-extras>.q17-phone{margin:0}
+#qr17 .q17-ready{margin-top:10px}#qr17 .q17-ready a{white-space:nowrap}
+@media(max-width:700px){#qr17 .prep-panel{padding:18px 0}#qr17 .prep-lead{margin-bottom:15px}.prep-steps{grid-template-columns:1fr;gap:12px}#qr17 .prep-steps>section{padding-top:10px}#qr17 .prep-steps p{margin-bottom:6px;line-height:1.55}#qr17 .prep-actions{margin-top:12px;gap:8px 16px}}
+@media(max-width:380px){#qr17 .q17-meta{padding:10px 0 7px}#qr17 .prep-panel{padding:12px 0}#qr17 .prep-lead{margin-bottom:9px}.prep-steps{gap:8px}#qr17 .prep-steps>section{padding-top:7px}#qr17 .prep-actions{margin-top:7px}}
 </style><script>(function(){
-  const entryIDs=new Set(['','start','files','setup','manual','paper','qr17','qr17-title','qr17-download','q17-next','q17-prompt']);
-  function setPanel(){const id=location.hash.slice(1);document.documentElement.dataset.q17=entryIDs.has(id)?'entry':'book';}
+  const dayIDs=new Set(['start','qr17-title','qr17-download','qr17-practice','q17-next','q17-prompt','q17-copy']);
+  const entryIDs=new Set(['','files','setup','manual','paper','qr17','prep','prep-title','prep-two','prep-three','prep-download','prep-prompt',...dayIDs]);
+  function setPanel(){const id=location.hash.slice(1),data=document.documentElement.dataset;data.q17=entryIDs.has(id)?'entry':'book';data.q17Stage=dayIDs.has(id)?'day':'prep';}
   setPanel();window.addEventListener('hashchange',setPanel);
 })();
-</script><noscript><style>#legacy-workbook #section-select,#legacy-workbook #mode-toggle,#legacy-workbook #previous,#legacy-workbook #next,#qr17 #q17-copy,#q17-copy-url{display:none!important}.q17-return{margin-top:1em}</style></noscript></head>
-<body><main id="qr17" aria-labelledby="qr17-title">
+</script><noscript><style>#legacy-workbook #section-select,#legacy-workbook #mode-toggle,#legacy-workbook #previous,#legacy-workbook #next,#qr17 #q17-copy,#qr17 #prep-copy,#q17-copy-url{display:none!important}.q17-return{margin-top:1em}</style></noscript></head>
+<body><main id="qr17" aria-label="영리더스 아카데미 논문 워크숍">
   <div class="q17-wrap" id="files">
     <div class="q17-meta"><span>영리더스 아카데미</span><span>2026. 11. 28.</span></div>
+    <section class="prep-panel" id="prep" aria-labelledby="prep-title">
+      <h1 id="prep-title" tabindex="-1">강의 사전 준비</h1>
+      <p class="prep-lead">참석 전에 아래 ②와 ③까지만 해 주세요.</p>
+      <div class="prep-steps">
+        <section aria-labelledby="prep-two"><h2 id="prep-two">② 실습 폴더 준비</h2>
+          <p>ChatGPT 데스크톱 앱에 로그인해 Codex를 여세요. 준비 요청문을 보내면 앱이 실습 ZIP을 받아 풀고 첫 질문을 보여 줍니다.</p>
+          <div class="prep-tools"><button type="button" id="prep-copy" aria-controls="prep-prompt">준비 요청문 복사</button><a id="prep-download" href="1128-assets/20261123/paper-workshop-1128.zip" download="paper-workshop-1128.zip">당일 실습 폴더 받기</a></div>
+          <details class="prep-preview"><summary>요청문 보기</summary><p id="prep-prompt" tabindex="0">https://sam-workshop-landing.vercel.app/1128.html 에서 ‘당일 실습 폴더 받기’를 눌러 줘. 받은 ZIP을 지금 허용한 작업 폴더 안의 새 폴더에 풀어 줘. 그 안의 시작하기.md와 AGENTS.md를 읽고 ‘시작하자’ 단계까지만 진행해 줘. 논문 카드와 빈 근거표를 보여 주고, 어느 군을 비교할지 내게 물은 뒤 기다려 줘.</p></details>
+        </section>
+        <section aria-labelledby="prep-three"><h2 id="prep-three">③ 첫 실행 확인</h2>
+          <p>논문 카드(TASMINH4)와 빈 근거표가 보이고 앱이 “어느 군을 비교할까요?”라고 물으면 준비 끝입니다. <strong>답은 강의 당일에 함께 고릅니다.</strong></p>
+          <p class="prep-hint">직접 받았다면 ZIP을 풀고, Codex에서 <code>시작하기.md</code>가 있는 폴더를 열어 <code>시작하자</code>를 입력하세요.</p>
+        </section>
+      </div>
+      <div class="prep-actions"><a class="q17-primary" id="prep-to-day" href="#start">강의 당일 실습 시작</a><a class="prep-practice" href="1128-practice.html#plot">32장 그림 만들기 → 59장 바뀐 문장 보기</a></div>
+    </section>
     <div class="q17-grid" id="start">
       <div class="q17-intro">
         <p class="q17-label">장표 17 <span aria-hidden="true">/</span> 논문 워크숍</p>
-        <h1 id="qr17-title">논문 실습 시작하기</h1>
+        <h1 id="qr17-title" tabindex="-1">논문 실습 시작하기</h1>
         <p class="q17-lead">ChatGPT 데스크톱 앱에서 로컬 Codex를 열고 시작 요청문을 붙여넣으세요. 로컬 폴더를 쓸 수 있는 Work에서도 가능합니다.</p>
         <button class="q17-primary" id="q17-copy" type="button" aria-controls="q17-prompt">시작 요청문 복사</button>
         <a class="q17-practice" id="qr17-practice" href="1128-practice.html#plot">32장 그림 만들기 → 59장 바뀐 문장 보기</a>
         <a class="q17-direct" id="qr17-download" href="1128-assets/20261123/paper-workshop-1128.zip" download="paper-workshop-1128.zip">당일 실습 폴더 받기</a>
-        <details class="q17-phone"><summary>휴대폰으로 QR을 여셨나요?</summary><p>노트북 브라우저에서 같은 주소를 열면 됩니다.</p><div class="q17-share"><span class="q17-url" id="q17-address">sam-workshop-landing.vercel.app/1128.html</span><button type="button" id="q17-copy-url" aria-label="강의 주소 복사">주소 복사</button></div></details>
       </div>
       <section class="q17-steps" aria-labelledby="q17-next">
         <h2 id="q17-next">앱에 보낼 요청문</h2>
         <p class="q17-request" id="q17-prompt" tabindex="0">https://sam-workshop-landing.vercel.app/1128.html 에서 ‘당일 실습 폴더 받기’를 눌러 줘. 받은 ZIP을 지금 허용한 작업 폴더 안의 새 폴더에 풀어 줘. 그 안의 시작하기.md와 AGENTS.md를 읽고 ‘시작하자’ 단계까지만 진행해 줘. 논문 카드와 빈 근거표를 보여 주고, 어느 군을 비교할지 내게 물은 뒤 기다려 줘.</p>
         <p class="q17-end">TASMINH4 논문 카드와 빈 근거표가 보이고, 앱이 “어느 군을 비교할까요?”라고 물으면 준비가 끝납니다.</p>
+        <p class="q17-ready">②·③을 이미 마치셨다면 준비한 폴더를 그대로 쓰세요. <a href="#files">사전 준비 다시 보기</a></p>
         <noscript><p>위 요청문을 선택해서 복사하세요.</p></noscript>
       </section>
     </div>
     <div class="q17-extras">
+        <details class="q17-phone"><summary>휴대폰으로 QR을 여셨나요?</summary><p>노트북 브라우저에서 같은 주소를 열면 됩니다.</p><div class="q17-share"><span class="q17-url" id="q17-address">sam-workshop-landing.vercel.app/1128.html</span><button type="button" id="q17-copy-url" aria-label="강의 주소 복사">주소 복사</button></div></details>
       <details id="manual"><summary>앱이 파일을 받거나 열지 못할 때</summary><div class="q17-detail"><p>사이트나 폴더 접근을 묻는 창이 뜨면 수업에 사용할 폴더를 선택해 허용하세요. 다운로드가 막혀 있으면 위 ‘당일 실습 폴더 받기’를 직접 눌러 ZIP을 새 폴더에 풉니다. <code>시작하기.md</code>와 <code>AGENTS.md</code>가 나란히 있는 폴더를 Codex에서 열고 <code>시작하자</code>라고 입력하세요.</p><p>앱에서 로컬 폴더를 열 수 없다면 <a href="#paper">브라우저에서 같은 예제 보기</a>로 이어가세요.</p></div></details>
       <details id="setup"><summary>앱 설치와 데이터 설정</summary><div class="q17-detail"><p><a href="https://developers.openai.com/codex/app/" target="_blank" rel="noopener">Codex 공식 안내</a>에서 앱을 준비하세요. 개인 계정은 ChatGPT 설정 → 데이터 제어에서 ‘모두를 위한 모델 개선’을 끕니다. <a href="https://help.openai.com/en/articles/7730893-data-controls-faq" target="_blank" rel="noopener">데이터 제어 안내</a></p><p>앱이 이미 설치되어 있으면 <a href="#start">17장 시작 요청문</a>을 복사해 보내세요. 수업에는 제공된 공개 자료만 씁니다.</p></div></details>
       <details id="paper"><summary>Codex 없이 같은 예제 보기</summary><div class="q17-detail"><h3>오늘 읽을 논문 · TASMINH4</h3><p>장표 23에서 읽을 논문입니다. <a href="https://pubmed.ncbi.nlm.nih.gov/29499873/" target="_blank" rel="noopener">PubMed 공개 초록 · PMID 29499873</a>의 Methods와 Findings를 엽니다.</p><p><strong>통상관리군과 비교할 군은 자가측정 단독군인가요, 원격 모니터링을 더한 군인가요?</strong> 선택한 군과 평가 시점, 지표, 단위를 적어 보세요. 두 군의 차이는 부호까지 확인하세요.</p><details class="q17-key"><summary>적은 뒤 대조하기 · 오프라인 메모</summary><p>오늘의 비교는 자가측정 단독군 − 통상관리군입니다. 12개월 진료실 수축기혈압의 조정 평균차는 −3.5 mmHg(95% 신뢰구간 −5.8 ~ −1.2)입니다. 이 요약만 봤다면 표에는 ‘원문 미대조’라고 기록하세요.</p></details></div></details>
@@ -166,7 +201,9 @@ B−A 보정 차이(점), 95% 신뢰구간과 p값을 구하고 표·그림·잔
     const el=document.getElementById(location.hash.slice(1));
     if(document.documentElement.dataset.q17!=='entry')return;
     if(el instanceof HTMLDetailsElement){el.open=true;if(move)el.scrollIntoView({block:'start'});}
-    else if(move)window.scrollTo(0,0);
+    else if(move && (location.hash==='#start'||location.hash==='#files'||location.hash==='#prep'||!location.hash)){
+      document.getElementById(document.documentElement.dataset.q17Stage==='day'?'qr17-title':'prep-title').focus({preventScroll:true});window.scrollTo(0,0);
+    }else if(move && el){el.scrollIntoView({block:'start'});}
   }
   sync(false);window.addEventListener('hashchange',()=>sync(true));
   const status=document.getElementById('q17-status');
@@ -174,10 +211,11 @@ B−A 보정 차이(점), 95% 신뢰구간과 p값을 구하고 표·그림·잔
   btn.addEventListener('click',async()=>{
     let ok=false;
     try{if(navigator.clipboard){await navigator.clipboard.writeText(contents||p.textContent);ok=true;}}catch(e){}
-    if(!ok){const r=document.createRange();r.selectNodeContents(p);const s=window.getSelection();s.removeAllRanges();s.addRange(r);try{ok=document.execCommand('copy')===true;}catch(e){}if(ok)s.removeAllRanges();}
+    if(!ok){const container=p.closest('details');if(container)container.open=true;const r=document.createRange();r.selectNodeContents(p);const s=window.getSelection();s.removeAllRanges();s.addRange(r);try{ok=document.execCommand('copy')===true;}catch(e){}if(ok)s.removeAllRanges();}
     status.textContent=ok?label+' 복사 완료.':'선택된 텍스트를 직접 복사하세요.';
     btn.textContent=ok?'복사됨':'직접 복사';clearTimeout(timer);timer=setTimeout(()=>{btn.textContent=original;status.textContent='';},2200);
   });}
+  bind('prep-copy','prep-prompt','준비 요청문');
   bind('q17-copy','q17-prompt','시작 요청문');
   bind('q17-copy-url','q17-address','강의 주소','https://sam-workshop-landing.vercel.app/1128.html');
 })();
